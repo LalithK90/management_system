@@ -1,0 +1,345 @@
+* {
+    font-family: "Times New Roman", Times, serif;
+}
+
+#loginBack{
+    background-image: url('../img/loginBackground.jpg');
+}
+
+/*html Background - start*/
+body {
+    background-image: url('../img/main.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/*html Background - end*/
+
+/*radio button style -start*/
+.checkbox-round {
+    width: 1.3em;
+    height: 1.3em;
+    background-color: #fff;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 3px solid #20B2AA;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-round:checked {
+    background-color: green;
+}
+
+/*radio button style -end*/
+
+/*mainWindow properties*/
+.lblText {
+    font-size: 16px;
+}
+
+#loginLog {
+    height: 120px;
+    border-radius: 5%;
+    background-color: #ffffff;
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+.page-footer {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+div #login1 {
+    vertical-align: center;
+    text-align: center;
+    box-shadow: 2px 4px 2px 4px #000;
+    margin-top: 50px;
+    padding-top: 10px;
+    padding-bottom: 25px;
+    border-radius: 15px;
+}
+
+.btn {
+    box-shadow: 1px 2px 5px #000000;
+}
+
+#loginh2 {
+    font-size: 30px;
+    border-style: outset;
+    margin-top: 5px;
+    text-shadow: 1px 3px 3px #36F;
+}
+
+.loginp {
+    font-size: 20px;
+    border-style: outset;
+    margin-top: 10px;
+    text-shadow: 1px 2px 2px #36F;
+    text-align: center;
+}
+
+/* for login form - end*/
+/* for summary form - start*/
+.casChqCdt {
+    color: red;
+}
+
+/* for summary form - end*/
+/* for billing test show - start*/
+#tableTestBill {
+    font-size: 16px;
+}
+
+#tableTestBill tr td p {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* for sbilling test show - end*/
+/*main window  - start*/
+.mainWindowText {
+    font-size: 18px;
+    text-shadow: 0 1px 0 #17E,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaa,
+    0 6px 1px rgba(0, 0, 1, .1),
+    0 0 5px rgba(0, 0, 0, .1),
+    0 1px 3px rgba(0, 0, 0, .3),
+    0 3px 5px rgba(0, 0, 0, .2),
+    0 5px 10px rgba(0, 0, 0, .25),
+    0 10px 10px rgba(0, 0, 0, .2),
+    0 20px 20px rgba(0, 0, 0, .15);
+}
+
+.mainWindowText:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    text-shadow: 2px 2px 0 #29A1D5;
+}
+
+.mainWindImg:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    box-shadow: 3px -5px #f5f5f5, -1em 0 .4em #29A1D5;
+}
+
+.logoProperty:hover {
+    padding: 10px;
+    border: 1px solid red;
+    background-color: #f5f5f5;
+    box-shadow: 3px -5px 1px #f5f5f5;
+}
+
+img {
+    padding: 3px;
+    border: 1px solid #29A1D5;
+    background-color: #29A1D5;
+}
+
+.logoProperty {
+    background-color: #f5f5f5 !important;
+}
+
+/*main windo - properties end */
+/*Nav bar - start*/
+.dropdown-toggle {
+    font-size: 18px;
+!important;
+}
+
+nav {
+    position: sticky;
+}
+
+/*Nav bar - end*/
+/*footer - properties start */
+.cashier-footer {
+    text-align: center;
+    font-size: 20px;
+}
+
+.cashier-footer:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    text-shadow: 2px 2px 0 #29A1D5;
+}
+
+.cashier-footer:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    box-shadow: 3px -5px #f5f5f5, -1em 0 .4em #29A1D5;
+}
+
+/*footer - properties end */
+/*error pages - properties start */
+#error {
+    color: #39bbdb;
+    padding-bottom: 0;
+    min-height: 100%;
+    font-family: 'Open Sans', 'Segoe UI';
+    font-size: 13px;
+}
+
+.error-header {
+    background: #fff;
+    height: 180px;
+}
+
+.error-container {
+    background: rgba(0, 0, 0, .05);
+    text-align: center;
+}
+
+.error-container h1 {
+    color: #39bbdb;
+}
+
+.error-container h1 {
+    font-size: 110px;
+    font-weight: 300;
+    margin: -103px 0 0 0;
+    text-align: center;
+}
+
+.error-divider {
+    margin-top: -27px;
+    padding: 30px 0;
+}
+
+.error-container h2 {
+    font-size: 58px;
+    font-weight: 300;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.error-container p.description {
+    color: #39bbdb;
+    font-size: 50px;
+    margin: 0;
+}
+
+.return-btn, .return-btn:hover {
+    border: 1px solid rgba(255, 255, 255, .3);
+    padding: 10px 15px;
+    margin-top: 100px;
+    margin-bottom: 30px;
+    display: inline-block;
+    -webkit-border-radius: 5px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 5px;
+    -moz-background-clip: padding;
+    border-radius: 5px;
+    background-clip: padding-box;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/*error pages - properties end */
+/*Error Message Colour - star*/
+.error {
+    font-family: 'Open Sans', 'Segoe UI';
+    color: #fa0901;
+}
+
+/*Error Message Colour - star*/
+/*main window notification div style- start*/
+.mainWindSumReport {
+    color: #f7f7f7;
+    align-content: center;
+    background: #49e6fd;
+    background: -webkit-radial-gradient(#6b67ff, #3b9ffd, #29A1D5);
+    background: -o-radial-gradient(#6b67ff, #3b9ffd, #29A1D5);
+    background: -moz-radial-gradient(#6b67ff, #3b9ffd, #29A1D5);
+    background: radial-gradient(#6b67ff, #3b9ffd, #29A1D5);
+    border: 1px solid #f7f7f7;
+    border-radius: 25px 10px 25px 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*main window notification div style- end*/
+/*all button same size according to boostrap btn-sm  - start*/
+button .btn {
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    border-radius: 50px !important;
+}
+
+/*all button same size according to boostrap btn-sm  - end*/
+
+/*remove lab test from selected table - start*/
+.removeLabTest {
+    color: #f0ad4e;
+    font-weight: lighter;
+}
+.addLabTest{
+    color: #000000;
+    background-color: #00FFFF;
+}
+/*remove lab test from selected table - end*/
+
+/*all lable fonts size increase - start*/
+label{
+    font-size: 18px !important;
+    font-max-size: 20px;
+    font-min-size: 12px;
+}
+/*all lable fonts size increase - end*/
+
+/*Table show and hide - start*/
+.display{
+    display: none;
+}
+/*Table show and hide - end*/
+/*medical Package show area - start*/
+#medicalPackage{
+    border: 2px solid blue ;
+    border-radius: 5px;
+}
+
+#labTestShowTable {
+    margin-top: 3px;
+}
+
+#medicalPackageDetails{
+    margin-top: 5px;
+}
+#btnRegisteredPatient{
+    margin-bottom: 5px;
+}
+/*medical Package show area - end*/
+/* enter filed validation - start*/
+.valid{
+    background-color: #7ae899;
+}
+.invalid{
+    background-color: #ff88b3;
+}
+/* enter filed validation - end*/
+
+input{
+    font-size: 18px !important;
+}
+

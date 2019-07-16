@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Login - KL</title>
+    <link rel="stylesheet" th:href="@{/css/myCss.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body id="loginBack">
+<div class="col-sm-10">
+    <div class="container-fluid">
+        <form action="login" method="post">
+            <div class="col-md-6 col-md-offset-4 col-sm-8 col-sm-offset-2"
+                 style="margin-top:125px;margin-left:80px; ">
+                <div class="panel panel-warning">
+                    <div class="panel-heading" style="background-color: saddlebrown">
+                        <h2 align="center"
+                            style="color: white">
+                            <b>Karunadasa Learners </b></h2></div>
+                    <div class="panel-body" style="background-color: oldlace">
+                        <div class="input-group" style="margin-bottom: 20px">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-user"></span></span>
+                            <input autofocus class="form-control" id="username" name="username"
+                                   placeholder="User Name" required type="text"/>
+                        </div>
+                        <div class="input-group" style="margin-bottom: 25px">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-lock"></span></span>
+                            <input autocomplete="current-password" autofocus class="form-control"
+                                   id="exampleInputPassword1" name="password" placeholder="Password" required
+                                   type="password">
+                        </div>
+                        <div style="margin-top:10px">
+                            <button class="btn btn-warning btn-lg"
+                                    style="background-color: peru"
+                                    type="Submit"><span
+                                    class=" glyphicon glyphicon-log-in"></span>&nbsp; Log in &nbsp;
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container-fluid" th:if="${param.error}">
+                        <p class="text text-center text-danger">Invalid username or password. </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

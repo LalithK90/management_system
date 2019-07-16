@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style th:replace="fragments/style"></style>
+</head>
+<body>
+<nav th:replace="fragments/header :: header"></nav>
+<div class="container-fluid" style="margin-top: 50px">
+    <div class="panel panel-primary">
+        <div class="panel panel-heading text-center">
+            <h4><b><span th:text="${addStatus==true?'New User Add':'Update User'}"></span></b></h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-4 ">
+                    <a class="btn btn-primary" href="/home"> Return Home</a>
+                </div>
+                <div class="col-sm-4" style="text-align: center;">
+                    <h4 class="text-info"></h4>
+                </div>
+                <div class="col-sm-4 text-right">
+                    <a href="/user">
+                        <button class="btn btn-sm btn-primary"><span
+                                class="glyphicon glyphicon-list">&nbsp; View List </span></button>
+                    </a>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="container-fluid">
+                <div class="col-sm-offset-2">
+                    <form class="form-horizontal" th:action="${addStatus==true?'/user/add':'/user/update'}"
+                          th:method="POST">
+                        <div class="col-sm-8 text-center">
+                            <div class="form-group" th:if="${addStatus==false}">
+                                <label class="control-label col-md-4" for="id">ID :</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" id="id" name="id" placeholder="Enter ID Here"
+                                           th:field="*{id}" type="text"/>
+                                    <span class="error" th:errors="*{id}" th:if="${#fields.hasErrors('id')}">Error Number</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4" th:for="name">Employee Name</label>
+                                <div class="col-md-6">
+                                    <select class="form-control" id="name" name="employee">
+                                        <option th:each="employees : ${employee}"
+                                                th:text="${employees.name}+ ${' '} + ${employees.number}"
+                                                th:value="${employees.id}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="username">User Name</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" id="username" name="username"
+                                           placeholder="Enter User Name Here" required type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="password">Password</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" id="password" name="password"
+                                           placeholder="Enter Password Here" required type="password"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Role</label>
+                                <div class="col-md-4">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <tr th:each="roles, rowCount : ${role}">
+                                                <th th:text="${rowCount.count}"></th>
+                                                <th th:text="${roles.roleName}"></th>
+                                                <th><input name="roles" th:value="${roles.id}" type="checkbox"></th>
+
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center row">
+                                <button class="btn btn-success" type="submit"><span
+                                        class="glyphicon glyphicon-thumbs-up"></span>&nbsp; &nbsp;<span
+                                        th:text="${addStatus==true?'Save': 'Update'}"></span></button>
+                            </div>
+                        </div>
+                        <ul>
+                            <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="page-footer" th:replace="fragments/footer"></footer>
+<script th:replace="fragments/script"></script>
+</body>
+</html>

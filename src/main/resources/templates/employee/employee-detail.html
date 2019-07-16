@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style th:replace="fragments/style"></style>
+</head>
+<body>
+<nav class="navbar navbar-default" th:replace="fragments/header :: header"></nav>
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="panel panel-primary">
+        <div class="panel panel-heading  text-center">
+            <h4><span th:text="${employeeDetail.title.title}"></span> &nbsp; <span
+                    th:text="${employeeDetail.name}"></span></h4>
+        </div>
+        <div class="panel-body">
+            <!--lefet side-->
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>Id : <span th:text="${employeeDetail.id}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Number : <span th:text="${employeeDetail.number}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Name : <span th:text="${employeeDetail.title.title}"></span> &nbsp; <span
+                                th:text="${employeeDetail.name}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Calling Name : <span th:text="${employeeDetail.callingName}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            NIC : <span th:text="${employeeDetail.nic}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Gender : <span th:text="${employeeDetail.gender.gender}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Blood Group : <span th:text="${employeeDetail.bloodGroup.bloodGroup}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Email : <span th:text="${employeeDetail.email}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Mobile : <span th:text="${employeeDetail.mobile}"></span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <!-- right side -->
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Land : <span th:text="${employeeDetail.land}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Address : <span th:text="${employeeDetail.address}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Designation : <span th:text="${employeeDetail.designation.designation}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Date of Assignment : <span th:text="${employeeDetail.dateOfAssignment}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Date Of Birth : <span th:text="${employeeDetail.dateOfBirth}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Civil Status : <span th:text="${employeeDetail.civilStatus.civilStatus}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Employee Status : <span th:text="${employeeDetail.employeeStatus.employeeStatus}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <h4>
+                            Created Date : <span th:text="${employeeDetail.createdAt}"></span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div th:if="${addStatus==true}">
+                    <div class="col-sm-4 text-right">
+                        <a href="/home">
+                            <button class="btn btn-success"><span class="glyphicon glyphicon-home"></span>&nbsp; Home
+                            </button>
+                        </a>
+                    </div>
+                    <div class="col-sm-4 text-left">
+                        <a href="/passwordChange">
+                            <button class="btn btn-warning"><i class="fa fa-expeditedssl"></i>&nbsp; Need to Change
+                                Password
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div th:if="${addStatus==false}">
+                    <div class="col-sm-6 text-center">
+                        <a href="/employee">
+                            <button class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span>&nbsp;
+                                Back
+                            </button>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <a href="/home">
+                            <button class="btn btn-success"><span class="glyphicon glyphicon-home"></span>&nbsp; Home
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="page-footer" th:replace="fragments/footer"></footer>
+<script th:replace="fragments/script"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.6.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'lk.imms'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //================= Following jar is need to email =================// 
+    compile('org.springframework.boot:spring-boot-starter-mail')
+    //================= Following jar is need to check url util - https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 =================// 
+    compile group: 'org.apache.commons', name: 'commons-lang3'
+    //================= Following jar is need to generate excel file - https://mvnrepository.com/artifact/org.apache.poi/poi=================//
+    compile group: 'org.apache.poi', name: 'poi', version: '3.8'
+    //================= Following jar is need to generate pdf file -https://mvnrepository.com/artifact/com.itextpdf/itextpdf =================//
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.9'
+    // ==== this is need to html content convert to pdf 
+    compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.5.9'
+    
+    
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'mysql:mysql-connector-java'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

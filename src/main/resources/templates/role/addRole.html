@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style th:replace="fragments/style"></style>
+</head>
+<body>
+<nav th:replace="fragments/header :: header"></nav>
+<div class="container-fluid" style="margin-top: 50px">
+    <div class="panel panel-primary">
+        <div class="panel panel-heading text-center">
+            <h4><b><span th:text="${addStatus==true?'New Role Add':'Update Role'}"></span></b></h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-4 ">
+                    <a class="btn btn-primary" href="/home"> Return Home</a>
+                </div>
+                <div class="col-sm-4" style="text-align: center;">
+                    <h4 class="text-info"></h4>
+                </div>
+                <div class="col-sm-4 text-right">
+                    <a href="/role">
+                        <button class="btn btn-sm btn-primary"><span
+                                class="glyphicon glyphicon-list">&nbsp; View List </span></button>
+                    </a>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="container-fluid">
+                    <form class="form-horizontal" th:action="${addStatus==true?'/role/add':'/role/update'}"
+                          th:method="POST" th:object="${role}">
+                        <label th:if="${#fields.hasErrors('*')}" th:text="'Errors: '">Errors: </label>
+                        <ul>
+                            <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+                        </ul>
+                        <div class="col-sm-6 text-center">
+                            <div class="form-group" th:if="${addStatus==false}">
+                                <label class="control-label col-md-4" for="id">ID </label>
+                                <div class="col-md-8">
+                                    <input class="form-control" id="id" name="id" placeholder="Enter ID Here"
+                                           th:field="*{id}" type="text"/>
+                                    <span class="error" th:errors="*{id}" th:if="${#fields.hasErrors('id')}">Error Number</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="roleName">Name</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" id="roleName" name="roleName"
+                                           placeholder="Enter Role Ex: MANAGER" type="text" required />
+                                    <span class="error" th:errors="*{roleName}" th:if="${#fields.hasErrors('roleName')}">Error Name</span>
+                                </div>
+                            </div>
+                            <div class="text-center row">
+                                <button class="btn btn-success" type="submit"><span
+                                        class="glyphicon glyphicon-thumbs-up"></span>&nbsp; &nbsp;<span
+                                        th:text="${addStatus==true?'Save': 'Update'}"></span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="page-footer" th:replace="fragments/footer"></footer>
+<script th:replace="fragments/script"></script>
+</body>
+</html>

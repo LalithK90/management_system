@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8"/>
+<title>KL</title>
+<th:block th:replace="fragments/style"></th:block>
+</head>
+<body>
+<nav class="navbar navbar-default" th:replace="fragments/header :: header" style="margin-bottom: 60px"></nav>
+<div class="col-sm-6 col-sm-offset-4" style="margin-top: 100px;">
+    <div class="row">
+        <div th:class="${alert==true?'alert alert-success':'alert alert-danger'}" style="align-content: center; align-self: center;">
+            <div class="text-center">
+                <strong>
+                    <span th:text="${message}"></span>
+                </strong>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <div class="text-center">
+                 <a href="/home">
+                    <button type="button" class="btn-sm btn btn-outline-success" ><span class="glyphicon glyphicon-home"></span> &nbsp;Home</button>
+                 </a>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="page-footer" th:replace="fragments/footer"></footer>
+<th:block th:replace="fragments/script"></th:block>
+</body>
+</html>
