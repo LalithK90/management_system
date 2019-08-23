@@ -1,7 +1,7 @@
 package lk.imms.management_system.general.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lk.imms.management_system.resources.entity.Employee;
+import lk.imms.management_system.resources.department.entity.Employee;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,7 +27,7 @@ public class User {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     @Size(min = 5, message = "user name should include at least five characters")
     private String username;
 
@@ -46,6 +46,5 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-
 
 }

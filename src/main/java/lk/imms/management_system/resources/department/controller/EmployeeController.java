@@ -1,10 +1,14 @@
-package lk.imms.management_system.resources.controller;
+package lk.imms.management_system.resources.department.controller;
 
 import lk.imms.management_system.general.security.entity.User;
 import lk.imms.management_system.general.security.service.UserService;
-import lk.imms.management_system.resources.entity.Employee;
-import lk.imms.management_system.resources.entity.Enum.*;
-import lk.imms.management_system.resources.service.EmployeeService;
+import lk.imms.management_system.general.commonEnum.BloodGroup;
+import lk.imms.management_system.general.commonEnum.CivilStatus;
+import lk.imms.management_system.general.commonEnum.Gender;
+import lk.imms.management_system.general.commonEnum.Title;
+import lk.imms.management_system.resources.department.entity.Employee;
+import lk.imms.management_system.resources.department.entity.Enum.*;
+import lk.imms.management_system.resources.department.service.EmployeeService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

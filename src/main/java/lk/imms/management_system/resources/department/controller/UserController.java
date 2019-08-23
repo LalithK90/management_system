@@ -1,9 +1,9 @@
-package lk.imms.management_system.resources.controller;
+package lk.imms.management_system.resources.department.controller;
 
 import lk.imms.management_system.general.security.entity.User;
 import lk.imms.management_system.general.security.service.RoleService;
 import lk.imms.management_system.general.security.service.UserService;
-import lk.imms.management_system.resources.service.EmployeeService;
+import lk.imms.management_system.resources.department.service.EmployeeService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package lk.imms.management_system.resources.entity.Enum;
+package lk.imms.management_system.resources.department.entity.Enum;
 
 public enum Designation {
     MANAGER("Manager"),

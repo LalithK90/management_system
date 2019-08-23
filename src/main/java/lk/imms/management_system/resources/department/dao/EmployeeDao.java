@@ -1,6 +1,6 @@
-package lk.imms.management_system.resources.dao;
+package lk.imms.management_system.resources.department.dao;
 
-import lk.imms.management_system.resources.entity.Employee;
+import lk.imms.management_system.resources.department.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package lk.imms.management_system.resources.entity.Enum;
+package lk.imms.management_system.general.commonEnum;
 
 public enum CivilStatus {
     MARRIED("Married"),

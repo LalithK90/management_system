@@ -64,7 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/js/**",
                         "/fonts/**",
-                        "/divTool/**",
                         "/fontawesome/**").permitAll()
                 .antMatchers("/login", "/select/**").permitAll()
 
@@ -81,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .defaultSuccessUrl("/mainWindow")
                 //Username and password for validation
-                .usernameParameter("username")
+                .usernameParameter("userame")
                 .passwordParameter("password")
                 .and()
                 //Logout controlling
@@ -96,7 +95,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable();
-
 
     }
 }

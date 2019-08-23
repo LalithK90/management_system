@@ -1,11 +1,11 @@
-package lk.imms.management_system.resources.entity.Enum;
+package lk.imms.management_system.resources.department.entity.Enum;
 
 public enum EmployeeStatus {
     WORKING("Working"),
     LEAVE("Leave"),
-    SUSPENED("Suspended"),
+    SUSPENDED("Suspended"),
     BLOCK("Block"),
-    RESINED("Resined"),
+    RESIGNED("Resigned"),
     RETIRED("Retired");
 
     private final String employeeStatus;

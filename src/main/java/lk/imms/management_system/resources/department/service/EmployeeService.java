@@ -1,7 +1,7 @@
-package lk.imms.management_system.resources.service;
+package lk.imms.management_system.resources.department.service;
 
-import lk.imms.management_system.resources.dao.EmployeeDao;
-import lk.imms.management_system.resources.entity.Employee;
+import lk.imms.management_system.resources.department.dao.EmployeeDao;
+import lk.imms.management_system.resources.department.entity.Employee;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

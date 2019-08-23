@@ -25,8 +25,8 @@ public class MvcConfig implements WebMvcConfigurer {
                 .setViewName("forward:/index");
         registry.addViewController("/login")
                 .setViewName("login/login");
-        registry.addViewController("/mainwindow")
-                .setViewName("mainwindow");
+        registry.addViewController("/mainWindow")
+                .setViewName("mainWindow");
     }
 
     @Override
@@ -41,7 +41,6 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/js/");
 
     }
-
     //Bean configuration
     @Bean
     public InternalResourceViewResolver viewResolver() {
@@ -50,6 +49,7 @@ public class MvcConfig implements WebMvcConfigurer {
         resolver.setSuffix(".html");
         return resolver;
     }
+
 
     //time zone set to
     @Bean
