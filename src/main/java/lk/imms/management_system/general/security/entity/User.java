@@ -1,7 +1,7 @@
 package lk.imms.management_system.general.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lk.imms.management_system.resources.department.entity.Employee;
+import lk.imms.management_system.asset.department.entity.Employee;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
