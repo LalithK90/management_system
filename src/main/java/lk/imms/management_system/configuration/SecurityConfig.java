@@ -1,6 +1,7 @@
 package lk.imms.management_system.configuration;
 
-import lk.imms.management_system.general.security.service.UserDetailsServiceImpl;
+
+import lk.imms.management_system.asset.userManagement.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

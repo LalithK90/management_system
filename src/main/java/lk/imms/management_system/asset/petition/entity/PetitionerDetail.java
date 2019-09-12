@@ -1,12 +1,10 @@
 package lk.imms.management_system.asset.petition.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lk.imms.management_system.general.security.entity.User;
+import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -14,13 +12,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@JsonIgnoreProperties( value = {"createdAt", "updatedAt"}, allowGetters = true )
-public class PetitionerDetail {
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
-    @Column( unique = true )
-    private Long id;
+@EqualsAndHashCode( callSuper = true )
+public class PetitionerDetail extends AuditEntity {
 
     private String name;
 
@@ -29,15 +22,5 @@ public class PetitionerDetail {
     @OneToMany(mappedBy = "petitionerDetail")
     private List< PetitionerContactDetail > petitionerContactDetails;
 
-    @ManyToOne
-    private User createdUser;
 
-    @ManyToOne
-    private User updatedUser;
-
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate createdAt;
-
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate updatedAt;
 }

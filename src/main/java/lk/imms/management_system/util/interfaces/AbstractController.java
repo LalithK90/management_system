@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface AbstractController<E, I> {
-
+// this is most help to create REST API
     List<E> findAll();
 
     E findById(I id);

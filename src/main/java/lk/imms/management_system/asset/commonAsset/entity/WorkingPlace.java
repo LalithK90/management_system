@@ -1,6 +1,6 @@
 package lk.imms.management_system.asset.commonAsset.entity;
 
-import lk.imms.management_system.asset.department.entity.WorkingHistory;
+import lk.imms.management_system.asset.employee.entity.WorkingHistory;
 import lombok.*;
 import org.hibernate.validator.constraints.UniqueElements;
 
@@ -23,7 +23,7 @@ public class WorkingPlace {
     @NotNull( message = "Name is required" )
     @UniqueElements
     private String name;
-
+//todo court place
     @UniqueElements
     private String code;
 

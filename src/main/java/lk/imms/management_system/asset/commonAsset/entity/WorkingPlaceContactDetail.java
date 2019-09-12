@@ -1,6 +1,6 @@
 package lk.imms.management_system.asset.commonAsset.entity;
 
-import lk.imms.management_system.asset.department.entity.Enum.ContactType;
+import lk.imms.management_system.asset.employee.entity.Enum.ContactType;
 import lombok.*;
 
 import javax.persistence.*;

@@ -4,6 +4,8 @@ import lk.imms.management_system.asset.petition.dao.PetitionerDetailDao;
 import lk.imms.management_system.asset.petition.entity.PetitionerDetail;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +41,11 @@ public class PetitionerDetailService implements AbstractService< PetitionerDetai
 
     @Override
     public List< PetitionerDetail > search(PetitionerDetail petitionerDetail) {
-        return null;
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example< PetitionerDetail > petitionerDetailExample = Example.of(petitionerDetail, matcher);
+        return petitionerDetailDao.findAll(petitionerDetailExample);
     }
 }

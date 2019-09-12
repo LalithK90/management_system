@@ -4,6 +4,8 @@ import lk.imms.management_system.asset.offenders.dao.OffenderCallingNameDao;
 import lk.imms.management_system.asset.offenders.entity.OffenderCallingName;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +41,11 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
 
     @Override
     public List< OffenderCallingName > search(OffenderCallingName offenderCallingName) {
-        return null;
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example< OffenderCallingName > offenderCallingNameExample = Example.of(offenderCallingName, matcher);
+        return offenderCallingNameDao.findAll(offenderCallingNameExample);
     }
 }

@@ -1,13 +1,13 @@
 package lk.imms.management_system.asset.petition.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lk.imms.management_system.asset.minute.entity.MinutePetition;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
-import lk.imms.management_system.general.security.entity.User;
+import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,19 +15,15 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@JsonIgnoreProperties( value = {"createdAt", "updatedAt"}, allowGetters = true )
-public class Petition {
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
-    @Column( unique = true )
-    private Long id;
-
+@EqualsAndHashCode( callSuper = true )
+public class Petition extends AuditEntity {
 
     // -->Auto Generate Year/Month/OfficeType/StationCode/PetitionNumberFromDB
     private String petitionNumber;
 
     private String indexNumber;
+    @Column(length = 50000)
+    private String subject;
 
     @Enumerated( EnumType.STRING )
     private PetitionType petitionType;
@@ -35,20 +31,18 @@ public class Petition {
     @OneToMany( mappedBy = "petition" )
     private List< PetitionState > petitionStates;
 
+    @OneToMany(mappedBy = "petition")
+    private List< MinutePetition > minutePetitions;
+
     @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL )
     private PetitionerDetail petitionerDetail;
 
-    @ManyToOne
-    private User createdUser;
 
-    @ManyToOne
-    private User updatedUser;
 
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate createdAt;
+    @Transient
+    private List< MultipartFile > files = new ArrayList<>();
 
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate updatedAt;
-
+    @Transient
+    private List< String > removeImages = new ArrayList<>();
 
 }

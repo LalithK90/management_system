@@ -4,6 +4,8 @@ import lk.imms.management_system.asset.offenders.dao.ContraveneDao;
 import lk.imms.management_system.asset.offenders.entity.Contravene;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +41,11 @@ public class ContraveneService implements AbstractService< Contravene, Long > {
 
     @Override
     public List< Contravene > search(Contravene contravene) {
-        return null;
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example< Contravene > contravenes = Example.of(contravene, matcher);
+        return contraveneDao.findAll(contravenes);
     }
 }

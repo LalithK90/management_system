@@ -4,6 +4,8 @@ import lk.imms.management_system.asset.commonAsset.dao.WorkingPlaceDao;
 import lk.imms.management_system.asset.commonAsset.entity.WorkingPlace;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +42,11 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
 
     @Override
     public List< WorkingPlace > search(WorkingPlace workingPlace) {
-        return null;
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example< WorkingPlace > workingPlaceExample = Example.of(workingPlace, matcher);
+        return workingPlaceDao.findAll(workingPlaceExample);
     }
 }
