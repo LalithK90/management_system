@@ -1,0 +1,1230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>lk.imms.management_system</OriginalElement>
+  <nodes>
+    <node x="4305.0" y="1315.0">lk.imms.management_system.util.service.OperatorService</node>
+    <node x="2182.6286308919425" y="1100.0">lk.imms.management_system.asset.minute.service.MinuteService</node>
+    <node x="2479.0796395024036" y="550.0">lk.imms.management_system.asset.petition.entity.PetitionFiles</node>
+    <node x="5248.828630891943" y="0.0">lk.imms.management_system.asset.commonAsset.entity.Enum.Gender</node>
+    <node x="1454.6250000000002" y="1100.0">lk.imms.management_system.asset.offenders.service.OffenderContactDetailService</node>
+    <node x="1392.8750000000002" y="950.0">lk.imms.management_system.asset.offenders.dao.OffenderContactDetailDao</node>
+    <node x="4968.0" y="1315.0">lk.imms.management_system.asset.employee.entity.Enum.Designation</node>
+    <node x="5182.727129876448" y="350.0">lk.imms.management_system.asset.offenders.dao.OffenderDescriptionDao</node>
+    <node x="5789.359880891943" y="950.0">lk.imms.management_system.asset.userManagement.CustomerUserDetails</node>
+    <node x="5200.489520394347" y="180.0">lk.imms.management_system.asset.offenders.entity.OffenderDescription</node>
+    <node x="2205.6286308919425" y="180.0">lk.imms.management_system.asset.minute.entity.Minute</node>
+    <node x="5965.797380891943" y="180.0">lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus</node>
+    <node x="0.0" y="1315.0">lk.imms.management_system.util.audit.SecurityAuditor</node>
+    <node x="5578.835463209782" y="1240.0">lk.imms.management_system.asset.employee.controller.UserController</node>
+    <node x="0.0" y="1100.0">lk.imms.management_system.asset.userManagement.entity.PasswordChange</node>
+    <node x="791.375" y="950.0">lk.imms.management_system.asset.petition.dao.PetitionerDetailDao</node>
+    <node x="4971.75625" y="950.0">lk.imms.management_system.asset.offenders.dao.OffenderDao</node>
+    <node x="4965.7536308919425" y="180.0">lk.imms.management_system.asset.offenders.entity.Guardian</node>
+    <node x="5462.329057184565" y="850.0">lk.imms.management_system.asset.userManagement.entity.User</node>
+    <node x="1136.625" y="1100.0">lk.imms.management_system.asset.employee.service.WorkingHistoryService</node>
+    <node x="2922.333270394346" y="550.0">lk.imms.management_system.asset.detection.entity.DetectionTeam</node>
+    <node x="4943.43125" y="350.0">lk.imms.management_system.asset.offenders.entity.Offender</node>
+    <node x="1156.875" y="950.0">lk.imms.management_system.asset.employee.dao.WorkingHistoryDao</node>
+    <node x="1695.0" y="1315.0">lk.imms.management_system.asset.commonAsset.controller.WorkingPlaceController</node>
+    <node x="4306.833270394347" y="1100.0">lk.imms.management_system.asset.employee.service.EmployeeService</node>
+    <node x="652.0" y="1315.0">lk.imms.management_system.util.controller.MimeTypeFileHandelController</node>
+    <node x="2819.0" y="1315.0">lk.imms.management_system.util.service.UrlBuilderService</node>
+    <node x="2492.1542132097816" y="460.0">lk.imms.management_system.asset.petition.entity.Petition</node>
+    <node x="840.625" y="1100.0">lk.imms.management_system.asset.petition.service.PetitionerDetailService</node>
+    <node x="3363.083270394346" y="950.0">lk.imms.management_system.asset.detection.dao.DetectionTeamMemberDao</node>
+    <node x="2342.6042132097814" y="350.0">lk.imms.management_system.asset.minute.entity.MinutePetition</node>
+    <node x="5.0" y="1395.0">lk.imms.management_system.util.audit.AuditingConfig</node>
+    <node x="3835.083270394346" y="950.0">lk.imms.management_system.asset.crime.dao.CrimeDao</node>
+    <node x="4900.359880891943" y="1100.0">lk.imms.management_system.asset.offenders.service.OffenderService</node>
+    <node x="3365.333270394346" y="630.0">lk.imms.management_system.asset.detection.entity.DetectionTeamMember</node>
+    <node x="241.0" y="1315.0">lk.imms.management_system.ManagementSystemApplicationTests</node>
+    <node x="2587.5796395024036" y="950.0">lk.imms.management_system.asset.petition.dao.PetitionDao</node>
+    <node x="308.2042132097813" y="550.0">lk.imms.management_system.asset.commonAsset.entity.WorkingPlace</node>
+    <node x="2157.2542132097815" y="350.0">lk.imms.management_system.asset.minute.entity.MinuteFile</node>
+    <node x="2006.0" y="1315.0">lk.imms.management_system.util.interfaces.AbstractController</node>
+    <node x="3726.3786308919425" y="350.0">lk.imms.management_system.asset.crime.entity.Court</node>
+    <node x="4218.083270394346" y="850.0">lk.imms.management_system.asset.employee.entity.EmployeeFiles</node>
+    <node x="6145.908270394346" y="950.0">lk.imms.management_system.asset.userManagement.dao.RoleDao</node>
+    <node x="1864.2042132097815" y="180.0">lk.imms.management_system.asset.employee.entity.EmployeeContactDetail</node>
+    <node x="5659.4748905178985" y="770.0">lk.imms.management_system.asset.userManagement.entity.Role</node>
+    <node x="4673.458270394347" y="460.0">lk.imms.management_system.asset.offenders.entity.OffenderFiles</node>
+    <node x="5374.828630891943" y="0.0">lk.imms.management_system.asset.offenders.entity.Enum.OffenderDescriptionType</node>
+    <node x="4757.0" y="1315.0">lk.imms.management_system.asset.commonAsset.controller.UiController</node>
+    <node x="6086.658270394346" y="1100.0">lk.imms.management_system.asset.userManagement.service.RoleService</node>
+    <node x="166.75" y="950.0">lk.imms.management_system.asset.commonAsset.dao.WorkingPlaceDao</node>
+    <node x="2539.9042132097816" y="1100.0">lk.imms.management_system.asset.petition.service.PetitionService</node>
+    <node x="5169.0" y="1315.0">lk.imms.management_system.configuration.MvcConfig</node>
+    <node x="5350.0" y="1315.0">lk.imms.management_system.asset.commonAsset.fileManage.FileInfo</node>
+    <node x="2565.6542132097816" y="350.0">lk.imms.management_system.asset.petition.entity.Enum.PetitionType</node>
+    <node x="5862.210463209782" y="1240.0">lk.imms.management_system.configuration.SecurityConfig</node>
+    <node x="3814.6046395024036" y="1100.0">lk.imms.management_system.asset.crime.service.CrimeService</node>
+    <node x="2277.0" y="1315.0">lk.imms.management_system.asset.offenders.controller.OffenderController</node>
+    <node x="3823.0" y="1315.0">lk.imms.management_system.util.classs.ServiceResponse</node>
+    <node x="4708.7536308919425" y="180.0">lk.imms.management_system.asset.offenders.entity.OffenderCallingName</node>
+    <node x="4326.583270394347" y="950.0">lk.imms.management_system.asset.employee.dao.EmployeeDao</node>
+    <node x="3330.083270394346" y="550.0">lk.imms.management_system.asset.detection.entity.Enum.DetectionTeamMemberRole</node>
+    <node x="407.875" y="950.0">lk.imms.management_system.asset.petition.dao.PetitionerContactDetailDao</node>
+    <node x="619.1296395024033" y="180.0">lk.imms.management_system.asset.petition.entity.PetitionerContactDetail</node>
+    <node x="3649.083270394346" y="950.0">lk.imms.management_system.asset.crime.dao.CourtDao</node>
+    <node x="2380.8542132097814" y="180.0">lk.imms.management_system.asset.minute.entity.Enum.MinuteState</node>
+    <node x="5789.797380891943" y="180.0">lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus</node>
+    <node x="4524.604639502403" y="1100.0">lk.imms.management_system.asset.offenders.service.OffenderCallingNameService</node>
+    <node x="2751.6542132097816" y="350.0">lk.imms.management_system.asset.petition.entity.PetitionState</node>
+    <node x="3230.8546395024036" y="1100.0">lk.imms.management_system.asset.detection.service.DetectionTeamMemberService</node>
+    <node x="4304.099784738097" y="630.0">lk.imms.management_system.asset.employee.entity.Designation</node>
+    <node x="1073.679057184565" y="0.0">lk.imms.management_system.asset.employee.entity.Enum.ContactType</node>
+    <node x="1588.2042132097815" y="180.0">lk.imms.management_system.asset.offenders.entity.OffenderContactDetail</node>
+    <node x="2920.083270394346" y="950.0">lk.imms.management_system.asset.detection.dao.DetectionTeamDao</node>
+    <node x="5263.859880891943" y="1240.0">lk.imms.management_system.TestRestController</node>
+    <node x="5062.828630891943" y="0.0">lk.imms.management_system.asset.offenders.entity.Enum.GuardianType</node>
+    <node x="243.2042132097813" y="460.0">lk.imms.management_system.asset.commonAsset.entity.WorkingPlaceContactDetail</node>
+    <node x="5027.859880891943" y="1240.0">lk.imms.management_system.asset.commonAsset.controller.ProfileController</node>
+    <node x="3080.0" y="1315.0">lk.imms.management_system.asset.minute.controller.MinuteController</node>
+    <node x="6171.797380891943" y="180.0">lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup</node>
+    <node x="4529.958270394347" y="950.0">lk.imms.management_system.asset.offenders.dao.OffenderCallingNameDao</node>
+    <node x="5800.658270394346" y="1100.0">lk.imms.management_system.asset.userManagement.service.UserDetailsServiceImpl</node>
+    <node x="5709.797380891943" y="0.0">lk.imms.management_system.asset.commonAsset.entity.Enum.Title</node>
+    <node x="5418.433270394346" y="950.0">lk.imms.management_system.asset.userManagement.dao.UserDao</node>
+    <node x="920.2875465431152" y="350.0">lk.imms.management_system.asset.petition.entity.PetitionerDetail</node>
+    <node x="474.625" y="1100.0">lk.imms.management_system.asset.petition.service.PetitionerContactDetailService</node>
+    <node x="1023.0" y="1315.0">lk.imms.management_system.ManagementSystemApplication</node>
+    <node x="2548.0" y="1315.0">lk.imms.management_system.asset.petition.controller.PetitionController</node>
+    <node x="1384.0" y="1315.0">lk.imms.management_system.util.service.CustomExceptionService</node>
+    <node x="2672.4042132097816" y="180.0">lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType</node>
+    <node x="206.0" y="1100.0">lk.imms.management_system.asset.commonAsset.service.WorkingPlaceService</node>
+    <node x="2245.7542132097815" y="950.0">lk.imms.management_system.asset.minute.dao.MinuteDao</node>
+    <node x="4542.7536308919425" y="180.0">lk.imms.management_system.asset.offenders.entity.Contravene</node>
+    <node x="4000.6046395024036" y="1100.0">lk.imms.management_system.asset.offenders.service.ContraveneService</node>
+    <node x="1140.0792132097813" y="630.0">lk.imms.management_system.asset.employee.entity.WorkingHistory</node>
+    <node x="3255.8290571845646" y="0.0">lk.imms.management_system.util.audit.AuditEntity</node>
+    <node x="1113.3292132097813" y="550.0">lk.imms.management_system.asset.employee.entity.Enum.WorkingPlaceChangeReason</node>
+    <node x="3331.0" y="1315.0">lk.imms.management_system.util.service.ExceptionService</node>
+    <node x="3628.6046395024036" y="1100.0">lk.imms.management_system.asset.crime.service.CourtService</node>
+    <node x="3146.083270394346" y="950.0">lk.imms.management_system.util.interfaces.AbstractService</node>
+    <node x="3582.0" y="1315.0">lk.imms.management_system.configuration.ThymeleafConfig</node>
+    <node x="5531.359880891943" y="1100.0">lk.imms.management_system.util.service.DateTimeAgeService</node>
+    <node x="2849.9042132097816" y="1100.0">lk.imms.management_system.asset.detection.service.DetectionTeamService</node>
+    <node x="4546.0" y="1315.0">lk.imms.management_system.util.service.EmailService</node>
+    <node x="4021.083270394346" y="950.0">lk.imms.management_system.asset.offenders.dao.ContraveneDao</node>
+    <node x="3838.083270394346" y="460.0">lk.imms.management_system.asset.crime.entity.Crime</node>
+    <node x="5344.683270394346" y="1100.0">lk.imms.management_system.asset.userManagement.service.UserService</node>
+    <node x="4064.0" y="1315.0">lk.imms.management_system.asset.crime.controller.CrimeController</node>
+    <node x="4366.025" y="770.0">lk.imms.management_system.asset.employee.entity.Employee</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="lk.imms.management_system.asset.employee.entity.Employee" target="lk.imms.management_system.asset.employee.entity.Designation">
+      <point x="-9.692307692307622" y="-15.0" />
+      <point x="4419.332692307692" y="690.0" />
+      <point x="4343.099784738097" y="690.0" />
+      <point x="-39.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.Employee" target="lk.imms.management_system.asset.employee.entity.WorkingHistory">
+      <point x="-58.15384615384619" y="-15.0" />
+      <point x="4370.871153846154" y="740.0" />
+      <point x="1295.0792132097813" y="740.0" />
+      <point x="62.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.offenders.entity.OffenderDescription">
+      <point x="19.6875" y="-15.0" />
+      <point x="5026.11875" y="270.0" />
+      <point x="5239.82285372768" y="270.0" />
+      <point x="-78.66666666666663" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus">
+      <point x="51.1875" y="-15.0" />
+      <point x="5057.61875" y="320.0" />
+      <point x="6012.297380891943" y="320.0" />
+      <point x="-46.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Guardian" target="lk.imms.management_system.asset.commonAsset.entity.Enum.Gender">
+      <point x="15.75" y="-15.0" />
+      <point x="5044.5036308919425" y="140.0" />
+      <point x="5266.495297558609" y="140.0" />
+      <point x="-35.33333333333337" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.service.CrimeService" target="lk.imms.management_system.asset.crime.dao.CrimeDao">
+      <point x="20.75" y="-15.0" />
+      <point x="3918.3546395024036" y="1080.0" />
+      <point x="3929.583270394346" y="1080.0" />
+      <point x="31.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.Petition" target="lk.imms.management_system.asset.petition.entity.PetitionerDetail">
+      <point x="-54.0" y="-15.0" />
+      <point x="2501.1542132097816" y="440.0" />
+      <point x="1091.9542132097822" y="440.0" />
+      <point x="68.66666666666697" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.dao.PetitionDao" target="lk.imms.management_system.asset.petition.entity.Petition">
+      <point x="0.0" y="-15.0" />
+      <point x="2665.5796395024036" y="520.0" />
+      <point x="2570.9042132097816" y="520.0" />
+      <point x="15.75" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.PetitionFiles" target="lk.imms.management_system.asset.petition.entity.Petition">
+      <point x="0.0" y="-15.0" />
+      <point x="2567.0796395024036" y="530.0" />
+      <point x="2539.4042132097816" y="530.0" />
+      <point x="-15.75" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.commonAsset.entity.Enum.Gender">
+      <point x="11.8125" y="-15.0" />
+      <point x="5018.24375" y="260.0" />
+      <point x="5166.489520394347" y="260.0" />
+      <point x="5166.489520394347" y="150.0" />
+      <point x="5301.828630891943" y="150.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.PetitionerContactDetail" target="lk.imms.management_system.asset.employee.entity.Enum.ContactType">
+      <point x="-69.0" y="-15.0" />
+      <point x="688.1296395024033" y="60.0" />
+      <point x="1132.179057184565" y="60.0" />
+      <point x="-19.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.entity.DetectionTeamMember" target="lk.imms.management_system.asset.detection.entity.Enum.DetectionTeamMemberRole">
+      <point x="29.5" y="-15.0" />
+      <point x="3512.833270394346" y="610.0" />
+      <point x="3468.083270394346" y="610.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.service.PetitionService" target="lk.imms.management_system.asset.petition.entity.Petition">
+      <point x="-73.5" y="-15.0" />
+      <point x="2564.4042132097816" y="1000.0" />
+      <point x="2468.5796395024036" y="1000.0" />
+      <point x="2468.5796395024036" y="530.0" />
+      <point x="2507.9042132097816" y="530.0" />
+      <point x="-47.25" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.entity.Crime" target="lk.imms.management_system.asset.offenders.entity.Offender">
+      <point x="19.199999999999818" y="-15.0" />
+      <point x="3905.283270394346" y="410.0" />
+      <point x="4956.03125" y="410.0" />
+      <point x="-50.39999999999998" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.PetitionerDetail" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="68.66666666666697" y="-15.0" />
+      <point x="1091.9542132097822" y="330.0" />
+      <point x="1078.970723851232" y="330.0" />
+      <point x="1078.970723851232" y="80.0" />
+      <point x="3267.5290571845644" y="80.0" />
+      <point x="-66.30000000000018" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.Petition" target="lk.imms.management_system.asset.minute.entity.MinutePetition">
+      <point x="-36.0" y="-15.0" />
+      <point x="2519.1542132097816" y="430.0" />
+      <point x="2389.1042132097814" y="430.0" />
+      <point x="-46.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.OffenderFiles" target="lk.imms.management_system.asset.offenders.entity.Offender">
+      <point x="44.0" y="-15.0" />
+      <point x="4805.458270394347" y="430.0" />
+      <point x="5006.43125" y="430.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.service.RoleService" target="lk.imms.management_system.asset.userManagement.entity.Role">
+      <point x="-19.5" y="-15.0" />
+      <point x="6145.158270394346" y="1080.0" />
+      <point x="6135.408270394346" y="1080.0" />
+      <point x="6135.408270394346" y="830.0" />
+      <point x="5713.2248905178985" y="830.0" />
+      <point x="10.75" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.dao.DetectionTeamMemberDao" target="lk.imms.management_system.asset.detection.entity.DetectionTeamMember">
+      <point x="0.0" y="-15.0" />
+      <point x="3496.083270394346" y="750.0" />
+      <point x="3453.833270394346" y="750.0" />
+      <point x="-29.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.Petition" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="0.0" y="-15.0" />
+      <point x="2555.1542132097816" y="140.0" />
+      <point x="3314.3290571845646" y="140.0" />
+      <point x="-19.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.dao.OffenderContactDetailDao" target="lk.imms.management_system.asset.offenders.entity.OffenderContactDetail">
+      <point x="0.0" y="-15.0" />
+      <point x="1535.8750000000002" y="330.0" />
+      <point x="1620.2042132097815" y="330.0" />
+      <point x="-96.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.dao.PetitionerContactDetailDao" target="lk.imms.management_system.asset.petition.entity.PetitionerContactDetail">
+      <point x="0.0" y="-15.0" />
+      <point x="560.875" y="330.0" />
+      <point x="653.6296395024033" y="330.0" />
+      <point x="-103.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.OffenderContactDetailService" target="lk.imms.management_system.asset.offenders.entity.OffenderContactDetail">
+      <point x="40.75" y="-15.0" />
+      <point x="1658.3750000000002" y="1000.0" />
+      <point x="1689.3750000000002" y="1000.0" />
+      <point x="1689.3750000000002" y="330.0" />
+      <point x="1684.2042132097815" y="330.0" />
+      <point x="-32.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Guardian" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="-47.25" y="-15.0" />
+      <point x="4981.5036308919425" y="80.0" />
+      <point x="3400.1290571845648" y="80.0" />
+      <point x="66.30000000000018" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.service.RoleService" target="lk.imms.management_system.asset.userManagement.dao.RoleDao">
+      <point x="58.5" y="-15.0" />
+      <point x="6223.158270394346" y="1080.0" />
+      <point x="6232.908270394346" y="1080.0" />
+      <point x="29.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.service.CourtService" target="lk.imms.management_system.asset.crime.entity.Court">
+      <point x="62.25" y="-15.0" />
+      <point x="3773.8546395024036" y="1080.0" />
+      <point x="3785.583270394346" y="1080.0" />
+      <point x="3785.583270394346" y="440.0" />
+      <point x="3762.3786308919425" y="440.0" />
+      <point x="-12.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="-11.8125" y="-15.0" />
+      <point x="4994.61875" y="240.0" />
+      <point x="4955.2536308919425" y="240.0" />
+      <point x="4955.2536308919425" y="90.0" />
+      <point x="3392.3290571845646" y="90.0" />
+      <point x="58.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.OffenderDescription" target="lk.imms.management_system.asset.offenders.entity.Offender">
+      <point x="0.0" y="15.0" />
+      <point x="5318.489520394347" y="280.0" />
+      <point x="5033.99375" y="280.0" />
+      <point x="27.5625" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.entity.Crime" target="lk.imms.management_system.asset.detection.entity.DetectionTeam">
+      <point x="-12.0" y="15.0" />
+      <point x="3874.083270394346" y="530.0" />
+      <point x="3076.333270394346" y="530.0" />
+      <point x="66.0" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.controller.UserController" target="lk.imms.management_system.asset.userManagement.service.UserService">
+      <point x="-46.5" y="-15.0" />
+      <point x="5625.335463209782" y="1170.0" />
+      <point x="5453.883270394346" y="1170.0" />
+      <point x="31.199999999999818" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.EmployeeContactDetail" target="lk.imms.management_system.asset.employee.entity.Enum.ContactType">
+      <point x="-64.0" y="-15.0" />
+      <point x="1928.2042132097815" y="50.0" />
+      <point x="1210.179057184565" y="50.0" />
+      <point x="58.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.service.CourtService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="-62.25" y="-15.0" />
+      <point x="3649.3546395024036" y="1070.0" />
+      <point x="3255.6126821590524" y="1070.0" />
+      <point x="11.529411764705856" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.entity.MinutePetition" target="lk.imms.management_system.asset.minute.entity.Enum.MinuteState">
+      <point x="23.25" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.ContraveneService" target="lk.imms.management_system.asset.offenders.dao.ContraveneDao">
+      <point x="27.0" y="-15.0" />
+      <point x="4135.604639502404" y="1080.0" />
+      <point x="4153.083270394346" y="1080.0" />
+      <point x="44.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.OffenderCallingName" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="0.0" y="-15.0" />
+      <point x="4826.7536308919425" y="100.0" />
+      <point x="3384.5290571845644" y="100.0" />
+      <point x="50.69999999999982" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.PetitionerContactDetail" target="lk.imms.management_system.asset.petition.entity.PetitionerDetail">
+      <point x="103.5" y="15.0" />
+      <point x="860.6296395024033" y="320.0" />
+      <point x="1023.2875465431152" y="320.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.service.WorkingPlaceService" target="lk.imms.management_system.asset.commonAsset.entity.WorkingPlace">
+      <point x="29.5" y="-15.0" />
+      <point x="353.5" y="1080.0" />
+      <point x="373.25" y="1080.0" />
+      <point x="373.25" y="610.0" />
+      <point x="370.4542132097813" y="610.0" />
+      <point x="-20.75" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.service.DetectionTeamMemberService" target="lk.imms.management_system.asset.detection.entity.DetectionTeamMember">
+      <point x="-38.25" y="-15.0" />
+      <point x="3345.6046395024036" y="1080.0" />
+      <point x="3352.583270394346" y="1080.0" />
+      <point x="3352.583270394346" y="750.0" />
+      <point x="3394.833270394346" y="750.0" />
+      <point x="-88.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.entity.WorkingPlaceContactDetail" target="lk.imms.management_system.asset.employee.entity.Enum.ContactType">
+      <point x="0.0" y="-15.0" />
+      <point x="391.2042132097813" y="50.0" />
+      <point x="1093.179057184565" y="50.0" />
+      <point x="-58.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.service.UserDetailsServiceImpl" target="lk.imms.management_system.asset.userManagement.CustomerUserDetails">
+      <point x="33.25" y="-15.0" />
+      <point x="59.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.OffenderContactDetail" target="lk.imms.management_system.asset.offenders.entity.Offender">
+      <point x="96.0" y="15.0" />
+      <point x="1812.2042132097815" y="290.0" />
+      <point x="4955.24375" y="290.0" />
+      <point x="-51.1875" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.service.MinuteService" target="lk.imms.management_system.asset.minute.entity.Minute">
+      <point x="-66.0" y="-15.0" />
+      <point x="2204.6286308919425" y="1000.0" />
+      <point x="2146.7542132097815" y="1000.0" />
+      <point x="2146.7542132097815" y="330.0" />
+      <point x="2216.228630891943" y="330.0" />
+      <point x="-42.399999999999636" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.entity.WorkingPlace" target="lk.imms.management_system.asset.commonAsset.entity.WorkingPlaceContactDetail">
+      <point x="-41.5" y="-15.0" />
+      <point x="349.7042132097813" y="530.0" />
+      <point x="317.2042132097813" y="530.0" />
+      <point x="-74.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.dao.OffenderCallingNameDao" target="lk.imms.management_system.asset.offenders.entity.OffenderCallingName">
+      <point x="0.0" y="-15.0" />
+      <point x="4662.958270394347" y="330.0" />
+      <point x="4738.2536308919425" y="330.0" />
+      <point x="-88.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.crime.entity.Crime">
+      <point x="-25.200000000000045" y="15.0" />
+      <point x="4981.23125" y="420.0" />
+      <point x="3924.4832703943466" y="420.0" />
+      <point x="38.40000000000009" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.service.UserService" target="lk.imms.management_system.asset.userManagement.dao.UserDao">
+      <point x="58.5" y="-15.0" />
+      <point x="5481.183270394346" y="1080.0" />
+      <point x="5476.433270394346" y="1080.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.PetitionerDetail" target="lk.imms.management_system.asset.petition.entity.PetitionerContactDetail">
+      <point x="-68.66666666666697" y="-15.0" />
+      <point x="954.6208798764483" y="330.0" />
+      <point x="791.6296395024033" y="330.0" />
+      <point x="34.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.entity.MinutePetition" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="69.75" y="-15.0" />
+      <point x="2505.3542132097814" y="330.0" />
+      <point x="2547.3542132097814" y="330.0" />
+      <point x="2547.3542132097814" y="130.0" />
+      <point x="3306.5290571845644" y="130.0" />
+      <point x="-27.300000000000182" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Contravene" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="0.0" y="-15.0" />
+      <point x="4615.7536308919425" y="110.0" />
+      <point x="3376.729057184565" y="110.0" />
+      <point x="42.90000000000009" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.entity.DetectionTeam" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="-22.0" y="-15.0" />
+      <point x="2988.333270394346" y="160.0" />
+      <point x="3329.929057184565" y="160.0" />
+      <point x="-3.900000000000091" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.OffenderContactDetailService" target="lk.imms.management_system.asset.offenders.dao.OffenderContactDetailDao">
+      <point x="-122.25" y="-15.0" />
+      <point x="1495.3750000000002" y="1000.0" />
+      <point x="1464.3750000000002" y="1000.0" />
+      <point x="-71.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.OffenderFiles" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="-44.0" y="-15.0" />
+      <point x="4717.458270394347" y="400.0" />
+      <point x="4532.2536308919425" y="400.0" />
+      <point x="4532.2536308919425" y="120.0" />
+      <point x="3368.929057184565" y="120.0" />
+      <point x="35.09999999999991" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.commonAsset.entity.Enum.Title">
+      <point x="35.4375" y="-15.0" />
+      <point x="5041.86875" y="300.0" />
+      <point x="5768.297380891943" y="300.0" />
+      <point x="5768.297380891943" y="160.0" />
+      <point x="5757.797380891943" y="160.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.service.DetectionTeamService" target="lk.imms.management_system.asset.detection.entity.DetectionTeam">
+      <point x="-92.25" y="-15.0" />
+      <point x="2880.6542132097816" y="1000.0" />
+      <point x="2859.4042132097816" y="1000.0" />
+      <point x="2859.4042132097816" y="610.0" />
+      <point x="2944.333270394346" y="610.0" />
+      <point x="-66.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.OffenderContactDetailService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="122.25" y="-15.0" />
+      <point x="1739.8750000000002" y="1050.0" />
+      <point x="3197.9656233355227" y="1050.0" />
+      <point x="-46.11764705882342" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.service.CourtService" target="lk.imms.management_system.asset.crime.dao.CourtDao">
+      <point x="-20.75" y="-15.0" />
+      <point x="3690.8546395024036" y="1080.0" />
+      <point x="3680.583270394346" y="1080.0" />
+      <point x="-31.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.util.audit.AuditingConfig" target="lk.imms.management_system.util.audit.SecurityAuditor">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.Designation" target="lk.imms.management_system.asset.employee.entity.Employee">
+      <point x="39.000000000000114" y="15.0" />
+      <point x="4421.099784738097" y="680.0" />
+      <point x="4429.025" y="680.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.service.DetectionTeamMemberService" target="lk.imms.management_system.asset.detection.dao.DetectionTeamMemberDao">
+      <point x="114.75" y="-15.0" />
+      <point x="3498.6046395024036" y="1080.0" />
+      <point x="3562.583270394346" y="1080.0" />
+      <point x="66.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.dao.PetitionerDetailDao" target="lk.imms.management_system.asset.petition.entity.PetitionerDetail">
+      <point x="0.0" y="-15.0" />
+      <point x="909.375" y="440.0" />
+      <point x="954.6208798764483" y="440.0" />
+      <point x="-68.66666666666697" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.service.CrimeService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="-62.25" y="-15.0" />
+      <point x="3835.3546395024036" y="1060.0" />
+      <point x="3267.142093923758" y="1060.0" />
+      <point x="23.05882352941171" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.service.EmployeeService" target="lk.imms.management_system.asset.employee.dao.EmployeeDao">
+      <point x="24.5" y="-15.0" />
+      <point x="4429.333270394347" y="1080.0" />
+      <point x="4443.583270394347" y="1080.0" />
+      <point x="39.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.Employee" target="lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus">
+      <point x="38.76923076923072" y="-15.0" />
+      <point x="4467.79423076923" y="730.0" />
+      <point x="5906.797380891943" y="730.0" />
+      <point x="39.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.OffenderDescription" target="lk.imms.management_system.asset.offenders.entity.Enum.OffenderDescriptionType">
+      <point x="59.0" y="-15.0" />
+      <point x="5377.489520394347" y="150.0" />
+      <point x="5512.828630891943" y="150.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.service.DetectionTeamService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="92.25" y="-15.0" />
+      <point x="3065.1542132097816" y="1080.0" />
+      <point x="3232.5538586296407" y="1080.0" />
+      <point x="-11.529411764705856" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.service.WorkingPlaceService" target="lk.imms.management_system.asset.commonAsset.dao.WorkingPlaceDao">
+      <point x="-88.5" y="-15.0" />
+      <point x="235.5" y="1080.0" />
+      <point x="215.75" y="1080.0" />
+      <point x="-49.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Guardian" target="lk.imms.management_system.asset.offenders.entity.Enum.GuardianType">
+      <point x="-15.75" y="-15.0" />
+      <point x="5013.0036308919425" y="130.0" />
+      <point x="5145.828630891943" y="130.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.dao.ContraveneDao" target="lk.imms.management_system.asset.offenders.entity.Contravene">
+      <point x="0.0" y="-15.0" />
+      <point x="4109.083270394346" y="320.0" />
+      <point x="4561.0036308919425" y="320.0" />
+      <point x="-54.75" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.entity.Crime" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="0.0" y="-15.0" />
+      <point x="3886.083270394346" y="140.0" />
+      <point x="3353.3290571845646" y="140.0" />
+      <point x="19.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.service.PetitionService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="73.5" y="-15.0" />
+      <point x="2711.4042132097816" y="1070.0" />
+      <point x="3221.0244468649344" y="1070.0" />
+      <point x="-23.05882352941171" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.OffenderService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="-73.5" y="-15.0" />
+      <point x="4924.859880891943" y="1020.0" />
+      <point x="3313.259740982581" y="1020.0" />
+      <point x="69.17647058823513" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.Employee" target="lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup">
+      <point x="58.15384615384619" y="-15.0" />
+      <point x="4487.178846153846" y="750.0" />
+      <point x="6281.297380891943" y="750.0" />
+      <point x="36.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.service.CrimeService" target="lk.imms.management_system.asset.crime.entity.Crime">
+      <point x="62.25" y="-15.0" />
+      <point x="3959.8546395024036" y="1080.0" />
+      <point x="3971.583270394346" y="1080.0" />
+      <point x="3971.583270394346" y="530.0" />
+      <point x="3922.083270394346" y="530.0" />
+      <point x="36.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.service.UserDetailsServiceImpl" target="lk.imms.management_system.asset.userManagement.dao.UserDao">
+      <point x="-99.75" y="-15.0" />
+      <point x="5833.908270394346" y="1080.0" />
+      <point x="5515.099937061013" y="1080.0" />
+      <point x="38.66666666666674" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.entity.DetectionTeam" target="lk.imms.management_system.asset.crime.entity.Crime">
+      <point x="22.0" y="-15.0" />
+      <point x="3032.333270394346" y="520.0" />
+      <point x="3850.083270394346" y="520.0" />
+      <point x="-36.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.service.UserService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="-58.5" y="-15.0" />
+      <point x="5364.183270394346" y="1010.0" />
+      <point x="3324.7891527472875" y="1010.0" />
+      <point x="80.70588235294144" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.Petition" target="lk.imms.management_system.asset.petition.entity.PetitionState">
+      <point x="36.0" y="-15.0" />
+      <point x="2591.1542132097816" y="430.0" />
+      <point x="2795.6542132097816" y="430.0" />
+      <point x="-44.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.controller.UserController" target="lk.imms.management_system.asset.userManagement.entity.User">
+      <point x="46.5" y="-15.0" />
+      <point x="5718.335463209782" y="1200.0" />
+      <point x="5778.859880891943" y="1200.0" />
+      <point x="5778.859880891943" y="920.0" />
+      <point x="5521.454057184565" y="920.0" />
+      <point x="16.125" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.OffenderContactDetail" target="lk.imms.management_system.asset.employee.entity.Enum.ContactType">
+      <point x="-64.0" y="-15.0" />
+      <point x="1652.2042132097815" y="60.0" />
+      <point x="1171.179057184565" y="60.0" />
+      <point x="19.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.dao.OffenderDao" target="lk.imms.management_system.asset.offenders.entity.Offender">
+      <point x="0.0" y="-15.0" />
+      <point x="5049.75625" y="440.0" />
+      <point x="5056.831249999999" y="440.0" />
+      <point x="50.399999999999864" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.service.PetitionerContactDetailService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="129.75" y="-15.0" />
+      <point x="777.375" y="1020.0" />
+      <point x="3163.3773880414055" y="1020.0" />
+      <point x="-80.70588235294099" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.controller.UserController" target="lk.imms.management_system.asset.employee.service.EmployeeService">
+      <point x="-65.09999999999991" y="-15.0" />
+      <point x="5606.735463209781" y="1180.0" />
+      <point x="4453.833270394347" y="1180.0" />
+      <point x="49.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.controller.UserController" target="lk.imms.management_system.asset.userManagement.service.RoleService">
+      <point x="65.09999999999991" y="-15.0" />
+      <point x="5736.935463209782" y="1210.0" />
+      <point x="6125.658270394346" y="1210.0" />
+      <point x="-39.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.dao.OffenderDescriptionDao" target="lk.imms.management_system.asset.offenders.entity.OffenderDescription">
+      <point x="0.0" y="-15.0" />
+      <point x="5315.727129876448" y="290.0" />
+      <point x="5397.156187061013" y="290.0" />
+      <point x="78.66666666666674" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.EmployeeContactDetail" target="lk.imms.management_system.asset.employee.entity.Employee">
+      <point x="-64.0" y="15.0" />
+      <point x="1928.2042132097815" y="330.0" />
+      <point x="1964.957903338411" y="330.0" />
+      <point x="1964.957903338411" y="730.0" />
+      <point x="4380.5634615384615" y="730.0" />
+      <point x="-48.46153846153857" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.controller.ProfileController" target="lk.imms.management_system.asset.userManagement.entity.User">
+      <point x="0.0" y="-15.0" />
+      <point x="5135.859880891943" y="1220.0" />
+      <point x="5138.25625" y="1220.0" />
+      <point x="5138.25625" y="900.0" />
+      <point x="5467.704057184565" y="900.0" />
+      <point x="-37.625" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.Employee" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="9.692307692307622" y="-15.0" />
+      <point x="4438.717307692307" y="700.0" />
+      <point x="4487.574784738097" y="700.0" />
+      <point x="4487.574784738097" y="130.0" />
+      <point x="3361.1290571845648" y="130.0" />
+      <point x="27.300000000000182" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.service.DetectionTeamService" target="lk.imms.management_system.asset.detection.dao.DetectionTeamDao">
+      <point x="30.75" y="-15.0" />
+      <point x="3003.6542132097816" y="1000.0" />
+      <point x="3074.583270394346" y="1000.0" />
+      <point x="51.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus">
+      <point x="43.3125" y="-15.0" />
+      <point x="5049.74375" y="310.0" />
+      <point x="5828.797380891943" y="310.0" />
+      <point x="-39.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.Employee" target="lk.imms.management_system.asset.employee.entity.EmployeeContactDetail">
+      <point x="-38.76923076923072" y="-15.0" />
+      <point x="4390.255769230769" y="720.0" />
+      <point x="1974.6502110307188" y="720.0" />
+      <point x="1974.6502110307188" y="330.0" />
+      <point x="2056.2042132097813" y="330.0" />
+      <point x="64.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.entity.DetectionTeamMember" target="lk.imms.management_system.asset.employee.entity.Employee">
+      <point x="88.5" y="15.0" />
+      <point x="3571.833270394346" y="700.0" />
+      <point x="4409.640384615384" y="700.0" />
+      <point x="-19.384615384615472" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.entity.MinuteFile" target="lk.imms.management_system.asset.minute.entity.Minute">
+      <point x="0.0" y="-15.0" />
+      <point x="2230.2542132097815" y="330.0" />
+      <point x="2237.4286308919427" y="330.0" />
+      <point x="-21.199999999999818" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.entity.WorkingPlace" target="lk.imms.management_system.asset.employee.entity.WorkingHistory">
+      <point x="62.25" y="15.0" />
+      <point x="453.4542132097813" y="600.0" />
+      <point x="1209.8292132097813" y="600.0" />
+      <point x="-23.25" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.OffenderCallingNameService" target="lk.imms.management_system.asset.offenders.entity.OffenderCallingName">
+      <point x="114.75" y="-15.0" />
+      <point x="4792.354639502403" y="1080.0" />
+      <point x="4859.958270394347" y="1080.0" />
+      <point x="4859.958270394347" y="330.0" />
+      <point x="4797.2536308919425" y="330.0" />
+      <point x="-29.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.offenders.entity.OffenderCallingName">
+      <point x="-27.5625" y="-15.0" />
+      <point x="4978.86875" y="260.0" />
+      <point x="4856.2536308919425" y="260.0" />
+      <point x="29.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.dao.CourtDao" target="lk.imms.management_system.asset.crime.entity.Court">
+      <point x="0.0" y="-15.0" />
+      <point x="3712.083270394346" y="440.0" />
+      <point x="3738.3786308919425" y="440.0" />
+      <point x="-36.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.EmployeeContactDetail" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="64.0" y="-15.0" />
+      <point x="2056.2042132097813" y="100.0" />
+      <point x="3283.1290571845648" y="100.0" />
+      <point x="-50.69999999999982" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.PetitionState" target="lk.imms.management_system.asset.petition.entity.Petition">
+      <point x="44.0" y="15.0" />
+      <point x="2883.6542132097816" y="440.0" />
+      <point x="2609.1542132097816" y="440.0" />
+      <point x="54.0" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.service.PetitionService" target="lk.imms.management_system.asset.petition.dao.PetitionDao">
+      <point x="24.5" y="-15.0" />
+      <point x="2662.4042132097816" y="1000.0" />
+      <point x="2704.5796395024036" y="1000.0" />
+      <point x="39.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.dao.CrimeDao" target="lk.imms.management_system.asset.crime.entity.Crime">
+      <point x="0.0" y="-15.0" />
+      <point x="12.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.OffenderService" target="lk.imms.management_system.asset.offenders.dao.OffenderDao">
+      <point x="24.5" y="-15.0" />
+      <point x="5022.859880891943" y="1080.0" />
+      <point x="5010.75625" y="1080.0" />
+      <point x="-39.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.service.UserService" target="lk.imms.management_system.asset.userManagement.entity.User">
+      <point x="-19.5" y="-15.0" />
+      <point x="5403.183270394346" y="1080.0" />
+      <point x="5407.933270394346" y="1080.0" />
+      <point x="5407.933270394346" y="920.0" />
+      <point x="5489.204057184565" y="920.0" />
+      <point x="-16.125" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.entity.Minute" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="0.0" y="-15.0" />
+      <point x="2258.6286308919425" y="120.0" />
+      <point x="3298.729057184565" y="120.0" />
+      <point x="-35.09999999999991" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.service.PetitionerContactDetailService" target="lk.imms.management_system.asset.petition.entity.PetitionerContactDetail">
+      <point x="43.25" y="-15.0" />
+      <point x="690.875" y="1000.0" />
+      <point x="724.375" y="1000.0" />
+      <point x="724.375" y="330.0" />
+      <point x="722.6296395024033" y="330.0" />
+      <point x="-34.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.dao.WorkingHistoryDao" target="lk.imms.management_system.asset.employee.entity.WorkingHistory">
+      <point x="0.0" y="-15.0" />
+      <point x="1264.875" y="750.0" />
+      <point x="1233.0792132097813" y="750.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.Petition" target="lk.imms.management_system.asset.petition.entity.Enum.PetitionType">
+      <point x="18.0" y="-15.0" />
+      <point x="2573.1542132097816" y="420.0" />
+      <point x="2648.6542132097816" y="420.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.dao.WorkingPlaceDao" target="lk.imms.management_system.asset.commonAsset.entity.WorkingPlace">
+      <point x="0.0" y="-15.0" />
+      <point x="264.75" y="610.0" />
+      <point x="328.9542132097813" y="610.0" />
+      <point x="-62.25" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Contravene" target="lk.imms.management_system.asset.offenders.entity.Offender">
+      <point x="54.75" y="15.0" />
+      <point x="4670.5036308919425" y="270.0" />
+      <point x="4970.99375" y="270.0" />
+      <point x="-35.4375" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.service.DetectionTeamMemberService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="-114.75" y="-15.0" />
+      <point x="3269.1046395024036" y="1080.0" />
+      <point x="3244.083270394346" y="1080.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.dao.MinuteDao" target="lk.imms.management_system.asset.minute.entity.Minute">
+      <point x="0.0" y="-15.0" />
+      <point x="2313.7542132097815" y="330.0" />
+      <point x="2258.6286308919425" y="330.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.WorkingHistory" target="lk.imms.management_system.asset.employee.entity.Enum.WorkingPlaceChangeReason">
+      <point x="23.25" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.service.PetitionerDetailService" target="lk.imms.management_system.asset.petition.entity.PetitionerDetail">
+      <point x="34.5" y="-15.0" />
+      <point x="1013.125" y="1000.0" />
+      <point x="1037.875" y="1000.0" />
+      <point x="1037.875" y="440.0" />
+      <point x="1023.2875465431152" y="440.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.entity.User" target="lk.imms.management_system.asset.employee.entity.Employee">
+      <point x="-28.666666666666742" y="-15.0" />
+      <point x="5476.662390517898" y="820.0" />
+      <point x="4476.275" y="820.0" />
+      <point x="47.25" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.OffenderCallingNameService" target="lk.imms.management_system.asset.offenders.dao.OffenderCallingNameDao">
+      <point x="38.25" y="-15.0" />
+      <point x="4715.854639502403" y="1080.0" />
+      <point x="4729.458270394347" y="1080.0" />
+      <point x="66.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.entity.DetectionTeam" target="lk.imms.management_system.asset.petition.entity.Petition">
+      <point x="-66.0" y="-15.0" />
+      <point x="2944.333270394346" y="510.0" />
+      <point x="2602.4042132097816" y="510.0" />
+      <point x="47.25" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.entity.DetectionTeamMember" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="88.5" y="-15.0" />
+      <point x="3571.833270394346" y="610.0" />
+      <point x="3616.583270394346" y="610.0" />
+      <point x="3616.583270394346" y="160.0" />
+      <point x="3337.729057184565" y="160.0" />
+      <point x="3.900000000000091" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.controller.UserController" target="lk.imms.management_system.util.service.DateTimeAgeService">
+      <point x="9.299999999999955" y="-15.0" />
+      <point x="5681.135463209782" y="1180.0" />
+      <point x="5700.859880891943" y="1180.0" />
+      <point x="56.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.service.WorkingHistoryService" target="lk.imms.management_system.asset.employee.dao.WorkingHistoryDao">
+      <point x="32.0" y="-15.0" />
+      <point x="1296.625" y="1000.0" />
+      <point x="1318.875" y="1000.0" />
+      <point x="54.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.WorkingHistory" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="69.75" y="-15.0" />
+      <point x="1302.8292132097813" y="610.0" />
+      <point x="2130.7042132097813" y="610.0" />
+      <point x="2130.7042132097813" y="110.0" />
+      <point x="3290.929057184565" y="110.0" />
+      <point x="-42.90000000000009" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.TestRestController" target="lk.imms.management_system.asset.userManagement.entity.User">
+      <point x="-56.5" y="-15.0" />
+      <point x="5320.359880891943" y="1200.0" />
+      <point x="5334.183270394346" y="1200.0" />
+      <point x="5334.183270394346" y="910.0" />
+      <point x="5478.454057184565" y="910.0" />
+      <point x="-26.875" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.WorkingHistory" target="lk.imms.management_system.asset.commonAsset.entity.WorkingPlace">
+      <point x="-69.75" y="-15.0" />
+      <point x="1163.3292132097813" y="610.0" />
+      <point x="411.9542132097813" y="610.0" />
+      <point x="20.75" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.OffenderService" target="lk.imms.management_system.asset.offenders.entity.Offender">
+      <point x="-24.5" y="-15.0" />
+      <point x="4973.859880891943" y="1080.0" />
+      <point x="4961.25625" y="1080.0" />
+      <point x="4961.25625" y="440.0" />
+      <point x="5031.63125" y="440.0" />
+      <point x="25.200000000000045" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.service.WorkingPlaceService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="88.5" y="-15.0" />
+      <point x="412.5" y="1010.0" />
+      <point x="3151.8479762766992" y="1010.0" />
+      <point x="-92.23529411764684" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.entity.MinutePetition" target="lk.imms.management_system.asset.petition.entity.Petition">
+      <point x="46.5" y="15.0" />
+      <point x="2482.1042132097814" y="420.0" />
+      <point x="2537.1542132097816" y="420.0" />
+      <point x="-18.0" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.OffenderContactDetail" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="64.0" y="-15.0" />
+      <point x="1780.2042132097815" y="90.0" />
+      <point x="3275.3290571845646" y="90.0" />
+      <point x="-58.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.entity.MinutePetition" target="lk.imms.management_system.asset.minute.entity.Minute">
+      <point x="-69.75" y="-15.0" />
+      <point x="2365.8542132097814" y="320.0" />
+      <point x="2279.8286308919423" y="320.0" />
+      <point x="21.199999999999818" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.ContraveneService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="-81.0" y="-15.0" />
+      <point x="4027.6046395024036" y="1050.0" />
+      <point x="3278.671505688464" y="1050.0" />
+      <point x="34.58823529411757" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.entity.User" target="lk.imms.management_system.asset.userManagement.entity.Role">
+      <point x="0.0" y="-15.0" />
+      <point x="5505.329057184565" y="820.0" />
+      <point x="5670.2248905178985" y="820.0" />
+      <point x="-32.25" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.controller.ProfileController" target="lk.imms.management_system.asset.userManagement.service.UserService">
+      <point x="86.40000000000009" y="-15.0" />
+      <point x="5222.259880891943" y="1220.0" />
+      <point x="5391.483270394347" y="1220.0" />
+      <point x="-31.200000000000045" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.EmployeeFiles" target="lk.imms.management_system.asset.employee.entity.Employee">
+      <point x="0.0" y="-15.0" />
+      <point x="4306.083270394346" y="830.0" />
+      <point x="4381.775" y="830.0" />
+      <point x="-47.25" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.service.MinuteService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="66.0" y="-15.0" />
+      <point x="2336.6286308919425" y="1060.0" />
+      <point x="3209.495035100229" y="1060.0" />
+      <point x="-34.58823529411757" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.Employee" target="lk.imms.management_system.asset.commonAsset.entity.Enum.Title">
+      <point x="29.076923076923094" y="-15.0" />
+      <point x="4458.101923076923" y="720.0" />
+      <point x="5779.297380891943" y="720.0" />
+      <point x="5779.297380891943" y="160.0" />
+      <point x="5789.797380891943" y="160.0" />
+      <point x="32.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.service.UserDetailsServiceImpl" target="lk.imms.management_system.asset.userManagement.entity.User">
+      <point x="99.75" y="-15.0" />
+      <point x="6033.408270394346" y="1080.0" />
+      <point x="6060.658270394346" y="1080.0" />
+      <point x="6060.658270394346" y="900.0" />
+      <point x="5542.954057184565" y="900.0" />
+      <point x="37.625" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.Employee" target="lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus">
+      <point x="48.46153846153857" y="-15.0" />
+      <point x="4477.486538461539" y="740.0" />
+      <point x="6105.297380891943" y="740.0" />
+      <point x="46.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.ContraveneService" target="lk.imms.management_system.asset.offenders.entity.Contravene">
+      <point x="81.0" y="-15.0" />
+      <point x="4189.604639502404" y="1080.0" />
+      <point x="4207.583270394346" y="1080.0" />
+      <point x="4207.583270394346" y="330.0" />
+      <point x="4597.5036308919425" y="330.0" />
+      <point x="-18.25" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.entity.Crime" target="lk.imms.management_system.asset.crime.entity.Court">
+      <point x="-38.40000000000009" y="-15.0" />
+      <point x="3847.6832703943464" y="430.0" />
+      <point x="3786.3786308919425" y="430.0" />
+      <point x="12.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.dao.RoleDao" target="lk.imms.management_system.asset.userManagement.entity.Role">
+      <point x="0.0" y="-15.0" />
+      <point x="6203.908270394346" y="820.0" />
+      <point x="5734.7248905178985" y="820.0" />
+      <point x="32.25" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.entity.WorkingPlaceContactDetail" target="lk.imms.management_system.asset.commonAsset.entity.WorkingPlace">
+      <point x="74.0" y="15.0" />
+      <point x="465.2042132097813" y="530.0" />
+      <point x="432.7042132097813" y="530.0" />
+      <point x="41.5" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.dao.EmployeeDao" target="lk.imms.management_system.asset.employee.entity.Employee">
+      <point x="0.0" y="-15.0" />
+      <point x="4404.583270394347" y="830.0" />
+      <point x="4413.275" y="830.0" />
+      <point x="-15.75" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.Employee" target="lk.imms.management_system.asset.detection.entity.DetectionTeamMember">
+      <point x="-29.076923076923094" y="-15.0" />
+      <point x="4399.948076923077" y="710.0" />
+      <point x="3512.833270394346" y="710.0" />
+      <point x="29.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.entity.DetectionTeam" target="lk.imms.management_system.asset.detection.entity.DetectionTeamMember">
+      <point x="66.0" y="15.0" />
+      <point x="3076.333270394346" y="600.0" />
+      <point x="3453.833270394346" y="600.0" />
+      <point x="-29.5" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.offenders.entity.Contravene">
+      <point x="-43.3125" y="-15.0" />
+      <point x="4963.11875" y="280.0" />
+      <point x="4634.0036308919425" y="280.0" />
+      <point x="18.25" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.service.WorkingHistoryService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="96.0" y="-15.0" />
+      <point x="1360.625" y="1040.0" />
+      <point x="3186.4362115708172" y="1040.0" />
+      <point x="-57.64705882352928" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.service.PetitionerContactDetailService" target="lk.imms.management_system.asset.petition.dao.PetitionerContactDetailDao">
+      <point x="-43.25" y="-15.0" />
+      <point x="604.375" y="1000.0" />
+      <point x="637.375" y="1000.0" />
+      <point x="76.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.service.EmployeeService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="-73.5" y="-15.0" />
+      <point x="4331.333270394347" y="1040.0" />
+      <point x="3290.2009174531695" y="1040.0" />
+      <point x="46.11764705882342" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.service.OffenderCallingNameService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="-114.75" y="-15.0" />
+      <point x="4562.854639502403" y="1030.0" />
+      <point x="3301.730329217876" y="1030.0" />
+      <point x="57.64705882352928" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.service.RoleService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="-58.5" y="-15.0" />
+      <point x="6106.158270394346" y="1000.0" />
+      <point x="3336.318564511994" y="1000.0" />
+      <point x="92.2352941176473" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.entity.Employee" target="lk.imms.management_system.asset.commonAsset.entity.Enum.Gender">
+      <point x="19.384615384615472" y="-15.0" />
+      <point x="4448.409615384615" y="710.0" />
+      <point x="5595.54160372768" y="710.0" />
+      <point x="5595.54160372768" y="140.0" />
+      <point x="5337.161964225276" y="140.0" />
+      <point x="35.333333333333485" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.entity.Court" target="lk.imms.management_system.asset.crime.entity.Crime">
+      <point x="36.0" y="15.0" />
+      <point x="3810.3786308919425" y="420.0" />
+      <point x="3866.8832703943463" y="420.0" />
+      <point x="-19.199999999999818" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.commonAsset.controller.ProfileController" target="lk.imms.management_system.asset.userManagement.entity.PasswordChange">
+      <point x="-43.19999999999982" y="-15.0" />
+      <point x="5092.6598808919425" y="1210.0" />
+      <point x="139.5" y="1210.0" />
+      <point x="46.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Guardian" target="lk.imms.management_system.asset.offenders.entity.Offender">
+      <point x="31.5" y="15.0" />
+      <point x="5060.2536308919425" y="250.0" />
+      <point x="5010.36875" y="250.0" />
+      <point x="3.9375" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.service.EmployeeService" target="lk.imms.management_system.asset.employee.entity.Employee">
+      <point x="73.5" y="-15.0" />
+      <point x="4478.333270394347" y="1080.0" />
+      <point x="4493.083270394347" y="1080.0" />
+      <point x="4493.083270394347" y="830.0" />
+      <point x="4444.775" y="830.0" />
+      <point x="15.75" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.entity.DetectionTeamMember" target="lk.imms.management_system.asset.detection.entity.DetectionTeam">
+      <point x="-88.5" y="-15.0" />
+      <point x="3394.833270394346" y="610.0" />
+      <point x="3032.333270394346" y="610.0" />
+      <point x="22.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.detection.dao.DetectionTeamDao" target="lk.imms.management_system.asset.detection.entity.DetectionTeam">
+      <point x="0.0" y="-15.0" />
+      <point x="3023.083270394346" y="610.0" />
+      <point x="2988.333270394346" y="610.0" />
+      <point x="-22.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.OffenderDescription" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="-59.0" y="-15.0" />
+      <point x="5259.489520394347" y="70.0" />
+      <point x="3407.929057184565" y="70.0" />
+      <point x="74.09999999999991" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.crime.entity.Court" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="0.0" y="-15.0" />
+      <point x="3774.3786308919425" y="150.0" />
+      <point x="3345.5290571845644" y="150.0" />
+      <point x="11.699999999999818" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.OffenderCallingName" target="lk.imms.management_system.asset.offenders.entity.Offender">
+      <point x="88.5" y="15.0" />
+      <point x="4915.2536308919425" y="250.0" />
+      <point x="4986.74375" y="250.0" />
+      <point x="-19.6875" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.offenders.entity.OffenderContactDetail">
+      <point x="-59.0625" y="-15.0" />
+      <point x="4947.36875" y="300.0" />
+      <point x="1748.2042132097815" y="300.0" />
+      <point x="32.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.configuration.SecurityConfig" target="lk.imms.management_system.asset.userManagement.service.UserDetailsServiceImpl">
+      <point x="-46.5" y="-15.0" />
+      <point x="5908.710463209782" y="1200.0" />
+      <point x="5867.158270394346" y="1200.0" />
+      <point x="-66.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.PetitionState" target="lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType">
+      <point x="-44.0" y="-15.0" />
+      <point x="2795.6542132097816" y="330.0" />
+      <point x="2780.4042132097816" y="330.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.CustomerUserDetails" target="lk.imms.management_system.asset.userManagement.entity.User">
+      <point x="0.0" y="-15.0" />
+      <point x="5907.359880891943" y="910.0" />
+      <point x="5532.204057184565" y="910.0" />
+      <point x="26.875" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.employee.service.WorkingHistoryService" target="lk.imms.management_system.asset.employee.entity.WorkingHistory">
+      <point x="-96.0" y="-15.0" />
+      <point x="1168.625" y="1000.0" />
+      <point x="1142.8292132097813" y="1000.0" />
+      <point x="1142.8292132097813" y="750.0" />
+      <point x="1171.0792132097813" y="750.0" />
+      <point x="-62.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.offenders.entity.Guardian">
+      <point x="-3.9375" y="-15.0" />
+      <point x="5002.49375" y="230.0" />
+      <point x="4997.2536308919425" y="230.0" />
+      <point x="-31.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.service.PetitionerDetailService" target="lk.imms.management_system.asset.petition.dao.PetitionerDetailDao">
+      <point x="-34.5" y="-15.0" />
+      <point x="944.125" y="1000.0" />
+      <point x="968.375" y="1000.0" />
+      <point x="59.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.PetitionerContactDetail" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="69.0" y="-15.0" />
+      <point x="826.1296395024033" y="70.0" />
+      <point x="3259.729057184565" y="70.0" />
+      <point x="-74.09999999999991" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.dao.UserDao" target="lk.imms.management_system.asset.userManagement.entity.User">
+      <point x="0.0" y="-15.0" />
+      <point x="5476.433270394346" y="930.0" />
+      <point x="5499.954057184565" y="930.0" />
+      <point x="-5.375" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.userManagement.entity.Role" target="lk.imms.management_system.asset.userManagement.entity.User">
+      <point x="-10.75" y="15.0" />
+      <point x="5691.7248905178985" y="830.0" />
+      <point x="5533.995723851232" y="830.0" />
+      <point x="28.66666666666697" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.service.MinuteService" target="lk.imms.management_system.asset.minute.dao.MinuteDao">
+      <point x="22.0" y="-15.0" />
+      <point x="2292.6286308919425" y="1000.0" />
+      <point x="2347.7542132097815" y="1000.0" />
+      <point x="34.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Offender" target="lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup">
+      <point x="59.0625" y="-15.0" />
+      <point x="5065.49375" y="330.0" />
+      <point x="6208.297380891943" y="330.0" />
+      <point x="-36.5" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.offenders.entity.Guardian" target="lk.imms.management_system.asset.commonAsset.entity.Enum.Title">
+      <point x="47.25" y="-15.0" />
+      <point x="5076.0036308919425" y="160.0" />
+      <point x="5725.797380891943" y="160.0" />
+      <point x="-32.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.entity.PetitionState" target="lk.imms.management_system.util.audit.AuditEntity">
+      <point x="44.0" y="-15.0" />
+      <point x="2883.6542132097816" y="330.0" />
+      <point x="2898.9042132097816" y="330.0" />
+      <point x="2898.9042132097816" y="150.0" />
+      <point x="3322.1290571845648" y="150.0" />
+      <point x="-11.699999999999818" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.TestRestController" target="lk.imms.management_system.asset.userManagement.service.UserService">
+      <point x="56.5" y="-15.0" />
+      <point x="5433.359880891943" y="1220.0" />
+      <point x="5422.683270394346" y="1220.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.minute.entity.Minute" target="lk.imms.management_system.asset.minute.entity.MinutePetition">
+      <point x="42.399999999999636" y="15.0" />
+      <point x="2301.028630891942" y="310.0" />
+      <point x="2412.3542132097814" y="310.0" />
+      <point x="-23.25" y="-15.0" />
+    </edge>
+    <edge source="lk.imms.management_system.asset.petition.service.PetitionerDetailService" target="lk.imms.management_system.util.interfaces.AbstractService">
+      <point x="103.5" y="-15.0" />
+      <point x="1082.125" y="1030.0" />
+      <point x="3174.906799806111" y="1030.0" />
+      <point x="-69.17647058823513" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6087409277374566" x="1573.6691721528175" y="1090.8922813747345" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

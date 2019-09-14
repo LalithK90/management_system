@@ -81,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .defaultSuccessUrl("/mainWindow")
                 //Username and password for validation
-                .usernameParameter("userame")
+                .usernameParameter("username")
                 .passwordParameter("password")
                 .and()
                 //Logout controlling
