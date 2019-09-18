@@ -11,9 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class OffenderService implements AbstractService< Offender, Long> {
+public class OffenderService implements AbstractService< Offender, Long > {
     private final OffenderDao offenderDao;
-@Autowired
+
+    @Autowired
     public OffenderService(OffenderDao offenderDao) {
         this.offenderDao = offenderDao;
     }
@@ -26,17 +27,21 @@ public class OffenderService implements AbstractService< Offender, Long> {
 
     @Override
     public Offender findById(Long id) {
-        return null;
+        return offenderDao.getOne(id);
     }
 
     @Override
     public Offender persist(Offender offender) {
-        return null;
+        //todo -> need to find fact to before save
+        return offenderDao.save(offender);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        //there is no possibilities to delete offender from system
+        //more than 100 years need to save the in the system
+        offenderDao.deleteById(id);
+        return true;
     }
 
     @Override

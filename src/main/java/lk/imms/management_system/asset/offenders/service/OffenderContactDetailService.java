@@ -25,17 +25,20 @@ public class OffenderContactDetailService implements AbstractService< OffenderCo
 
     @Override
     public OffenderContactDetail findById(Long id) {
-        return null;
+        return offenderContactDetailDao.getOne(id);
     }
 
     @Override
     public OffenderContactDetail persist(OffenderContactDetail offenderContactDetail) {
-        return null;
+    //todo -> find fact before need to save
+    return offenderContactDetailDao.save(offenderContactDetail);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+    //there is no possibilities to delete any offender in the system
+    offenderContactDetailDao.deleteById(id);
+    return true;
     }
 
     @Override

@@ -13,7 +13,8 @@ import java.util.List;
 @Service
 public class OffenderCallingNameService implements AbstractService< OffenderCallingName, Long > {
     private final OffenderCallingNameDao offenderCallingNameDao;
-@Autowired
+
+    @Autowired
     public OffenderCallingNameService(OffenderCallingNameDao offenderCallingNameDao) {
         this.offenderCallingNameDao = offenderCallingNameDao;
     }
@@ -26,17 +27,20 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
 
     @Override
     public OffenderCallingName findById(Long id) {
-        return null;
+        return offenderCallingNameDao.getOne(id);
     }
 
     @Override
     public OffenderCallingName persist(OffenderCallingName offenderCallingName) {
-        return null;
+        //todo -> find fact before save
+        return offenderCallingNameDao.save(offenderCallingName);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        //there should not be possibilities to delete
+        offenderCallingNameDao.deleteById(id);
+        return true;
     }
 
     @Override

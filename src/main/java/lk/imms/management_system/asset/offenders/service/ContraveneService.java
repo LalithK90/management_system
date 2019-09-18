@@ -26,17 +26,20 @@ public class ContraveneService implements AbstractService< Contravene, Long > {
 
     @Override
     public Contravene findById(Long id) {
-        return null;
+        return contraveneDao.getOne(id);
     }
 
     @Override
     public Contravene persist(Contravene contravene) {
-        return null;
+       //todo-> plz check what are the fact need to check before save
+        return contraveneDao.save(contravene);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        //there is no possibilities to delete
+        contraveneDao.deleteById(id);
+        return true;
     }
 
     @Override

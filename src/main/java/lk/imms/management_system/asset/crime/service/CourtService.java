@@ -26,17 +26,21 @@ public class CourtService implements AbstractService< Court, Long > {
 
     @Override
     public Court findById(Long id) {
-        return null;
+        return courtDao.getOne(id);
     }
 
     @Override
     public Court persist(Court court) {
-        return null;
+        //todo -> please find what area the main criteria to save cour to system
+        // if some time need to verify court function
+        return courtDao.save(court);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        //todo -> consider what are the fact need to check before delete
+        courtDao.deleteById(id);
+        return true;
     }
 
     @Override

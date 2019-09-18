@@ -25,17 +25,19 @@ public class MinuteService implements AbstractService< Minute, Long > {
 
     @Override
     public Minute findById(Long id) {
-        return null;
+        return minuteDao.getOne(id);
     }
 
     @Override
     public Minute persist(Minute minute) {
-        return null;
+    //todo -> find what are the things to check before save
+    return minuteDao.save(minute);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+    // there is no possibility to delete any minute
+    return false;
     }
 
     @Override

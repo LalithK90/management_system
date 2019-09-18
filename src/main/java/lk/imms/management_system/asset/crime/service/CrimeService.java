@@ -26,17 +26,21 @@ public class CrimeService implements AbstractService< Crime, Long > {
 
     @Override
     public Crime findById(Long id) {
-        return null;
+        return crimeDao.getOne(id);
     }
 
     @Override
-    public Crime persist(Crime crime) {
-        return null;
+    public Crime persist(Crime crime)
+    {
+        //todo -> find fact before save
+        return crimeDao.save(crime);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        //todo -> find fact what are the criteria before the delete
+        crimeDao.deleteById(id);
+        return true;
     }
 
     @Override

@@ -14,3 +14,29 @@ Rajagiriya,
 Sri Lanka.
 
 Phone : +94112045000
+
+==============================================================
+invoices => Array
+invoice => object
+        object in
+        items => array
+            item => object
+                object in suppliers
+                    suppliers => Array
+                        supplier => object
+                            object in contact person => Array
+                                contactPerson => object
+                                    contactPerson.name -> required
+
+ ===Long Method All data render one table
+     tr => th:each ="invoice : ${invoices} "
+       tr = >  th:each ="item : ${invoice.items} "
+        tr = >  th:each ="suppliers : ${item.supplier} "
+            tr = >  th:each ="contactPersons : ${suppliers.contactPerson} "
+                tr = >  th:each ="contactPerson : ${contactPersons} "
+                   td = >  th:text ="${contactPerson.name} "
+
+ ===Short Method required data render one table
+    tr => th:each ="invoice : ${invoices} "
+        td = >  th:text ="${invoice.items.supplier.contactPerson.contactPersona.name} "
+

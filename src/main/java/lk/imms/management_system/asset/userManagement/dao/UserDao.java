@@ -1,10 +1,13 @@
 package lk.imms.management_system.asset.userManagement.dao;
 
+
+import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public interface UserDao extends JpaRepository< User, Long> {
@@ -17,4 +20,5 @@ public interface UserDao extends JpaRepository< User, Long> {
 
     User findByUsername(String name);
 
+    User findByEmployee(Employee employee);
 }

@@ -39,9 +39,15 @@
                     </div>
                     <div class="row">
                         <div class="container-fluid">
-                            <h3>Role :
-                                <span th:text="${employee.designation.designation}"></span>
+                            <div class="row">
+                            <h3 >Role :
                             </h3>
+                            <ol>
+                                <li th:each="role : ${userDetail.roles}">
+                                    <h4 th:text="${role.roleName}"></h4>
+                                </li>
+                            </ol>
+                        </div>
                         </div>
                     </div>
                     <div class="row">

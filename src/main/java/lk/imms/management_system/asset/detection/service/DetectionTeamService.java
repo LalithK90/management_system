@@ -24,17 +24,21 @@ public class DetectionTeamService implements AbstractService< DetectionTeam, Lon
 
     @Override
     public DetectionTeam findById(Long id) {
-        return null;
+        return detectionTeamDao.getOne(id);
     }
 
     @Override
-    public DetectionTeam persist(DetectionTeam detectionTeam) {
-        return null;
+    public DetectionTeam persist(DetectionTeam detectionTeam)
+    {
+        //todo -> find what things need to check before save
+        return detectionTeamDao.save(detectionTeam);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        //todo -> check before delete what are the things need to check before delete
+        detectionTeamDao.deleteById(id);
+        return true;
     }
 
     @Override

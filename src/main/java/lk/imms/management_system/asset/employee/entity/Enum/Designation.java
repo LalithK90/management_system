@@ -1,6 +1,8 @@
 package lk.imms.management_system.asset.employee.entity.Enum;
 
-public enum Designation {
+import lk.imms.management_system.asset.employee.entity.Employee;
+
+public enum Designation extends Employee {
     MANAGER("Manager"),
     CASHIER("Cashier"),
     DRIVER("Instructor"),
