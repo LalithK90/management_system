@@ -1,6 +1,7 @@
 package lk.imms.management_system.asset.commonAsset.entity;
 
 import lk.imms.management_system.asset.employee.entity.WorkingHistory;
+import lk.imms.management_system.asset.userManagement.entity.User;
 import lombok.*;
 import org.hibernate.validator.constraints.UniqueElements;
 
@@ -23,14 +24,19 @@ public class WorkingPlace {
     @NotNull( message = "Name is required" )
     @UniqueElements
     private String name;
-//todo court place
+
+
+    //todo court place
     @UniqueElements
     private String code;
 
-    @OneToMany(mappedBy = "workingPlace")
-    private List<WorkingPlaceContactDetail> workingPlaceContactDetails;
+    @OneToMany( mappedBy = "workingPlace" )
+    private List< WorkingPlaceContactDetail > workingPlaceContactDetails;
 
     @ManyToMany( mappedBy = "workingPlaces" )
     private List< WorkingHistory > workingHistory;
+
+    @ManyToMany( mappedBy = "workingPlaces" )
+    private List< User > users;
 
 }

@@ -1,6 +1,7 @@
 package lk.imms.management_system.asset.userManagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lk.imms.management_system.asset.commonAsset.entity.WorkingPlace;
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
@@ -49,5 +50,12 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @Fetch( FetchMode.SUBSELECT)
+    @JoinTable(name = "user_workingPlace",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "workingPlace_id"))
+    private List< WorkingPlace > workingPlaces;
 
 }

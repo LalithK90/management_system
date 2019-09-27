@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.petition.entity;
 
+import lk.imms.management_system.asset.commonAsset.entity.WorkingPlace;
 import lk.imms.management_system.asset.minute.entity.MinutePetition;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
 import lk.imms.management_system.util.audit.AuditEntity;
@@ -22,7 +23,7 @@ public class Petition extends AuditEntity {
     private String petitionNumber;
 
     private String indexNumber;
-    @Column(length = 50000)
+    @Column( length = 50000 )
     private String subject;
 
     @Enumerated( EnumType.STRING )
@@ -31,12 +32,14 @@ public class Petition extends AuditEntity {
     @OneToMany( mappedBy = "petition" )
     private List< PetitionState > petitionStates;
 
-    @OneToMany(mappedBy = "petition")
+    @OneToMany( mappedBy = "petition" )
     private List< MinutePetition > minutePetitions;
 
     @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL )
     private PetitionerDetail petitionerDetail;
 
+    @ManyToOne( fetch = FetchType.EAGER )
+    private WorkingPlace workingPlace;
 
 
     @Transient
