@@ -1,15 +1,16 @@
-/*
-package lk.imms.management_system.resources.department.controller;
+package lk.imms.management_system.asset.employee.controller;
 
-import lk.imms.management_system.general.security.entity.User;
-import lk.imms.management_system.general.security.service.UserService;
-import lk.imms.management_system.general.commonEnum.BloodGroup;
-import lk.imms.management_system.general.commonEnum.CivilStatus;
-import lk.imms.management_system.general.commonEnum.Gender;
-import lk.imms.management_system.general.commonEnum.Title;
-import lk.imms.management_system.resources.department.entity.Employee;
-import lk.imms.management_system.resources.department.entity.Enum.*;
-import lk.imms.management_system.resources.department.service.EmployeeService;
+
+import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
+import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
+import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
+import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
+import lk.imms.management_system.asset.employee.entity.Employee;
+import lk.imms.management_system.asset.employee.entity.Enum.Designation;
+import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
+import lk.imms.management_system.asset.employee.service.EmployeeService;
+import lk.imms.management_system.asset.userManagement.entity.User;
+import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -72,7 +73,18 @@ public class EmployeeController {
 
     @RequestMapping(value = {"/add"}, method = RequestMethod.GET)
     public String employeeAddFrom(Model model) {
-        String newEmployeeNumber = "";
+        model.addAttribute("addStatus", true);
+        CommonThings(model);
+        model.addAttribute("employee", new Employee());
+        return "employee/addEmployee";
+    }
+
+
+    @RequestMapping(value = {"/add", "/update"}, method = RequestMethod.POST)
+    public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+        /*
+        *
+        * String newEmployeeNumber = "";
         String input;
         if (employeeService.lastEmployee() != null) {
             input = employeeService.lastEmployee().getNumber();
@@ -94,18 +106,8 @@ public class EmployeeController {
             newEmployeeNumber = "KL0001";
             input = "KL0000";
         }
+        * */
 
-        model.addAttribute("addStatus", true);
-        model.addAttribute("lastEmployee", input);
-        model.addAttribute("newEmployee", newEmployeeNumber);
-        CommonThings(model);
-        model.addAttribute("employee", new Employee());
-        return "employee/addEmployee";
-    }
-
-
-    @RequestMapping(value = {"/add", "/update"}, method = RequestMethod.POST)
-    public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (dateTimeAgeService.getAge(employee.getDateOfBirth()) < 18) {
             ObjectError error = new ObjectError("dateOfBirth", "Employee must be 18 old ");
             result.addError(error);
@@ -130,32 +132,22 @@ public class EmployeeController {
             User user = userService.findById(userService.findByEmployeeId(employee.getId()));
             if (employee.getEmployeeStatus() != EmployeeStatus.WORKING) {
                 user.setEnabled(false);
-                employee.setUpdatedAt(dateTimeAgeService.getCurrentDate());
                 employeeService.persist(employee);
             }
             System.out.println("update working");
             user.setEnabled(true);
-            employee.setUpdatedAt(dateTimeAgeService.getCurrentDate());
             employeeService.persist(employee);
             return "redirect:/employee";
         }
         if (employee.getId() != null) {
             redirectAttributes.addFlashAttribute("message", "Successfully Add but Email was not sent.");
             redirectAttributes.addFlashAttribute("alertStatus", false);
-            employee.setUpdatedAt(dateTimeAgeService.getCurrentDate());
+
             employeeService.persist(employee);
         }
 
-        if (employee.getEmail() != null) {
 
-            redirectAttributes.addFlashAttribute("message", "Successfully Add but Email was not sent.");
-            redirectAttributes.addFlashAttribute("alertStatus", false);
-            employee.setCreatedAt(dateTimeAgeService.getCurrentDate());
-            employeeService.persist(employee);
-
-        }
         System.out.println("save no id");
-        employee.setCreatedAt(dateTimeAgeService.getCurrentDate());
         employeeService.persist(employee);
         return "redirect:/employee";
     }
@@ -171,4 +163,4 @@ public class EmployeeController {
         model.addAttribute("employeeDetail", employeeService.search(employee));
         return "employee/employee-detail";
     }
-}*/
+}

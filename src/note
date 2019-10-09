@@ -40,3 +40,33 @@ invoice => object
     tr => th:each ="invoice : ${invoices} "
         td = >  th:text ="${invoice.items.supplier.contactPerson.contactPersona.name} "
 
+
+Employee table attribute
+=========================
+id
+number
+payRoleNumber
+name
+callingName
+nic
+departmentIdNumber
+mobileOne
+mobileTwo
+land
+email
+title
+gender
+bloodGroup
+designation
+civilStatus
+employeeStatus
+dateOfBirth
+dateOfAssignment
+files
+removeImages
+createdAt
+createdBy
+updatedAt
+updatedBy
+
+

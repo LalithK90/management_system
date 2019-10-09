@@ -6,6 +6,7 @@ import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.RoleService;
 import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
+
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class UserController {

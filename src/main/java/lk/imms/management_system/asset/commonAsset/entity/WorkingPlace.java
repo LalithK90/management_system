@@ -1,12 +1,16 @@
 package lk.imms.management_system.asset.commonAsset.entity;
 
+import lk.imms.management_system.asset.commonAsset.entity.Enum.Province;
+import lk.imms.management_system.asset.commonAsset.entity.Enum.WorkingPlaceType;
 import lk.imms.management_system.asset.employee.entity.WorkingHistory;
 import lk.imms.management_system.asset.userManagement.entity.User;
+import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -14,24 +18,40 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-public class WorkingPlace {
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
-    @Column( unique = true )
-    private Long id;
+@EqualsAndHashCode( callSuper = true )
+public class WorkingPlace extends AuditEntity {
 
     @NotNull( message = "Name is required" )
-    @UniqueElements
+    @Column( unique = true )
     private String name;
 
+    @Enumerated( EnumType.STRING )
+    private Province province;
 
-    //todo court place
-    @UniqueElements
+    @Enumerated( EnumType.STRING )
+    private WorkingPlaceType workingPlaceType;
+
+    @Column( unique = true )
     private String code;
 
-    @OneToMany( mappedBy = "workingPlace" )
-    private List< WorkingPlaceContactDetail > workingPlaceContactDetails;
+    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    private String landOne;
+
+    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    private String landTwo;
+
+    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    private String landThree;
+
+    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    private String landFour;
+
+    @Size( max = 10, min = 9, message = "Fax number length should be contained 10 and 9" )
+    private String faxNumber;
+
+    @Email(message = "Provide valid email")
+    @Column(unique = true)
+    private String email;
 
     @ManyToMany( mappedBy = "workingPlaces" )
     private List< WorkingHistory > workingHistory;

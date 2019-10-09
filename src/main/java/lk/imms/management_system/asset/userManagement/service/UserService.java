@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserService implements AbstractService< User, Long> {
+public class UserService implements AbstractService< User, Long > {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
 
@@ -26,21 +26,23 @@ public class UserService implements AbstractService< User, Long> {
         this.userDao = userDao;
     }
 
-    public List<User> findAll() {
+    public List< User > findAll() {
         return userDao.findAll();
     }
 
     public User findById(Long id) {
-        return (User) userDao.getOne(id);
+        return userDao.getOne(id);
     }
 
     public User persist(User user) {
         user.setEnabled(true);
-
-        if (user.getPassword() != null) {
+        user.setUsername(user.getUsername().toLowerCase());
+        if ( user.getPassword() != null ) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-        } else
+
+        } else {
             user.setPassword(userDao.getOne(user.getId()).getPassword());
+        }
         return userDao.save(user);
     }
 
@@ -50,9 +52,10 @@ public class UserService implements AbstractService< User, Long> {
     }
 
 
-    public List<User> search(User user) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example<User> userExample = Example.of(user, matcher);
+    public List< User > search(User user) {
+        ExampleMatcher matcher =
+                ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example< User > userExample = Example.of(user, matcher);
         return userDao.findAll(userExample);
     }
 

@@ -1,5 +1,10 @@
 package lk.imms.management_system.asset.commonAsset.entity.Enum;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum BloodGroup {
     AP("A RhD positive"),
     AN("A RhD negative"),
@@ -11,12 +16,4 @@ public enum BloodGroup {
     ABN("AB RhD negative");
 
     private final String bloodGroup;
-
-    private BloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
-    }
-
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
 }

@@ -63,7 +63,7 @@ let numberRegex = /^([eE][hH][sS][\d]+)$/;
 let invoiceNumberRegex = /^[0-9]{10}$/;
 
 
-/*//Nic - data of birth - start//*/
+//Nic - data of birth - start
 function dateLengthValidate(day) {
     if (day.toLocaleString().length === 1) {
         return day = '0' + day;
@@ -203,27 +203,25 @@ function calculateDateOfBirth(nic) {
     }
     return dateOfBirth;
 }
+//Nic - data of birth - end
 
-/*//Nic - data of birth - end//*/
-
-/*//Nic - gender - start//*/
+//Nic - gender - start
 function calculateGender(nic) {
-    let gender = null;
+    let genders = null;
     if (nic.length === 10 && nic[9] === "V" || nic[9] === "v" || nic[9] === "x" || nic[9] === "X") {
         if (nic[9] === "v" || nic[9] === "x") {
             alert(` Please change "v" or "x" to "V" or "X" `);
         }
-        if (+nic.substr(2, 3) < 500) gender = 'MALE';
-        else gender = 'FEMALE';
+        if (+nic.substr(2, 3) < 500) genders = 'MALE';
+        else genders = 'FEMALE';
 
     } else if (nic.length === 12) {
-        if (+nic.substr(4, 3) < 500) gender = 'MALE';
-        else gender = 'FEMALE';
+        if (+nic.substr(4, 3) < 500) genders = 'MALE';
+        else genders = 'FEMALE';
     }
-    return gender;
+    return genders;
 }
-
-/*//Nic - gender - end//*/
+//Nic - gender - end
 
 //mobile number and land number validation
 $("#mobile").bind("keyup", function () {

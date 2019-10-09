@@ -14,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,12 +36,31 @@ public class Offender extends AuditEntity {
     @Size( min = 5, message = "Name (Sinhala) cannot be accept" )
     private String nameSinhala;
 
+    @Size( min = 5, message = "Name (Tamil) cannot be accept" )
+    private String nameTamil;
+
     @Size( max = 12, min = 10, message = "NIC number is contained numbers between 9 and X/V or 12 " )
+    @Column(unique = true)
     private String nic;
 
+    @Column(unique = true)
     private String passportNumber;
 
+    @Column(unique = true)
     private String drivingLicenceNumber;
+
+    @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
+    private String mobileOne;
+
+    @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
+    private String mobileTwo;
+
+    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    private String land;
+
+    @Email(message = "Provide valid email")
+    @Column(unique = true)
+    private String email;
 
     @Enumerated( EnumType.STRING )
     private Title title;
@@ -59,9 +79,6 @@ public class Offender extends AuditEntity {
 
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfBirth;
-
-    @ManyToOne( fetch = FetchType.EAGER )
-    private OffenderContactDetail offenderContactDetail;
 
     @OneToMany( mappedBy = "offender" )
     private List< OffenderCallingName > offenderCallingNames;

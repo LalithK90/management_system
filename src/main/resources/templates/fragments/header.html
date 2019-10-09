@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+<nav th:fragment="header" class="navbar navbar-default navbar-fixed-top" >
     <div class="container-fluid">
         <div class="navbar-header">
             <h3 class="text-info mainWindowText navbar-header-text"><b> &nbsp; Excellent Health Solution</b> &nbsp;&nbsp;
@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown dropdown-toggle"><a href="/home">Home</a></li>
                 <li class="dropdown dropdown-toggle" sec:authorize="!isAuthenticated()"><a href="/invoiceProcess">Lab
-																												  test
+                                                                                                                  test
                                                                                                                   &amp;
                                                                                                                   Medical
                                                                                                                   Package</a>

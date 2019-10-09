@@ -10,14 +10,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    /*@Autowired
-    public UserDetailsServiceImpl userDetailsService;*/
 
     @Bean
     public UserDetailsServiceImpl userDetailsService() {
@@ -43,19 +39,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-/*    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-    }*/
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-/*        http.csrf().disable();
-        http.authorizeRequests().antMatchers("/").permitAll();*/
+        http.csrf().disable();
+        http.authorizeRequests().antMatchers("/").permitAll();
 
         //for developing easy to give permission all link
 
-        http.
+       /* http.
                 authorizeRequests()
                 //Always users can access without login
                 .antMatchers(
@@ -96,6 +87,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable();
-
+*/
     }
 }

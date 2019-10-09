@@ -5,16 +5,17 @@ import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
 import lk.imms.management_system.asset.detection.entity.DetectionTeamMember;
+import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -30,11 +31,11 @@ import java.util.List;
 public class Employee extends AuditEntity {
 
     @NotNull( message = "Employee number is required" )
-    @UniqueElements
-    private String employeeNumber;
+    @Column( unique = true )
+    private String number;
 
     @NotNull( message = "Pay roll number is required" )
-    @UniqueElements
+    @Column( unique = true )
     private String payRoleNumber;
 
     @Size( min = 5, message = "Your name cannot be accept" )
@@ -44,7 +45,24 @@ public class Employee extends AuditEntity {
     private String callingName;
 
     @Size( max = 12, min = 10, message = "NIC number is contained numbers between 9 and X/V or 12 " )
+    @Column( unique = true )
     private String nic;
+
+    @Column( unique = true )
+    private String departmentIdNumber;
+
+    @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
+    private String mobileOne;
+
+    @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
+    private String mobileTwo;
+
+    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    private String land;
+
+    @Email( message = "Provide valid email" )
+    @Column( unique = true )
+    private String email;
 
     @Enumerated( EnumType.STRING )
     private Title title;
@@ -56,6 +74,9 @@ public class Employee extends AuditEntity {
     private BloodGroup bloodGroup;
 
     @Enumerated( EnumType.STRING )
+    private Designation designation;
+
+    @Enumerated( EnumType.STRING )
     private CivilStatus civilStatus;
 
     @Enumerated( EnumType.STRING )
@@ -64,19 +85,14 @@ public class Employee extends AuditEntity {
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfBirth;
 
-    @ManyToOne
-    private Designation designation;
-
-
-    @OneToMany( mappedBy = "employee", fetch = FetchType.EAGER )
-    @Fetch( value = FetchMode.SUBSELECT )
-    private List< EmployeeContactDetail > employeeContactDetail;
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
+    private LocalDate dateOfAssignment;
 
     @OneToMany( mappedBy = "employee", fetch = FetchType.EAGER )
     @Fetch( value = FetchMode.SUBSELECT )
     private List< DetectionTeamMember > detectionTeamMembers;
 
-    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+    @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable( name = "employee_working_history",
             joinColumns = @JoinColumn( name = "employee_id" ),
             inverseJoinColumns = @JoinColumn( name = "working_history_id" ) )

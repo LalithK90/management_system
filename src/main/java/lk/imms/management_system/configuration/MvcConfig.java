@@ -7,7 +7,6 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.TimeZone;
 
@@ -22,7 +21,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/")
-                .setViewName("forward:/index");
+                .setViewName("forward:/login");
         registry.addViewController("/login")
                 .setViewName("login/login");
         registry.addViewController("/mainWindow")
@@ -42,14 +41,13 @@ public class MvcConfig implements WebMvcConfigurer {
 
     }
     //Bean configuration
-    @Bean
+   /* @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/resources/templates/");
         resolver.setSuffix(".html");
         return resolver;
-    }
-
+    }*/
 
     //time zone set to
     @Bean

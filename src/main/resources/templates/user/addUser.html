@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <style th:replace="fragments/style"></style>
+    <title>User - Management</title>
 </head>
 <body>
 <nav th:replace="fragments/header :: header"></nav>
@@ -47,7 +48,7 @@
                                     <select class="form-control" id="name" name="employee" th:value="${employee}">
                                         <option th:each="employees, count : ${employee}"
                                                 th:text="${employees.name}+ ${' '} + ${employees.number}"
-                                                th:value="${employees.id}"
+                                                th:value="${employees}"
                                                 th:selected="${employee==employees?'selected':'unselected'}">
                                         </option>
                                     </select>
