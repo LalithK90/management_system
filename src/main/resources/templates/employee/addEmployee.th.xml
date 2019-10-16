@@ -1,0 +1,96 @@
+<thlogic>
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <attr sel="#formHeader" th:text="${addStatus==true?'New Employee Add':'Update Employee Details'}"/>
+    <attr sel="#form" th:action="${addStatus==true?'/employee/add':'/employee/update'}"
+          th:object="${employee}"/>
+    <attr sel="#idStatus" th:if="${addStatus==false}"/>
+    <attr sel="#id" th:field="*{id}"/>
+    <attr sel="#payRoleNumber" th:field="*{payRoleNumber}"/>
+    <attr sel="#payRoleNumberError" th:errors="*{payRoleNumber}"
+          th:if="${#fields.hasErrors('payRoleNumber')}"/>
+    <attr sel="#departmentIdNumber" th:field="*{departmentIdNumber}"/>
+    <attr sel="#departmentIdNumberError" th:errors="*{departmentIdNumber}"
+          th:if="${#fields.hasErrors('departmentIdNumber')}"/>
+    <attr sel="#title" th:field="*{title}"/>
+    <attr sel="#titleContent" th:each="titles : ${title}"
+          th:text="${titles.title}"
+          th:value="${titles}"
+          th:selected="${titles==employee.title?'selected':'unselected'}"/>
+    <attr sel="#name" th:field="*{name}"/>
+    <attr sel="#nameError" th:errors="*{name}"
+          th:if="${#fields.hasErrors('name')}"/>
+    <attr sel="#callingName" th:field="*{callingName}"/>
+    <attr sel="#callingNameError" th:errors="*{callingName}"
+          th:if="${#fields.hasErrors('callingName')}"/>
+    <attr sel="#nic" th:field="*{nic}"/>
+    <attr sel="#nicError" th:errors="*{nic}"
+          th:if="${#fields.hasErrors('nic')}"/>
+    <attr sel="#gender" th:field="*{gender}"/>
+    <attr sel="#genderList" th:each="genders : ${gender}"
+          th:text="${genders.gender}"
+          th:value="${genders}"
+          th:selected="${genders==employee.gender?'selected':'unselected'}"/>
+    <attr sel="#dateOfBirth" th:field="*{dateOfBirth}"/>
+    <attr sel="#dateOfBirthError" th:errors="*{dateOfBirth}"
+          th:if="${#fields.hasErrors('dateOfBirth')}"/>
+    <attr sel="#bloodGroup" th:field="*{bloodGroup}"/>
+    <attr sel="#bloodGroupList" th:each="bloodGroups : ${bloodGroup}"
+          th:text="${bloodGroups.bloodGroup}"
+          th:value="${bloodGroups}"
+          th:selected="${bloodGroups==employee.bloodGroup?'selected':'unselected'}"/>
+    <attr sel="#designation" th:field="*{designation}"/>
+    <attr sel="#designationList" th:each="designations : ${designation}"
+          th:text="${designations.designation}"
+          th:value="${designations}"
+          th:selected="${designations==employee.designation?'selected':'unselected'}"/>
+    <attr sel="#civilStatus" th:field="*{civilStatus}"/>
+    <attr sel="#civilStatusList" th:each="civilStatu : ${civilStatus}"
+          th:text="${civilStatu.CivilStatus}"
+          th:value="${civilStatu}"
+          th:selected="${civilStatu==employee.civilStatus?'selected':'unselected'}"/>
+    <attr sel="#address" th:field="*{address}"/>
+    <attr sel="#addressError" th:errors="*{address}"
+          th:if="${#fields.hasErrors('address')}"/>
+    <attr sel="#mobileOne" th:field="*{mobileOne}"/>
+    <attr sel="#mobileOneError" th:errors="*{mobileOne}"
+          th:if="${#fields.hasErrors('mobileOne')}"/>
+    <attr sel="#mobileTwo" th:field="*{mobileTwo}"/>
+    <attr sel="#mobileTwoError" th:errors="*{mobileTwo}"
+          th:if="${#fields.hasErrors('mobileTwo')}"/>
+    <attr sel="#land" th:field="*{land}"/>
+    <attr sel="#landError" th:errors="*{land}"
+          th:if="${#fields.hasErrors('land')}"/>
+    <attr sel="#email" th:field="*{email}"/>
+    <attr sel="#emailError" th:errors="*{email}"
+          th:if="${#fields.hasErrors('email')}"/>
+    <attr sel="#officeEmail" th:field="*{officeEmail}"/>
+    <attr sel="#officeEmailError" th:errors="*{officeEmail}"
+          th:if="${#fields.hasErrors('officeEmail')}"/>
+    <attr sel="#dateOfAssignment" th:field="*{{dateOfAssignment}}"/>
+    <attr sel="#dateOfAssignmentError" th:errors="*{dateOfAssignment}"
+          th:if="${#fields.hasErrors('dateOfAssignment')}"/>
+    <attr sel="#employeeStatus" th:field="*{employeeStatus}"/>
+    <attr sel="#employeeStatusList" th:each="employeeStatuss : ${employeeStatus}"
+          th:text="${employeeStatuss.employeeStatus}"
+          th:value="${employeeStatuss}"
+          th:selected="${employeeStatuss==employee.employeeStatus?'selected':'unselected'}"/>
+    <attr sel="#updateStatus" th:if="${addStatus==false}"/>
+    <attr sel="#createdBy" th:field="*{createdBy}"/>
+    <attr sel="#createdAt" th:field="*{{createdAt}}"/>
+    <attr sel="#photoDetails" th:if="${addStatus==false}"/>
+    <attr sel="#filesList" th:each="file, rowStat: ${files}"/>
+    <attr sel="#img" th:src="${file.url}"/>
+    <!--//todo - > need to reconsider how to remove image from the system -->
+    <attr sel="#removeImages" th:value="${file.filename}"/>
+    <attr sel="#imgName" th:text="${file.filename}"/>
+    <attr sel="#imgCreateAt" th:text="${{file.createAt}}"/>
+    <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
+    <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
+    <attr sel="#error" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>
+
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

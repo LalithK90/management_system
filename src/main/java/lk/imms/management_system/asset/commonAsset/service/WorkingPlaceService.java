@@ -27,17 +27,18 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
 
     @Override
     public WorkingPlace findById(Long id) {
-        return null;
+        return workingPlaceDao.getOne(id);
     }
 
     @Override
     public WorkingPlace persist(WorkingPlace workingPlace) {
-        return null;
+        return workingPlaceDao.save(workingPlace);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        workingPlaceDao.deleteById(id);
+        return true;
     }
 
     @Override

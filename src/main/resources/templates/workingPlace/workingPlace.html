@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+</head>
+<body>
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" href="/workingPlace/add">
+                <i class="fa fa-user-plus" style="font-size: 18px;"></i> &nbsp; New Working Place </a>
+
+        </div>
+        <div class="col ">
+            <h4 class="text-info text-center">
+                <strong>
+                    Working Place Management
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-dark formBorder text-center">
+    <div class="container">
+        <div class="col-sm-12" id="workingPlaceListPresent">
+            <table class="table table-hover table-striped" id="myTable">
+                <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Working Place Name</th>
+                    <th>Province</th>
+                    <th>Office Type</th>
+                    <th>Contact Number</th>
+                    <th>Fax Number</th>
+                    <th>Modify</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="workingPlaceList">
+                    <th id="count"></th>
+                    <th id="name"></th>
+                    <th id="province"></th>
+                    <th id="workingPlaceType"></th>
+                    <th id="landOne"></th>
+                    <th id="faxNumber"></th>
+                    <th><a class="btn btn-success" id="view"><i class="fa fa-folder-open"></i>&nbsp;View</a>
+                        &nbsp;<a class="btn btn-primary" id="edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                        &nbsp;<a class="btn btn-danger" id="remove"><i class="fa fa-trash-o"></i>&nbsp;
+                                                                                                 Delete </a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer id="footer"></footer>
+<script id="script"></script>
+</body>
+</html>

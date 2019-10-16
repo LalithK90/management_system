@@ -1,0 +1,5 @@
+<thlogic>
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#error" th:if="${param.error}"/>
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+</thlogic>

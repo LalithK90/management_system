@@ -6,7 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PetitionStateType {
-
     RECEIVED("Received"),
     REJECT("Reject"),
     ACCEPT("Accept"),

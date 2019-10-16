@@ -41,8 +41,12 @@ dependencies {
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.9'
     // ==== this is need to html content convert to pdf 
     compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.5.9'
-    
-    
+    // https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-pdf  for testpurpose not used
+    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-pdf', version: '9.1.18'
+    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-core', version: '9.1.6'
+    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-pdf-itext5', version: '9.1.6'
+
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'

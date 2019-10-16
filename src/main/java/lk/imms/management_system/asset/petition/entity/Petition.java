@@ -1,7 +1,9 @@
 package lk.imms.management_system.asset.petition.entity;
 
 import lk.imms.management_system.asset.commonAsset.entity.WorkingPlace;
+import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.minute.entity.MinutePetition;
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
@@ -23,11 +25,18 @@ public class Petition extends AuditEntity {
     private String petitionNumber;
 
     private String indexNumber;
+
     @Column( length = 50000 )
     private String subject;
 
     @Enumerated( EnumType.STRING )
     private PetitionType petitionType;
+
+    @Enumerated( EnumType.STRING )
+    private PetitionPriority petitionPriority;
+
+    @Enumerated( EnumType.STRING )
+    private Designation designation;
 
     @OneToMany( mappedBy = "petition" )
     private List< PetitionState > petitionStates;
@@ -41,11 +50,11 @@ public class Petition extends AuditEntity {
     @ManyToOne( fetch = FetchType.EAGER )
     private WorkingPlace workingPlace;
 
-
     @Transient
     private List< MultipartFile > files = new ArrayList<>();
 
     @Transient
     private List< String > removeImages = new ArrayList<>();
+
 
 }

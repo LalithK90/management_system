@@ -1,4 +1,4 @@
- $(document).ready(function () {
+$(document).ready(function () {
 
     // set current year to the footer
     document.getElementById("currentYear").innerHTML = new Date().getFullYear();
@@ -43,22 +43,13 @@
             }
         });
     });
-//prevent checkbox==null before submit - end
-
-    //WYSIWYG add to text area
-    //let textarea =document.getElementById("description");
-    // sceditor.create(textarea);
-    //     , {
-    //     format: 'bbcode',
-    //         icons: 'monocons',
-    //         style: '../minified/themes/content/default.min.css'
-    // });
 
 });
 // regex
 let nicRegex = /^([0-9]{9}[vV|xX])|^([0-9]{12})$/;
 let mobileRegex = /^([0][7][\d]{8}$)|^([7][\d]{8})$/;
-let nameRegex = /^[a-zA-Z]{5}[ a-zA-Z]+$/;
+let landRegex = /^0((11)|(2(1|[3-7]))|(3[1-8])|(4(1|5|7))|(5(1|2|4|5|7))|(6(3|[5-7]))|([8-9]1))([2-4]|5|7|9)[0-9]{6}$/;
+let nameRegex = /^[a-zA-Z .]{5}[ a-zA-Z.]+$/;
 let numberRegex = /^([eE][hH][sS][\d]+)$/;
 let invoiceNumberRegex = /^[0-9]{10}$/;
 
@@ -70,8 +61,8 @@ function dateLengthValidate(day) {
     }
     return day;
 }
-function calculateDateOfBirth(nic) {
 
+function calculateDateOfBirth(nic) {
     let dateOfBirth = null;
     let day = null;
     let month;
@@ -203,6 +194,7 @@ function calculateDateOfBirth(nic) {
     }
     return dateOfBirth;
 }
+
 //Nic - data of birth - end
 
 //Nic - gender - start
@@ -221,39 +213,62 @@ function calculateGender(nic) {
     }
     return genders;
 }
+
 //Nic - gender - end
 
 //mobile number and land number validation
-$("#mobile").bind("keyup", function () {
-    let mobile = $(this).val();
+$(".mobile").bind("keyup", function () {
+    mobileValidate($(this));
+});
+
+$(".land").bind("keyup", function () {
+    landValidate($(this));
+});
+
+$(".fax").bind("keyup", function () {
+    landValidate($(this));
+});
+
+function mobileValidate(val) {
+    let mobile = $(val).val();
     if (mobileRegex.test(mobile)) {
-        backgroundColourChangeGood($(this));
+        backgroundColourChangeGood(val);
+    } else if (mobile.length === 0) {
+        backgroundColourChangeNothingToChange(val);
     } else {
-        backgroundColourChangeBad($(this));
+        backgroundColourChangeBad(val);
     }
-});
-$("#land").bind("keyup", function () {
-    let land = $(this).val();
-    if (mobileRegex.test(land)) {
-        backgroundColourChangeGood($(this));
+}
+
+function landValidate(val) {
+    let land = $(val).val();
+    if (landRegex.test(land)) {
+        backgroundColourChangeGood(val);
+    } else if (land.length === 0) {
+        backgroundColourChangeNothingToChange(val);
     } else {
-        backgroundColourChangeBad($(this));
+        backgroundColourChangeBad(val);
     }
-});
+}
+
 //NIC colour change
 $("#nic").bind("keyup", function () {
     let nic = $(this).val();
     if (nicRegex.test(nic)) {
         backgroundColourChangeGood($(this));
+    } else if (nic.length === 0) {
+        backgroundColourChangeNothingToChange($(this));
     } else {
         backgroundColourChangeBad($(this));
     }
 });
 //Name validation
-$("#patientName").bind("keyup", function () {
+$("#name").bind("keyup", function () {
     let name = $(this).val();
     if (nameRegex.test(name)) {
         backgroundColourChangeGood($(this));
+    } else if (name.length === 0) {
+        backgroundColourChangeNothingToChange($(this));
     } else {
         backgroundColourChangeBad($(this));
     }
@@ -267,13 +282,16 @@ $("#invoiceNumber").bind("keyup", function () {
         backgroundColourChangeBad($(this));
     }
 });
+
 //colour change function --start
 function backgroundColourChangeGood(id) {
     $(id).css('background-color', '#00FFFF');
 }
+
 function backgroundColourChangeBad(id) {
     $(id).css('background-color', '#FF00AA');
 }
+
 function backgroundColourChangeNothingToChange(id) {
     $(id).css('background-color', '#ffffff');
 }
@@ -319,6 +337,7 @@ function conformationAndLoginWindow() {
 function contentShow(contentName) {
     contentName.removeAttribute("class");
 }
+
 function contentHide(contentName) {
     contentName.setAttribute("class", "display");
 }

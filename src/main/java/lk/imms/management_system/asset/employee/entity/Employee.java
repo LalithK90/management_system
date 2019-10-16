@@ -28,11 +28,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
+@ToString
 public class Employee extends AuditEntity {
-
-    @NotNull( message = "Employee number is required" )
-    @Column( unique = true )
-    private String number;
 
     @NotNull( message = "Pay roll number is required" )
     @Column( unique = true )
@@ -51,18 +48,24 @@ public class Employee extends AuditEntity {
     @Column( unique = true )
     private String departmentIdNumber;
 
-    @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
+    @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
     private String mobileOne;
 
-    @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
+    @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
     private String mobileTwo;
 
-    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    @Size( max = 10, message = "Land number length should be contained 10 and 9" )
     private String land;
 
     @Email( message = "Provide valid email" )
     @Column( unique = true )
     private String email;
+
+    @Email( message = "Provide valid office email" )
+    @Column( unique = true )
+    private String officeEmail;
+
+    private String address;
 
     @Enumerated( EnumType.STRING )
     private Title title;

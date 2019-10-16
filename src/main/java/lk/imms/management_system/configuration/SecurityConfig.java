@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //for developing easy to give permission all link
 
-       /* http.
+/*        http.
                 authorizeRequests()
                 //Always users can access without login
                 .antMatchers(
@@ -86,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //Cross site disable
                 .and()
                 .csrf()
-                .disable();
-*/
+                .disable();*/
+
     }
 }

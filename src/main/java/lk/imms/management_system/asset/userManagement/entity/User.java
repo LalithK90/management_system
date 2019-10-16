@@ -53,9 +53,9 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @Fetch( FetchMode.SUBSELECT)
-    @JoinTable(name = "user_workingPlace",
+    @JoinTable(name = "user_working_place",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "workingPlace_id"))
+            inverseJoinColumns = @JoinColumn(name = "working_place_id"))
     private List< WorkingPlace > workingPlaces;
 
 }

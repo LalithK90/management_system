@@ -22,7 +22,7 @@ public class CustomerUserDetails implements UserDetails {
 
         return user.getRoles()
                 .stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName()))
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName().toUpperCase()))
                 .collect(Collectors.toList());
     }
 

@@ -1,66 +1,64 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <style th:replace="fragments/style"></style>
-    <title>Employee - List</title>
+<html lang="en">
+<head id="header">
 </head>
 <body>
-<nav class="navbar navbar-default" th:replace="fragments/header :: header"></nav>
-<div class="container-fluid">
-    <div class="row text-center">
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
         <div class="col">
-            <h4 class="text-info">
+            <a class="btn btn-success" href="/employee/add"><i class="fa fa-user-plus"></i>
+                &nbsp; New Employee</a>
+        </div>
+        <div class="col">
+            <h4 class="text-info text-center">
                 <strong>
                     Employee Management
                 </strong>
             </h4>
         </div>
-    </div>
-    <div class="col">
-        <div class="text-left" style="margin-bottom: 20px">
-            <a class="btn btn-success" th:href="${'/employee/add'}"><i class="fa fa-user-plus"></i>
-                &nbsp; New Employee</a>
+        <div class="col">
         </div>
     </div>
-    <div class="row" th:if="${not #lists.isEmpty(employees)}">
-        <div class="col-sm-12">
-            <table class="table table-striped table-inverse table-responsive" id="myTable">
-                <thead class="thead-inverse">
+</div>
+<div class="container-fluid bg-dark formBorder text-center">
+    <div class="col">
+        <div class="col" id="employeeListPresent">
+            <table class="table table-hover table-striped" id="myTable">
+                <thead>
                 <tr>
-                    <th>Index</th>
-                    <th>Number</th>
+                    <th> Index</th>
+                    <th> Pay Role Number</th>
                     <th> Name</th>
                     <th> Mobile</th>
                     <th> Land Number</th>
                     <th> Designation</th>
                     <th> Status</th>
-                    <th> Work with</th>
-                    <th class="text-center">Modify</th>
+                    <th> Modify</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="employee, rowCount : ${employees}" scope="row">
-                    <th th:text="${rowCount.count}"></th>
-                    <th th:text="${employee.number}"></th>
-                    <th th:text="${employee.callingName}"></th>
-                    <th th:text="${employee.mobileOne}"></th>
-                    <th th:text="${employee.land}"></th>
-                    <th th:text="${employee.designation.designation}"></th>
-                    <th th:text="${employee.employeeStatus.employeeStatus}"></th>
-                    <th th:text="${employee.dateOfAssignment}"></th>
-                    <th><a class="btn btn-success" th:href="${'/employee/' + employee.id}"><i
-                            class="fa fa-folder-open"></i>&nbsp;View</a>
-                        <a class="btn btn-primary" th:href="${'/employee/edit/' + employee.id}"><i
-                                class="fa fa-edit"></i>&nbsp;Edit</a>
-                        <a class="btn btn-danger" th:href="${'/employee/remove/' + employee.id}"><i
-                                aria-hidden="true" class="fa fa-trash-o"></i>
-                            Delete</a></th>
+                <tr id="employeeList">
+                    <th id="index"></th>
+                    <th id="payRoleNumber"></th>
+                    <th id="callingName"></th>
+                    <th id="mobileOne"></th>
+                    <th id="land"></th>
+                    <th id="designation"></th>
+                    <th id="employeeStatus"></th>
+                    <th>
+                        <a id="employeeView" class="btn btn-success"><i
+                                class="fa fa-folder-open"></i>&nbsp;View</a>
+                        <a id="employeeEdit" class="btn btn-primary"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                        <a id="employeeRemove" class="btn btn-danger"><i class="fa fa-trash-o"></i>
+                            Delete</a>
+                    </th>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="row" th:if="${ #lists.isEmpty(employees)}">
+    <div class="row" id="employeeListNotPresent">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -80,7 +78,7 @@
         </script>
     </div>
 </div>
-<footer class="page-footer" th:replace="fragments/footer"></footer>
-<script th:replace="fragments/script"></script>
+<footer id="footer"></footer>
+<script id="script"></script>
 </body>
 </html>

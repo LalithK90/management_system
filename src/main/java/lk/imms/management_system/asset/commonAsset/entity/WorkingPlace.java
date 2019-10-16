@@ -22,7 +22,6 @@ import java.util.List;
 public class WorkingPlace extends AuditEntity {
 
     @NotNull( message = "Name is required" )
-    @Column( unique = true )
     private String name;
 
     @Enumerated( EnumType.STRING )
@@ -31,27 +30,34 @@ public class WorkingPlace extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private WorkingPlaceType workingPlaceType;
 
-    @Column( unique = true )
+    @Column( unique = true, nullable = false)
     private String code;
 
-    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    @Column( nullable = false)
+    private String address;
+
+    @Size( max = 10, min = 9, message = "Land number length should be contained 10 or 9 \n At least one phone number should be in on working place" )
     private String landOne;
 
-    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    @Size( max = 10, message = "Land number length should be contained 10 or 9" )
     private String landTwo;
 
-    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    @Size( max = 10, message = "Land number length should be contained 10 or 9" )
     private String landThree;
 
-    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
+    @Size( max = 10, message = "Land number length should be contained 10 or 9" )
     private String landFour;
 
-    @Size( max = 10, min = 9, message = "Fax number length should be contained 10 and 9" )
+    @Size( max = 10, message = "Fax number length should be contained 10 or 9" )
     private String faxNumber;
 
     @Email(message = "Provide valid email")
     @Column(unique = true)
-    private String email;
+    private String emailOne;
+
+    @Email(message = "Provide valid email")
+    @Column(unique = true)
+    private String emailTwo;
 
     @ManyToMany( mappedBy = "workingPlaces" )
     private List< WorkingHistory > workingHistory;

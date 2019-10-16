@@ -63,9 +63,8 @@ public class MimeTypeFileHandelController {
     }
 
     @GetMapping("/imageDisplay")
-    public void showImage(@RequestParam("id") int imageId, HttpServletResponse response)
+    public void showImage(@RequestParam("id") int imageId,HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-
 
         // Item item = itemService.get(itemId); --> contained class object
         response.setContentType("image/jpeg, image/jpg, image/png, image/gif");

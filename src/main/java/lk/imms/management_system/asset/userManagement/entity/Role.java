@@ -8,6 +8,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -17,16 +18,17 @@ import java.util.List;
 @NoArgsConstructor
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique = true)
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long id;
 
+    @NotNull
+    @Column( unique = true )
     private String roleName;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @Fetch( FetchMode.SUBSELECT)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users;
+    @ManyToMany( cascade = CascadeType.ALL )
+    @Fetch( FetchMode.SUBSELECT )
+    @JoinTable( name = "user_role",
+            joinColumns = @JoinColumn( name = "role_id" ),
+            inverseJoinColumns = @JoinColumn( name = "user_id" ) )
+    private List< User > users;
 }

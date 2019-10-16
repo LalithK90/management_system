@@ -35,13 +35,14 @@ public class RoleService implements AbstractService< Role, Long> {
 
 
     public Role persist(Role role) {
+        role.setRoleName(role.getRoleName().toUpperCase());
         return roleDao.save(role);
     }
 
 
     public boolean delete(Long id) {
         roleDao.deleteById(id);
-        return false;
+        return true;
     }
 
 

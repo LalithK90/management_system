@@ -1,0 +1,17 @@
+<thlogic>
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <attr sel="#roleListPresent" th:if="${not #lists.isEmpty(roles)}"/>
+    <attr sel="#authorizedPersonDisplay" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"/>
+    <attr sel="#roleList" th:each="role, rowCount : ${roles}"/>
+    <attr sel="#index" th:text="${rowCount.count}"/>
+    <attr sel="#name" th:text="${role.roleName}"/>
+    <attr sel="#authorizedPerson" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"/>
+    <attr sel="#edit" th:href="${'/role/edit/' + role.id}"/>
+    <attr sel="#remove" th:href="${'/role/remove/' + role.id}"/>
+
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

@@ -1,16 +1,21 @@
 package lk.imms.management_system.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.config.annotation.*;
 
 import java.util.TimeZone;
 
 @Configuration
+@EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
 
     @Override
@@ -38,10 +43,15 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/css/");
         registry.addResourceHandler("/js/**")
                 .addResourceLocations("classpath:/static/js/");
-
+        registry.addResourceHandler("/fontawesome/**")
+                .addResourceLocations("classpath:/static/fontawesome/");
+        registry.addResourceHandler("/font/**")
+                .addResourceLocations("classpath:/static/font/");
+        registry.addResourceHandler("/favicon/**")
+                .addResourceLocations("classpath:/static/");
     }
     //Bean configuration
-   /* @Bean
+/*    @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/resources/templates/");
@@ -54,6 +64,23 @@ public class MvcConfig implements WebMvcConfigurer {
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
         return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.timeZone(TimeZone.getTimeZone("Asia/Colombo"));
     }
+
+    //Manage all errors
+    @ControllerAdvice
+    public static class ErrorController {
+
+        private Logger logger = LoggerFactory.getLogger(ErrorController.class);
+
+        @ExceptionHandler( Throwable.class )
+        @ResponseStatus( HttpStatus.INTERNAL_SERVER_ERROR )
+        public String exception(final Throwable throwable, Model model) {
+            logger.error("Exception during execution of SpringSecurity application", throwable);
+            String errorMessage = (throwable != null ? throwable.getMessage() : "Unknown error");
+            model.addAttribute("errorMessage", errorMessage);
+            return "error/error";
+        }
+    }
+
 
 }
 

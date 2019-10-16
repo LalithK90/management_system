@@ -1,0 +1,24 @@
+<thlogic>
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <attr sel="#heading" th:text="${workingPlace.name}"/>
+    <attr sel="#id" th:text="${workingPlace.id}"/>
+    <attr sel="#name" th:text="${workingPlace.name}"/>
+    <attr sel="#code" th:text="${workingPlace.code}"/>
+    <attr sel="#province" th:text="${workingPlace.province.province}"/>
+    <attr sel="#workingPlaceType" th:text="${workingPlace.workingPlaceType.workingPlaceType}"/>
+    <attr sel="#email" th:text="${workingPlace.email}"/>
+    <attr sel="#address" th:text="${workingPlace.address}"/>
+    <attr sel="#landOne" th:text="${workingPlace.landOne}"/>
+    <attr sel="#landTwo" th:text="${workingPlace.landTwo}"/>
+    <attr sel="#landThree" th:text="${workingPlace.landThree}"/>
+    <attr sel="#landFour" th:text="${workingPlace.landFour}"/>
+    <attr sel="#faxNumber" th:text="${workingPlace.faxNumber}"/>
+    <attr sel="#createdBy" th:text="${workingPlace.createdBy}"/>
+    <attr sel="#createdAt" th:text="${{workingPlace.createdAt}}"/>
+    <attr sel="#edit" th:href="${'/workingPlace/edit/' + workingPlace.id}"/>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

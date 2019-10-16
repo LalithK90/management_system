@@ -1,7 +1,10 @@
 * {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Comic Sans", "Courier New",
+    georgia, helvetica, impact, "times new roman", "trebuchet ms", verdana,
+"Iskoola Pota";
+    --error-color: #fa370d;
 }
 
 #loginBack {
@@ -62,7 +65,7 @@ body {
 /* for login form - end*/
 /* for summary form - start*/
 .casChqCdt {
-    color: red;
+    color: var(--error-color);
 }
 
 /* for summary form - end*/
@@ -72,7 +75,7 @@ body {
 }
 
 #tableTestBill tr td p {
-    color: red;
+    color: var(--error-color);
     text-align: center;
     font-weight: bold;
     font-style: italic;
@@ -114,7 +117,7 @@ body {
 
 .logoProperty:hover {
     padding: 10px;
-    border: 1px solid red;
+    border: 1px solid var(--error-color);
     background-color: #f5f5f5;
     box-shadow: 3px -5px 1px #f5f5f5;
 }
@@ -165,78 +168,57 @@ nav {
 
 /*footer - properties end */
 /*error pages - properties start */
-#error {
-    color: #39bbdb;
-    padding-bottom: 0;
-    min-height: 100%;
-    font-size: 13px;
-}
-
-.error-header {
-    background: #fff;
-    height: 180px;
-}
-
-.error-container {
-    background: rgba(0, 0, 0, .05);
-    text-align: center;
-}
-
-.error-container h1 {
-    color: #39bbdb;
-}
-
-.error-container h1 {
-    font-size: 110px;
-    font-weight: 300;
-    margin: -103px 0 0 0;
-    text-align: center;
-}
-
-.error-divider {
-    margin-top: -27px;
-    padding: 30px 0;
-}
-
-.error-container h2 {
-    font-size: 58px;
-    font-weight: 300;
-    margin: 0;
-    text-transform: uppercase;
-}
-
-.error-container p.description {
-    color: #39bbdb;
-    font-size: 50px;
-    margin: 0;
-}
-
-.return-btn, .return-btn:hover {
-    border: 1px solid rgba(255, 255, 255, .3);
-    padding: 10px 15px;
-    margin-top: 100px;
-    margin-bottom: 30px;
-    display: inline-block;
-    -webkit-border-radius: 5px;
-    -webkit-background-clip: padding-box;
-    -moz-border-radius: 5px;
-    -moz-background-clip: padding;
-    border-radius: 5px;
-    background-clip: padding-box;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 300;
-}
-
-a:hover {
-    text-decoration: none;
-}
 
 /*error pages - properties end */
 /*Error Message Colour - star*/
 .error {
     font-family: 'Open Sans', 'Segoe UI';
-    color: #fa0901;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--error-color);
+}
+
+#error {
+    text-align: center;
+}
+
+#errorCode {
+    margin-top: 10%;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-style: oblique;
+    font-size: 40px;
+    color: #3299ff;
+    background-color: #ffddca;
+    border-radius: 10px;
+}
+
+#icon {
+    height: 250px;
+    width: 250px;
+    box-shadow: 8px 8px 8px 8px white;
+
+    border-radius: 50%;
+    background: linear-gradient(215deg, #5ca155, #a080c5, #56a4b6, #04c2ec, #f2e053);
+    background-size: 1000% 1000%;
+
+    -webkit-animation: AnimationName 10s ease infinite;
+    -moz-animation: AnimationName 10s ease infinite;
+    -o-animation: AnimationName 10s ease infinite;
+    animation: AnimationName 10s ease infinite;
+}
+
+#iconIn {
+    font-size: 250px;
+    text-align: center;
+}
+
+#errorMessage {
+    color: var(--error-color);
+    font-size: 20px;
+    font-style: italic;
+    background-color: white;
+    border-radius: 5px 20px 0px 15px;
 }
 
 /*Error Message Colour - star*/
@@ -314,24 +296,51 @@ input {
 }
 
 @-webkit-keyframes AnimationName {
-    0%{background-position:88% 0%}
-    50%{background-position:13% 100%}
-    100%{background-position:88% 0%}
+    0% {
+        background-position: 88% 0%
+    }
+    50% {
+        background-position: 13% 100%
+    }
+    100% {
+        background-position: 88% 0%
+    }
 }
+
 @-moz-keyframes AnimationName {
-    0%{background-position:88% 0%}
-    50%{background-position:13% 100%}
-    100%{background-position:88% 0%}
+    0% {
+        background-position: 88% 0%
+    }
+    50% {
+        background-position: 13% 100%
+    }
+    100% {
+        background-position: 88% 0%
+    }
 }
+
 @-o-keyframes AnimationName {
-    0%{background-position:88% 0%}
-    50%{background-position:13% 100%}
-    100%{background-position:88% 0%}
+    0% {
+        background-position: 88% 0%
+    }
+    50% {
+        background-position: 13% 100%
+    }
+    100% {
+        background-position: 88% 0%
+    }
 }
+
 @keyframes AnimationName {
-    0%{background-position:88% 0%}
-    50%{background-position:13% 100%}
-    100%{background-position:88% 0%}
+    0% {
+        background-position: 88% 0%
+    }
+    50% {
+        background-position: 13% 100%
+    }
+    100% {
+        background-position: 88% 0%
+    }
 }
 
 .form-Border {
@@ -373,6 +382,24 @@ input {
 .invalid {
     background-color: #ff88b3;
 }
+
+/*html 5 filed validation - start */
+input:required:invalid, input:focus:invalid {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAeVJREFUeNqkU01oE1EQ/mazSTdRmqSxLVSJVKU9RYoHD8WfHr16kh5EFA8eSy6hXrwUPBSKZ6E9V1CU4tGf0DZWDEQrGkhprRDbCvlpavan3ezu+LLSUnADLZnHwHvzmJlvvpkhZkY7IqFNaTuAfPhhP/8Uo87SGSaDsP27hgYM/lUpy6lHdqsAtM+BPfvqKp3ufYKwcgmWCug6oKmrrG3PoaqngWjdd/922hOBs5C/jJA6x7AiUt8VYVUAVQXXShfIqCYRMZO8/N1N+B8H1sOUwivpSUSVCJ2MAjtVwBAIdv+AQkHQqbOgc+fBvorjyQENDcch16/BtkQdAlC4E6jrYHGgGU18Io3gmhzJuwub6/fQJYNi/YBpCifhbDaAPXFvCBVxXbvfbNGFeN8DkjogWAd8DljV3KRutcEAeHMN/HXZ4p9bhncJHCyhNx52R0Kv/XNuQvYBnM+CP7xddXL5KaJw0TMAF8qjnMvegeK/SLHubhpKDKIrJDlvXoMX3y9xcSMZyBQ+tpyk5hzsa2Ns7LGdfWdbL6fZvHn92d7dgROH/730YBLtiZmEdGPkFnhX4kxmjVe2xgPfCtrRd6GHRtEh9zsL8xVe+pwSzj+OtwvletZZ/wLeKD71L+ZeHHWZ/gowABkp7AwwnEjFAAAAAElFTkSuQmCC);
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    -moz-box-shadow: none;
+}
+
+input:required:valid {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAepJREFUeNrEk79PFEEUx9/uDDd7v/AAQQnEQokmJCRGwc7/QeM/YGVxsZJQYI/EhCChICYmUJigNBSGzobQaI5SaYRw6imne0d2D/bYmZ3dGd+YQKEHYiyc5GUyb3Y+77vfeWNpreFfhvXfAWAAJtbKi7dff1rWK9vPHx3mThP2Iaipk5EzTg8Qmru38H7izmkFHAF4WH1R52654PR0Oamzj2dKxYt/Bbg1OPZuY3d9aU82VGem/5LtnJscLxWzfzRxaWNqWJP0XUadIbSzu5DuvUJpzq7sfYBKsP1GJeLB+PWpt8cCXm4+2+zLXx4guKiLXWA2Nc5ChOuacMEPv20FkT+dIawyenVi5VcAbcigWzXLeNiDRCdwId0LFm5IUMBIBgrp8wOEsFlfeCGm23/zoBZWn9a4C314A1nCoM1OAVccuGyCkPs/P+pIdVIOkG9pIh6YlyqCrwhRKD3GygK9PUBImIQQxRi4b2O+JcCLg8+e8NZiLVEygwCrWpYF0jQJziYU/ho2TUuCPTn8hHcQNuZy1/94sAMOzQHDeqaij7Cd8Dt8CatGhX3iWxgtFW/m29pnUjR7TSQcRCIAVW1FSr6KAVYdi+5Pj8yunviYHq7f72po3Y9dbi7CxzDO1+duzCXH9cEPAQYAhJELY/AqBtwAAAAASUVORK5CYII=);
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+/*html 5 filed validation - end */
 
 /* enter filed validation - end*/
 

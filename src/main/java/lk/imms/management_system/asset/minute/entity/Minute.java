@@ -16,7 +16,7 @@ import java.util.List;
 @EqualsAndHashCode( callSuper = true )
 public class Minute extends AuditEntity {
 
-    @OneToMany(mappedBy = "minute")
+    @OneToMany(mappedBy = "minute",cascade = CascadeType.PERSIST)
     private List< MinutePetition > minutePetitions;
 
     @Column(length = 50000)

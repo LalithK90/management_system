@@ -1,0 +1,10 @@
+<thlogic>
+    <attr sel="#header" th:fragment="headerFragment"/>
+    <attr sel="#headerTitle" th:text="${headerTitle==null?'Excise Department - Sri Lanka': headerTitle}"/>
+    <attr sel="#bSCss" th:href="@{/css/bootstrap.min.css}"/>
+    <attr sel="#dTCss" th:href="@{/css/dataTables.bootstrap.min.css}"/>
+    <attr sel="#mCCss" th:href="@{/css/myCss.css}"/>
+    <attr sel="#fWCss" th:href="@{/fontawesome/css/all.css}"/>
+    <attr sel="#imagesUploader" th:href="@{/css/image-uploader.min.css}"/>
+    <attr sel="#floatingLabel" th:href="@{/css/floating-labels.css}"/>
+</thlogic>
