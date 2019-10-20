@@ -1,7 +1,7 @@
-package lk.imms.management_system.asset.commonAsset.entity;
+package lk.imms.management_system.asset.workingPlace.entity;
 
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Province;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.WorkingPlaceType;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.WorkingPlaceType;
 import lk.imms.management_system.asset.employee.entity.WorkingHistory;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.util.audit.AuditEntity;

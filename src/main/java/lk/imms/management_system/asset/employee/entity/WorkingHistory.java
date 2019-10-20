@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.employee.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lk.imms.management_system.asset.commonAsset.entity.WorkingPlace;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.asset.employee.entity.Enum.WorkingPlaceChangeReason;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;

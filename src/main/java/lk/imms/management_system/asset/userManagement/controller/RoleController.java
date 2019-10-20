@@ -1,4 +1,4 @@
-package lk.imms.management_system.asset.commonAsset.controller;
+package lk.imms.management_system.asset.userManagement.controller;
 
 
 import lk.imms.management_system.asset.userManagement.entity.Role;

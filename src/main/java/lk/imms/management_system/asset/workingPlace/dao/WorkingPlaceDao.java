@@ -1,6 +1,6 @@
-package lk.imms.management_system.asset.commonAsset.dao;
+package lk.imms.management_system.asset.workingPlace.dao;
 
-import lk.imms.management_system.asset.commonAsset.entity.WorkingPlace;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

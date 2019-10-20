@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" >
+<!--header Include-->
+<head id="header">
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/workingPlace" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="form-horizontal" method="POST">
+            <div class="row">
+                <!--Left Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <div id="idHide" class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="id">Province :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="form-control" id="id" type="text" readonly/>
+                        </div>
+                    </div>
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="name">Village :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="name" class="form-control" type="text" minlength="6" required/>
+                            <span class="error" id="nameError">Error Number</span>
+                        </div>
+                    </div>
+                </div>
+                <!--Right Side-->
+                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="landOne">District :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="landOne" class="form-control land" type="text" minlength="9" maxlength="10"
+                                   required/>
+                            <span id="landOneError" class="error">Error One Number</span>
+                        </div>
+                    </div>
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="landTwo">Priority:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="landTwo" class="form-control land" type="text" minlength="9" maxlength="10"/>
+                            <span id="landTwoError" class="error">Error Land Number Two
+
+                                                                  Number</span>
+                        </div>
+                    </div>
+                </div>
+                <!--petition note are-->
+                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
+                    <div class="input-field">
+                        <label class="control-label col-sm-4" for="description">Description</label>
+                        <div>
+                            <textarea class="form-control" id="description"
+                                      name="description" placeholder="Enter Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!--photos -->
+                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
+                    <div class="input-field">
+                        <label class="active ">Photos :</label>
+                        <div class="input-images" style="padding-top: .5rem;"></div>
+                    </div>
+                </div>
+                <!--button-->
+                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                    <div class="input-field">
+                        <button class="btn btn-success" type="submit">
+                            <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                                id="submit"></span>
+                        </button>
+                    </div>
+                </div>
+                <!--Errors -->
+                <div class="form-row">
+                    <label id="errorLabel">Errors: </label>
+                    <ul>
+                        <li id="error" class="error"></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script>
+    //WYSIWYG add to text area
+    bkLib.onDomLoaded(function () {
+        nicEditors.allTextAreas()
+    });
+    $('.input-images').imageUploader();
+    $(".alert").alert();
+</script>
+</body>
+</html>

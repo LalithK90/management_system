@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.userManagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lk.imms.management_system.asset.commonAsset.entity.WorkingPlace;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lombok.*;
 import org.hibernate.annotations.Fetch;

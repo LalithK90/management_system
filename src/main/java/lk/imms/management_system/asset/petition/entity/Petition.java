@@ -1,6 +1,6 @@
 package lk.imms.management_system.asset.petition.entity;
 
-import lk.imms.management_system.asset.commonAsset.entity.WorkingPlace;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.minute.entity.MinutePetition;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;

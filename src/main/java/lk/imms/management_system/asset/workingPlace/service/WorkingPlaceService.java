@@ -1,7 +1,7 @@
-package lk.imms.management_system.asset.commonAsset.service;
+package lk.imms.management_system.asset.workingPlace.service;
 
-import lk.imms.management_system.asset.commonAsset.dao.WorkingPlaceDao;
-import lk.imms.management_system.asset.commonAsset.entity.WorkingPlace;
+import lk.imms.management_system.asset.workingPlace.dao.WorkingPlaceDao;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

@@ -1,9 +1,9 @@
-package lk.imms.management_system.asset.commonAsset.controller;
+package lk.imms.management_system.asset.workingPlace.controller;
 
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Province;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.WorkingPlaceType;
-import lk.imms.management_system.asset.commonAsset.entity.WorkingPlace;
-import lk.imms.management_system.asset.commonAsset.service.WorkingPlaceService;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.WorkingPlaceType;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
+import lk.imms.management_system.asset.workingPlace.service.WorkingPlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
