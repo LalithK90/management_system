@@ -16,6 +16,11 @@
           th:text="${provinces.province}"
           th:value="${provinces}"
           th:selected="${provinces==workingPlace.province?'selected':'unselected'}"/>
+    <attr sel="#district" th:field="*{district}"/>
+    <attr sel="#districtSelect" th:each="districts : ${district}"
+          th:text="${districts.district}"
+          th:value="${districts}"
+          th:selected="${districts==workingPlace.district?'selected':'unselected'}"/>
     <attr sel="#workingPlaceType" th:field="*{workingPlaceType}"/>
     <attr sel="#workingPlaceTypeSelect" th:each="workingPlaceTypes : ${workingPlaceType}"
           th:text="${workingPlaceTypes.workingPlaceType}"

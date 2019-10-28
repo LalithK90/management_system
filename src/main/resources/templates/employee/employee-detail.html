@@ -1,179 +1,295 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <style th:replace="fragments/style"></style>
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
 </head>
 <body>
-<nav class="navbar navbar-default" th:replace="fragments/header :: header"></nav>
-<div class="container-fluid" style="margin-top: 60px">
-    <div class="panel panel-primary">
-        <div class="panel panel-heading  text-center">
-            <h4><span th:text="${employeeDetail.title.title}"></span> &nbsp; <span
-                    th:text="${employeeDetail.name}"></span></h4>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--heading Area-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
         </div>
-        <div class="panel-body">
-            <!--lefet side-->
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>Id : <span th:text="${employeeDetail.id}"></span>
-                        </h4>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <p id="formHeader"></p>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/employee" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+<!--details-->
+<div id="employeeDetails" class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <div class="row">
+            <!--Left Side-->
+            <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">ID :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="id" class="display_detail"></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Number : <span th:text="${employeeDetail.number}"></span>
-                        </h4>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="payRoleNumber">Pay Role No :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="payRoleNumber" class="display_detail"></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Name : <span th:text="${employeeDetail.title.title}"></span> &nbsp; <span
-                                th:text="${employeeDetail.name}"></span>
-                        </h4>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="departmentIdNumber">Depart Id No :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="departmentIdNumber" class="display_detail"></p></div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="name">Name :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="name" class="display_detail"></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Calling Name : <span th:text="${employeeDetail.callingName}"></span>
-                        </h4>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="callingName">Calling Name :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="callingName" class="display_detail"></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            NIC : <span th:text="${employeeDetail.nic}"></span>
-                        </h4>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="nic">NIC No :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="nic" class="display_detail"></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Gender : <span th:text="${employeeDetail.gender.gender}"></span>
-                        </h4>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="gender">Gender :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="gender" class="display_detail"></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Blood Group : <span th:text="${employeeDetail.bloodGroup.bloodGroup}"></span>
-                        </h4>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="dateOfBirth">Birth date :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="dateOfBirth" class="display_detail">Error Birthday</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Email : <span th:text="${employeeDetail.email}"></span>
-                        </h4>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="bloodGroup">Blood Group :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="bloodGroup" class="display_detail">
+                        </p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Mobile : <span th:text="${employeeDetail.mobile}"></span>
-                        </h4>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="designation">Designation :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="designation" class="display_detail">
+                        </p>
                     </div>
                 </div>
-            </div>
-            <!-- right side -->
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Land : <span th:text="${employeeDetail.land}"></span>
-                        </h4>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="civilStatus">Civil State :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="civilStatus" class="display_detail"></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Address : <span th:text="${employeeDetail.address}"></span>
-                        </h4>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="employeeStatus">Employee Status :</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Designation : <span th:text="${employeeDetail.designation.designation}"></span>
-                        </h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Date of Assignment : <span th:text="${employeeDetail.dateOfAssignment}"></span>
-                        </h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Date Of Birth : <span th:text="${employeeDetail.dateOfBirth}"></span>
-                        </h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Civil Status : <span th:text="${employeeDetail.civilStatus.civilStatus}"></span>
-                        </h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Employee Status : <span th:text="${employeeDetail.employeeStatus.employeeStatus}"></span>
-                        </h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container-fluid">
-                        <h4>
-                            Created Date : <span th:text="${employeeDetail.createdAt}"></span>
-                        </h4>
+                    <div class="col-md-8">
+                        <p id="employeeStatus" class="display_detail"></p>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div th:if="${addStatus==true}">
-                    <div class="col-sm-4 text-right">
-                        <a href="/home">
-                            <button class="btn btn-success"><span class="glyphicon glyphicon-home"></span>&nbsp; Home
-                            </button>
-                        </a>
+            <!--Right Side-->
+            <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="address">Address :</label>
                     </div>
-                    <div class="col-sm-4 text-left">
-                        <a href="/passwordChange">
-                            <button class="btn btn-warning"><i class="fa fa-expeditedssl"></i>&nbsp; Need to Change
-                                Password
-                            </button>
-                        </a>
+                    <div class="col-md-8 text-left">
+                        <textarea id="address" class="display_detail "></textarea>
                     </div>
                 </div>
-                <div th:if="${addStatus==false}">
-                    <div class="col-sm-6 text-center">
-                        <a href="/employee">
-                            <button class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span>&nbsp;
-                                Back
-                            </button>
-                        </a>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="mobileOne">Mobile One No :</label>
                     </div>
-                    <div class="col-sm-6 text-center">
-                        <a href="/home">
-                            <button class="btn btn-success"><span class="glyphicon glyphicon-home"></span>&nbsp; Home
-                            </button>
-                        </a>
+                    <div class="col-md-8">
+                        <p id="mobileOne" class="display_detail"></p>
                     </div>
                 </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="mobileTwo">Mobile Two No :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="mobileTwo" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="land">Land No :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="land" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="email">Email :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="email" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="officeEmail">Office Email :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="officeEmail" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="dateOfAssignment">Date Of Assignment :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="dateOfAssignment" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="createdBy">Created By :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="createdBy" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="createdAt">Created At :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="createdAt" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="updatedBy">Updated By :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="updatedBy" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="updatedAt">Updated At :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="updatedAt" class="display_detail"></p>
+                    </div>
+                </div>
+            </div>
+            <!--images-->
+            <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
+                <div class="col" id="photoDetails">
+                    <div>
+                        <label class="control-label ">Photo Details : </label>
+                    </div>
+                    <div class="row">
+                        <div class="col" id="filesList">
+                            <div class="col">
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <div class="card text-center">
+                                        <div class="card-body">
+                                            <img id="img" class="rounded"
+                                                 style="height: 150px; width: 150px; border-radius: 10px"
+                                                 alt="Employee images"/>
+                                        </div>
+                                        <div class="card-footer bg-secondary text-light text-center">
+                                            <p id="imgName"></p>
+                                            <span> Uploaded Date :
+                                            <p id="imgCreateAt"></p>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Working Place History Details show-->
+        <div class="container-fluid text-center bg-dark formBorder" id="workingPlaceHistoryDetails">
+            <div class="col-sm-12 flex-column ">
+                <div class="header ">
+                    <strong><span id="captionEmployeeName"></span>'s Working History</strong>
+                </div>
+                <table class="table table-striped table-inverse table-responsive">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>Working Place Name</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Duration</th>
+                        <th>Transfer Reason</th>
+                        <th>Remark</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="workingPlaceList">
+                        <td id="workingPlaceName" scope="row"></td>
+                        <td id="from"></td>
+                        <td id="to"></td>
+                        <td id="duration"></td>
+                        <td id="workingPlaceChangeReason"></td>
+                        <td id="remarks"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
-<footer class="page-footer" th:replace="fragments/footer"></footer>
-<script th:replace="fragments/script"></script>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
 </body>
 </html>

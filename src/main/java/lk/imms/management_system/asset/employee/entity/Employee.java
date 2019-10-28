@@ -95,11 +95,8 @@ public class Employee extends AuditEntity {
     @Fetch( value = FetchMode.SUBSELECT )
     private List< DetectionTeamMember > detectionTeamMembers;
 
-    @ManyToMany( fetch = FetchType.EAGER )
-    @JoinTable( name = "employee_working_history",
-            joinColumns = @JoinColumn( name = "employee_id" ),
-            inverseJoinColumns = @JoinColumn( name = "working_history_id" ) )
-    private List< WorkingHistory > workingHistories;
+    @OneToMany( mappedBy = "employee", fetch = FetchType.EAGER )
+    private List< EmployeeWorkingPlaceHistory > employeeWorkingHistories;
 
     @Transient
     private List< MultipartFile > files = new ArrayList<>();

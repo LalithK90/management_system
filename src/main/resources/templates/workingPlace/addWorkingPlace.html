@@ -38,7 +38,7 @@
                             <label class="control-label" for="id">ID :</label>
                         </div>
                         <div class="col-md-8">
-                            <input class="form-control" id="id" type="text" readonly/>
+                            <input class="form-control" id="id" type="text"  readonly/>
                         </div>
                     </div>
                     <div class="form-row text-right">
@@ -46,7 +46,7 @@
                             <label class="control-label" for="name">Name :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="name" class="form-control" type="text" minlength="6" required/>
+                            <input id="name" class="form-control" tabindex="1" type="text" minlength="6" required/>
                             <span class="error" id="nameError">Error Number</span>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             <label class="control-label" for="code">Code :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="code" class="form-control" type="text" required/>
+                            <input id="code" class="form-control" tabindex="2" type="text" required/>
                             <span class="error" id="codeError">Error Code</span>
                         </div>
                     </div>
@@ -64,9 +64,20 @@
                             <label class="control-label" for="province">Province :</label>
                         </div>
                         <div class="col-md-8">
-                            <select class="form-control" id="province" required>
+                            <select class="form-control" id="province" tabindex="3" required>
                                 <option value="">Please select</option>
                                 <option id="provinceSelect"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="district">District :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" id="district" tabindex="4" required>
+                                <option value="">Please select</option>
+                                <option id="districtSelect"></option>
                             </select>
                         </div>
                     </div>
@@ -75,7 +86,7 @@
                             <label class="control-label" for="workingPlaceType">Working Place Type :</label>
                         </div>
                         <div class="col-md-8">
-                            <select class="form-control" id="workingPlaceType" required>
+                            <select class="form-control" id="workingPlaceType" tabindex="5" required>
                                 <option value="">Please select</option>
                                 <option id="workingPlaceTypeSelect"></option>
                             </select>
@@ -86,7 +97,7 @@
                             <label class="control-label" for="emailOne">Email One:</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="emailOne" class="form-control" type="email"/>
+                            <input id="emailOne" class="form-control" tabindex="6" type="email"/>
                             <span id="emailOneError" class="error">Error Email</span>
                         </div>
                     </div>
@@ -95,7 +106,7 @@
                             <label class="control-label" for="emailTwo">Email Two:</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="emailTwo" class="form-control" type="email"/>
+                            <input id="emailTwo" class="form-control" tabindex="7" type="email"/>
                             <span id="emailTwoError" class="error">Error Email</span>
                         </div>
                     </div>
@@ -107,7 +118,8 @@
                             <label class="control-label" for="landOne">Land No One:</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="landOne" class="form-control land" type="text" minlength="9" maxlength="10"
+                            <input id="landOne" class="form-control land" tabindex="8" type="text" minlength="9"
+                                   maxlength="10"
                                    required/>
                             <span id="landOneError" class="error">Error One Number</span>
                         </div>
@@ -117,7 +129,8 @@
                             <label class="control-label" for="landTwo">Land No Two:</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="landTwo" class="form-control land" type="text" minlength="9" maxlength="10"/>
+                            <input id="landTwo" class="form-control land" tabindex="9" type="text" minlength="9"
+                                   maxlength="10"/>
                             <span id="landTwoError" class="error">Error Land Number Two
 
                                                                   Number</span>
@@ -128,7 +141,7 @@
                             <label class="control-label " for="landThree">Land No Three :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="landThree" class="form-control land" type="text" minlength="9"
+                            <input id="landThree" class="form-control land" tabindex="10" type="text" minlength="9"
                                    maxlength="10"/>
                             <span id="landThreeError" class="error">Error Land Number Three</span>
                         </div>
@@ -138,7 +151,8 @@
                             <label class="control-label" for="landFour">Land No Four :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="landFour" class="form-control land" type="text" minlength="9" maxlength="10"
+                            <input id="landFour" class="form-control land" tabindex="11" type="text" minlength="9"
+                                   maxlength="10"
                             />
                             <span id="landFourError" class="error">Error Land Four Number</span>
                         </div>
@@ -148,7 +162,7 @@
                             <label class="control-label" for="faxNumber">Fax No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="faxNumber" class="form-control land"
+                            <input id="faxNumber" class="form-control land" tabindex="12"
                                    type="text" minlength="9"
                                    maxlength="10"/>
                             <span id="faxNumberError" class="error">Error Fax Number</span>
@@ -159,7 +173,7 @@
                             <label class="control-label" for="address">Address :</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea id="address" class="form-control" required="required"></textarea>
+                            <textarea id="address" class="form-control" tabindex="13" required="required"></textarea>
                             <span id="addressError" class="error">Error Address</span>
                         </div>
                     </div>
@@ -182,7 +196,7 @@
                 </div>
                 <!--Button-->
                 <div class="form-group col-md-12 col-sm-12 text-center flex-column">
-                    <button class="btn btn-success" type="submit">
+                    <button class="btn btn-success" tabindex="15" type="submit">
                         <i class="fa fa-save" style="font-size: 20px"></i>&nbsp; &nbsp;<span
                             id="submit">                        </span>
                     </button>

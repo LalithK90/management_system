@@ -22,6 +22,8 @@ public class DetectionTeam extends AuditEntity {
     @ManyToOne( fetch = FetchType.EAGER )
     private Petition petition;
 
+    private String name;
+
     @OneToMany( mappedBy = "detectionTeam" )
     private List< DetectionTeamMember > detectionTeamMembers;
 

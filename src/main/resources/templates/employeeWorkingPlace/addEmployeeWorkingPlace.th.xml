@@ -1,8 +1,34 @@
 <thlogic>
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+    <!--to show employee Search button-->
+    <attr sel="#searchShow" th:if="${employeeDetailShow==true || employeeNotFoundShow==false}"/>
+    <!--to Display employee Search from -->
+    <attr sel="#employeeFindForm" th:if="${employeeDetailShow==false}"/>
+    <attr sel="#from" th:action="${/employee/workingPlace}" th:object="${employee}"/>
+    <attr sel="#employeeNotFoundShow" th:if="${employeeNotFoundShow==true}"/>
+    <attr sel="#employeeNotFound" th:text="${employeeNotFound}"/>
+    <!--display employee details content-->
+    <attr sel="#employeeDetailShow" th:if="${employeeDetailShow==true}"/>
+    <!--data taken from employee-details-->
+    <attr sel="#employeeDetails" th:replace="~{employee/employee-detail :: employeeDetailsFragment}"/>
 
+    <!--new Working place add form-->
+    <!--display add from -->
+    <attr sel="#workingPlaceAddFrom" th:if="${employeeDetailShow==true}"/>
+    <attr sel="#changeReasonList" th:each="changeReasons : ${workingPlaceChangeReason}"
+          th:text="${changeReasons.workingPlaceChangeReason}"
+          th:value="${changeReasons}"/>
+    <attr sel="#employee" th:value="${employeeDetail.id}"/>
+    <attr sel="#provinceSelectList" th:each="provinces : ${province}"
+          th:text="${provinces.province}"
+          th:value="${provinces}"/>
+
+    <!--URL Comes -->
+    <attr sel="#districtUrl" th:value="${districtUrl}"/>
+    <attr sel="#stationUrl" th:value="${stationUrl}"/>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+    <attr sel="#customJS" th:src="@{/js/workingPlaceAdd.js}"/>
 </thlogic>

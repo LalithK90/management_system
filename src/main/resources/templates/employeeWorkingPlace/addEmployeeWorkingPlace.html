@@ -2,19 +2,216 @@
 <html lang="en">
 <!--header Include-->
 <head id="header">
-
 </head>
 <body>
 <!--nav Bar include-->
 <nav id="navBar"></nav>
-
-
-<!--Container spaces-->
-
-
+<!--page title-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col-2">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col-8">
+            <h4 class="text-light text-center">
+                <strong>
+                    <p id="formHeader">Employee Working Place Management</p>
+                </strong>
+            </h4>
+        </div>
+        <div class="col-2">
+            <a href="/employee/workingPlace" id="searchShow" class="btn btn-primary">
+                <i class="fa fa-search " style="font-size: 20px"></i>&nbsp; &nbsp;Search
+                <i class="fa fa-user " style="font-size: 20px"></i>&nbsp; &nbsp;
+            </a>
+        </div>
+    </div>
+</div>
+<!--Employee find-->
+<div class="container-fluid bg-dark formBorder" id="employeeFindForm">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="" method="POST" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="col-5 flex-column">
+                    <div class="form-group">
+                        <div class="col-4">
+                            <label class="control-label" for="selectParameter">Parameter :</label>
+                        </div>
+                        <div class="col-8">
+                            <select id="selectParameter" class="form-control" tabindex="1" required>
+                                <option value="">Please select</option>
+                                <option value="nic">NIC Number</option>
+                                <option value="payRoleNumber">Pay Role Number</option>
+                                <option value="departmentIdNumber">Department Id Number</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 flex-column">
+                    <div class="form-group">
+                        <div class="col-5">
+                            <label class="control-label" for="valueEmployee">Value :</label>
+                        </div>
+                        <div class="col-7">
+                            <input id="valueEmployee" tabindex="2" class="form-control" type="text" minlength="3"
+                                   required
+                                   autofocus/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 flex-column">
+                    <div class="form-group">
+                        <div class="">
+                            <div class="col-2">
+                                <label class="control-label"></label>
+                            </div>
+                            <div class="col-10 text-left" id="btnSearchEmployee">
+                                <button class="btn btn-success" tabindex="3" type="submit">
+                                    <i class="fa fa-search " style="font-size: 20px"></i>&nbsp; &nbsp;Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--Employee not fount message-->
+<div id="employeeNotFoundShow" class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong><span id="employeeNotFound"></span></strong>
+    <script>
+        $(".alert").alert();
+    </script>
+</div>
+<!--Employee details Display-->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <div id="employeeDetailShow">
+            <div id="employeeDetails"></div>
+        </div>
+    </div>
+</div>
+<!--Working place add From-->
+<div class="container-fluid bg-dark formBorder" id="workingPlaceAddFrom">
+    <div class="col-sm-12 flex-column ">
+        <form id="formWorkingPlace" action="/employee/workingPlace/add" class="form-horizontal" method="POST">
+            <div class="row">
+                <!--Left Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="from_place">Form :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="from_place" class="form-control" type="date" name="from_place" required/>
+                        </div>
+                    </div>
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="changeReason">Change Reason :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="changeReason" name="workingPlaceChangeReason" class="form-control" required>
+                                <option value="">Please select</option>
+                                <option id="changeReasonList"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--Right Side-->
+                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="to_place">To:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="to_place" name="to_place" class="form-control land" type="date" required/>
+                        </div>
+                    </div>
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="employee">Employee:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="employee" name="employee"
+                                   class="form-control" readonly/>
+                        </div>
+                    </div>
+                </div>
+                <!--any description note are-->
+                <div class="form-group col-md-12 col-sm-12 col-12 text-left">
+                    <div class="input-field">
+                        <label class="control-label col-sm-4" for="remark">Remarks:</label>
+                        <div>
+                            <textarea class="form-control" id="remark" name="remark"
+                                      placeholder="Enter Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!--Working Place Find-->
+                <div class="row col-12 col-md-12 col-sm-12">
+                    <!--province-->
+                    <div class="col-md-4 col-sm-4 text-left ">
+                        <div class="col-md-4">
+                            <label class="control-label" for="province">Province:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" id="province" name="province" required>
+                                <option value="">Please select</option>
+                                <option id="provinceSelectList"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--District-->
+                    <div id="districtShow" class="col-md-4 col-sm-4 text-left ">
+                        <div class="col-md-4">
+                            <label class="control-label" for="district">District:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" name="district" id="district" required>
+                                <option value="">Please select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Station-->
+                    <div id="stationShow" class="col-md-4 col-sm-4 text-left ">
+                        <div class="col-md-4">
+                            <label class="control-label" for="station">Station:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="station" name="workingPlace" class="form-control" required>
+                                <option value="">Please select</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Button-->
+            <div class="form-group col-md-12 col-sm-12 text-center flex-column">
+                <div>
+                    <button class="btn btn-success" type="submit">
+                        <i class="fa fa-save" style="font-size: 20px"></i>&nbsp; Save
+                    </button>
+                </div>
+            </div>
+            <!--Hide content from visual-->
+            <div class="form-row">
+                <input type="hidden" id="districtUrl" class="hide"/>
+                <input type="hidden" id="stationUrl" class="hide"/>
+            </div>
+        </form>
+    </div>
+</div>
 <!--footer include-->
 <footer id="footer" class="page-footer"></footer>
 <!--script include-->
 <script id="script"></script>
+<script id="customJS"></script>
 </body>
 </html>

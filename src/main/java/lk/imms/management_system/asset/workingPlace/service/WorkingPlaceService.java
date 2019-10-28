@@ -50,4 +50,5 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
         Example< WorkingPlace > workingPlaceExample = Example.of(workingPlace, matcher);
         return workingPlaceDao.findAll(workingPlaceExample);
     }
+
 }

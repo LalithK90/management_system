@@ -3,7 +3,7 @@
     "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Comic Sans", "Courier New",
     georgia, helvetica, impact, "times new roman", "trebuchet ms", verdana,
-"Iskoola Pota";
+    "Iskoola Pota";
     --error-color: #fa370d;
 }
 
@@ -273,6 +273,15 @@ input {
     font-size: 18px !important;
 }
 
+.display_detail {
+    font-size: 18px !important;
+    font-max-size: 20px;
+    font-min-size: 12px;
+    font-weight: bold;
+    color: black;
+    text-align: left;
+}
+
 .form-row {
     padding: 10px;
     border-radius: 10px;
@@ -402,6 +411,3 @@ input:required:valid {
 /*html 5 filed validation - end */
 
 /* enter filed validation - end*/
-
-
-

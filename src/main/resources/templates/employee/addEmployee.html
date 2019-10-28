@@ -45,7 +45,7 @@
                             <label class="control-label" for="payRoleNumber">Pay Role No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="payRoleNumber" class="form-control" type="text" required/>
+                            <input id="payRoleNumber" class="form-control" tabindex="1" type="text" required/>
                             <span id="payRoleNumberError" class="error">Error Pay Role Number</span>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             <label class="control-label" for="departmentIdNumber">Depart Id No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="departmentIdNumber" class="form-control" type="text"/>
+                            <input id="departmentIdNumber" class="form-control" tabindex="2" type="text"/>
                             <span id="departmentIdNumberError" class="error">Error Department Number</span></div>
                     </div>
                     <div class="form-row text-right">
@@ -62,7 +62,7 @@
                             <label class="control-label" for="title">Title :</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="title" class="form-control" required>
+                            <select id="title" class="form-control" tabindex="3" required>
                                 <option value="">Please select</option>
                                 <option id="titleContent"></option>
                             </select>
@@ -74,7 +74,7 @@
                             <label class="control-label" for="name">Name :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="name" class="form-control" type="text" required/>
+                            <input id="name" class="form-control" tabindex="4" type="text" required/>
                             <span id="nameError" class="error">Error Name</span>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                             <label class="control-label" for="callingName">Calling Name :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="callingName" class="form-control" type="text" minlength="5"/>
+                            <input id="callingName" class="form-control" tabindex="5" type="text" minlength="5"/>
                             <span class="error" id="callingNameError">Error                                                                                                      Calling                                                                                                                        Name</span>
                         </div>
                     </div>
@@ -92,7 +92,8 @@
                             <label class="control-label" for="nic">NIC No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="nic" class="form-control" type="text" maxlength="12" minlength="10" required/>
+                            <input id="nic" class="form-control" tabindex="6" type="text" maxlength="12"
+                                   minlength="10" required/>
                             <span class="error" id="nicError">Error                                                                                                     NIC Number</span>
                         </div>
                     </div>
@@ -101,7 +102,7 @@
                             <label class="control-label" for="gender">Gender :</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="gender" class="form-control" required>
+                            <select id="gender" class="form-control" tabindex="7" required>
                                 <option value="">Please select</option>
                                 <option id="genderList"></option>
                             </select>
@@ -112,7 +113,7 @@
                             <label class="control-label" for="dateOfBirth">Birth date :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="dateOfBirth" class="form-control"
+                            <input id="dateOfBirth" class="form-control" tabindex="8"
                                    placeholder="Ex: 1990 - 01 - 20"
                                    required type="date"/>
                             <span id="dateOfBirthError" class="error">Error Birthday</span>
@@ -123,7 +124,7 @@
                             <label class="control-label" for="bloodGroup">Blood Group :</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="bloodGroup" class="form-control" required>
+                            <select id="bloodGroup" class="form-control" tabindex="9" required>
                                 <option value="">Please select</option>
                                 <option id="bloodGroupList">Please select</option>
                             </select>
@@ -134,7 +135,7 @@
                             <label class="control-label" for="designation">Designation :</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="designation" class="form-control" required>
+                            <select id="designation" class="form-control" tabindex="10" required>
                                 <option value="">Please select</option>
                                 <option id="designationList"></option>
                             </select>
@@ -148,7 +149,7 @@
                             <label class="control-label" for="civilStatus">Civil State :</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="civilStatus" class="form-control" required>
+                            <select id="civilStatus" class="form-control" tabindex="11" required>
                                 <option value="">Please select</option>
                                 <option id="civilStatusList"></option>
                             </select>
@@ -159,7 +160,7 @@
                             <label class="control-label" for="address">Address :</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea id="address" class="form-control" required></textarea>
+                            <textarea id="address" class="form-control" tabindex="12" required></textarea>
                             <span class="error" id="addressError">Error Address</span>
                         </div>
                     </div>
@@ -168,7 +169,8 @@
                             <label class="control-label" for="mobileOne">Mobile One No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="mobileOne" class="form-control mobile" type="text" maxlength="10" min="9"
+                            <input id="mobileOne" class="form-control mobile" tabindex="13" type="text"
+                                   maxlength="10" min="9"
                                    required/>
                             <span class="error" id="mobileOneError">Error Mobile Number</span>
                         </div>
@@ -178,7 +180,8 @@
                             <label class="control-label" for="mobileTwo">Mobile Two No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="mobileTwo" class="form-control mobile" type="text" maxlength="10" min="9"/>
+                            <input id="mobileTwo" class="form-control mobile" tabindex="14" type="text"
+                                   maxlength="10" min="9"/>
                             <span class="error" id="mobileTwoError">Error Mobile  Number</span>
                         </div>
                     </div>
@@ -187,7 +190,7 @@
                             <label class="control-label" for="land">Land No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="land" class="form-control land" type="text" maxlength="10" min="9"/>
+                            <input id="land" class="form-control land" type="text" tabindex="15" maxlength="10" min="9"/>
                             <span class="error" id="landError">Error Land Number</span>
                         </div>
                     </div>
@@ -196,7 +199,7 @@
                             <label class="control-label" for="email">Email :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="email" class="form-control" type="email"/>
+                            <input id="email" class="form-control" tabindex="16" type="email"/>
                             <span class="error" id="emailError">Error Email</span>
                         </div>
                     </div>
@@ -205,7 +208,7 @@
                             <label class="control-label" for="officeEmail">Office Email :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="officeEmail" class="form-control" type="email"/>
+                            <input id="officeEmail" class="form-control" tabindex="17" type="email"/>
                             <span class="error" id="officeEmailError">Error Office Email</span>
                         </div>
                     </div>
@@ -214,7 +217,7 @@
                             <label class="control-label" for="dateOfAssignment">Date Of Assignment :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="dateOfAssignment" type="date" class="form-control"
+                            <input id="dateOfAssignment" type="date" class="form-control" tabindex="18"
                                    placeholder="Ex: 1990 - 01 - 20" required/>
                             <span class="error" id="dateOfAssignmentError">Error Date Of Assignment</span>
                         </div>
@@ -224,7 +227,7 @@
                             <label class="control-label" for="employeeStatus">Employee Status :</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="employeeStatus" class="form-control" required>
+                            <select id="employeeStatus" class="form-control" tabindex="19" required>
                                 <option value="">Please select</option>
                                 <option id="employeeStatusList"></option>
                             </select>
@@ -285,7 +288,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                        <button class="btn btn-success" type="submit">
+                        <button class="btn btn-success" type="submit" tabindex="20">
                             <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
                         </button>
                     </div>

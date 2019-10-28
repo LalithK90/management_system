@@ -8,10 +8,16 @@ import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
 import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.employee.entity.EmployeeFiles;
+import lk.imms.management_system.asset.employee.entity.EmployeeWorkingPlaceHistory;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
+import lk.imms.management_system.asset.employee.entity.Enum.WorkingPlaceChangeReason;
 import lk.imms.management_system.asset.employee.service.EmployeeFilesService;
 import lk.imms.management_system.asset.employee.service.EmployeeService;
+import lk.imms.management_system.asset.employee.service.EmployeeWorkingPlaceHistoryService;
+import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
+import lk.imms.management_system.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -35,14 +41,20 @@ import java.util.stream.Collectors;
 @Controller
 public class EmployeeController {
     private final EmployeeService employeeService;
+    private final EmployeeWorkingPlaceHistoryService employeeWorkingPlaceHistoryService;
     private final EmployeeFilesService employeeFilesService;
+    private final DateTimeAgeService dateTimeAgeService;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService, EmployeeFilesService employeeFilesService) {
+    public EmployeeController(EmployeeService employeeService,
+                              EmployeeWorkingPlaceHistoryService employeeWorkingPlaceHistoryService,
+                              EmployeeFilesService employeeFilesService, DateTimeAgeService dateTimeAgeService) {
         this.employeeService = employeeService;
+        this.employeeWorkingPlaceHistoryService = employeeWorkingPlaceHistoryService;
         this.employeeFilesService = employeeFilesService;
+        this.dateTimeAgeService = dateTimeAgeService;
     }
-
+//----> Employee details management - start <----//
 
     // common things for employee add and update
     private void commonThings(Model model) {
@@ -55,7 +67,7 @@ public class EmployeeController {
     }
 
     //to get files from the database
-    public void employeeFiles(Employee employee, Model model) {
+    private void employeeFiles(Employee employee, Model model) {
         List< FileInfo > fileInfos = employeeFilesService.findByEmployee(employee)
                 .stream()
                 .map(EmployeeFiles -> {
@@ -79,12 +91,14 @@ public class EmployeeController {
                 .body(file.getPic());
     }
 
+    //send all employee data
     @RequestMapping
     public String employeePage(Model model) {
         model.addAttribute("employees", employeeService.findAll());
         return "employee/employee";
     }
 
+    //send on employee details
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     public String employeeView(@PathVariable( "id" ) Long id, Model model) {
         Employee employee = employeeService.findById(id);
@@ -94,7 +108,7 @@ public class EmployeeController {
         return "employee/employee-detail";
     }
 
-
+    //send employee data edit
     @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
     public String editEmployeeFrom(@PathVariable( "id" ) Long id, Model model) {
         Employee employee = employeeService.findById(id);
@@ -106,6 +120,7 @@ public class EmployeeController {
         return "employee/addEmployee";
     }
 
+    //send employee add from
     @RequestMapping( value = {"/add"}, method = RequestMethod.GET )
     public String employeeAddFrom(Model model) {
         model.addAttribute("addStatus", true);
@@ -114,7 +129,7 @@ public class EmployeeController {
         return "employee/addEmployee";
     }
 
-
+    //employee add and update
     @RequestMapping( value = {"/add", "/update"}, method = RequestMethod.POST )
     public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result, Model model,
                               RedirectAttributes redirectAttributes) {
@@ -129,6 +144,8 @@ public class EmployeeController {
         try {
             //todo->employee controller logic to before save
             //todo->employeeFiles controller logic to before save
+
+            System.out.println(employee.getFiles());
 
             //first save employee and
             employeeService.persist(employee);
@@ -165,17 +182,75 @@ public class EmployeeController {
         return "employee/addEmployee";
     }
 
+    //if need to employee {but not applicable for this }
     @RequestMapping( value = "/remove/{id}", method = RequestMethod.GET )
     public String removeEmployee(@PathVariable Long id) {
         employeeService.delete(id);
         return "redirect:/employee";
     }
 
+    //to search employee any giving employee parameter
     @RequestMapping( value = "/search", method = RequestMethod.GET )
     public String search(Model model, Employee employee) {
         model.addAttribute("employeeDetail", employeeService.search(employee));
         return "employee/employee-detail";
     }
+
+//----> Employee details management - end <----//
+    //````````````````````````````````````````````````````````````````````````````//
+//----> EmployeeWorkingPlace - details management - start <----//
+
+    //send from to add working place before find employee
+    @RequestMapping( value = "/workingPlace", method = RequestMethod.GET )
+    public String addEmployeeWorkingPlaceFrom(Model model) {
+        model.addAttribute("employee", new Employee());
+        model.addAttribute("employeeDetailShow", false);
+        return "employeeWorkingPlace/addEmployeeWorkingPlace";
+    }
+
+    //send searched employee to add working place
+    @RequestMapping( value = "/workingPlace", method = RequestMethod.POST )
+    public String addWorkingPlaceEmployeeDetails(@ModelAttribute( "employee" ) Employee employee, Model model) {
+
+        List< Employee > employees = employeeService.search(employee);
+        if ( employees.size() == 1 ) {
+            model.addAttribute("employeeDetailShow", true);
+            model.addAttribute("employeeNotFoundShow", false);
+            model.addAttribute("employeeDetail", employees.get(0));
+            employeeFiles(employees.get(0), model);
+            model.addAttribute("employeeWorkingPlaceHistoryObject", new EmployeeWorkingPlaceHistory());
+            model.addAttribute("workingPlaceChangeReason", WorkingPlaceChangeReason.values());
+            model.addAttribute("province", Province.values());
+            model.addAttribute("districtUrl", MvcUriComponentsBuilder
+                    .fromMethodName(WorkingPlaceRestController.class, "getDistrict", "")
+                    .build()
+                    .toString());
+            model.addAttribute("stationUrl", MvcUriComponentsBuilder
+                    .fromMethodName(WorkingPlaceRestController.class, "getStation", "")
+                    .build()
+                    .toString());
+            return "employeeWorkingPlace/addEmployeeWorkingPlace";
+        }
+        model.addAttribute("employee", new Employee());
+        model.addAttribute("employeeDetailShow", false);
+        model.addAttribute("employeeNotFoundShow", true);
+        model.addAttribute("employeeNotFound", "There is not employee in the system according to the provided details" +
+                " \n Could you please search again !!");
+
+        return "employeeWorkingPlace/addEmployeeWorkingPlace";
+    }
+
+    @RequestMapping( value = "/workingPlace/add", method = RequestMethod.POST )
+    public String addWorkingPlaceEmployee(@ModelAttribute( "employeeWorkingPlaceHistory" ) EmployeeWorkingPlaceHistory employeeWorkingPlaceHistory, Model model) {
+        System.out.println(employeeWorkingPlaceHistory.toString());
+        //todo -> need to write validation before the save working place
+        employeeWorkingPlaceHistory.setWorkingDuration(dateTimeAgeService.dateDifference(employeeWorkingPlaceHistory.getFrom_place(), employeeWorkingPlaceHistory.getTo_place()));
+        employeeWorkingPlaceHistoryService.persist(employeeWorkingPlaceHistory);
+        return "redirect:/employee" +
+                "";
+    }
+
+//----> EmployeeWorkingPlace - details management - end <----//
 
 }
 /*

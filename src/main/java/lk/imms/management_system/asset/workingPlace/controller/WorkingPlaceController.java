@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.workingPlace.controller;
 
+import lk.imms.management_system.asset.workingPlace.entity.Enum.District;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.WorkingPlaceType;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
@@ -32,6 +33,7 @@ public class WorkingPlaceController {
     // common font-end attribute for workingPlace
     private void CommonThings(Model model) {
         model.addAttribute("province", Province.values());
+        model.addAttribute("district", District.values());
         model.addAttribute("workingPlaceType", WorkingPlaceType.values());
     }
 
