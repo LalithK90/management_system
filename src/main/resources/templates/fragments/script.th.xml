@@ -1,10 +1,11 @@
 <thlogic>
     <attr sel="#script" th:fragment="scriptFragment"/>
-    <attr sel="#jQJs" th:src="@{/js/jquery.min.js}"/>
-    <attr sel="#bSJs" th:src="@{/js/bootstrap.min.js}"/>
+    <attr sel="#jQJs" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"/>
+    <attr sel="#bSJs" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"/>
+    <attr sel="#bPRO" th:src="@{/webjars/popper.js/1.15.0/popper.min.js}"/>
     <attr sel="#sAJs" th:src="@{/js/sweetalert.js}"/>
     <attr sel="#dTJs" th:src="@{/js/pagination.js}"/>
-    <attr sel="#fWJs" th:src="@{/fontawesome/js/all.js}"/>
+    <attr sel="#fWJs" th:src="@{/webjars/font-awesome/5.11.2/js/all.min.js}"/>
     <attr sel="#mJJs" th:src="@{/js/myJs.js}"/>
     <attr sel="#imUpJs" th:src="@{/js/image-uploader.min.js}"/>
     <attr sel="#WYE" th:src="@{/js/nicEdit-WYSIWYG_HTML.js}"/>

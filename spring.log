@@ -1,0 +1,95 @@
+2019-11-05 12:45:15.368  INFO 11504 --- [restartedMain] l.i.m.ManagementSystemApplication        : Starting ManagementSystemApplication on Lositha with PID 11504 (started by Lositha in D:\On Going Project\management_system)
+2019-11-05 12:45:15.437  INFO 11504 --- [restartedMain] l.i.m.ManagementSystemApplication        : No active profile set, falling back to default profiles: default
+2019-11-05 12:45:15.853  INFO 11504 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-11-05 12:45:15.853  INFO 11504 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-11-05 12:45:34.620  INFO 11504 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-11-05 12:45:35.342  INFO 11504 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 691ms. Found 18 repository interfaces.
+2019-11-05 12:45:36.700  INFO 11504 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$37a31a7e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-11-05 12:45:38.517  INFO 11504 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (https)
+2019-11-05 12:45:38.671  INFO 11504 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-05 12:45:38.671  INFO 11504 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.24]
+2019-11-05 12:45:39.329  INFO 11504 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-11-05 12:45:39.329  INFO 11504 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 23476 ms
+2019-11-05 12:45:40.061  INFO 11504 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-11-05 12:45:40.662  INFO 11504 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-11-05 12:45:41.043  INFO 11504 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-11-05 12:45:41.472  INFO 11504 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.11.Final}
+2019-11-05 12:45:41.519  INFO 11504 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-11-05 12:45:42.412  INFO 11504 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-11-05 12:45:43.267  INFO 11504 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019-11-05 12:45:53.244  INFO 11504 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-11-05 12:45:53.529  INFO 11504 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-11-05 12:45:56.516  INFO 11504 --- [restartedMain] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-11-05 12:45:57.741  WARN 11504 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-05 12:45:58.890  INFO 11504 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4647574e, org.springframework.security.web.context.SecurityContextPersistenceFilter@4eb58df6, org.springframework.security.web.header.HeaderWriterFilter@3de8f654, org.springframework.security.web.authentication.logout.LogoutFilter@179bce8b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6e86ee55, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@452712f9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@67e78d3, org.springframework.security.web.session.SessionManagementFilter@29eae7bd, org.springframework.security.web.access.ExceptionTranslationFilter@665c303, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2fac147d]
+2019-11-05 12:46:02.071  INFO 11504 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (https) with context path ''
+2019-11-05 12:46:02.071  INFO 11504 --- [restartedMain] l.i.m.ManagementSystemApplication        : Started ManagementSystemApplication in 50.97 seconds (JVM running for 69.336)
+2019-11-05 12:46:55.977 ERROR 11504 --- [https-jsse-nio-8080-exec-2] o.a.coyote.http11.Http11NioProtocol      : Error reading request, ignored
+
+java.lang.NullPointerException: null
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.getSslSupport(NioEndpoint.java:1392) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1593) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+
+2019-11-05 12:46:55.983 ERROR 11504 --- [https-jsse-nio-8080-exec-2] org.apache.tomcat.util.net.NioEndpoint   : Error running socket processor
+
+java.lang.NullPointerException: null
+	at org.apache.coyote.http11.Http11InputBuffer.recycle(Http11InputBuffer.java:265) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.coyote.http11.Http11Processor.recycle(Http11Processor.java:1331) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.release(AbstractProtocol.java:1055) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1023) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1593) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+
+2019-11-05 12:47:10.221 ERROR 11504 --- [https-jsse-nio-8080-exec-1] o.a.coyote.http11.Http11NioProtocol      : Error reading request, ignored
+
+java.lang.NullPointerException: null
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.getSslSupport(NioEndpoint.java:1392) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1593) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+
+2019-11-05 12:47:10.221 ERROR 11504 --- [https-jsse-nio-8080-exec-1] org.apache.tomcat.util.net.NioEndpoint   : Error running socket processor
+
+java.lang.NullPointerException: null
+	at org.apache.coyote.http11.Http11InputBuffer.recycle(Http11InputBuffer.java:265) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.coyote.http11.Http11Processor.recycle(Http11Processor.java:1331) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.release(AbstractProtocol.java:1055) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1023) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1593) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+
+2019-11-05 12:47:21.714  INFO 11504 --- [https-jsse-nio-8080-exec-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-11-05 12:47:21.715  INFO 11504 --- [https-jsse-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-11-05 12:47:21.757  INFO 11504 --- [https-jsse-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed initialization in 41 ms
+2019-11-05 12:47:27.809 ERROR 11504 --- [https-jsse-nio-8080-exec-10] o.a.coyote.http11.Http11NioProtocol      : Error reading request, ignored
+
+java.lang.NullPointerException: null
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.getSslSupport(NioEndpoint.java:1392) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1593) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.24.jar:9.0.24]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+
