@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" >
+<html lang="en">
 <!--header Include-->
 <head id="header">
 </head>
@@ -35,45 +35,71 @@
             <div class="row">
                 <!--Left Side-->
                 <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-                    <div id="idHide" class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="id">Province :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input class="form-control" id="id" type="text" readonly/>
-                        </div>
-                    </div>
+                    <!--Province-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="control-label" for="name">Village :</label>
+                            <label class="control-label" for="province">Province:</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="name" class="form-control" type="text" minlength="6" required/>
+                            <select class="form-control" id="province" name="province" required>
+                                <option value="">Please select</option>
+                                <option id="provinceSelectList"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Station-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="station">Station:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="station" name="workingPlace" class="form-control" required>
+                                <option value="">Please select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Village-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="village">Village :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="village" class="form-control" type="text" required/>
                             <span class="error" id="nameError">Error Number</span>
                         </div>
                     </div>
                 </div>
                 <!--Right Side-->
                 <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <!--District-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="control-label" for="landOne">District :</label>
+                            <label class="control-label" for="district">District:</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="landOne" class="form-control land" type="text" minlength="9" maxlength="10"
-                                   required/>
-                            <span id="landOneError" class="error">Error One Number</span>
+                            <select class="form-control" name="district" id="district" required>
+                                <option value="">Please select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--AGA Division-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="agaDivision">AGA Division :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="form-control" id="agaDivision" type="text" required/>
                         </div>
                     </div>
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="control-label" for="landTwo">Priority:</label>
+                            <label class="control-label" for="priority">Priority:</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="landTwo" class="form-control land" type="text" minlength="9" maxlength="10"/>
-                            <span id="landTwoError" class="error">Error Land Number Two
-
-                                                                  Number</span>
+                            <select class="form-control" id="priority" name="province" required>
+                                <option value="">Please select</option>
+                                <option id="prioritySelectList"></option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -93,6 +119,10 @@
                         <label class="active ">Photos :</label>
                         <div class="input-images" style="padding-top: .5rem;"></div>
                     </div>
+                </div>
+                <!--Complaint directed to-->
+                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
+<!--todo -> need to more details-->
                 </div>
                 <!--button-->
                 <div class="form-group col-md-12 col-sm-12 text-center flex-column ">

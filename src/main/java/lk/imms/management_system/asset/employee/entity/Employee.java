@@ -28,17 +28,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
-@ToString
 public class Employee extends AuditEntity {
 
     @NotNull( message = "Pay roll number is required" )
     @Column( unique = true )
     private String payRoleNumber;
 
-    @Size( min = 5, message = "Your name cannot be accept" )
+    @Size( min = 5, message = "Your name cannot be accepted" )
     private String name;
 
-    @Size( min = 5, message = "At least 5 characters should be include calling name" )
+    @Size( min = 5, message = "At least 5 characters should be included calling name" )
     private String callingName;
 
     @Size( max = 12, min = 10, message = "NIC number is contained numbers between 9 and X/V or 12 " )
@@ -58,13 +57,14 @@ public class Employee extends AuditEntity {
     private String land;
 
     @Email( message = "Provide valid email" )
-    @Column( unique = true )
+    @Column( unique = true, columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL"  )
     private String email;
 
     @Email( message = "Provide valid office email" )
-    @Column( unique = true )
+    @Column( unique = true,columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL"  )
     private String officeEmail;
 
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String address;
 
     @Enumerated( EnumType.STRING )

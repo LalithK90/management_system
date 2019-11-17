@@ -33,6 +33,8 @@ $(document).ready(function () {
     });
     /* Patient and employee Nic Validation - end*/
 
+
+
 /*
 //prevent checkbox==null before submit -start
     $(function () {
@@ -47,6 +49,13 @@ $(document).ready(function () {
 */
 
 });
+/*jquery - ui function
+$( "input" ).checkboxradio();
+$( "#resizable" ).resizable();
+$( "#dateOfBirth" ).datepicker();
+$( document ).tooltip();
+*/
+
 // regex
 let nicRegex = /^([0-9]{9}[vV|xX])|^([0-9]{12})$/;
 let mobileRegex = /^([0][7][\d]{8}$)|^([7][\d]{8})$/;

@@ -16,6 +16,7 @@ import java.util.List;
 public class Contravene extends AuditEntity {
 
     @NotNull
+    @Column(columnDefinition = "mediumtext")
     private String contravene;
 
     @ManyToMany(fetch = FetchType.EAGER )

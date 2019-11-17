@@ -16,7 +16,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
-@ToString
 public class EmployeeWorkingPlaceHistory extends AuditEntity {
 
     @Column( length = 50000 )

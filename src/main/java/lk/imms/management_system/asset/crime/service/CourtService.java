@@ -31,7 +31,7 @@ public class CourtService implements AbstractService< Court, Long > {
 
     @Override
     public Court persist(Court court) {
-        //todo -> please find what area the main criteria to save cour to system
+        //todo -> please find what area the main criteria to save court to system
         // if some time need to verify court function
         return courtDao.save(court);
     }

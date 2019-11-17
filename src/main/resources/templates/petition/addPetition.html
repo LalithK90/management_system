@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" >
+<html lang="en">
 <!--header Include-->
 <head id="header">
 </head>
@@ -32,84 +32,159 @@
 <div class="container-fluid bg-dark formBorder">
     <div class="col-sm-12 flex-column ">
         <form id="form" class="form-horizontal" method="POST">
-            <div class="row">
-                <!--Left Side-->
-                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-                    <div id="idHide" class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="id">Province :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input class="form-control" id="id" type="text" readonly/>
-                        </div>
+            <!--Working Place Find-->
+            <div class="row col-12 col-md-12 col-sm-12">
+                <!--province-->
+                <div class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="province">Province:</label>
                     </div>
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="name">Village :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="name" class="form-control" type="text" minlength="6" required/>
-                            <span class="error" id="nameError">Error Number</span>
-                        </div>
+                    <div class="col-md-8">
+                        <select class="form-control" id="province" name="province" required>
+                            <option value="">Please select</option>
+                            <option id="provinceSelectList"></option>
+                        </select>
                     </div>
                 </div>
-                <!--Right Side-->
-                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="landOne">District :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="landOne" class="form-control land" type="text" minlength="9" maxlength="10"
-                                   required/>
-                            <span id="landOneError" class="error">Error One Number</span>
-                        </div>
+                <!--District-->
+                <div id="districtShow" class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="district">District:</label>
                     </div>
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="landTwo">Priority:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="landTwo" class="form-control land" type="text" minlength="9" maxlength="10"/>
-                            <span id="landTwoError" class="error">Error Land Number Two
-
-                                                                  Number</span>
-                        </div>
+                    <div class="col-md-8">
+                        <select class="form-control" name="district" id="district" required>
+                            <option value="">Please select</option>
+                        </select>
                     </div>
                 </div>
-                <!--petition note are-->
-                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-                    <div class="input-field">
-                        <label class="control-label col-sm-4" for="description">Description</label>
-                        <div>
+                <!--Station-->
+                <div id="stationShow" class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="station">Station:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select id="station" name="workingPlace" class="form-control" required>
+                            <option value="">Please select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--Normal Petition details-->
+            <div class="row col-12 col-md-12 col-sm-12">
+                <!--village-->
+                <div class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="village">Village :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input id="village" class="form-control" type="text" required/>
+                    </div>
+                </div>
+                <!--AGA Division-->
+                <div class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="agaDivision">AGA Division :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="form-control" id="agaDivision" type="text" required/>
+                    </div>
+                </div>
+                <!--petition Type-->
+                <div class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="petitionType">Petition Type:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select id="petitionType" name="petitionType" class="form-control" required>
+                            <option value="">Please select</option>
+                            <option id="petitionTypeList" value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--petition note are-->
+            <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
+                <div class="input-field">
+                    <label class="control-label col-sm-4" for="description">Description</label>
+                    <div>
                             <textarea class="form-control" id="description"
                                       name="description" placeholder="Enter Description"></textarea>
-                        </div>
                     </div>
                 </div>
-                <!--photos -->
-                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-                    <div class="input-field">
-                        <label class="active ">Photos :</label>
-                        <div class="input-images" style="padding-top: .5rem;"></div>
+            </div>
+            <!--photos -->
+            <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
+                <div class="input-field">
+                    <label class="active ">Photos :</label>
+                    <div class="input-images" style="padding-top: .5rem;"></div>
+                </div>
+            </div>
+            <!--Petitioner Details-->
+            <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
+                <!--todo -> petitioner Details need to more details-->
+            </div>
+            <!--Complaint directed to-->
+            <div class="row col-12 col-md-12 col-sm-12">
+                <div class="row col-12 col-md-12 col-sm-12 text-left">
+                    <label>Complaint Direct To: </label>
+                </div>
+                <!--petition Type-->
+                <div class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="petitionPriority">Priority:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select id="petitionPriority" name="petitionPriority" class="form-control" required>
+                            <option value="">Please select</option>
+                            <option id="petitionPriorityList" value=""></option>
+                        </select>
                     </div>
                 </div>
-                <!--button-->
-                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                    <div class="input-field">
-                        <button class="btn btn-success" type="submit">
-                            <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
-                                id="submit"></span>
-                        </button>
+                <!--designation-->
+                <div class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="designation">Designation :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select id="designation" name="designation" class="form-control" required>
+                            <option value="">Please select</option>
+                            <option id="designationList" value=""></option>
+                        </select>
                     </div>
                 </div>
-                <!--Errors -->
-                <div class="form-row">
-                    <label id="errorLabel">Errors: </label>
-                    <ul>
-                        <li id="error" class="error"></li>
-                    </ul>
+                <!--employees selected-->
+                <div class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="employees">Employees :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select id="employees" name="employees" class="form-control" required>
+                            <option value="">Please select</option>
+                            <option id="employeesList" value=""></option>
+                        </select>
+                    </div>
                 </div>
+            </div>
+            <!--button-->
+            <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                <div class="input-field">
+                    <button class="btn btn-success" type="submit">
+                        <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                            id="submit"></span>
+                    </button>
+                </div>
+            </div>
+            <!--Errors -->
+            <div class="form-row">
+                <label id="errorLabel">Errors: </label>
+                <ul>
+                    <li id="error" class="error"></li>
+                </ul>
+            </div>
+            <!--Hide content from visual-->
+            <div class="form-row">
+                <input type="hidden" id="districtUrl" class="hide"/>
+                <input type="hidden" id="stationUrl" class="hide"/>
             </div>
         </form>
     </div>
@@ -119,13 +194,13 @@
 <footer id="footer" class="page-footer"></footer>
 <!--script include-->
 <script id="script"></script>
+<script id="customJS"></script>
 <script>
     //WYSIWYG add to text area
     bkLib.onDomLoaded(function () {
         nicEditors.allTextAreas()
     });
     $('.input-images').imageUploader();
-    $(".alert").alert();
 </script>
 </body>
 </html>

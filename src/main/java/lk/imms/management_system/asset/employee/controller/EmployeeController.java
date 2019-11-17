@@ -57,13 +57,14 @@ public class EmployeeController {
 //----> Employee details management - start <----//
 
     // common things for employee add and update
-    private void commonThings(Model model) {
+    private String commonThings(Model model) {
         model.addAttribute("title", Title.values());
         model.addAttribute("gender", Gender.values());
         model.addAttribute("civilStatus", CivilStatus.values());
         model.addAttribute("employeeStatus", EmployeeStatus.values());
         model.addAttribute("designation", Designation.values());
         model.addAttribute("bloodGroup", BloodGroup.values());
+        return "employee/addEmployee";
     }
 
     //to get files from the database
@@ -115,18 +116,16 @@ public class EmployeeController {
         model.addAttribute("employee", employee);
         model.addAttribute("newEmployee", employee.getPayRoleNumber());
         model.addAttribute("addStatus", false);
-        commonThings(model);
         employeeFiles(employee, model);
-        return "employee/addEmployee";
+        return  commonThings(model);
     }
 
     //send employee add from
     @RequestMapping( value = {"/add"}, method = RequestMethod.GET )
     public String employeeAddFrom(Model model) {
         model.addAttribute("addStatus", true);
-        commonThings(model);
         model.addAttribute("employee", new Employee());
-        return "employee/addEmployee";
+        return  commonThings(model);
     }
 
     //employee add and update
@@ -137,9 +136,8 @@ public class EmployeeController {
 
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
-            commonThings(model);
             redirectAttributes.addFlashAttribute("employee", employee);
-            return "employee/addEmployee";
+            return  commonThings(model);
         }
         try {
             //todo->employee controller logic to before save
@@ -176,10 +174,9 @@ public class EmployeeController {
                                                 "There is already in the system. <br>System message -->" + e.toString());
             result.addError(error);
             model.addAttribute("addStatus", true);
-            commonThings(model);
             redirectAttributes.addFlashAttribute("employee", employee);
+            return  commonThings(model);
         }
-        return "employee/addEmployee";
     }
 
     //if need to employee {but not applicable for this }
@@ -246,8 +243,7 @@ public class EmployeeController {
         //todo -> need to write validation before the save working place
         employeeWorkingPlaceHistory.setWorkingDuration(dateTimeAgeService.dateDifference(employeeWorkingPlaceHistory.getFrom_place(), employeeWorkingPlaceHistory.getTo_place()));
         employeeWorkingPlaceHistoryService.persist(employeeWorkingPlaceHistory);
-        return "redirect:/employee" +
-                "";
+        return "redirect:/employee";
     }
 
 //----> EmployeeWorkingPlace - details management - end <----//

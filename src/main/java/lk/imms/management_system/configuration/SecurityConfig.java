@@ -86,7 +86,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //Cross site disable
                 .and()
                 .csrf()
-                .disable();*/
+                .disable()
+                //header use to Enable HTTP Strict Transport Security (HSTS)
+                .headers()
+		.httpStrictTransportSecurity()
+			.includeSubdomains(true)
+			.maxAgeSeconds(31536000);
+}
+                ;*/
 
     }
 }

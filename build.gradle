@@ -59,10 +59,14 @@ dependencies {
 //use as three jars to set bootstrap and front awesome
 // https://mvnrepository.com/artifact/org.webjars/bootstrap
     compile group: 'org.webjars', name: 'bootstrap', version: '4.3.1'
-// https://mvnrepository.com/artifact/org.webjars/jquery
-    compile group: 'org.webjars', name: 'jquery', version: '3.4.1'
 // https://mvnrepository.com/artifact/org.webjars/popper.js
     compile group: 'org.webjars', name: 'popper.js', version: '1.15.0'
+
+// https://mvnrepository.com/artifact/org.webjars/jquery
+    compile group: 'org.webjars', name: 'jquery', version: '3.4.1'
+// https://mvnrepository.com/artifact/org.webjars/jquery-ui
+    compile group: 'org.webjars', name: 'jquery-ui', version: '1.12.1'
+
 
 // https://mvnrepository.com/artifact/org.webjars/font-awesome
     compile group: 'org.webjars', name: 'font-awesome', version: '5.11.2'

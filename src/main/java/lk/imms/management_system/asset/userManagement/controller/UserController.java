@@ -62,9 +62,10 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String userAddFrom(Model model) {
         model.addAttribute("addStatus", true);
-        model.addAttribute("employee", employeeService.findAll());
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("user", new User());
+
+
         return "user/addUser";
     }
 
@@ -73,6 +74,7 @@ public class UserController {
 
     @RequestMapping(value = {"/add", "/update"}, method = RequestMethod.POST)
     public String addUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
+        System.out.println(user.toString());
 
         if (userService.findUserByEmployee(user.getEmployee()) != null) {
             ObjectError error = new ObjectError("employee", "This employee already defined as a user");

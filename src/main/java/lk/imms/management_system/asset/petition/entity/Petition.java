@@ -1,10 +1,9 @@
 package lk.imms.management_system.asset.petition.entity;
 
-import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
-import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.minute.entity.MinutePetition;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +25,10 @@ public class Petition extends AuditEntity {
 
     private String indexNumber;
 
+    private String village;
+
+    private String agaDivision;
+
     @Column( length = 50000 )
     private String subject;
 
@@ -35,26 +38,13 @@ public class Petition extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private PetitionPriority petitionPriority;
 
-    @Enumerated( EnumType.STRING )
-    private Designation designation;
-
     @OneToMany( mappedBy = "petition" )
     private List< PetitionState > petitionStates;
 
-    @OneToMany( mappedBy = "petition" )
+    @OneToMany( mappedBy = "petition")
     private List< MinutePetition > minutePetitions;
 
-    @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.PERSIST )
     private PetitionerDetail petitionerDetail;
-
-    @ManyToOne( fetch = FetchType.EAGER )
-    private WorkingPlace workingPlace;
-
-    @Transient
-    private List< MultipartFile > files = new ArrayList<>();
-
-    @Transient
-    private List< String > removeImages = new ArrayList<>();
-
 
 }
