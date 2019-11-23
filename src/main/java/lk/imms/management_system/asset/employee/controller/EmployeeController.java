@@ -205,7 +205,7 @@ public class EmployeeController {
         return "employeeWorkingPlace/addEmployeeWorkingPlace";
     }
 
-    //send searched employee to add working place
+    //Send a searched employee to add working place
     @RequestMapping( value = "/workingPlace", method = RequestMethod.POST )
     public String addWorkingPlaceEmployeeDetails(@ModelAttribute( "employee" ) Employee employee, Model model) {
 

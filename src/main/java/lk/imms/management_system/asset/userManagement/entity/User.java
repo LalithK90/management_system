@@ -9,6 +9,7 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
@@ -26,8 +27,8 @@ public class User {
     @Column(unique = true)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "employee_id")
+    @OneToOne
+    @NotNull
     private Employee employee;
 
     @Column(nullable = false)

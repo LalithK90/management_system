@@ -479,5 +479,51 @@ $("#btnSummaryFind").bind("mouseover", function () {
         });
     }
 });
-//search form date validation - end
+//Search form date validation — end
 
+//Customer employee Search filed - start any way in project
+
+/*Employee working place*/
+$("#selectParameter").bind("change", function () {
+    btnSearchEmployeeShow();
+    $("#selectParameter").css('background', '');
+    //set what is the parameter will search
+    $("#valueEmployee").attr('name', $(this).val());
+    $("#valueEmployee").val('');
+    backgroundColourChangeNothingToChange($("#valueEmployee"));
+});
+
+/*Employee Find */
+$("#valueEmployee").bind("keyup", function () {
+    let selectedValue = $("#valueEmployee").attr('name');
+    if ($("#valueEmployee").val() !== '' && $("#selectParameter").val() === '') {
+        $("#selectParameter").css('background', '#dc3545');
+        swal({
+            title: "Please enter select parameter value before type here",
+            icon: "warning",
+        });
+    }
+    if (selectedValue === "nic") {
+        let nic = $("#valueEmployee");
+        if (nicRegex.test($("#valueEmployee").val())) {
+            backgroundColourChangeGood(nic);
+        } else if (nic.length === 0) {
+            backgroundColourChangeNothingToChange(nic);
+        } else {
+            backgroundColourChangeBad(nic);
+        }
+    }
+    btnSearchEmployeeShow();
+
+});
+
+function btnSearchEmployeeShow() {
+    if ($("#selectParameter").val() !== '' && $("#valueEmployee").val() !== '') {
+        $("#btnSearchEmployee").css('display', '');
+    } else {
+        $("#btnSearchEmployee").css('display', 'none');
+    }
+}
+
+
+//Customer employee Search filed - end any way in project

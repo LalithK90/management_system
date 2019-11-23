@@ -3,30 +3,55 @@
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
 
     <attr sel="#formHeader" th:text="${addStatus==true?'New User':'Update User'}"/>
+    <!--to show employee Search button-->
+    <attr sel="#searchShow" th:if="${employeeDetailShow==true || employeeNotFoundShow==false}"/>
+    <!--to Display employee Search from -->
+    <attr sel="#employeeFindForm" th:if="${employeeDetailShow==false}"/>
+    <attr sel="#form" th:action="${'/user/workingPlace'}" th:object="${employee}"/>
+    <attr sel="#employeeNotFoundShow" th:if="${employeeNotFoundShow==true}"/>
+    <attr sel="#employeeNotFound" th:text="${employeeNotFound}"/>
 
+
+    <attr sel="#userFormShow" th:if="${employeeDetailShow==true}"/>
     <!--New User Form show-->
     <attr sel="#formUser" th:action="${addStatus==true?'/user/add':'/user/update'}" th:object="${user}"/>
     <attr sel="#idHide" th:if="${addStatus==false}"/>
     <attr sel="#id" th:field="*{id}"/>
+    <!--Employee-->
+    <attr sel="#employee" th:field="*{employee}" th:each="e : ${employee}"/>
+    <attr sel="#employeeList" th:text="${e.title.title} + ${' '} + ${e.name} +${' - '} + ${e.nic}" th:value="${e.id}"
+          th:field="*{employee}"/>
     <!--User name-->
     <attr sel="#username" th:field="*{username}"/>
+    <!--Password-->
+    <attr sel="#password" th:field="*{password}"/>
+    <!--Roles-->
+    <attr sel="#roles" th:field="*{roles}"/>
+    <attr sel="#roleList" th:each="role, rowCount : ${roleList}"
+          th:text="${rowCount.count} +${'. '}+${role.roleName}"
+          th:value="${role.id}"/>
+
 
     <!--Working Place find -->
     <attr sel="#provinceSelectList" th:each="provinces : ${province}"
           th:text="${provinces.province}"
           th:value="${provinces}"/>
 
+    <!--Working Place-->
+    <attr sel="#station" th:field="*{workingPlaces}"/>
+
     <!--URL Comes -->
     <attr sel="#districtUrl" th:value="${districtUrl}"/>
     <attr sel="#stationUrl" th:value="${stationUrl}"/>
 
     <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
-<!--    <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
-    <attr sel="#errorDisplay" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>-->
+    <!--Any Errors -->
+    <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
+    <attr sel="#errorDisplay" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>
 
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
     <attr sel="#stationFindJS" th:src="@{/js/stationFindUsingProvince.js}"/>
-    <attr sel="#customJS" th:src="@{/js/userAdd.js}"/>
+
 </thlogic>

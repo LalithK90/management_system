@@ -1,6 +1,7 @@
 <thlogic xmlns:th="http://www.thymeleaf.org">
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
     <!--to show employee Search button-->
     <attr sel="#searchShow" th:if="${employeeDetailShow==true || employeeNotFoundShow==false}"/>
     <!--to Display employee Search from -->
@@ -8,6 +9,7 @@
     <attr sel="#from" th:action="${'/employee/workingPlace'}" th:object="${employee}"/>
     <attr sel="#employeeNotFoundShow" th:if="${employeeNotFoundShow==true}"/>
     <attr sel="#employeeNotFound" th:text="${employeeNotFound}"/>
+
     <!--display employee details content-->
     <attr sel="#employeeDetailShow" th:if="${employeeDetailShow==true}"/>
     <!--data taken from employee-details-->
