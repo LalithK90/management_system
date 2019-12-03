@@ -1,5 +1,14 @@
 <thlogic xmlns:th="http://www.thymeleaf.org">
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+
+    <!--form action-->
+    <attr sel="#login" th:action="${'/login'}" />
+    <!--Username-->
+    <attr sel="#username" th:name="${'username'}"/>
+    <!--Password-->
+    <attr sel="#inputPassword" th:name="${'password'}"/>
+
     <attr sel="#error" th:if="${param.error}"/>
+
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
 </thlogic>

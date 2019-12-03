@@ -3,9 +3,7 @@ package lk.imms.management_system.asset.offenders.entity;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
 import lk.imms.management_system.asset.crime.entity.Crime;
-import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
@@ -15,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,27 +25,30 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
+@ToString
 public class Offender extends AuditEntity {
 
+    @Column( unique = true )
     private String offenderRegisterNumber;
 
-    @Size( min = 5, message = "Name (English) cannot be accept" )
+    @NotNull
+    @Size( min = 5, message = "Name (English) cannot be accepted" )
     private String nameEnglish;
 
-    @Size( min = 5, message = "Name (Sinhala) cannot be accept" )
+    @Size( min = 5, message = "Name (Sinhala) cannot be accepted" )
     private String nameSinhala;
 
-    @Size( min = 5, message = "Name (Tamil) cannot be accept" )
+    @Size( min = 5, message = "Name (Tamil) cannot be accepted" )
     private String nameTamil;
 
     @Size( max = 12, min = 10, message = "NIC number is contained numbers between 9 and X/V or 12 " )
-    @Column(unique = true)
+    @Column( unique = true )
     private String nic;
 
-    @Column(unique = true)
+    @Column( unique = true )
     private String passportNumber;
 
-    @Column(unique = true)
+    @Column( unique = true )
     private String drivingLicenceNumber;
 
     @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
@@ -58,12 +60,15 @@ public class Offender extends AuditEntity {
     @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
     private String land;
 
-    @Email(message = "Provide valid email")
-    @Column(unique = true)
+    @Email( message = "Provide valid email" )
+    @Column( unique = true )
     private String email;
 
-    @Enumerated( EnumType.STRING )
-    private Title title;
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    private String address;
+
+    @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    private String description;
 
     @Enumerated( EnumType.STRING )
     private Gender gender;
@@ -74,19 +79,13 @@ public class Offender extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private CivilStatus civilStatus;
 
-    @Enumerated( EnumType.STRING )
-    private EmployeeStatus employeeStatus;
-
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfBirth;
 
-    @OneToMany( mappedBy = "offender" )
+    @OneToMany( mappedBy = "offender", cascade = CascadeType.PERSIST )
     private List< OffenderCallingName > offenderCallingNames;
 
-    @OneToMany( mappedBy = "offender" )
-    private List< OffenderDescription > offenderDescriptions;
-
-    @OneToMany( mappedBy = "offender" )
+    @OneToMany( mappedBy = "offender", cascade = CascadeType.PERSIST )
     private List< Guardian > guardians;
 
     @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
@@ -95,13 +94,12 @@ public class Offender extends AuditEntity {
             inverseJoinColumns = @JoinColumn( name = "contravene_id" ) )
     private List< Contravene > contravenes;
 
-    @ManyToMany( cascade = CascadeType.ALL )
+    @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable( name = "crime_offender",
             joinColumns = @JoinColumn( name = "crime_id" ),
             inverseJoinColumns = @JoinColumn( name = "offender_id" ) )
     @Fetch( value = FetchMode.SUBSELECT )
     private List< Crime > crimes;
-
 
     @Transient
     private List< MultipartFile > files = new ArrayList<>();

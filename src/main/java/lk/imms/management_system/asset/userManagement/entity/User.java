@@ -45,7 +45,7 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdDate;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch( FetchMode.SUBSELECT)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),

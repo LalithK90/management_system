@@ -56,7 +56,7 @@ public class EmployeeController {
     }
 //----> Employee details management - start <----//
 
-    // common things for employee add and update
+    // Common things for an employee add and update
     private String commonThings(Model model) {
         model.addAttribute("title", Title.values());
         model.addAttribute("gender", Gender.values());
@@ -67,7 +67,7 @@ public class EmployeeController {
         return "employee/addEmployee";
     }
 
-    //to get files from the database
+    //To get files from the database
     private void employeeFiles(Employee employee, Model model) {
         List< FileInfo > fileInfos = employeeFilesService.findByEmployee(employee)
                 .stream()
@@ -83,7 +83,7 @@ public class EmployeeController {
         model.addAttribute("files", fileInfos);
     }
 
-    //when scr called file will send to
+    //When scr called file will send to
     @GetMapping( "/file/{filename}" )
     public ResponseEntity< byte[] > downloadFile(@PathVariable( "filename" ) String filename) {
         EmployeeFiles file = employeeFilesService.findByNewID(filename);
@@ -92,14 +92,14 @@ public class EmployeeController {
                 .body(file.getPic());
     }
 
-    //send all employee data
+    //Send all employee data
     @RequestMapping
     public String employeePage(Model model) {
         model.addAttribute("employees", employeeService.findAll());
         return "employee/employee";
     }
 
-    //send on employee details
+    //Send on employee details
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     public String employeeView(@PathVariable( "id" ) Long id, Model model) {
         Employee employee = employeeService.findById(id);
@@ -109,7 +109,7 @@ public class EmployeeController {
         return "employee/employee-detail";
     }
 
-    //send employee data edit
+    //Send employee data edit
     @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
     public String editEmployeeFrom(@PathVariable( "id" ) Long id, Model model) {
         Employee employee = employeeService.findById(id);
@@ -120,7 +120,7 @@ public class EmployeeController {
         return  commonThings(model);
     }
 
-    //send employee add from
+    //Send an employee add from
     @RequestMapping( value = {"/add"}, method = RequestMethod.GET )
     public String employeeAddFrom(Model model) {
         model.addAttribute("addStatus", true);
@@ -128,11 +128,10 @@ public class EmployeeController {
         return  commonThings(model);
     }
 
-    //employee add and update
+    //Employee add and update
     @RequestMapping( value = {"/add", "/update"}, method = RequestMethod.POST )
     public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result, Model model,
                               RedirectAttributes redirectAttributes) {
-        System.out.println("employee " + employee.toString());
 
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
@@ -179,14 +178,14 @@ public class EmployeeController {
         }
     }
 
-    //if need to employee {but not applicable for this }
+    //If need to employee {but not applicable for this }
     @RequestMapping( value = "/remove/{id}", method = RequestMethod.GET )
     public String removeEmployee(@PathVariable Long id) {
         employeeService.delete(id);
         return "redirect:/employee";
     }
 
-    //to search employee any giving employee parameter
+    //To search employee any giving employee parameter
     @RequestMapping( value = "/search", method = RequestMethod.GET )
     public String search(Model model, Employee employee) {
         model.addAttribute("employeeDetail", employeeService.search(employee));
@@ -197,7 +196,7 @@ public class EmployeeController {
     //````````````````````````````````````````````````````````````````````````````//
 //----> EmployeeWorkingPlace - details management - start <----//
 
-    //send from to add working place before find employee
+    //Send from to add working place before find employee
     @RequestMapping( value = "/workingPlace", method = RequestMethod.GET )
     public String addEmployeeWorkingPlaceFrom(Model model) {
         model.addAttribute("employee", new Employee());
@@ -240,7 +239,7 @@ public class EmployeeController {
     @RequestMapping( value = "/workingPlace/add", method = RequestMethod.POST )
     public String addWorkingPlaceEmployee(@ModelAttribute( "employeeWorkingPlaceHistory" ) EmployeeWorkingPlaceHistory employeeWorkingPlaceHistory, Model model) {
         System.out.println(employeeWorkingPlaceHistory.toString());
-        //todo -> need to write validation before the save working place
+        //Todo -> need to write validation before the save working place
         employeeWorkingPlaceHistory.setWorkingDuration(dateTimeAgeService.dateDifference(employeeWorkingPlaceHistory.getFrom_place(), employeeWorkingPlaceHistory.getTo_place()));
         employeeWorkingPlaceHistoryService.persist(employeeWorkingPlaceHistory);
         return "redirect:/employee";

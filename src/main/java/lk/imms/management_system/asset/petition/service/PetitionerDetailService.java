@@ -26,17 +26,18 @@ public class PetitionerDetailService implements AbstractService< PetitionerDetai
 
     @Override
     public PetitionerDetail findById(Long id) {
-        return null;
+        return petitionerDetailDao.getOne(id);
     }
 
     @Override
     public PetitionerDetail persist(PetitionerDetail petitionerDetail) {
-        return null;
+        return petitionerDetailDao.save(petitionerDetail);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        petitionerDetailDao.deleteById(id);
+        return true;
     }
 
     @Override

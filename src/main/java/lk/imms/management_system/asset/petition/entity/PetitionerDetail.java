@@ -14,10 +14,19 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
+@ToString
 public class PetitionerDetail extends AuditEntity {
 
-    private String name;
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    private String nameSinhala;
 
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    private String nameTamil;
+
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    private String nameEnglish;
+
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String address;
 
     @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
@@ -29,8 +38,8 @@ public class PetitionerDetail extends AuditEntity {
     @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
     private String land;
 
-    @Email(message = "Provide valid email")
-    @Column(unique = true)
+    @Email( message = "Provide valid email" )
+    @Column( unique = true )
     private String email;
 
 

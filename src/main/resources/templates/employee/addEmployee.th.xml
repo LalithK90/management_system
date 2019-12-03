@@ -1,92 +1,118 @@
 <thlogic xmlns:th="http://www.thymeleaf.org">
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
-
+    <!--Form header-->
     <attr sel="#formHeader" th:text="${addStatus==true?'New Employee Add':'Update Employee Details'}"/>
+    <!--Form action-->
     <attr sel="#form" th:action="${addStatus==true?'/employee/add':'/employee/update'}"
           th:object="${employee}"/>
+    <!--Id-->
     <attr sel="#idStatus" th:if="${addStatus==false}"/>
     <attr sel="#id" th:field="*{id}"/>
+    <!--Pay role number-->
     <attr sel="#payRoleNumber" th:field="*{payRoleNumber}"/>
     <attr sel="#payRoleNumberError" th:errors="*{payRoleNumber}"
           th:if="${#fields.hasErrors('payRoleNumber')}"/>
+    <!--Department ID-->
     <attr sel="#departmentIdNumber" th:field="*{departmentIdNumber}"/>
     <attr sel="#departmentIdNumberError" th:errors="*{departmentIdNumber}"
           th:if="${#fields.hasErrors('departmentIdNumber')}"/>
+    <!--Title-->
     <attr sel="#title" th:field="*{title}"/>
     <attr sel="#titleContent" th:each="titles : ${title}"
           th:text="${titles.title}"
           th:value="${titles}"
           th:selected="${titles==employee.title?'selected':'unselected'}"/>
+    <!--Name-->
     <attr sel="#name" th:field="*{name}"/>
     <attr sel="#nameError" th:errors="*{name}"
           th:if="${#fields.hasErrors('name')}"/>
+    <!--Calling Name-->
     <attr sel="#callingName" th:field="*{callingName}"/>
     <attr sel="#callingNameError" th:errors="*{callingName}"
           th:if="${#fields.hasErrors('callingName')}"/>
+    <!--NIC-->
     <attr sel="#nic" th:field="*{nic}"/>
     <attr sel="#nicError" th:errors="*{nic}"
           th:if="${#fields.hasErrors('nic')}"/>
+    <!--Gender-->
     <attr sel="#gender" th:field="*{gender}"/>
     <attr sel="#genderList" th:each="genders : ${gender}"
           th:text="${genders.gender}"
           th:value="${genders}"
           th:selected="${genders==employee.gender?'selected':'unselected'}"/>
+    <!--Date of birth-->
     <attr sel="#dateOfBirth" th:field="*{dateOfBirth}"/>
     <attr sel="#dateOfBirthError" th:errors="*{dateOfBirth}"
           th:if="${#fields.hasErrors('dateOfBirth')}"/>
+    <!--Blood group-->
     <attr sel="#bloodGroup" th:field="*{bloodGroup}"/>
     <attr sel="#bloodGroupList" th:each="bloodGroups : ${bloodGroup}"
           th:text="${bloodGroups.bloodGroup}"
           th:value="${bloodGroups}"
           th:selected="${bloodGroups==employee.bloodGroup?'selected':'unselected'}"/>
+    <!--Designation-->
     <attr sel="#designation" th:field="*{designation}"/>
     <attr sel="#designationList" th:each="designations : ${designation}"
           th:text="${designations.designation}"
           th:value="${designations}"
           th:selected="${designations==employee.designation?'selected':'unselected'}"/>
+    <!--Civil status-->
     <attr sel="#civilStatus" th:field="*{civilStatus}"/>
     <attr sel="#civilStatusList" th:each="civilStatu : ${civilStatus}"
           th:text="${civilStatu.CivilStatus}"
           th:value="${civilStatu}"
           th:selected="${civilStatu==employee.civilStatus?'selected':'unselected'}"/>
+    <!--Address-->
     <attr sel="#address" th:field="*{address}"/>
     <attr sel="#addressError" th:errors="*{address}"
           th:if="${#fields.hasErrors('address')}"/>
+    <!--Mobile one-->
     <attr sel="#mobileOne" th:field="*{mobileOne}"/>
     <attr sel="#mobileOneError" th:errors="*{mobileOne}"
           th:if="${#fields.hasErrors('mobileOne')}"/>
+    <!--Mobile two-->
     <attr sel="#mobileTwo" th:field="*{mobileTwo}"/>
     <attr sel="#mobileTwoError" th:errors="*{mobileTwo}"
           th:if="${#fields.hasErrors('mobileTwo')}"/>
+    <!--Land-->
     <attr sel="#land" th:field="*{land}"/>
     <attr sel="#landError" th:errors="*{land}"
           th:if="${#fields.hasErrors('land')}"/>
+    <!--Email-->
     <attr sel="#email" th:field="*{email}"/>
     <attr sel="#emailError" th:errors="*{email}"
           th:if="${#fields.hasErrors('email')}"/>
+    <!--Office email-->
     <attr sel="#officeEmail" th:field="*{officeEmail}"/>
     <attr sel="#officeEmailError" th:errors="*{officeEmail}"
           th:if="${#fields.hasErrors('officeEmail')}"/>
+    <!--Date of assignment-->
     <attr sel="#dateOfAssignment" th:field="*{{dateOfAssignment}}"/>
     <attr sel="#dateOfAssignmentError" th:errors="*{dateOfAssignment}"
           th:if="${#fields.hasErrors('dateOfAssignment')}"/>
+    <!--Employee status-->
     <attr sel="#employeeStatus" th:field="*{employeeStatus}"/>
     <attr sel="#employeeStatusList" th:each="employeeStatuss : ${employeeStatus}"
           th:text="${employeeStatuss.employeeStatus}"
           th:value="${employeeStatuss}"
           th:selected="${employeeStatuss==employee.employeeStatus?'selected':'unselected'}"/>
+    <!--Created at update at-->
     <attr sel="#updateStatus" th:if="${addStatus==false}"/>
     <attr sel="#createdBy" th:field="*{createdBy}"/>
     <attr sel="#createdAt" th:field="*{{createdAt}}"/>
+    <!--Photos -->
     <attr sel="#photoDetails" th:if="${addStatus==false}"/>
     <attr sel="#filesList" th:each="file, rowStat: ${files}"/>
     <attr sel="#img" th:src="${file.url}"/>
     <!--//todo - > need to reconsider how to remove image from the system -->
+    <!--Remove images-->
     <attr sel="#removeImages" th:value="${file.filename}"/>
     <attr sel="#imgName" th:text="${file.filename}"/>
     <attr sel="#imgCreateAt" th:text="${{file.createAt}}"/>
+    <!--Button-->
     <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
+    <!--Error-->
     <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
     <attr sel="#error" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>
 

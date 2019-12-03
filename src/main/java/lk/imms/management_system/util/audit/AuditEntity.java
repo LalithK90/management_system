@@ -1,7 +1,7 @@
 package lk.imms.management_system.util.audit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -12,7 +12,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
-@Data
+@Getter
+@Setter
+@ToString //Without this we cannot take any object id related with this audit class
 @MappedSuperclass
 @EntityListeners( AuditingEntityListener.class )
 @JsonIgnoreProperties( value = {"createdAt", "updatedAt", "createdBy", "updatedBy"}, allowGetters = true )

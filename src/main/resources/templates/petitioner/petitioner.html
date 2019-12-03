@@ -7,85 +7,80 @@
 <body>
 <!--nav Bar include-->
 <nav id="navBar"></nav>
+<!--Container spaces-->
 <div class="container-fluid bg-secondary form-Border">
     <div class="row text-center formManagement border-info">
         <div class="col">
-            <a class="btn btn-success" href="/offender/add"><i class="fa fa-user-plus"></i>
-                &nbsp; New Offender</a>
+            <a class="btn btn-success" href="/petitionerDetail/add"><i class="fa fa-user-plus"></i>
+                &nbsp; New Petitioner</a>
         </div>
         <div class="col">
             <h4 class="text-info text-center">
                 <strong>
-                    Offender Management
+                    Petitioner Management
                 </strong>
             </h4>
         </div>
         <div class="col">
-            <!-- <a href="/employee/workingPlace" id="searchShow" class="btn btn-primary">
-                 <i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add Contravene
-             </a>-->
+            <a href="/petitionerDetail/search" id="searchShow" class="btn btn-primary">
+                <i class="fa fa-user " style="font-size: 20px"></i>&nbsp; Search
+                <i class="fas fa-search" style="font-size: 20px"></i>
+                                                                   &nbsp;
+            </a>
         </div>
     </div>
 </div>
 <div class="container-fluid bg-dark formBorder text-center">
     <div class="col">
-        <div class="col" id="offenderListPresent">
+        <div class="col" id="petitionerListPresent">
             <table class="table table-hover table-striped" id="myTable">
                 <thead>
                 <tr>
                     <th> Index</th>
-                    <th> Name</th>
-                    <th> Calling Name</th>
-                    <th> Mobile</th>
-                    <th> Land Number</th>
-                    <th> Modify</th>
+                    <th> Name (Sinhala)</th>
+                    <th> Name (Tamil)</th>
+                    <th> Name (English)</th>
+                    <th> Mobile One</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr id="offenderList">
+                <tr id="petitionerList">
                     <th id="index"></th>
-                    <th id="payRoleNumber"></th>
-                    <th>
-                        <ol id="callingNames">
-                            <li id="callingNameIndex"></li>
-                            <li id="callingName"></li>
-                        </ol>
-                    </th>
+                    <th id="nameSinhala"></th>
+                    <th id="nameTamil"></th>
+                    <th id="nameEnglish"></th>
                     <th id="mobileOne"></th>
-                    <th id="land"></th>
                     <th>
-                        <a id="offenderView" class="btn btn-success"><i
+                        <a id="petitionerView" class="btn btn-success"><i
                                 class="fa fa-folder-open"></i>&nbsp;View</a>
-                        <a id="offenderEdit" class="btn btn-primary"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                        <!--<a id="offenderRemove" class="btn btn-danger"><i class="fa fa-trash-o"></i>
-                                                    Delete</a>-->
+                        <a id="petitionerEdit" class="btn btn-primary"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+
                     </th>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="row" id="offenderListNotPresent">
+    <div class="row" id="petitionerListNotPresent">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h3 class="text-center text-danger">
-                    <strong>There is no offender upto know please add user to the system
+                    <strong>There is no employee upto know please add user to the system
                             using add user button.
                     </strong>
                 </h3>
             </div>
         </div>
         <script>
-            /*Active bootstraps alert - start*/
+            /*active boostrap alert - start*/
             $(".alert").alert();
-            /*Active bootstraps alert - end*/
+            /*active boostrap alert - end*/
         </script>
     </div>
 </div>
-
 
 <!--footer include-->
 <footer id="footer" class="page-footer"></footer>

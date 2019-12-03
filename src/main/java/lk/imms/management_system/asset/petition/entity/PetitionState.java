@@ -20,8 +20,6 @@ public class PetitionState extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private PetitionStateType petitionStateType;
 
-    private String remark;
-
     @ManyToOne
     private Petition petition;
 

@@ -11,7 +11,6 @@
     <attr sel="#employeeNotFoundShow" th:if="${employeeNotFoundShow==true}"/>
     <attr sel="#employeeNotFound" th:text="${employeeNotFound}"/>
 
-
     <attr sel="#userFormShow" th:if="${employeeDetailShow==true}"/>
     <!--New User Form show-->
     <attr sel="#formUser" th:action="${addStatus==true?'/user/add':'/user/update'}" th:object="${user}"/>
@@ -21,6 +20,11 @@
     <attr sel="#employee" th:field="*{employee}" th:each="e : ${employee}"/>
     <attr sel="#employeeList" th:text="${e.title.title} + ${' '} + ${e.name} +${' - '} + ${e.nic}" th:value="${e.id}"
           th:field="*{employee}"/>
+    <attr sel="#employeeNameBox" th:if="${addStatus==false}">
+        <!--When come to edit user employee show-->
+        <attr sel="#employeeName"
+              th:text="${user.employee.title.title} + ${' '} + ${user.employee.name} +${' - '} + ${user.employee.nic}"/>
+    </attr>
     <!--User name-->
     <attr sel="#username" th:field="*{username}"/>
     <!--Password-->

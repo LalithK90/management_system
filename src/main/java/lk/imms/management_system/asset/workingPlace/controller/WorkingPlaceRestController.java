@@ -31,7 +31,7 @@ public class WorkingPlaceRestController {
     @GetMapping( "/province/{province}" )
     public List< DistrictList > getDistrict(@PathVariable( "province" ) Province province) {
         List< DistrictList > districtLists = new ArrayList<>();
-//taken all working place from db
+//Taken all working place from db
         HashMap< String, String > districts = new HashMap<>();
         for ( WorkingPlace workingPlace : workingPlaceService.findAll() ) {
             if ( province.equals(workingPlace.getProvince()) ) {
@@ -52,10 +52,10 @@ public class WorkingPlaceRestController {
     /*return station relevant to the district */
     @GetMapping( "/district/{district}" )
     public List< StationList > getStation(@PathVariable( "district" ) District district) {
-        System.out.println(district);
+
         List< StationList > stationLists = new ArrayList<>();
         HashMap< Long, String > stations = new HashMap<>();
-//take all workstation and match with district and create new hash map
+//Take all workstation and match with district and create new hash map
         for ( WorkingPlace workingPlace : workingPlaceService.findAll() ) {
             if ( district.equals(workingPlace.getDistrict()) ) {
                 stations.put(workingPlace.getId(), workingPlace.getName());

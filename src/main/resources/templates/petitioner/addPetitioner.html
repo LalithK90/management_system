@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/petitionerDetail" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--Form Content — start -->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="form-horizontal" method="POST">
+            <div class="row" id="petitionerAddFormFragment">
+                <!--Left Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <!--Id-->
+                    <div id="idStatus" class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="id">ID :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="id" class="form-control" type="text" readonly/>
+                        </div>
+                    </div>
+                    <!--Name Sinhala-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="nameSinhala">Name ( Sinhala ) :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="nameSinhala" class="form-control" tabindex="1" type="text"/>
+                            <span id="nameSinhalaError" class="error">Error Name in Sinhala</span>
+                        </div>
+                    </div>
+                    <!--Name Tamil-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="nameTamil">Name ( Tamil ) :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="nameTamil" class="form-control" tabindex="2" type="text"/>
+                            <span id="nameTamilError" class="error">Error Name In Tamil</span></div>
+                    </div>
+                    <!--Name English-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="nameEnglish">Name ( English ) :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="nameEnglish" class="form-control" tabindex="3" type="text" />
+                            <span id="nameEnglishError" class="error">Error Name in English</span>
+                        </div>
+                    </div>
+                    <!--Email -->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="email">Email :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="email" class="form-control" tabindex="5" type="email"/>
+                            <span class="error" id="emailError">Error Email</span>
+                        </div>
+                    </div>
+                </div>
+                <!--Right Side-->
+                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <!--Address-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="address">Address :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <textarea id="address" class="form-control" tabindex="6" required></textarea>
+                            <span class="error" id="addressError">Error Address</span>
+                        </div>
+                    </div>
+                    <!--Mobile one-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="mobileOne">Mobile One No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="mobileOne" class="form-control mobile" tabindex="7" type="text"
+                                   maxlength="10" min="9"
+                                   required/>
+                            <span class="error" id="mobileOneError">Error Mobile Number</span>
+                        </div>
+                    </div>
+                    <!--Mobile Two-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="mobileTwo">Mobile Two No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="mobileTwo" class="form-control mobile" tabindex="8" type="text"
+                                   maxlength="10" min="9"/>
+                            <span class="error" id="mobileTwoError">Error Mobile  Number</span>
+                        </div>
+                    </div>
+                    <!--Land-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="land">Land No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="land" class="form-control land" type="text" tabindex="9" maxlength="10"
+                                   min="9"/>
+                            <span class="error" id="landError">Error Land Number</span>
+                        </div>
+                    </div>
+                    <div id="updateStatus">
+                        <!--Created by-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="createdBy">Created By :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="createdBy" class="form-control" type="text" readonly/>
+                            </div>
+                        </div>
+                        <!--Created Date-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="createdAt">Created At :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="createdAt" class="form-control" type="text" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                        <button class="btn btn-success" type="submit" tabindex="10">
+                            <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label id="errorLabel">Errors: </label>
+                    <ul>
+                        <li id="error" class="error"></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+</body>
+</html>

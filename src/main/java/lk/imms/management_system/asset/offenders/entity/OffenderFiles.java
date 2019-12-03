@@ -13,17 +13,22 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
 public class OffenderFiles extends AuditEntity {
+    private String name, mimeType,newName;
 
-    private String fileName;
-    private String modifiedFileName;
-    private String fileExtension;
+    @Column(unique = true)
+    private String newId;
+
+    @Lob
+    private byte[] pic;
 
     @ManyToOne
     private Offender offender;
 
-    public OffenderFiles(String fileName, String modifiedFileName, String fileExtension) {
-        this.fileName = fileName;
-        this.modifiedFileName = modifiedFileName;
-        this.fileExtension = fileExtension;
+    public OffenderFiles(String name, String mimeType, byte[] pic, String newName,String newId) {
+        this.name = name;
+        this.mimeType = mimeType;
+        this.pic = pic;
+        this.newName = newName;
+        this.newId = newId;
     }
 }

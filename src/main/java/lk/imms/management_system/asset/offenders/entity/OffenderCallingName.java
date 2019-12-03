@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -13,8 +14,9 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
+@ToString
 public class OffenderCallingName extends AuditEntity {
-
+    @NotNull
     private String callingName;
 
     @ManyToOne( fetch = FetchType.EAGER )

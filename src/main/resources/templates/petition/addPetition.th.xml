@@ -1,22 +1,43 @@
 <thlogic xmlns:th="http://www.thymeleaf.org">
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
-
+    <!--form header-->
     <attr sel="#formHeader" th:text="${addStatus==true?'Make A Petition ':'Update A Petition Details'}"/>
+    <!--provinces-->
+    <attr sel="#province" th:filed="*{province}"/>
     <attr sel="#provinceSelectList" th:each="province : ${provinces}"
           th:text="${province.province}"
           th:value="${province}"/>
+    <!--Form -->
     <attr sel="#from" th:action="${'/petition/add'}" th:object="${minutePetition}"/>
-    <attr sel="#village" th:filed="*{petition.village}"/>
-    <attr sel="#agaDivision" th:filed="*{petition.agaDivision}"/>
-    <attr sel="#petitionType" th:filed="*{petition.petitionType}"/>
-    <attr sel="#provinceSelectList" th:each="petitionType : ${petitionTypes}"
+    <!--Village-->
+    <attr sel="#village" th:filed="*{village}"/>
+    <!--Division-->
+    <attr sel="#agaDivision" th:filed="*{agaDivision}"/>
+    <!--Petition Type-->
+    <attr sel="#petitionType" th:filed="*{petitionType}"/>
+    <attr sel="#petitionTypeList" th:each="petitionType : ${petitionTypes}"
           th:text="${petitionType.petitionType}"
           th:value="${petitionType}"/>
-    <attr sel="#description" th:filed="*{minute.remark}"/>
-    <attr sel="#description" th:filed=""/>
-<!--todo need to pettion details and now im goint to make user-->
-
+    <!--Remarks-->
+    <attr sel="#description" th:filed="*{subject}"/>
+    <!--Petition priority-->
+    <attr sel="#petitionPriority" th:filed="*{petitionPriority}">
+        <attr sel="#petitionPriorityList" th:each="petitionPriority : ${petitionPriorities}"
+              th:text="${petitionPriority.petitionPriority}"
+              th:value="${petitionPriority}"/>
+    </attr>
+    <!--Designation -->
+    <attr sel="#designationList" th:each="designation : ${designations}"
+          th:text="${designation.designation}"
+          th:value="${designation}"/>
+    <!--Petitioner Details-->
+    <attr sel="#petitionerDetails" th:replace="~{petitioner/addPetitioner :: petitionerAddFromFragment}"/>
+    <!--Button-->
+    <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
+    <!--Errors-->
+    <!--    <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
+        <attr sel="#error" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>-->
 
     <!--URL Comes -->
     <attr sel="#districtUrl" th:value="${districtUrl}"/>

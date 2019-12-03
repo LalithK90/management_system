@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -34,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());
     }
 
@@ -44,24 +45,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/").permitAll();
 
-        //for developing easy to give permission all link
+        //For developing easy to give permission all link
 
-/*        http.
+   /*     http.
+
                 authorizeRequests()
-                //Always users can access without login
+                //Anytime users can access without login
                 .antMatchers(
                         "/index",
                         "/favicon.ico",
                         "/img/**",
                         "/css/**",
                         "/js/**",
-                        "/fonts/**",
-                        "/fontawesome/**").permitAll()
+                        "/webjars/**").permitAll()
                 .antMatchers("/login", "/select/**").permitAll()
 
                 //Need to login for access those are
-                .antMatchers("/employee/**").hasRole("MANAGER")
-                .antMatchers("/employee/**").hasRole("MANAGER")
+                .antMatchers("/employee/**").hasRole("ADMIN")
+                .antMatchers("/employee1/**").hasRole("MANAGER")
                 .antMatchers("/user/**").hasRole("MANAGER")
                 .antMatchers("/invoiceProcess/add").hasRole("CASHIER")
                 .anyRequest()
@@ -73,7 +74,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //Username and password for validation
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/mainWindow")
+                *//*todo -> need to change *//*
+                .defaultSuccessUrl("/employee")
                 .and()
                 //Logout controlling
                 .logout()
@@ -86,14 +88,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //Cross site disable
                 .and()
                 .csrf()
-                .disable()
-                //header use to Enable HTTP Strict Transport Security (HSTS)
+                .disable();*/
+        /* //Header used to Enable HTTP Strict Transport Security (HSTS)
                 .headers()
-		.httpStrictTransportSecurity()
-			.includeSubdomains(true)
-			.maxAgeSeconds(31536000);
-}
-                ;*/
+                .httpStrictTransportSecurity()
+                .includeSubdomains(true)
+                .maxAgeSeconds(31536000);
+                */
 
     }
+
+    ;
+
 }
+

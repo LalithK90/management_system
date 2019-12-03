@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.minute.controller;
 
-import lk.imms.management_system.asset.minute.entity.Minute;
-import lk.imms.management_system.asset.minute.service.MinuteService;
+import lk.imms.management_system.asset.minute.entity.MinutePetition;
+import lk.imms.management_system.asset.minute.service.MinutePetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,14 +11,14 @@ import java.util.List;
 @Controller
 @RequestMapping( "/minute" )
 public class MinuteController {
-    private final MinuteService minuteService;
+    private final MinutePetitionService minutePetitionService;
 
     @Autowired
-    public MinuteController(MinuteService minuteService) {
-        this.minuteService = minuteService;
+    public MinuteController(MinutePetitionService minutePetitionService) {
+        this.minutePetitionService = minutePetitionService;
     }
 
-    private List< Minute > findAll() {
-        return minuteService.findAll();
+    private List< MinutePetition > findAll() {
+        return minutePetitionService.findAll();
     }
 }

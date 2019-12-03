@@ -18,13 +18,13 @@ import java.util.List;
 @EqualsAndHashCode( callSuper = true )
 public class MinutePetition extends AuditEntity {
 
+    @Column(columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    private String detail;
+
     @Enumerated( EnumType.STRING )
     private MinuteState minuteState;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Minute minute;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne( cascade = CascadeType.PERSIST )
     private Petition petition;
 
     @Transient

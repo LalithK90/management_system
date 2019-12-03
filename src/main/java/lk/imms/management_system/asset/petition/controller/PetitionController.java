@@ -31,10 +31,10 @@ public class PetitionController {
         this.petitionFilesService = petitionFilesService;
     }
 
-    // common things for petition add and update
+    // Common things for petition add and update
     private String commonThings(Model model) {
         model.addAttribute("petitionTypes", PetitionType.values());
-        model.addAttribute("petitionPriority", PetitionPriority.values());
+        model.addAttribute("petitionPriorities", PetitionPriority.values());
         model.addAttribute("designations", Designation.values());
         model.addAttribute("provinces", Province.values());
         model.addAttribute("districtUrl", MvcUriComponentsBuilder
@@ -48,7 +48,7 @@ public class PetitionController {
         return "petition/addPetition";
     }
 
-    //to get files from the database
+    //To get files from the database
 /*
     public void petitionFiles(Petition petition, Model model) {
         List< FileInfo > fileInfos = petitionFilesService.findByPetition(petition)
@@ -66,7 +66,7 @@ public class PetitionController {
     }
 */
 
-    //when scr called file will send to
+    //When scr called file will send to
 /*
     @GetMapping( "/file/{filename}" )
     public ResponseEntity< byte[] > downloadFile(@PathVariable( "filename" ) String filename) {
@@ -76,7 +76,7 @@ public class PetitionController {
                 .body(file.getPic());
     }
 */
-//give all available petition according to login user
+//Give all available petition according to login user
     @GetMapping
     public String petitionPage(Model model) {
         //todo -> get user from principal object find his working place
@@ -84,11 +84,11 @@ public class PetitionController {
         model.addAttribute("petitions", petitionService.findAll());
         return "petition/petition";
     }
-//give frontend to petition add from
+//Give a frontend to petition add from
     @GetMapping("/add")
     public String addPetitionPage(Model model) {
         model.addAttribute("addStatus",true);
-        model.addAttribute("minutePetition", new MinutePetition());
+        model.addAttribute("minutePetition", new Petition());
         return commonThings(model);
     }
 }

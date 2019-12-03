@@ -32,15 +32,48 @@
 <div class="container-fluid bg-dark formBorder">
     <div class="col-sm-12 flex-column ">
         <form id="form" class="form-horizontal" method="POST">
+            <!--Normal Petition details-->
+            <div class="row col-12 col-md-12 col-sm-12">
+                <!--village-->
+                <div class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="village">Village</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input id="village" class="form-control" type="text" required/>
+                    </div>
+                </div>
+                <!--AGA Division-->
+                <div class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="agaDivision">AGA Division</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="form-control" id="agaDivision" type="text" required/>
+                    </div>
+                </div>
+                <!--petition Type-->
+                <div class="col-md-4 col-sm-4 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="petitionType">Received</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select id="petitionType" name="petitionType" class="form-control" required>
+                            <option value="">Please select</option>
+                            <option id="petitionTypeList" value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <!--Working Place Find-->
             <div class="row col-12 col-md-12 col-sm-12">
                 <!--province-->
                 <div class="col-md-4 col-sm-4 text-left ">
                     <div class="col-md-4">
-                        <label class="control-label" for="province">Province:</label>
+                        <label class="control-label" for="province">Province</label>
                     </div>
                     <div class="col-md-8">
-                        <select class="form-control" id="province" name="province" required>
+                        <select class="form-control" id="province" required>
                             <option value="">Please select</option>
                             <option id="provinceSelectList"></option>
                         </select>
@@ -49,7 +82,7 @@
                 <!--District-->
                 <div id="districtShow" class="col-md-4 col-sm-4 text-left ">
                     <div class="col-md-4">
-                        <label class="control-label" for="district">District:</label>
+                        <label class="control-label" for="district">District</label>
                     </div>
                     <div class="col-md-8">
                         <select class="form-control" name="district" id="district" required>
@@ -65,39 +98,6 @@
                     <div class="col-md-8">
                         <select id="station" name="workingPlace" class="form-control" required>
                             <option value="">Please select</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <!--Normal Petition details-->
-            <div class="row col-12 col-md-12 col-sm-12">
-                <!--village-->
-                <div class="col-md-4 col-sm-4 text-left ">
-                    <div class="col-md-4">
-                        <label class="control-label" for="village">Village :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input id="village" class="form-control" type="text" required/>
-                    </div>
-                </div>
-                <!--AGA Division-->
-                <div class="col-md-4 col-sm-4 text-left ">
-                    <div class="col-md-4">
-                        <label class="control-label" for="agaDivision">AGA Division :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input class="form-control" id="agaDivision" type="text" required/>
-                    </div>
-                </div>
-                <!--petition Type-->
-                <div class="col-md-4 col-sm-4 text-left ">
-                    <div class="col-md-4">
-                        <label class="control-label" for="petitionType">Petition Type:</label>
-                    </div>
-                    <div class="col-md-8">
-                        <select id="petitionType" name="petitionType" class="form-control" required>
-                            <option value="">Please select</option>
-                            <option id="petitionTypeList" value=""></option>
                         </select>
                     </div>
                 </div>
@@ -119,22 +119,18 @@
                     <div class="input-images" style="padding-top: .5rem;"></div>
                 </div>
             </div>
-            <!--Petitioner Details-->
-            <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-                <!--todo -> petitioner Details need to more details-->
-            </div>
             <!--Complaint directed to-->
             <div class="row col-12 col-md-12 col-sm-12">
                 <div class="row col-12 col-md-12 col-sm-12 text-left">
-                    <label>Complaint Direct To: </label>
+                    <label>Complaint Direct To :- </label>
                 </div>
                 <!--petition Type-->
                 <div class="col-md-4 col-sm-4 text-left ">
                     <div class="col-md-4">
-                        <label class="control-label" for="petitionPriority">Priority:</label>
+                        <label class="control-label" for="petitionPriority">Priority</label>
                     </div>
                     <div class="col-md-8">
-                        <select id="petitionPriority" name="petitionPriority" class="form-control" required>
+                        <select id="petitionPriority" class="form-control" required>
                             <option value="">Please select</option>
                             <option id="petitionPriorityList" value=""></option>
                         </select>
@@ -143,10 +139,10 @@
                 <!--designation-->
                 <div class="col-md-4 col-sm-4 text-left ">
                     <div class="col-md-4">
-                        <label class="control-label" for="designation">Designation :</label>
+                        <label class="control-label" for="designation">Designation</label>
                     </div>
                     <div class="col-md-8">
-                        <select id="designation" name="designation" class="form-control" required>
+                        <select id="designation" class="form-control" required>
                             <option value="">Please select</option>
                             <option id="designationList" value=""></option>
                         </select>
@@ -155,7 +151,7 @@
                 <!--employees selected-->
                 <div class="col-md-4 col-sm-4 text-left ">
                     <div class="col-md-4">
-                        <label class="control-label" for="employees">Employees :</label>
+                        <label class="control-label" for="employees">Employees</label>
                     </div>
                     <div class="col-md-8">
                         <select id="employees" name="employees" class="form-control" required>
@@ -164,6 +160,13 @@
                         </select>
                     </div>
                 </div>
+            </div>
+
+            <!--Petitioner details-->
+            <div class="row col-12 col-md-12 col-sm-12" >
+                <label>Petitioner Details :- </label>
+                <div class="row col-12 col-md-12 col-sm-12 text-left" id="petitionerDetails">  </div>
+
             </div>
             <!--button-->
             <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
