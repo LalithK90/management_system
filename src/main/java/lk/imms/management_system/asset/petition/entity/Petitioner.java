@@ -5,8 +5,10 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,7 +17,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
 @ToString
-public class PetitionerDetail extends AuditEntity {
+public class Petitioner extends AuditEntity {
 
     @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String nameSinhala;
@@ -42,5 +44,7 @@ public class PetitionerDetail extends AuditEntity {
     @Column( unique = true )
     private String email;
 
+    @OneToMany(mappedBy = "petitioner")
+    private List<Petition> petitions;
 
 }

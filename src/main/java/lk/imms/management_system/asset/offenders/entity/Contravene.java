@@ -16,7 +16,7 @@ import java.util.List;
 public class Contravene extends AuditEntity {
 
     @NotNull
-    @Column(columnDefinition = "mediumtext")
+    @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String contravene;
 
     @ManyToMany(fetch = FetchType.EAGER )

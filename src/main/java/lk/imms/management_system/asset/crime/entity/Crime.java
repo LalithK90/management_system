@@ -27,6 +27,25 @@ public class Crime extends AuditEntity {
 
     private String compoundedChargeSheetNumber;
 
+    @Column( columnDefinition = "VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    private String result;
+
+    private String rewardSheetNumber;
+
+    private String remark;
+
+    @Column( columnDefinition = "VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    private String placeOfOffence;
+
+    @ManyToOne
+    private DetectionTeam detectionTeam;
+
+    @ManyToOne
+    private Court court;
+
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
+    private LocalDate dateOfDetection;
+
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate compoundedChargeSheetDate;
 
@@ -39,29 +58,11 @@ public class Crime extends AuditEntity {
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfJudgement;
 
-    @Column( length = 50000 )
-    private String result;
-
-    private String rewardSheetNumber;
-
-    private String remark;
-
-    @ManyToOne
-    private DetectionTeam detectionTeam;
-
-    @ManyToOne
-    private Court court;
-
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate dateOfDetection;
-
-    private String placeOfOffence;
-
-    @ManyToMany( cascade = CascadeType.ALL )
+    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
     @JoinTable( name = "crime_offender",
             joinColumns = @JoinColumn( name = "crime_id" ),
             inverseJoinColumns = @JoinColumn( name = "offender_id" ) )
     @Fetch( value = FetchMode.SUBSELECT )
     private List< Offender > offenders;
- 
+
 }

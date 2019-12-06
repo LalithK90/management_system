@@ -12,86 +12,86 @@
     <!--1. Id-->
     <attr sel="#id" th:value="${id}"/>
     <!--2. Offender Registration number-->
-    <attr sel="#offenderRegisterNumber" th:value="${offenderRegisterNumber}" th:name="${'offenderRegisterNumber'}"/>
+    <attr sel="#offenderRegisterNumber" th:field="*{offenderRegisterNumber}"/>
     <!--3. Name in Sinhala-->
-    <attr sel="#nameSinhala" th:value="${nameSinhala}" th:name="${'nameSinhala'}"/>
+    <attr sel="#nameSinhala" th:field="*{nameSinhala}"/>
     <attr sel="#nameSinhalaError" th:errors="*{nameSinhala}"
           th:if="${#fields.hasErrors('nameSinhala')}"/>
     <!--4. Name in Tamil-->
-    <attr sel="#nameTamil" th:value="${nameTamil}" th:name="${'nameTamil'}"/>
+    <attr sel="#nameTamil" th:field="*{nameTamil}"/>
     <attr sel="#nameTamilError" th:errors="*{nameTamil}"
           th:if="${#fields.hasErrors('nameTamil')}"/>
     <!--5. Name in English-->
-    <attr sel="#nameEnglish" th:value="${nameEnglish}" th:name="${'nameEnglish'}"/>
+    <attr sel="#nameEnglish" th:field="*{nameEnglish}"/>
     <attr sel="#nameEnglishError" th:errors="*{nameEnglish}"
           th:if="${#fields.hasErrors('nameEnglish')}"/>
     <!--6. NIC-->
-    <attr sel="#nic" th:value="${nic}" th:name="${'nic'}"/>
+    <attr sel="#nic" th:field="*{nic}"/>
     <attr sel="#nicError" th:errors="*{nic}"
           th:if="${#fields.hasErrors('nic')}"/>
     <!--7. Passport Number-->
-    <attr sel="#passportNumber" th:value="${passportNumber}" th:name="${'passportNumber'}"/>
+    <attr sel="#passportNumber" th:field="*{passportNumber}"/>
     <attr sel="#passportNumberError" th:errors="*{passportNumber}"
           th:if="${#fields.hasErrors('passportNumber')}"/>
     <!--8. Driving Licence Number-->
-    <attr sel="#drivingLicenceNumber" th:value="${drivingLicenceNumber}" th:name="${'drivingLicenceNumber'}"/>
+    <attr sel="#drivingLicenceNumber" th:field="*{drivingLicenceNumber}"/>
     <attr sel="#drivingLicenceNumberError" th:errors="*{drivingLicenceNumber}"
           th:if="${#fields.hasErrors('drivingLicenceNumber')}"/>
     <!--9. Gender-->
-    <attr sel="#gender" th:value="${gender}" th:name="${'gender'}"/>
+    <attr sel="#gender" th:field="*{gender}"/>
     <attr sel="#genderList" th:each="genders : ${gender}"
           th:text="${genders.gender}"
           th:value="${genders}"
           th:selected="${genders==offender.gender?'selected':'unselected'}"/>
     <!--10. Date of birth-->
-    <attr sel="#dateOfBirth" th:value="${dateOfBirth}" th:name="${'dateOfBirth'}"/>
+    <attr sel="#dateOfBirth" th:field="*{dateOfBirth}"/>
     <attr sel="#dateOfBirthError" th:errors="*{dateOfBirth}"
           th:if="${#fields.hasErrors('dateOfBirth')}"/>
     <!--11. Blood group-->
-    <attr sel="#bloodGroup" th:value="${bloodGroup}" th:name="${'bloodGroup'}"/>
+    <attr sel="#bloodGroup" th:field="*{bloodGroup}"/>
     <attr sel="#bloodGroupList" th:each="bloodGroups : ${bloodGroup}"
           th:text="${bloodGroups.bloodGroup}"
           th:value="${bloodGroups}"
           th:selected="${bloodGroups==offender.bloodGroup?'selected':'unselected'}"/>
     <!--12. Civil status-->
-    <attr sel="#civilStatus" th:value="${civilStatus}" th:name="${'civilStatus'}"/>
+    <attr sel="#civilStatus" th:field="*{civilStatus}"/>
     <attr sel="#civilStatusList" th:each="civilStatu : ${civilStatus}"
           th:text="${civilStatu.CivilStatus}"
           th:value="${civilStatu}"
           th:selected="${civilStatu==offender.civilStatus?'selected':'unselected'}"/>
     <!--13. Address-->
-    <attr sel="#address" th:value="${address}" th:name="${'address'}"/>
+    <attr sel="#address" th:field="*{address}"/>
     <attr sel="#addressError" th:errors="*{address}"
           th:if="${#fields.hasErrors('address')}"/>
     <!--14. Mobile one-->
-    <attr sel="#mobileOne" th:value="${mobileOne}" th:name="${'mobileOne'}"/>
+    <attr sel="#mobileOne" th:field="*{mobileOne}"/>
     <attr sel="#mobileOneError" th:errors="*{mobileOne}"
           th:if="${#fields.hasErrors('mobileOne')}"/>
     <!--15. Mobile two-->
-    <attr sel="#mobileTwo" th:value="${mobileTwo}" th:name="${'mobileTwo'}"/>
+    <attr sel="#mobileTwo" th:field="*{mobileTwo}"/>
     <attr sel="#mobileTwoError" th:errors="*{mobileTwo}"
           th:if="${#fields.hasErrors('mobileTwo')}"/>
     <!--16. Land-->
-    <attr sel="#land" th:value="${land}" th:name="${'land'}"/>
+    <attr sel="#land" th:field="*{land}"/>
     <attr sel="#landError" th:errors="*{land}"
           th:if="${#fields.hasErrors('land')}"/>
     <!--17. Email-->
-    <attr sel="#email" th:value="${email}" th:name="${'email'}"/>
+    <attr sel="#email" th:field="*{email}"/>
     <attr sel="#emailError" th:errors="*{email}"
           th:if="${#fields.hasErrors('email')}"/>
     <!--18. Created at update at-->
     <attr sel="#updateStatus" th:if="${addStatus==false}"/>
-    <attr sel="#createdBy" th:value="${createdBy}"/>
-    <attr sel="#createdAt" th:value="${{createdAt}}"/>
+    <attr sel="#createdBy" th:field="*{createdBy}"/>
+    <attr sel="#createdAt" th:field="*{{createdAt}}"/>
 
     <!--19. Calling Names-->
-    <attr sel="#newCallingNameBtn" th:if="${addStatus==true}"/>
-    <attr sel="#callingName" th:each="offenderCallingName, status : ${offender.offenderCallingNames}"/>
-    <attr sel="#callingNameId" th:field="*{offenderCallingNames[__${status.index}__].id}"/>
-    <attr sel="#callingNames" th:field="*{offenderCallingNames[__${status.index}__].callingName}"/>
+    <attr sel="#callingNameListDisplay" th:if="${addStatus==false}"/>
+    <attr sel="#callingNameDisplay" th:each="offenderCallingName, status : ${offender.offenderCallingNames}"/>
+    <attr sel="#callingNameIdDisplay" th:field="*{offenderCallingNames[__${status.index}__].id}"/>
+    <attr sel="#callingNamesDisplay" th:field="*{offenderCallingNames[__${status.index}__].callingName}"/>
 
     <!--20. Description-->
-    <attr sel="#description" th:value="${description}" th:name="${'description'}"/>
+    <attr sel="#description" th:field="*{description}"/>
     <attr sel="#descriptionError" th:errors="*{description}"
           th:if="${#fields.hasErrors('description')}"/>
 
@@ -101,6 +101,9 @@
     <attr sel="#img" th:src="${file.url}"/>
 
     <!--21. Guardian Details-->
+    <attr sel="#guardianTypesList" th:each="guardianType : ${guardianTypes}"
+          th:text="${guardianType.guardianType}"
+          th:value="${guardianType}"/>
     <attr sel="#guardianDetails" th:each="guardian, status : ${offender.guardians}"/>
     <attr sel="#guardianId" th:field="*{guardians[__${status.index}__].id}"/>
     <attr sel="#guardianType" th:field="*{guardians[__${status.index}__].guardianType}"/>
@@ -127,4 +130,5 @@
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+    <attr sel="#offenderJs" th:src="@{/js/offenderJs.js}"/>
 </thlogic>

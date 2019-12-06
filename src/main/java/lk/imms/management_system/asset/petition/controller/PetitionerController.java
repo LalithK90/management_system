@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.petition.controller;
 
-import lk.imms.management_system.asset.petition.entity.PetitionerDetail;
-import lk.imms.management_system.asset.petition.service.PetitionerDetailService;
+import lk.imms.management_system.asset.petition.entity.Petitioner;
+import lk.imms.management_system.asset.petition.service.PetitionerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping( "/petitionerDetail" )
-public class PetitionerDetailController {
-    private final PetitionerDetailService petitionerDetailService;
+@RequestMapping( "/petitioner" )
+public class PetitionerController {
+    private final PetitionerService petitionerService;
 
     @Autowired
-    public PetitionerDetailController(PetitionerDetailService petitionerDetailService) {
-        this.petitionerDetailService = petitionerDetailService;
+    public PetitionerController(PetitionerService petitionerService) {
+        this.petitionerService = petitionerService;
     }
 
     //All petitioner list send to frontend
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("petitioners", petitionerDetailService.findAll());
+        model.addAttribute("petitioners", petitionerService.findAll());
         return "petitioner/petitioner";
     }
 
@@ -32,14 +32,14 @@ public class PetitionerDetailController {
     @GetMapping( "/add" )
     public String addForm(Model model) {
         model.addAttribute("addStatus", true);
-        model.addAttribute("petitionerDetail", new PetitionerDetail());
+        model.addAttribute("petitioner", new Petitioner());
         return "petitioner/addPetitioner";
     }
 
     //Send on petitioner details
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     public String petitionerView(@PathVariable( "id" ) Long id, Model model) {
-        model.addAttribute("petitionerDetail", petitionerDetailService.findById(id));
+        model.addAttribute("petitioner", petitionerService.findById(id));
         return "petitioner/petitioner-detail";
     }
 
@@ -48,34 +48,34 @@ public class PetitionerDetailController {
     @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
     public String editPetitionerFrom(@PathVariable( "id" ) Long id, Model model) {
         model.addAttribute("addStatus", false);
-        model.addAttribute("petitionerDetail", petitionerDetailService.findById(id));
+        model.addAttribute("petitioner", petitionerService.findById(id));
         return "petitioner/addPetitioner";
     }
 
     //This method is used petitioner details save and update
     @PostMapping( value = {"/add", "/update"} )
-    public String savePetitioner(@Valid @ModelAttribute( "petitionerDetail" ) PetitionerDetail petitionerDetail,
+    public String savePetitioner(@Valid @ModelAttribute( "petitioner" ) Petitioner petitioner,
                                  BindingResult result, Model model) {
 
-        if ( petitionerDetail.getNameEnglish().isEmpty() || petitionerDetail.getNameSinhala().isEmpty() || petitionerDetail.getNameTamil().isEmpty() ) {
+        if ( petitioner.getNameEnglish().isEmpty() || petitioner.getNameSinhala().isEmpty() || petitioner.getNameTamil().isEmpty() ) {
             ObjectError error = new ObjectError("petitionerDetail", "There are no possibilities to empty petitioner " +
                     "name, it should be included any language, which is you used ");
             result.addError(error);
         }
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
-            model.addAttribute("petitionerDetail", petitionerDetail);
+            model.addAttribute("petitionerDetail", petitionerService);
             return "petitioner/addPetitioner";
         }
-        petitionerDetailService.persist(petitionerDetail);
-        return "redirect:/petitionerDetail";
+        petitionerService.persist(petitioner);
+        return "redirect:/petitioner";
     }
 //Delete is not applicable for this project
 
     //to search employee any giving employee parameter
     @RequestMapping( value = "/search", method = RequestMethod.GET )
-    public String search(Model model, PetitionerDetail petitionerDetail) {
-        model.addAttribute("petitioners", petitionerDetailService.search(petitionerDetail));
+    public String search(Model model, Petitioner petitioner) {
+        model.addAttribute("petitioners", petitionerService.search(petitioner));
         return "petitioner/petitioner";
     }
 }

@@ -16,7 +16,7 @@ import javax.persistence.Lob;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MinuteFiles extends AuditEntity {
+public class MinutePetitionFiles extends AuditEntity {
 
     private String name, mimeType,newName;
 
@@ -26,7 +26,7 @@ public class MinuteFiles extends AuditEntity {
     @Lob
     private byte[] pic;
 
-    public MinuteFiles(String name, String mimeType, byte[] pic, String newName,String newId) {
+    public MinutePetitionFiles(String name, String mimeType, byte[] pic, String newName,String newId) {
         this.name = name;
         this.mimeType = mimeType;
         this.pic = pic;

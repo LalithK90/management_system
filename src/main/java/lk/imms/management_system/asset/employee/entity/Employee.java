@@ -7,6 +7,7 @@ import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
 import lk.imms.management_system.asset.detection.entity.DetectionTeamMember;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
@@ -95,7 +96,7 @@ public class Employee extends AuditEntity {
     @Fetch( value = FetchMode.SUBSELECT )
     private List< DetectionTeamMember > detectionTeamMembers;
 
-    @OneToMany( mappedBy = "employee", fetch = FetchType.EAGER )
+    @OneToMany( mappedBy = "employee")
     private List< EmployeeWorkingPlaceHistory > employeeWorkingHistories;
 
     @Transient

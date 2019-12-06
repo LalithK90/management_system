@@ -97,6 +97,12 @@
           th:text="${employeeStatuss.employeeStatus}"
           th:value="${employeeStatuss}"
           th:selected="${employeeStatuss==employee.employeeStatus?'selected':'unselected'}"/>
+    <!--Employee working place-->
+    <attr sel="#workingPlace" th:field="*{workingPlace}"/>
+    <attr sel="#employeeStatusList" th:each="workingPlace : ${workingPlaces}"
+          th:text="${workingPlace.name}"
+          th:value="${workingPlace.id}"
+          th:selected="${workingPlace==employee.workingPlace?'selected':'unselected'}"/>
     <!--Created at update at-->
     <attr sel="#updateStatus" th:if="${addStatus==false}"/>
     <attr sel="#createdBy" th:field="*{createdBy}"/>

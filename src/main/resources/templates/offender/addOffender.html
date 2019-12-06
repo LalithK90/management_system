@@ -80,7 +80,7 @@
                             <label class="control-label" for="nameEnglish">Name ( English ) :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="nameEnglish" class="form-control" tabindex="3" type="text" required/>
+                            <input id="nameEnglish" class="form-control" tabindex="3" type="text" required>
                             <span id="nameEnglishError" class="error">Error Name in English</span>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                         </div>
                         <div class="col-md-8">
                             <input id="passportNumber" class="form-control" tabindex="5" type="text" maxlength="12"
-                                   minlength="10" required/>
+                                   minlength="10"/>
                             <span class="error" id="passportNumberError">Error                                                                                                     NIC Number</span>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                         <div class="col-md-8">
                             <input id="drivingLicenceNumber" class="form-control" tabindex="6" type="text"
                                    maxlength="12"
-                                   minlength="10" required/>
+                                   minlength="10"/>
                             <span class="error" id="drivingLicenceNumberError">Error                                                                                                     NIC Number</span>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                             <label class="control-label" for="address">Address :</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea id="address" class="form-control" tabindex="11" required></textarea>
+                            <textarea id="address" class="form-control" tabindex="11"></textarea>
                             <span class="error" id="addressError">Error Address</span>
                         </div>
                     </div>
@@ -243,187 +243,223 @@
                         </div>
                     </div>
                 </div>
-                <!--Calling Name-->
-                <div class="form-group col-md-12 col-sm-12 text-left flex-column">
-                    <div class="form-row"><label class="control-label"><h3><strong>Calling Name :</strong></h3></label>
-                        <!--ADD NEW ROW BUTTON-->
-                        <div class="col" id="newCallingNameBtn" >
-                            <button type="button" id="callingNameButton" tabindex="16" class="btn btn-sm btn-primary"
-                            ><i class="fa fa-user-circle"></i> &nbsp;New
-                            </button>
-                        </div>
-                    </div>
-                    <!--List Of Calling Name-->
-                    <div class="form-row" id="callingNameList">
-                        <div class="item" id="callingName">
-                            <div class=" d-none">
-                                <input type="hidden" id="callingNameId">
-                                <input id="callingNames" type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Description -->
-                <div class="form-group col-md-12 col-sm-12 text-left flex-column">
-                    <label class="control-label" for="description">Description:</label>
-                    <div class="input-field">
-                        <div>
-                            <textarea class="form-control" id="description" tabindex="17"
-                                      placeholder="Enter Description"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <!--Photos-->
-                <div class="form-group col-md-12 col-sm-12 text-left flex-column">
-                    <div class="input-field">
-                        <label class="active ">Photos :</label>
-                        <div class="input-images" style="padding-top: .5rem;"></div>
-                    </div>
-                    <div class="col" id="photoDetails">
-                        <div>
-                            <label class="control-label ">Photo Details : </label>
-                        </div>
-                        <div class="row">
-                            <div class="col" id="filesList">
-                                <div class="col">
-                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        <button id="alertClose" type="button" class="close" data-dismiss="alert"
-                                                aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <div class="card text-center">
-                                            <div class="card-header" hidden>
-                                                <input id="removeImages" type="text" name="removeImages"></div>
-                                            <div class="card-body">
-                                                <img id="img" class="rounded"
-                                                     style="height: 150px; width: 150px; border-radius: 10px"/>
-                                            </div>
-                                            <div class="card-footer bg-secondary text-light text-center">
-                                                <p id="imgName"></p>
-                                                <p> Uploaded Date : <span id="imgCreateAt"></span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <script>
-                                    $(".alert").alert();
-                                </script>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--Guardians Details-->
-                <div class="form-row col-sm-12 col-md-12 col-12">
-                    <label class="control-label " for="description"><h3><strong>Guardians Details:</strong></h3></label>
-                </div>
-                <div class="form-row col-sm-12 col-md-12 col-12">
-                    <div id="guardianDetails" class="row col-12 col-sm-12 col-md-12">
-                        <!--Left Side-->
-                        <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-                            <div class="form-row text-right">
-                                <div class="col-md-4">
-                                    <label class="control-label" for="guardianType">Guardian Type :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="hidden" id="guardianId">
-                                    <select id="guardianType" class="form-control" tabindex="18" required>
-                                        <option value="" selected disabled>Please select</option>
-                                        <option id="guardianTypeList"></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--Guardian NIC no-->
-                            <div class="form-row text-right">
-                                <div class="col-md-4">
-                                    <label class="control-label" for="guardianNic">NIC No :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input id="guardianNic" class="form-control" tabindex="19" type="text"
-                                           maxlength="12"
-                                           minlength="10" required/>
-                                    <span class="error" id="guardianNicError">Error NIC Number</span>
-                                </div>
-                            </div>
-                            <!--Guardian Created By-->
-                            <div class="form-row text-right">
-                                <div class="col-md-4">
-                                    <label class="control-label" for="guardianCreatedBy">Created By :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input id="guardianCreatedBy" class="form-control" tabindex="19" type="text"
-                                           maxlength="12"
-                                           minlength="10" required/>
-                                </div>
-                            </div>
-                            <!--Guardian Created At-->
-                            <div class="form-row text-right">
-                                <div class="col-md-4">
-                                    <label class="control-label" for="guardianCreatedAt">Created By :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input id="guardianCreatedAt" class="form-control" tabindex="19" type="text"
-                                           maxlength="12"
-                                           minlength="10" required/>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Right Side-->
-                        <div class="form-group col-md-6 col-sm-6 text-right flex-column">
-                            <!--Guardian Name-->
-                            <div class="form-row text-right">
-                                <div class="col-md-4">
-                                    <label class="control-label" for="guardianName">Guardian Name :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input id="guardianName" class="form-control" tabindex="20" type="text"/>
-                                    <span id="guardianNameError" class="error">Error Guardian Name in English</span>
-                                </div>
-                            </div>
-                            <!--Address-->
-                            <div class="form-row text-right">
-                                <div class="col-md-4">
-                                    <label class="control-label" for="guardianRemark">Remarks :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <textarea id="guardianRemark" class="form-control" tabindex="211"
-                                              required></textarea>
-                                    <span class="error" id="guardianRemarkError">Error Address</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              <!--  <div class="form-row"><label class="control-label"><h3><strong>Calling Name :</strong></h3></label>
-                    &lt;!&ndash;ADD NEW ROW BUTTON&ndash;&gt;
+            </div>
+            <!--Calling Name-->
+            <div class="form-group col-md-12 col-sm-12 text-left flex-column">
+                <div class="form-row"><label class="control-label"><h3><strong>Calling Name :</strong></h3></label>
+                    <!--ADD NEW ROW BUTTON-->
                     <div class="col">
                         <button type="button" id="callingNameButton" tabindex="16" class="btn btn-sm btn-primary"
                         ><i class="fa fa-user-circle"></i> &nbsp;New
                         </button>
                     </div>
-                </div>-->
+                </div>
+                <!--Calling name display -->
+                <div class="form-row" id="callingNameListDisplay">
+                    <div class="item form-row col-md-3" id="callingNameDisplay">
+                        <input id="callingNameIdDisplay" type="hidden"/>
+                        <input id="callingNamesDisplay" type="text" class="form-control"/>
+                    </div>
+                </div>
                 <!--List Of Calling Name-->
-               <!-- <div class="form-row" id="callingNameList">
+                <div class="form-row" id="callingNameList">
                     <div class="item" id="callingName">
                         <div class=" d-none">
-                            <input type="hidden" id="callingNameId">
-                            <input id="callingNames" type="text" class="form-control">
+                            <input id="callingNameId" type="hidden"/>
+                            <input id="callingNames" type="text" class="form-control"/>
                         </div>
                     </div>
-                </div>-->
-                <!--Button-->
-                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                    <button class="btn btn-success" type="submit" tabindex="22">
-                        <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
-                    </button>
                 </div>
-                <!--Errors-->
-                <div class="form-row">
-                    <label id="errorLabel">Errors: </label>
-                    <ul>
-                        <li id="error" class="error"></li>
-                    </ul>
+            </div>
+            <!-- Description -->
+            <div class="form-group col-md-12 col-sm-12 text-left flex-column">
+                <label class="control-label" for="description">Description:</label>
+                <div class="input-field">
+                    <div>
+                            <textarea class="form-control" id="description" tabindex="17"
+                                      placeholder="Enter Description"></textarea>
+                    </div>
                 </div>
+            </div>
+            <!--Photos-->
+            <div class="form-group col-md-12 col-sm-12 text-left flex-column">
+                <div class="input-field">
+                    <label class="active ">Photos :</label>
+                    <div class="input-images" style="padding-top: .5rem;"></div>
+                </div>
+                <div class="col" id="photoDetails">
+                    <div>
+                        <label class="control-label ">Photo Details : </label>
+                    </div>
+                    <div class="row">
+                        <div class="col" id="filesList">
+                            <div class="col">
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <button id="alertClose" type="button" class="close" data-dismiss="alert"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <div class="card text-center">
+                                        <div class="card-header" hidden>
+                                            <input id="removeImages" type="text" name="removeImages"></div>
+                                        <div class="card-body">
+                                            <img id="img" class="rounded"
+                                                 style="height: 150px; width: 150px; border-radius: 10px"/>
+                                        </div>
+                                        <div class="card-footer bg-secondary text-light text-center">
+                                            <p id="imgName"></p>
+                                            <p> Uploaded Date : <span id="imgCreateAt"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                $(".alert").alert();
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Guardians Details-->
+            <div class="form-row col-sm-12 col-md-12 col-12">
+                <label class="control-label " for="description"><h3><strong>Guardians Details:</strong></h3></label>
+            </div>
+            <div class="form-row col-sm-12 col-md-12 col-12" id="guardianDetail">
+                <!--to add new guardian -->
+                <div class="row col-md-12 col-sm-12 col-12">
+                    <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="guardianTypes">Guardian Type :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select id="guardianTypes" class="form-control" name="guardians[0].guardianType"
+                                        required>
+                                    <option value="" selected disabled>Please select</option>
+                                    <option id="guardianTypesList"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="guardian_Nic">NIC No :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="guardian_Nic" class="form-control" type="text" name="guardians[0].nic"
+                                       maxlength="12"
+                                       minlength="10" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="guardian_Name">Guardian Name :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="guardian_Name" class="form-control" name="guardians[0].name"
+                                       type="text" required/>
+                            </div>
+                        </div>
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="guardian_Remark">Remarks :</label>
+                            </div>
+                            <div class="col-md-8">
+                                        <textarea id="guardian_Remark" class="form-control"
+                                                  name="guardians[0].remark">
+                                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--To display guardian-->
+            <div id="guardianDetails" class="row col-12 col-sm-12 col-md-12">
+                <!--Left Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="guardianType">Guardian Type :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="hidden" id="guardianId">
+                            <select id="guardianType" class="form-control" tabindex="18" required>
+                                <option value="" selected disabled>Please select</option>
+                                <option id="guardianTypeList"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Guardian NIC no-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="guardianNic">NIC No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="guardianNic" class="form-control" tabindex="19" type="text"
+                                   maxlength="12"
+                                   minlength="10" required/>
+                        </div>
+                    </div>
+                    <!--Guardian Created By-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="guardianCreatedBy">Created By :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="guardianCreatedBy" class="form-control" tabindex="19" type="text"
+                                   maxlength="12"
+                                   minlength="10" required/>
+                        </div>
+                    </div>
+                    <!--Guardian Created At-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="guardianCreatedAt">Created At :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="guardianCreatedAt" class="form-control" tabindex="19" type="text"
+                                   maxlength="12"
+                                   minlength="10" required/>
+                        </div>
+                    </div>
+                </div>
+                <!--Right Side-->
+                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <!--Guardian Name-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="guardianName">Guardian Name :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="guardianName" class="form-control" tabindex="20" type="text"/>
+                        </div>
+                    </div>
+                    <!--Address-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="guardianRemark">Remarks :</label>
+                        </div>
+                        <div class="col-md-8">
+                                    <textarea id="guardianRemark" class="form-control" tabindex="21"
+                                              required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Button-->
+            <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                <button class="btn btn-success" type="submit" tabindex="22">
+                    <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
+                </button>
+            </div>
+            <!--Errors-->
+            <div class="form-row">
+                <label id="errorLabel">Errors: </label>
+                <ul>
+                    <li id="error" class="error"></li>
+                </ul>
             </div>
         </form>
     </div>
@@ -433,52 +469,6 @@
 <footer id="footer" class="page-footer"></footer>
 <!--script include-->
 <script id="script"></script>
-<script>
-    $(document).ready(function () {
-        //WYSIWYG add to text area
-        bkLib.onDomLoaded(function () {
-            nicEditors.allTextAreas()
-        });
-        $('.input-images').imageUploader();
-        $('#callingNameButton').bind('click', function () {
-            addCallingNameRow();
-        });
-
-        let addCallingNameRow = function () {
-            let listName = 'offenderCallingNames'; //List name in an offender.class
-            let fieldsNames = ['callingName']; //Field names from callingName.class
-            let rowIndex = document.querySelectorAll('.item').length; //we can add mock class to each calling-name-row
-
-            let row = document.createElement('div');
-            row.classList.add('form-row', 'item', 'col-md-3');
-
-            fieldsNames.forEach((fieldName) => {
-                let col = document.createElement('div');
-                col.classList.add('col');
-                if (fieldName === 'id') {
-                    col.classList.add('d-none');
-                    //Field with an id - hidden
-                }
-
-                let input = document.createElement('input');
-                input.type = 'text';
-                input.classList.add('form-control');
-                input.id = listName + rowIndex + '.' + fieldName;
-                input.setAttribute('name', listName + '[' + rowIndex + '].' + fieldName);
-
-                col.appendChild(input);
-                row.appendChild(col);
-            });
-
-            document.getElementById('callingNameList').appendChild(row);
-        };
-
-    });
-
-
-    /*let htmlContent =*/
-
-
-</script>
+<script id="offenderJs"></script>
 </body>
 </html>

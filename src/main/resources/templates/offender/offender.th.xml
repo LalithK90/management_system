@@ -10,9 +10,7 @@
     <!--Name in English-->
     <attr sel="#nameEnglish" th:text="${offender.nameEnglish}"/>
     <!--Calling Names-->
-    <attr sel="#callingNames" th:each="callingName, rowCount : ${offender.offenderCallingNames}"/>
-    <!--Calling Name Index-->
-    <attr sel="#callingNameIndex" th:text="${rowCount.count}"/>
+    <attr sel="#callingName" th:each="callingName, rowCount : ${offender.offenderCallingNames}"/>
     <!--Calling Name-->
     <attr sel="#callingName" th:text="${callingName.callingName}"/>
     <!--Mobile one-->

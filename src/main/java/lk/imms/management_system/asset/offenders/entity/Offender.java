@@ -41,7 +41,6 @@ public class Offender extends AuditEntity {
     @Size( min = 5, message = "Name (Tamil) cannot be accepted" )
     private String nameTamil;
 
-    @Size( max = 12, min = 10, message = "NIC number is contained numbers between 9 and X/V or 12 " )
     @Column( unique = true )
     private String nic;
 

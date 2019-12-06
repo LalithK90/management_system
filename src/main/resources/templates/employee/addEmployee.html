@@ -188,7 +188,7 @@
                             <span class="error" id="mobileOneError">Error Mobile Number</span>
                         </div>
                     </div>
-                    <!--MObile Numnber Two-->
+                    <!--Mobile Number Two-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
                             <label class="control-label" for="mobileTwo">Mobile Two No :</label>
@@ -252,6 +252,18 @@
                             </select>
                         </div>
                     </div>
+                    <!--Current Working Place-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="workingPlace">Employee Working Place :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="workingPlace" class="form-control" tabindex="20" required>
+                                <option value="">Please select</option>
+                                <option id="workingPlaceList"></option>
+                            </select>
+                        </div>
+                    </div>
                     <!--Created by and created at-->
                     <div id="updateStatus">
                         <div class="form-row text-right">
@@ -311,7 +323,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                        <button class="btn btn-success" type="submit" tabindex="20">
+                        <button class="btn btn-success" type="submit" tabindex="21">
                             <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
                         </button>
                     </div>

@@ -7,11 +7,13 @@ import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
 import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.offenders.entity.Enum.GuardianType;
+import lk.imms.management_system.asset.offenders.entity.Guardian;
 import lk.imms.management_system.asset.offenders.entity.Offender;
 import lk.imms.management_system.asset.offenders.entity.OffenderCallingName;
 import lk.imms.management_system.asset.offenders.entity.OffenderFiles;
 import lk.imms.management_system.asset.offenders.service.OffenderFilesService;
 import lk.imms.management_system.asset.offenders.service.OffenderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -35,21 +36,20 @@ import java.util.stream.Collectors;
 public class OffenderController {
     private final OffenderService offenderService;
     private final OffenderFilesService offenderFilesService;
-
+@Autowired
     public OffenderController(OffenderService offenderService, OffenderFilesService offenderFilesService) {
         this.offenderService = offenderService;
         this.offenderFilesService = offenderFilesService;
     }
 
     // Common things for an offender add and update
-    private String commonThings(Model model) {
+    private void commonThings(Model model) {
         model.addAttribute("title", Title.values());
         model.addAttribute("gender", Gender.values());
         model.addAttribute("civilStatus", CivilStatus.values());
         model.addAttribute("designation", Designation.values());
         model.addAttribute("bloodGroup", BloodGroup.values());
         model.addAttribute("guardianTypes", GuardianType.values());
-        return "offender/addOffender";
     }
 
     //To get files from the database
@@ -88,7 +88,7 @@ public class OffenderController {
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     public String offenderView(@PathVariable( "id" ) Long id, Model model) {
         Offender offender = offenderService.findById(id);
-        model.addAttribute("offenderDetail", offender);
+        model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
         offenderFiles(offender, model);
         return "offender/offender-detail";
@@ -101,7 +101,8 @@ public class OffenderController {
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
         offenderFiles(offender, model);
-        return commonThings(model);
+        commonThings(model);
+        return "offender/addOffender";
     }
 
     //Send an offender add from
@@ -109,27 +110,43 @@ public class OffenderController {
     public String offenderAddFrom(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("offender", new Offender());
-        /*model.addAttribute("offenderCallingName", new OffenderCallingName());*/
-        return commonThings(model);
+        commonThings(model);
+        return "offender/addOffender";
     }
 
     //Offender add and update
     @RequestMapping( value = {"/add", "/update"}, method = RequestMethod.POST )
-    public String addOffender(@Valid @ModelAttribute("offender") Offender offender, BindingResult result, Model model,
-                              RedirectAttributes redirectAttributes) {
+    public String addOffender(@Valid @ModelAttribute( "offender" ) Offender offender, BindingResult result,
+                              Model model) {
         System.out.println(offender.toString());
-/*
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
-            redirectAttributes.addFlashAttribute("offender", offender);
-            return  commonThings(model);
+            commonThings(model);
+            model.addAttribute("offender", offender);
+            System.out.println(" i am here now ");
+            return "offender/addOffender";
         }
+
+        //offender calling name set
+        List< OffenderCallingName > offenderCallingNames = new ArrayList<>();
+        for ( OffenderCallingName offenderCallingName : offender.getOffenderCallingNames() ) {
+            offenderCallingName.setOffender(offender);
+            offenderCallingNames.add(offenderCallingName);
+        }
+
+        //guardian details' offender set
+        List< Guardian > guardians = new ArrayList<>();
+        for ( Guardian guardian : offender.getGuardians() ) {
+            guardian.setOffender(offender);
+            guardians.add(guardian);
+        }
+
+        offender.setOffenderCallingNames(offenderCallingNames);
+        offender.setGuardians(guardians);
+        //todo -> created offender registration code OfficeCode/auto incerement
+
+        // System.out.println("after set guardian and calling name " + offender.toString());
         try {
-            //Todo->offender controller logic too before save
-            //Todo->offenderFiles controller logic too before save
-
-            System.out.println(offender.getFiles());
-
             //First save offender and
             offenderService.persist(offender);
             //Save offender images file
@@ -157,19 +174,13 @@ public class OffenderController {
         } catch ( Exception e ) {
             ObjectError error = new ObjectError("offender",
                                                 "There is already in the system. <br>System message -->" + e.toString
-                                                ());
+                                                        ());
             result.addError(error);
             model.addAttribute("addStatus", true);
-            redirectAttributes.addFlashAttribute("offender", offender);
-            return  commonThings(model);
-        }*/
-try {
-    offenderService.persist(offender);
-}catch ( Exception e ){
-    System.out.println(e.toString());
-}
-
-        return "redirect:/offender/add";
+            commonThings(model);
+            model.addAttribute("offender", offender);
+            return "offender/addOffender";
+        }
     }
 
     //If need to offender {but not applicable for this }

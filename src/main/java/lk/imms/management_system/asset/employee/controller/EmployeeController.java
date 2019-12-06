@@ -17,6 +17,7 @@ import lk.imms.management_system.asset.employee.service.EmployeeService;
 import lk.imms.management_system.asset.employee.service.EmployeeWorkingPlaceHistoryService;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
+import lk.imms.management_system.asset.workingPlace.service.WorkingPlaceService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -44,15 +45,18 @@ public class EmployeeController {
     private final EmployeeWorkingPlaceHistoryService employeeWorkingPlaceHistoryService;
     private final EmployeeFilesService employeeFilesService;
     private final DateTimeAgeService dateTimeAgeService;
+    private final WorkingPlaceService workingPlaceService;
 
     @Autowired
     public EmployeeController(EmployeeService employeeService,
                               EmployeeWorkingPlaceHistoryService employeeWorkingPlaceHistoryService,
-                              EmployeeFilesService employeeFilesService, DateTimeAgeService dateTimeAgeService) {
+                              EmployeeFilesService employeeFilesService, DateTimeAgeService dateTimeAgeService,
+                              WorkingPlaceService workingPlaceService) {
         this.employeeService = employeeService;
         this.employeeWorkingPlaceHistoryService = employeeWorkingPlaceHistoryService;
         this.employeeFilesService = employeeFilesService;
         this.dateTimeAgeService = dateTimeAgeService;
+        this.workingPlaceService = workingPlaceService;
     }
 //----> Employee details management - start <----//
 
@@ -64,6 +68,7 @@ public class EmployeeController {
         model.addAttribute("employeeStatus", EmployeeStatus.values());
         model.addAttribute("designation", Designation.values());
         model.addAttribute("bloodGroup", BloodGroup.values());
+        model.addAttribute("workingPlaces", workingPlaceService.findAll());
         return "employee/addEmployee";
     }
 
@@ -240,6 +245,8 @@ public class EmployeeController {
     public String addWorkingPlaceEmployee(@ModelAttribute( "employeeWorkingPlaceHistory" ) EmployeeWorkingPlaceHistory employeeWorkingPlaceHistory, Model model) {
         System.out.println(employeeWorkingPlaceHistory.toString());
         //Todo -> need to write validation before the save working place
+        //before saving set employee current working palace
+      //  employeeWorkingPlaceHistory.getEmployee().setWorkingPlace(employeeWorkingPlaceHistory.getWorkingPlace());
         employeeWorkingPlaceHistory.setWorkingDuration(dateTimeAgeService.dateDifference(employeeWorkingPlaceHistory.getFrom_place(), employeeWorkingPlaceHistory.getTo_place()));
         employeeWorkingPlaceHistoryService.persist(employeeWorkingPlaceHistory);
         return "redirect:/employee";
