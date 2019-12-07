@@ -17,6 +17,7 @@ import lk.imms.management_system.asset.employee.service.EmployeeService;
 import lk.imms.management_system.asset.employee.service.EmployeeWorkingPlaceHistoryService;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.asset.workingPlace.service.WorkingPlaceService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,7 +123,7 @@ public class EmployeeController {
         model.addAttribute("newEmployee", employee.getPayRoleNumber());
         model.addAttribute("addStatus", false);
         employeeFiles(employee, model);
-        return  commonThings(model);
+        return commonThings(model);
     }
 
     //Send an employee add from
@@ -130,7 +131,7 @@ public class EmployeeController {
     public String employeeAddFrom(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("employee", new Employee());
-        return  commonThings(model);
+        return commonThings(model);
     }
 
     //Employee add and update
@@ -141,7 +142,7 @@ public class EmployeeController {
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
             redirectAttributes.addFlashAttribute("employee", employee);
-            return  commonThings(model);
+            return commonThings(model);
         }
         try {
             //todo->employee controller logic to before save
@@ -179,7 +180,7 @@ public class EmployeeController {
             result.addError(error);
             model.addAttribute("addStatus", true);
             redirectAttributes.addFlashAttribute("employee", employee);
-            return  commonThings(model);
+            return commonThings(model);
         }
     }
 
@@ -246,7 +247,11 @@ public class EmployeeController {
         System.out.println(employeeWorkingPlaceHistory.toString());
         //Todo -> need to write validation before the save working place
         //before saving set employee current working palace
-      //  employeeWorkingPlaceHistory.getEmployee().setWorkingPlace(employeeWorkingPlaceHistory.getWorkingPlace());
+        WorkingPlace workingPlace = employeeWorkingPlaceHistory.getWorkingPlace();
+
+        employeeWorkingPlaceHistory.setWorkingPlace(employeeWorkingPlaceHistory.getEmployee().getWorkingPlace());
+        employeeWorkingPlaceHistory.getEmployee().setWorkingPlace(workingPlace);
+
         employeeWorkingPlaceHistory.setWorkingDuration(dateTimeAgeService.dateDifference(employeeWorkingPlaceHistory.getFrom_place(), employeeWorkingPlaceHistory.getTo_place()));
         employeeWorkingPlaceHistoryService.persist(employeeWorkingPlaceHistory);
         return "redirect:/employee";

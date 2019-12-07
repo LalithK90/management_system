@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.employee.entity;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
@@ -29,6 +30,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
+@JsonFilter("Employee")
 public class Employee extends AuditEntity {
 
     @NotNull( message = "Pay roll number is required" )
@@ -91,6 +93,9 @@ public class Employee extends AuditEntity {
 
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfAssignment;
+
+    @ManyToOne
+    private WorkingPlace workingPlace;
 
     @OneToMany( mappedBy = "employee", fetch = FetchType.EAGER )
     @Fetch( value = FetchMode.SUBSELECT )

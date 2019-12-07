@@ -49,12 +49,12 @@ $(document).ready(function () {
 */
 
 });
-/*jquery - ui function
-$( "input" ).checkboxradio();
-$( "#resizable" ).resizable();
-$( "#dateOfBirth" ).datepicker();
-$( document ).tooltip();
-*/
+/*jquery - ui function*/
+//$( "input" ).checkboxradio;
+//$( "#resizable" ).resizable();
+//$( "#dateOfBirth" ).datepicker;
+//$( document ).tooltip();
+
 
 // regex
 let nicRegex = /^([0-9]{9}[vV|xX])|^([0-9]{12})$/;

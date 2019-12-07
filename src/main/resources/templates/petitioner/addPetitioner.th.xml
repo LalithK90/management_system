@@ -5,7 +5,7 @@
     <attr sel="#formHeader" th:text="${addStatus==true?'Add New Petitioner ':'Update A Petitioner Details'}"/>
     <!--Form -->
     <attr sel="#form" th:action="${addStatus==true?'/petitionerDetail/add':'/petitionerDetail/update'}"
-          th:object="${petitionerDetail}"/>
+          th:object="${petitioner}"/>
     <attr sel="#petitionerAddFormFragment" th:fragment="petitionerAddFromFragment"/>
     <!--Id-->
     <attr sel="#idStatus" th:if="${addStatus==false}"/>
@@ -26,6 +26,12 @@
     <attr sel="#email" th:field="*{email}"/>
     <attr sel="#emailError" th:errors="*{email}"
           th:if="${#fields.hasErrors('email')}"/>
+    <!--Petitioner Type-->
+    <attr sel="#petitionerType" th:field="*{petitionerType}"/>
+    <attr sel="#petitionerTypeList" th:each="petitionerType : ${petitionerTypes}"
+          th:text="${petitionerType.petitionerType}"
+          th:value="${petitionerType}"
+          th:field="*{petitionerType}"/>
     <!--Address-->
     <attr sel="#address" th:field="*{address}"/>
     <attr sel="#addressError" th:errors="*{address}"
@@ -48,7 +54,7 @@
     <attr sel="#createdAt" th:field="*{{createdAt}}"/>
     <!--Button-->
     <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
-<!--Errors Display-->
+    <!--Errors Display-->
     <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
     <attr sel="#error" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>
 

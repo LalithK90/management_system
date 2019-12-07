@@ -35,7 +35,6 @@
 
     <!--Petitioner Details-->
     <!--Id-->
-    <attr sel="#idStatus" th:if="${addStatus==false}"/>
     <attr sel="#id" th:field="*{petition.petitioner.id}"/>
     <!--Name in sinhala-->
     <attr sel="#nameSinhala" th:field="*{petition.petitioner.nameSinhala}"/>
@@ -53,6 +52,15 @@
     <attr sel="#email" th:field="*{petition.petitioner.email}"/>
     <attr sel="#emailError" th:errors="*{petition.petitioner.email}"
           th:if="${#fields.hasErrors('petition.petitioner.email')}"/>
+    <!--Land-->
+    <attr sel="#land" th:field="*{petition.petitioner.land}"/>
+    <attr sel="#landError" th:errors="*{petition.petitioner.land}"
+          th:if="${#fields.hasErrors('petition.petitioner.land')}"/>
+    <!--Petitioner Type-->
+    <attr sel="#petitionerType" th:field="*{petition.petitioner.petitionerType}"/>
+    <attr sel="#petitionerTypeList" th:each="petitionerType : ${petitionerTypes}"
+          th:text="${petitionerType.petitionerType}"
+          th:value="${petitionerType}"/>
     <!--Address-->
     <attr sel="#address" th:field="*{petition.petitioner.address}"/>
     <attr sel="#addressError" th:errors="*{petition.petitioner.address}"
@@ -65,20 +73,16 @@
     <attr sel="#mobileTwo" th:field="*{petition.petitioner.mobileTwo}"/>
     <attr sel="#mobileTwoError" th:errors="*{petition.petitioner.mobileTwo}"
           th:if="${#fields.hasErrors('petition.petitioner.mobileTwo')}"/>
-    <!--Land-->
-    <attr sel="#land" th:field="*{petition.petitioner.land}"/>
-    <attr sel="#landError" th:errors="*{petition.petitioner.land}"
-          th:if="${#fields.hasErrors('petition.petitioner.land')}"/>
     <!--Created by and created at-->
     <attr sel="#updateStatus" th:if="${addStatus==false}"/>
     <attr sel="#createdBy" th:field="*{petition.petitioner.createdBy}"/>
     <attr sel="#createdAt" th:field="*{{petition.petitioner.createdAt}}"/>
 
     <!--Errors-->
-<!--
-      <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
-      <attr sel="#error" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>
--->
+    <!--
+          <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
+          <attr sel="#error" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>
+    -->
 
     <!--Button-->
     <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
@@ -87,8 +91,11 @@
     <!--URL Comes -->
     <attr sel="#districtUrl" th:value="${districtUrl}"/>
     <attr sel="#stationUrl" th:value="${stationUrl}"/>
+    <attr sel="#employeeUrl" th:value="${employeeUrl}"/>
+    <attr sel="#petitionerUrl" th:value="${petitionerUrl}"/>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
     <attr sel="#customJS" th:src="@{/js/stationFindUsingProvince.js}"/>
+    <attr sel="#customScript" th:src="@{/js/employeeFindUsingWorkingPlace.js}"/>
 </thlogic>

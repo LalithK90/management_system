@@ -99,10 +99,9 @@
           th:selected="${employeeStatuss==employee.employeeStatus?'selected':'unselected'}"/>
     <!--Employee working place-->
     <attr sel="#workingPlace" th:field="*{workingPlace}"/>
-    <attr sel="#employeeStatusList" th:each="workingPlace : ${workingPlaces}"
+    <attr sel="#workingPlaceList" th:each="workingPlace : ${workingPlaces}"
           th:text="${workingPlace.name}"
-          th:value="${workingPlace.id}"
-          th:selected="${workingPlace==employee.workingPlace?'selected':'unselected'}"/>
+          th:value="${workingPlace.id}"/>
     <!--Created at update at-->
     <attr sel="#updateStatus" th:if="${addStatus==false}"/>
     <attr sel="#createdBy" th:field="*{createdBy}"/>
@@ -111,7 +110,7 @@
     <attr sel="#photoDetails" th:if="${addStatus==false}"/>
     <attr sel="#filesList" th:each="file, rowStat: ${files}"/>
     <attr sel="#img" th:src="${file.url}"/>
-    <!--//todo - > need to reconsider how to remove image from the system -->
+    <!--Todo - > need to reconsider how to remove image from the system -->
     <!--Remove images-->
     <attr sel="#removeImages" th:value="${file.filename}"/>
     <attr sel="#imgName" th:text="${file.filename}"/>

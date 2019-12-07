@@ -2,11 +2,15 @@ package lk.imms.management_system.asset.petition.controller;
 
 
 import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
+import lk.imms.management_system.asset.employee.controller.EmployeeRestController;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
+import lk.imms.management_system.asset.employee.service.EmployeeService;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.asset.petition.entity.PetitionFiles;
+import lk.imms.management_system.asset.petition.entity.Petitioner;
 import lk.imms.management_system.asset.petition.service.PetitionFilesService;
 import lk.imms.management_system.asset.petition.service.PetitionService;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
@@ -43,6 +47,7 @@ public class PetitionController {
         model.addAttribute("petitionTypes", PetitionType.values());
         model.addAttribute("petitionPriorities", PetitionPriority.values());
         model.addAttribute("designations", Designation.values());
+        model.addAttribute("petitionerTypes", PetitionerType.values());
         model.addAttribute("provinces", Province.values());
         model.addAttribute("districtUrl", MvcUriComponentsBuilder
                 .fromMethodName(WorkingPlaceRestController.class, "getDistrict", "")
@@ -50,6 +55,14 @@ public class PetitionController {
                 .toString());
         model.addAttribute("stationUrl", MvcUriComponentsBuilder
                 .fromMethodName(WorkingPlaceRestController.class, "getStation", "")
+                .build()
+                .toString());
+        model.addAttribute("employeeUrl",MvcUriComponentsBuilder
+                          .fromMethodName(EmployeeRestController.class,"getEmployeeByWorkingPlace", "")
+                          .build()
+                          .toString());
+        model.addAttribute("petitionerUrl", MvcUriComponentsBuilder
+                .fromMethodName(PetitionerRestController.class, "getPetitioner", "")
                 .build()
                 .toString());
         return "petition/addPetition";

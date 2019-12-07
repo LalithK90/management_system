@@ -6,19 +6,19 @@
 <nav id="navBar"></nav>
 <div class="container-fluid bg-secondary form-Border">
     <div class="row text-center formManagement border-info">
-        <div class="col">
+        <div class="col-3">
             <a class="btn btn-primary" href="/home">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
             </a>
         </div>
-        <div class="col">
+        <div class="col-6">
             <h4 class="text-light text-center">
                 <strong>
-                    <span id="heading"></span>&nbsp; Details
+                    <p id="heading"></p>
                 </strong>
             </h4>
         </div>
-        <div class="col">
+        <div class="col-3">
             <a href="/workingPlace" class="btn btn-primary">
                 <i class="fa fa-list"></i>&nbsp; View List
             </a>
@@ -32,18 +32,10 @@
             <div class="form-group col-md-6 col-sm-6 text-left flex-column">
                 <div class="form-row text-right">
                     <div class="col-md-4">
-                        <label class="control-label" for="id">ID :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <span id="id" class="form-control"></span>
-                    </div>
-                </div>
-                <div class="form-row text-right">
-                    <div class="col-md-4">
                         <label class="control-label" for="name">Name :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="name" class="form-control"></span>
+                        <p id="name" class="display_detail"></p>
                     </div>
                 </div>
                 <div class="form-row text-right">
@@ -51,7 +43,7 @@
                         <label class="control-label" for="code">Code :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="code" class="form-control"></span>
+                        <p id="code" class="display_detail"></p>
                     </div>
                 </div>
                 <div class="form-row text-right">
@@ -59,7 +51,7 @@
                         <label class="control-label" for="province">Province :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="province" class="form-control">                        </span>
+                        <p id="province" class="display_detail"></p>
                     </div>
                 </div>
                 <div class="form-row text-right">
@@ -67,15 +59,23 @@
                         <label class="control-label" for="workingPlaceType">Working Place Type :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="workingPlaceType" class="form-control">                        </span>
+                        <p id="workingPlaceType" class="display_detail"></p>
                     </div>
                 </div>
                 <div class="form-row text-right">
                     <div class="col-md-4">
-                        <label class="control-label" for="email">Email :</label>
+                        <label class="control-label" for="emailOne">Email One :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="email" class="form-control"></span>
+                        <p id="emailOne" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="emailTwo">Email Two :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="emailTwo" class="display_detail"></p>
                     </div>
                 </div>
                 <div class="form-row text-right">
@@ -83,7 +83,7 @@
                         <label class="control-label" for="address">Address :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="address" class="form-control"></span>
+                        <p id="address" class="display_detail"></p>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                         <label class="control-label" for="landOne">Land No One:</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="landOne" class="form-control land"></span>
+                        <p id="landOne" class="display_detail land"></p>
                     </div>
                 </div>
                 <div class="form-row text-right">
@@ -102,7 +102,7 @@
                         <label class="control-label" for="landTwo">Land No Two:</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="landTwo" class="form-control land"></span>
+                        <p id="landTwo" class="display_detail land"></p>
                     </div>
                 </div>
                 <div class="form-row text-right">
@@ -110,7 +110,7 @@
                         <label class="control-label " for="landThree">Land No Three :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="landThree" class="form-control land"></span>
+                        <p id="landThree" class="display_detail land"></p>
                     </div>
                 </div>
                 <div class="form-row text-right">
@@ -118,7 +118,7 @@
                         <label class="control-label" for="landFour">Land No Four :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="landFour" class="form-control land"></span>
+                        <p id="landFour" class="display_detail land"></p>
                     </div>
                 </div>
                 <div class="form-row text-right">
@@ -126,7 +126,7 @@
                         <label class="control-label" for="faxNumber">Fax No :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="faxNumber" class="form-control land"></span>
+                        <p id="faxNumber" class="display_detail land"></p>
                     </div>
                 </div>
                 <div id="createdByDiv" class="form-row text-right">
@@ -134,7 +134,7 @@
                         <label class="control-label" for="createdBy">Created By :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="createdBy" class="form-control"></span>
+                        <p id="createdBy" class="display_detail"></p>
                     </div>
                 </div>
                 <div class="form-row text-right" id="createdAtDiv">
@@ -142,7 +142,7 @@
                         <label class="control-label" for="createdAt">Created At :</label>
                     </div>
                     <div class="col-md-8">
-                        <span id="createdAt" class="form-control"></span>
+                        <p id="createdAt" class="display_detail"></p>
                     </div>
                 </div>
             </div>

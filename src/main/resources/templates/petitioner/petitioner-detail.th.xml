@@ -14,6 +14,8 @@
     <attr sel="#nameEnglish" th:text="${petitionerDetail.nameEnglish}"/>
     <!--Email-->
     <attr sel="#email" th:text="${petitionerDetail.email}"/>
+    <!--Petitoner Type-->
+    <attr sel="#petitonerType" th:text="${petitionerDetail.petitonerType.petitonerType}"/>
     <!--Address-->
     <attr sel="#address" th:text="${petitionerDetail.address}"/>
     <!--Mobile One-->

@@ -26,7 +26,7 @@ public class MinutePetition extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private MinuteState minuteState;
 
-    @ManyToOne( cascade = CascadeType.PERSIST )
+    @ManyToOne
     private Petition petition;
 
     @ManyToOne( fetch = FetchType.EAGER )

@@ -2,6 +2,8 @@ package lk.imms.management_system.asset.employee.service;
 
 import lk.imms.management_system.asset.employee.dao.EmployeeDao;
 import lk.imms.management_system.asset.employee.entity.Employee;
+import lk.imms.management_system.asset.employee.entity.Enum.Designation;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -62,4 +64,7 @@ public class EmployeeService implements AbstractService< Employee, Long > {
     }
 
 
+    public List< Employee > findByWorkingPlace(WorkingPlace workingPlace) {
+        return employeeDao.findByWorkingPlace(workingPlace);
+    }
 }

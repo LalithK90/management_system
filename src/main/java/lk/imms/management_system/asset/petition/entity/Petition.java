@@ -41,7 +41,7 @@ public class Petition extends AuditEntity {
     @OneToMany( mappedBy = "petition")
     private List< MinutePetition > minutePetitions;
 
-    @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.PERSIST )
+    @ManyToOne
     private Petitioner petitioner;
 
 }

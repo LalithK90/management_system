@@ -1,11 +1,10 @@
 package lk.imms.management_system.asset.petition.entity;
 
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -43,6 +42,9 @@ public class Petitioner extends AuditEntity {
     @Email( message = "Provide valid email" )
     @Column( unique = true )
     private String email;
+
+    @Enumerated( EnumType.STRING )
+    private PetitionerType petitionerType;
 
     @OneToMany(mappedBy = "petitioner")
     private List<Petition> petitions;

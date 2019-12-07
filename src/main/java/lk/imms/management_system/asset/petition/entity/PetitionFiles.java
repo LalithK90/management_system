@@ -13,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class PetitionFiles extends AuditEntity {
 
+
     private String name, mimeType,newName;
 
     @Column(unique = true)

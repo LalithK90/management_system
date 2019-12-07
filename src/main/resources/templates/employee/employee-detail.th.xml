@@ -32,6 +32,23 @@
     <attr sel="#updatedBy" th:text="${employeeDetail.updatedBy}"/>
     <attr sel="#updatedAt" th:text="${{employeeDetail.updatedAt}}"/>
 
+    <!--Current working place detail -->
+    <attr sel="#employeeWorkingPlaceName" th:text="${employeeDetail.workingPlace.name}"/>
+    <attr sel="#employeeWorkingPlaceCode" th:text="${employeeDetail.workingPlace.code}"/>
+    <attr sel="#employeeWorkingPlaceProvince" th:text="${employeeDetail.workingPlace.province.province}"/>
+    <attr sel="#employeeWorkingPlaceWorkingPlaceType" th:text="${employeeDetail.workingPlace.workingPlaceType.workingPlaceType}"/>
+    <attr sel="#employeeWorkingPlaceEmailOne" th:text="${employeeDetail.workingPlace.emailOne}"/>
+    <attr sel="#employeeWorkingPlaceEmailTwo" th:text="${employeeDetail.workingPlace.emailTwo}"/>
+    <attr sel="#employeeWorkingPlaceAddress" th:utext="${employeeDetail.workingPlace.address}"/>
+    <attr sel="#employeeWorkingPlaceLandOne" th:text="${employeeDetail.workingPlace.landOne}"/>
+    <attr sel="#employeeWorkingPlaceLandTwo" th:text="${employeeDetail.workingPlace.landTwo}"/>
+    <attr sel="#employeeWorkingPlaceLandThree" th:text="${employeeDetail.workingPlace.landThree}"/>
+    <attr sel="#employeeWorkingPlaceLandFour" th:text="${employeeDetail.workingPlace.landFour}"/>
+    <attr sel="#employeeWorkingPlaceFaxNumber" th:text="${employeeDetail.workingPlace.faxNumber}"/>
+    <attr sel="#employeeWorkingPlaceCreatedBy" th:text="${employeeDetail.workingPlace.createdBy}"/>
+    <attr sel="#employeeWorkingPlaceCreatedAt" th:text="${{employeeDetail.workingPlace.createdAt}}"/>
+
+
     <attr sel="#filesList" th:each="file, rowStat: ${files}"/>
     <attr sel="#img" th:src="${file.url}"/>
     <!--//todo - > need to reconsider how to remove image from the system -->

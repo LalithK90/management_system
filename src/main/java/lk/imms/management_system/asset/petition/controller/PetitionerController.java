@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.petition.controller;
 
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
 import lk.imms.management_system.asset.petition.entity.Petitioner;
 import lk.imms.management_system.asset.petition.service.PetitionerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class PetitionerController {
     @GetMapping( "/add" )
     public String addForm(Model model) {
         model.addAttribute("addStatus", true);
+        model.addAttribute("petitionerTypes", PetitionerType.values());
         model.addAttribute("petitioner", new Petitioner());
         return "petitioner/addPetitioner";
     }
@@ -48,6 +50,7 @@ public class PetitionerController {
     @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
     public String editPetitionerFrom(@PathVariable( "id" ) Long id, Model model) {
         model.addAttribute("addStatus", false);
+        model.addAttribute("petitionerTypes", PetitionerType.values());
         model.addAttribute("petitioner", petitionerService.findById(id));
         return "petitioner/addPetitioner";
     }
@@ -56,7 +59,6 @@ public class PetitionerController {
     @PostMapping( value = {"/add", "/update"} )
     public String savePetitioner(@Valid @ModelAttribute( "petitioner" ) Petitioner petitioner,
                                  BindingResult result, Model model) {
-
         if ( petitioner.getNameEnglish().isEmpty() || petitioner.getNameSinhala().isEmpty() || petitioner.getNameTamil().isEmpty() ) {
             ObjectError error = new ObjectError("petitionerDetail", "There are no possibilities to empty petitioner " +
                     "name, it should be included any language, which is you used ");
@@ -64,7 +66,8 @@ public class PetitionerController {
         }
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
-            model.addAttribute("petitionerDetail", petitionerService);
+            model.addAttribute("petitionerType", PetitionerType.values());
+            model.addAttribute("petitioners", petitioner);
             return "petitioner/addPetitioner";
         }
         petitionerService.persist(petitioner);
