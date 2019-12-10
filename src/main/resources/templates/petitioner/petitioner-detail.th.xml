@@ -15,7 +15,7 @@
     <!--Email-->
     <attr sel="#email" th:text="${petitionerDetail.email}"/>
     <!--Petitoner Type-->
-    <attr sel="#petitonerType" th:text="${petitionerDetail.petitonerType.petitonerType}"/>
+    <attr sel="#petitionerType" th:text="${petitionerDetail.petitionerType.petitionerType}"/>
     <!--Address-->
     <attr sel="#address" th:text="${petitionerDetail.address}"/>
     <!--Mobile One-->

@@ -9,8 +9,8 @@
     <attr sel="#nameTamil" th:text="${petitioner.nameTamil}"/>
     <attr sel="#nameEnglish" th:text="${petitioner.nameEnglish}"/>
     <attr sel="#mobileOne" th:text="${petitioner.mobileOne}"/>
-    <attr sel="#petitionerView" th:href="${'/petitionerDetail/' + petitioner.id}"/>
-    <attr sel="#petitionerEdit" th:href="${'/petitionerDetail/edit/' + petitioner.id}"/>
+    <attr sel="#petitionerView" th:href="${'/petitioner/' + petitioner.id}"/>
+    <attr sel="#petitionerEdit" th:href="${'/petitioner/edit/' + petitioner.id}"/>
 
 
     <attr sel="#petitionerListNotPresent" th:if="${ #lists.isEmpty(petitioners)}"/>

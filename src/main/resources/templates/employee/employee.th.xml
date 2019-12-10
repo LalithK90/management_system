@@ -14,7 +14,9 @@
     <!--Mobile One-->
     <attr sel="#mobileOne" th:text="${employee.mobileOne}"/>
     <!--Land-->
+<!--
     <attr sel="#land" th:text="${employee.land}"/>
+-->
     <!--Designation-->
     <attr sel="#designation" th:text="${employee.designation.designation}"/>
     <!--Employee Status-->

@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PetitionType {
-    RESIDENT("By President Office"),
+    PRESIDENT("By President Office"),
     RRIMEMINISTER("By Prime Minister Office"),
     NDDCA("By NDDCA"),
     TELEPHONE("By Telephoning"),

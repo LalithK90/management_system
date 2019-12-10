@@ -1,8 +1,8 @@
-package lk.imms.management_system.asset.petition.controller;
+package lk.imms.management_system.asset.petitioner.controller;
 
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
-import lk.imms.management_system.asset.petition.entity.Petitioner;
-import lk.imms.management_system.asset.petition.service.PetitionerService;
+import lk.imms.management_system.asset.petitioner.entity.Petitioner;
+import lk.imms.management_system.asset.petitioner.service.PetitionerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +41,7 @@ public class PetitionerController {
     //Send on petitioner details
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     public String petitionerView(@PathVariable( "id" ) Long id, Model model) {
-        model.addAttribute("petitioner", petitionerService.findById(id));
+        model.addAttribute("petitionerDetail", petitionerService.findById(id));
         return "petitioner/petitioner-detail";
     }
 

@@ -23,7 +23,7 @@
             </h4>
         </div>
         <div class="col">
-            <a href="/petitionerDetail" class="btn btn-primary">
+            <a href="/petitioner" class="btn btn-primary">
                 <i class="fa fa-list"></i>&nbsp; View List
             </a>
         </div>
@@ -91,7 +91,7 @@
                             <label class="control-label" for="petitionerType">Petitioner Type :</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="petitionerType" class="form-control" required>
+                            <select id="petitionerType" class="form-control" tabindex="6" required>
                                 <option value="">Please select</option>
                                 <option id="petitionerTypeList" value=""></option>
                             </select>
@@ -106,7 +106,7 @@
                             <label class="control-label" for="address">Address :</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea id="address" class="form-control" tabindex="6" required></textarea>
+                            <textarea id="address" class="form-control" tabindex="7" required></textarea>
                             <span class="error" id="addressError">Error Address</span>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                             <label class="control-label" for="mobileOne">Mobile One No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="mobileOne" class="form-control mobile" tabindex="7" type="text"
+                            <input id="mobileOne" class="form-control mobile" tabindex="8" type="text"
                                    maxlength="10" min="9"
                                    required/>
                             <span class="error" id="mobileOneError">Error Mobile Number</span>
@@ -128,7 +128,7 @@
                             <label class="control-label" for="mobileTwo">Mobile Two No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="mobileTwo" class="form-control mobile" tabindex="8" type="text"
+                            <input id="mobileTwo" class="form-control mobile" tabindex="9" type="text"
                                    maxlength="10" min="9"/>
                             <span class="error" id="mobileTwoError">Error Mobile  Number</span>
                         </div>
@@ -139,7 +139,7 @@
                             <label class="control-label" for="land">Land No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="land" class="form-control land" type="text" tabindex="9" maxlength="10"
+                            <input id="land" class="form-control land" type="text" tabindex="10" maxlength="10"
                                    min="9"/>
                             <span class="error" id="landError">Error Land Number</span>
                         </div>
@@ -167,7 +167,7 @@
                 </div>
 
                 <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                    <button class="btn btn-success" type="submit" tabindex="10">
+                    <button class="btn btn-success" type="submit" tabindex="11">
                         <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
                     </button>
                 </div>

@@ -22,25 +22,25 @@
             </h4>
         </div>
         <div class="col">
-            <a href="/workingPlace" class="btn btn-primary">
+            <a href="/petition" class="btn btn-primary">
                 <i class="fa fa-list"></i>&nbsp; View List
             </a>
         </div>
     </div>
 </div>
-
+<!--Petition content start-->
 <div class="container-fluid bg-dark formBorder">
     <div class="col-sm-12 flex-column ">
-        <form id="form" class="form-horizontal" method="POST">
+        <form id="form" class="form-horizontal" method="POST" enctype="multipart/form-data">
             <!--Normal Petition details-->
-            <div class="row col-12 col-md-12 col-sm-12">
+            <div class="row col-12 col-md-12 col-sm-12 bg-dark formBorder card-columns">
                 <!--village-->
                 <div class="col-md-4 col-sm-4 text-left ">
                     <div class="col-md-4">
                         <label class="control-label" for="village">Village</label>
                     </div>
                     <div class="col-md-8">
-                        <input id="village" class="form-control" type="text" required/>
+                        <input id="village" class="form-control" tabindex="1" type="text" required/>
                     </div>
                 </div>
                 <!--AGA Division-->
@@ -49,7 +49,7 @@
                         <label class="control-label" for="agaDivision">AGA Division</label>
                     </div>
                     <div class="col-md-8">
-                        <input class="form-control" id="agaDivision" type="text" required/>
+                        <input class="form-control" id="agaDivision" tabindex="2" type="text" required/>
                     </div>
                 </div>
                 <!--petition Type-->
@@ -58,7 +58,7 @@
                         <label class="control-label" for="petitionType">Received</label>
                     </div>
                     <div class="col-md-8">
-                        <select id="petitionType" name="petitionType" class="form-control" required>
+                        <select id="petitionType" class="form-control" tabindex="3" required>
                             <option value="">Please select</option>
                             <option id="petitionTypeList" value=""></option>
                         </select>
@@ -66,14 +66,17 @@
                 </div>
             </div>
             <!--Working Place Find-->
-            <div class="row col-12 col-md-12 col-sm-12">
+            <div class="row col-12 col-md-12 col-sm-12 bg-dark formBorder card-columns">
+                <div class="form-row col-12 col-md-12 col-sm-12">
+                    <p class="text-md-left "><strong>Complaint Relevant To :- </strong></p>
+                </div>
                 <!--province-->
                 <div class="col-md-4 col-sm-4 text-left ">
                     <div class="col-md-4">
                         <label class="control-label" for="province">Province</label>
                     </div>
                     <div class="col-md-8">
-                        <select class="form-control" id="province" required>
+                        <select class="form-control" id="province" tabindex="4" required>
                             <option value="">Please select</option>
                             <option id="provinceSelectList"></option>
                         </select>
@@ -85,7 +88,7 @@
                         <label class="control-label" for="district">District</label>
                     </div>
                     <div class="col-md-8">
-                        <select class="form-control" name="district" id="district" required>
+                        <select class="form-control" name="district" tabindex="5" id="district" required>
                             <option value="">Please select</option>
                         </select>
                     </div>
@@ -96,18 +99,30 @@
                         <label class="control-label" for="station">Station:</label>
                     </div>
                     <div class="col-md-8">
-                        <select id="station" name="workingPlace" class="form-control" required>
+                        <select id="station" class="form-control" tabindex="6" required>
                             <option value="">Please select</option>
                         </select>
                     </div>
                 </div>
             </div>
-            <!--petition note are-->
+            <!--Petition subject-->
+            <div>
+                <!--subject-->
+                <div class="from-row col-md-12 col-sm-12 text-left ">
+                    <div class="col-md-4">
+                        <label class="control-label" for="subject">Subject</label>
+                    </div>
+                    <div class="col-md-12">
+                        <input id="subject" class="form-control" tabindex="7" type="text" required/>
+                    </div>
+                </div>
+            </div>
+            <!--minute petition note are-->
             <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
                 <div class="input-field">
                     <label class="control-label col-sm-4" for="description">Description</label>
                     <div>
-                            <textarea class="form-control" id="description"
+                            <textarea class="form-control" id="description" tabindex="8"
                                       name="description" placeholder="Enter Description"></textarea>
                     </div>
                 </div>
@@ -115,24 +130,24 @@
             <!--photos -->
             <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
                 <div class="input-field">
-                    <label class="active ">Photos :</label>
-                    <div class="input-images" style="padding-top: .5rem;"></div>
+                    <label class="active ">Photos </label>
+                    <div class="input-images" tabindex="10" style="padding-top: .5rem;"></div>
                 </div>
             </div>
             <!--Complaint directed to-->
             <div class="row col-12 col-md-12 col-sm-12 card-body formBorder">
                 <div class="row col-12 col-md-12 col-sm-12 text-left">
-                    <label>Complaint Direct To :- </label>
+                    <p class="text-md-left "><strong>Complaint Direct To :- </strong></p>
                 </div>
                 <!--Working Place Compalint Direct -->
                 <div class="row col-12 col-md-12 col-sm-12">
                     <!--province-->
                     <div class="col-md-4 col-sm-4 text-left ">
                         <div class="col-md-4">
-                            <label class="control-label" for="province">Province</label>
+                            <label class="control-label" for="provinces">Province</label>
                         </div>
                         <div class="col-md-8">
-                            <select class="form-control" id="provinces" required>
+                            <select class="form-control" tabindex="11" id="provinces" required>
                                 <option value="">Please select</option>
                                 <option id="provinceSelectList"></option>
                             </select>
@@ -144,7 +159,7 @@
                             <label class="control-label" for="districts">District</label>
                         </div>
                         <div class="col-md-8">
-                            <select class="form-control" name="district" id="districts" required>
+                            <select class="form-control" name="district" id="districts" tabindex="12" required>
                                 <option value="">Please select</option>
                             </select>
                         </div>
@@ -152,10 +167,10 @@
                     <!--Station-->
                     <div class="stationShow col-md-4 col-sm-4 text-left ">
                         <div class="col-md-4">
-                            <label class="control-label" for="station">Station:</label>
+                            <label class="control-label" for="stations">stations:</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="stations" name="workingPlace" class="form-control" required>
+                            <select id="stations" class="form-control" tabindex="13" required>
                                 <option value="">Please select</option>
                             </select>
                         </div>
@@ -168,7 +183,7 @@
                             <label class="control-label" for="designation">Designation</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="designation" class="form-control" required>
+                            <select id="designation" class="form-control" tabindex="14" required>
                                 <option value="">Please select</option>
                                 <option id="designationList" value=""></option>
                             </select>
@@ -180,7 +195,7 @@
                             <label class="control-label" for="employees">Employees</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="employees" name="employees" class="form-control" required>
+                            <select id="employees" class="form-control" tabindex="15" required>
                                 <option value="">Please select</option>
                                 <option id="employeesList" value=""></option>
                             </select>
@@ -192,7 +207,7 @@
                             <label class="control-label" for="petitionPriority">Priority</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="petitionPriority" class="form-control" required>
+                            <select id="petitionPriority" class="form-control" tabindex="16" required>
                                 <option value="">Please select</option>
                                 <option id="petitionPriorityList" value=""></option>
                             </select>
@@ -200,10 +215,9 @@
                     </div>
                 </div>
             </div>
-
             <!--Petitioner details-->
             <div class="row col-12 col-md-12 col-sm-12 card-body formBorder">
-                <label>Petitioner Details :- </label>
+                <p class="text-md-left "><strong>Petitioner Details :- </strong></p>
                 <div class="row col-12 col-md-12 col-sm-12 text-left" id="petitionerDetails">
                     <!--Add petitioner-->
                     <!--Left Side-->
@@ -211,64 +225,52 @@
                         <!--Name Sinhala-->
                         <div class="form-row text-right">
                             <div class="col-md-4">
-                                <input id="id" class="form-control" type="hidden" readonly/>
-                                <label class="control-label" for="nameSinhala">Name ( Sinhala ) :</label>
+                                <input id="petitionerId" class="form-control" type="hidden" readonly/>
+                                <label class="control-label" for="nameSinhala">Name ( Sinhala ) </label>
                             </div>
                             <div class="col-md-8">
-                                <input id="nameSinhala" class="form-control" tabindex="1" type="text"/>
+                                <input id="nameSinhala" class="form-control" tabindex="17"  type="text"/>
                                 <span id="nameSinhalaError" class="error">Error Name in Sinhala</span>
                             </div>
                         </div>
                         <!--Name Tamil-->
                         <div class="form-row text-right">
                             <div class="col-md-4">
-                                <label class="control-label" for="nameTamil">Name ( Tamil ) :</label>
+                                <label class="control-label" for="nameTamil">Name ( Tamil ) </label>
                             </div>
                             <div class="col-md-8">
-                                <input id="nameTamil" class="form-control" tabindex="2" type="text"/>
+                                <input id="nameTamil" class="form-control" tabindex="18" type="text"/>
                                 <span id="nameTamilError" class="error">Error Name In Tamil</span></div>
                         </div>
                         <!--Name English-->
                         <div class="form-row text-right">
                             <div class="col-md-4">
-                                <label class="control-label" for="nameEnglish">Name ( English ) :</label>
+                                <label class="control-label" for="nameEnglish">Name ( English ) </label>
                             </div>
                             <div class="col-md-8">
-                                <input id="nameEnglish" class="form-control" tabindex="3" type="text" required/>
+                                <input id="nameEnglish" class="form-control" tabindex="19" type="text" required/>
                                 <span id="nameEnglishError" class="error">Error Name in English</span>
                             </div>
                         </div>
                         <!--Email -->
                         <div class="form-row text-right">
                             <div class="col-md-4">
-                                <label class="control-label" for="email">Email :</label>
+                                <label class="control-label" for="email">Email </label>
                             </div>
                             <div class="col-md-8">
-                                <input id="email" class="form-control" tabindex="5" type="email"/>
+                                <input id="email" class="form-control" tabindex="20" type="email"/>
                                 <span class="error" id="emailError">Error Email</span>
                             </div>
                         </div>
                         <!--Land-->
                         <div class="form-row text-right">
                             <div class="col-md-4">
-                                <label class="control-label" for="land">Land No :</label>
+                                <label class="control-label" for="land">Land No </label>
                             </div>
                             <div class="col-md-8">
-                                <input id="land" class="form-control land" type="text" tabindex="9" maxlength="10"
+                                <input id="land" class="form-control land" type="text" tabindex="21" maxlength="10"
                                        min="9"/>
                                 <span class="error" id="landError">Error Land Number</span>
-                            </div>
-                        </div>
-                        <!--Petitioner type-->
-                        <div class="form-row text-right">
-                            <div class="col-md-4">
-                                <label class="control-label" for="petitionerType">Petitioner Type :</label>
-                            </div>
-                            <div class="col-md-8">
-                                <select id="petitionerType" class="form-control" required>
-                                    <option value="">Please select</option>
-                                    <option id="petitionerTypeList" value=""></option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -277,54 +279,42 @@
                         <!--Address-->
                         <div class="form-row text-right">
                             <div class="col-md-4">
-                                <label class="control-label" for="address">Address :</label>
+                                <label class="control-label" for="address">Address </label>
                             </div>
                             <div class="col-md-8">
-                                <textarea id="address" class="form-control" tabindex="6" required></textarea>
+                                <textarea id="address" class="form-control" tabindex="22" ></textarea>
                                 <span class="error" id="addressError">Error Address</span>
                             </div>
                         </div>
                         <!--Mobile one-->
                         <div class="form-row text-right">
                             <div class="col-md-4">
-                                <label class="control-label" for="mobileOne">Mobile One No :</label>
+                                <label class="control-label" for="mobileOne">Mobile One No </label>
                             </div>
                             <div class="col-md-8">
-                                <input id="mobileOne" class="form-control mobile" tabindex="7" type="text"
-                                       maxlength="10" min="9"
-                                       required/>
+                                <input id="mobileOne" class="form-control mobile" tabindex="23" type="text"
+                                       maxlength="10" min="9"/>
                                 <span class="error" id="mobileOneError">Error Mobile Number</span>
                             </div>
                         </div>
                         <!--Mobile Two-->
                         <div class="form-row text-right">
                             <div class="col-md-4">
-                                <label class="control-label" for="mobileTwo">Mobile Two No :</label>
+                                <label class="control-label" for="mobileTwo">Mobile Two No </label>
                             </div>
                             <div class="col-md-8">
-                                <input id="mobileTwo" class="form-control mobile" tabindex="8" type="text"
+                                <input id="mobileTwo" class="form-control mobile" tabindex="24" type="text"
                                        maxlength="10" min="9"/>
                                 <span class="error" id="mobileTwoError">Error Mobile  Number</span>
                             </div>
                         </div>
-                        <div id="updateStatus">
-                            <!--Created by-->
-                            <div class="form-row text-right">
-                                <div class="col-md-4">
-                                    <label class="control-label" for="createdBy">Created By :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input id="createdBy" class="form-control" type="text" readonly/>
-                                </div>
+                        <!--Created by-->
+                        <div class="form-row text-right" id="updateStatus">
+                            <div class="col-md-4">
+                                <label class="control-label" for="createdBy">Created By </label>
                             </div>
-                            <!--Created Date-->
-                            <div class="form-row text-right">
-                                <div class="col-md-4">
-                                    <label class="control-label" for="createdAt">Created At :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input id="createdAt" class="form-control" type="text" readonly/>
-                                </div>
+                            <div class="col-md-8">
+                                <input id="createdBy" class="form-control" type="text" readonly/>
                             </div>
                         </div>
                     </div>
@@ -333,18 +323,11 @@
             <!--button-->
             <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
                 <div class="input-field">
-                    <button class="btn btn-success" type="submit">
+                    <button class="btn btn-success" type="submit" tabindex="25">
                         <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
                             id="submit"></span>
                     </button>
                 </div>
-            </div>
-            <!--Errors -->
-            <div class="form-row">
-                <label id="errorLabel">Errors: </label>
-                <ul>
-                    <li id="error" class="error"></li>
-                </ul>
             </div>
             <!--Hide content from visual-->
             <div class="form-row">
@@ -356,7 +339,6 @@
         </form>
     </div>
 </div>
-
 <!--footer include-->
 <footer id="footer" class="page-footer"></footer>
 <!--script include-->

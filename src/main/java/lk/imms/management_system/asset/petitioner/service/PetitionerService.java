@@ -1,8 +1,8 @@
-package lk.imms.management_system.asset.petition.service;
+package lk.imms.management_system.asset.petitioner.service;
 
-import lk.imms.management_system.asset.petition.dao.PetitionerDao;
+import lk.imms.management_system.asset.petitioner.dao.PetitionerDao;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
-import lk.imms.management_system.asset.petition.entity.Petitioner;
+import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -52,6 +52,7 @@ public class PetitionerService implements AbstractService< Petitioner, Long > {
     }
 
     public Petitioner findByPetitionerType(PetitionerType petitionerType) {
-    return petitionerDao.findByPetitionerType(petitionerType);
+        String petitionerTypes = petitionerType.toString();
+        return petitionerDao.findByPetitionerType(petitionerTypes);
     }
 }

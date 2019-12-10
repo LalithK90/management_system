@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.minute.entity;
 
+import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -33,4 +35,8 @@ public class MinutePetitionFiles extends AuditEntity {
         this.newName = newName;
         this.newId = newId;
     }
+
+
+    @ManyToOne
+    private MinutePetition minutePetition;
 }

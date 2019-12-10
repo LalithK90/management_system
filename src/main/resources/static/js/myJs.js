@@ -350,23 +350,20 @@ async function getData(url) {
 
 // conformation message and to login page
 function conformationAndLoginWindow() {
-    let r = confirm("There is no way to access to the system without re re-login \n Please click \'Ok\' to login");
-    if (r === true) {
-        let loginUrl = window.location.protocol + "/login";
-        window.open(loginUrl, '_self');
-    }
+    swal(`Could you please wait until re-fresh me.;`)
+        .then((value) => {
+            if (value) {
+                location.reload();
+            }
+        });
+    /*    let r = confirm("");
+        if (r === true) {
+            location.reload();
+          /*let loginUrl = window.location.protocol + "/login";
+            window.open(loginUrl, '_self');
+        }*/
 }
 
-// content show table show and hide - start
-function contentShow(contentName) {
-    contentName.removeAttribute("class");
-}
-
-function contentHide(contentName) {
-    contentName.setAttribute("class", "display");
-}
-
-// content show table show and hide - end
 
 //custom invoice search page validation - start
 $("#invoiceFindBy").bind("change", function () {

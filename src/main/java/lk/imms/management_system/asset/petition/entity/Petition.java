@@ -3,10 +3,14 @@ package lk.imms.management_system.asset.petition.entity;
 import lk.imms.management_system.asset.minute.entity.MinutePetition;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
+import lk.imms.management_system.asset.petitioner.entity.Petitioner;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,10 +42,20 @@ public class Petition extends AuditEntity {
     @OneToMany( mappedBy = "petition" )
     private List< PetitionState > petitionStates;
 
-    @OneToMany( mappedBy = "petition")
+    @OneToMany( mappedBy = "petition" )
     private List< MinutePetition > minutePetitions;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Petitioner petitioner;
+
+    @ManyToOne
+    private WorkingPlace workingPlace;
+
+    @Transient
+    private List< MultipartFile > files = new ArrayList<>();
+
+    @Transient
+    private List< String > removeImages = new ArrayList<>();
+
 
 }

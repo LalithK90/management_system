@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PetitionerType {
-    RESIDENT("By President Office"),
-    RRIMEMINISTER("By Prime Minister Office"),
-    NDDCA("By NDDCA"),
-    OTHER("By Other Autho");
+    PRESIDENT("President Office"),
+    RRIMEMINISTER("Prime Minister Office"),
+    NDDCA("NDDCA"),
+    OTHER("Other");
 
     private final String petitionerType;
 }

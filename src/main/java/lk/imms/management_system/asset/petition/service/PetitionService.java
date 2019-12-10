@@ -26,17 +26,19 @@ public class PetitionService implements AbstractService< Petition, Long > {
 
     @Override
     public Petition findById(Long id) {
-        return null;
+        return petitionDao.getOne(id);
     }
 
     @Override
     public Petition persist(Petition petition) {
-        return null;
+        return petitionDao.save(petition);
     }
 
     @Override
-    public boolean delete(Long id) {
-        return false;
+    public boolean delete(Long id)
+    {
+     petitionDao.deleteById(id);
+        return true;
     }
 
     @Override
