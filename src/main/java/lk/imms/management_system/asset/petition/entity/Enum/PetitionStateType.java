@@ -6,9 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PetitionStateType {
-    RECEIVED("Received"),
-    REJECT("Reject"),
-    ACCEPT("Accept"),
     FURTHERADVICEECG("Further Advice ECG"),
     FORWARDACTIONDC("Forward Action DC"),
     FORWARDACTIONAC("Forward Action AC"),
@@ -17,12 +14,15 @@ public enum PetitionStateType {
     TODETECT("To Detect"),
     DETECTED("Detected"),
     COURT("Court"),
-    CHANGEDATE("Change Date"),
+    CHANGEDATE("Change Date In Court"),
     COURTCASEFINISHED("Court case Finished"),
     REQUESTTOCLOSECE("Request to closed SE"),
     REQUESTTOCLOSEAC("Request to closed AC"),
     REQUESTTOCLOSEDC("Request to closed DC"),
-    REQUESTTOCLOSEECG("Request to closed ECG");
+    REQUESTTOCLOSEECG("Request to closed ECG"),
+    RECEIVED("Received"),
+    REJECT("Reject"),
+    ACCEPT("Accept");
 
-    private final String petitionState;
+    private final String petitionStateType;
 }

@@ -26,6 +26,7 @@
     <!--Minute petition details -->
     <attr sel="#description" th:name="${'minutePetitions[0].detail'}"/>
     <!--Direct to petition -->
+    <attr sel="#directedTo" th:fragment="directedToFragment"/>
     <!--Relevant Station -->
     <attr sel="#stations" th:name="${'minutePetitions[0].workingPlace'}"/>
     <!--Relevant Employee-->
@@ -34,8 +35,6 @@
     <attr sel="#designationList" th:each="designation : ${designations}"
           th:text="${designation.designation}"
           th:value="${designation}"/>
-    <!--Employee-->
-    <attr sel="#employees"/>
     <!--Petition priority-->
     <attr sel="#petitionPriority" th:field="*{petition.petitionPriority}">
         <attr sel="#petitionPriorityList" th:each="petitionPriority : ${petitionPriorities}"

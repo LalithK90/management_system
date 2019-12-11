@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    console.log($("#employeeUrl").val());
     //WYSIWYG add to text area
     bkLib.onDomLoaded(function () {
         nicEditors.allTextAreas()

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+    <title></title>
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/petition" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="form-horizontal"  method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="row col-12 col-md-12 col-sm-12 card-body formBorder">
+                    <p class="text-md-left "><strong>Purpose of this minute  </strong></p>
+                    <!--minute petition state Type-->
+                    <div class="col-md-4 col-sm-4 text-left ">
+                        <div class="col-md-4">
+                            <label class="control-label" for="minuteState">To Action</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="minuteState" class="form-control" tabindex="" required>
+                                <option value="">Please select</option>
+                                <option id="minuteStateList" value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
+                    <div class="input-field">
+                        <label class="control-label col-sm-4" for="description">Description </label>
+                        <div>
+                            <textarea class="form-control" id="description"
+                                      name="description" placeholder="Enter Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!--photos -->
+                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
+                    <div class="input-field">
+                        <label class="active ">Photos </label>
+                        <div class="input-images" style="padding-top: .5rem;"></div>
+                    </div>
+                </div>
+                <!--Employee Find area-->
+                <!--Complaint directed to-->
+                <div class="row col-12 col-md-12 col-sm-12 card-body formBorder" id="directedTo">
+                    <div class="row col-12 col-md-12 col-sm-12 text-left">
+                        <p class="text-md-left "><strong>Direct To </strong></p>
+                    </div>
+                    <!--Working Place Complaint Direct -->
+                    <div class="row col-12 col-md-12 col-sm-12">
+                        <!--petition state Type-->
+                        <div class="col-md-4 col-sm-4 text-left ">
+                            <div class="col-md-4">
+                                <label class="control-label" for="petitionStateType">To Action</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select id="petitionStateType" class="form-control" tabindex="" required>
+                                    <option value="">Please select</option>
+                                    <option id="petitionStateTypeList" value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--province-->
+                        <div class="col-md-4 col-sm-4 text-left ">
+                            <div class="col-md-4">
+                                <label class="control-label" for="provinces">Province</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-control" tabindex="" id="provinces" required>
+                                    <option value="">Please select</option>
+                                    <option id="provinceSelectList"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--District-->
+                        <div class="districtShow col-md-4 col-sm-4 text-left ">
+                            <div class="col-md-4">
+                                <label class="control-label" for="districts">District</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-control" name="district" id="districts" tabindex="" required>
+                                    <option value="">Please select</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-12 col-md-12 col-sm-12">
+                        <!--Station-->
+                        <div class="stationShow col-md-4 col-sm-4 text-left ">
+                            <div class="col-md-4">
+                                <label class="control-label" for="stations">stations:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select id="stations" class="form-control" tabindex="" required>
+                                    <option value="">Please select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--designation-->
+                        <div class="col-md-4 col-sm-4 text-left ">
+                            <div class="col-md-4">
+                                <label class="control-label" for="designation">Designation</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select id="designation" class="form-control" tabindex="" required>
+                                    <option value="">Please select</option>
+                                    <option id="designationList" value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--employees selected-->
+                        <div class="col-md-4 col-sm-4 text-left ">
+                            <div class="col-md-4">
+                                <label class="control-label" for="employees">Employees</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select id="employees" class="form-control" tabindex="" required>
+                                    <option value="">Please select</option>
+                                    <option id="employeesList" value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--button-->
+                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                    <div class="input-field">
+                        <button class="btn btn-success" type="submit">
+                            <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                                id="submit"></span>
+                        </button>
+                    </div>
+                </div>
+                <!--Errors -->
+                <div class="form-row">
+                    <label id="errorLabel">Errors: </label>
+                    <ul>
+                        <li id="error" class="error"></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        <!--Hide content from visual-->
+        <div class="form-row">
+            <input type="hidden" id="districtUrl" class="hide"/>
+            <input type="hidden" id="stationUrl" class="hide"/>
+            <input type="hidden" id="employeeUrl" class="hide"/>
+            <input type="hidden" id="petitionerUrl" class="hide"/>
+        </div>
+    </div>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script id="customScript"></script>
+</body>
+</html>

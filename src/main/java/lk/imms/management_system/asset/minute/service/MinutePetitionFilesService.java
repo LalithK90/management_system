@@ -1,12 +1,16 @@
 package lk.imms.management_system.asset.minute.service;
 
+import lk.imms.management_system.asset.employee.entity.Employee;
+import lk.imms.management_system.asset.employee.entity.EmployeeFiles;
 import lk.imms.management_system.asset.minute.dao.MinutePetitionFilesDao;
+import lk.imms.management_system.asset.minute.entity.MinutePetition;
 import lk.imms.management_system.asset.minute.entity.MinutePetitionFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -47,4 +51,8 @@ public class MinutePetitionFilesService {
         return minutePetitionFilesDao.findByNewId(filename);
     }
 
+    public List< MinutePetitionFiles > findByMinutePetition(MinutePetition minutePetition) {
+        //return employeeFilesDao.findByEmployee(employee);
+        return minutePetitionFilesDao.findByMinutePetitionOrderByIdDesc(minutePetition);
+    }
 }

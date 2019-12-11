@@ -1,6 +1,7 @@
 package lk.imms.management_system.asset.petition.controller;
 
 
+import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
 import lk.imms.management_system.asset.employee.controller.EmployeeRestController;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.minute.entity.Enum.MinuteState;
@@ -38,6 +39,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 // This clz is used to manage petition adding process while on this adding
 // Minute, petition, and petitioner details come on one same object MinutePetition
@@ -75,7 +77,7 @@ public class PetitionController {
                 .fromMethodName(WorkingPlaceRestController.class, "getStation", "")
                 .build()
                 .toString());
-        String[] arg = {"designation", "id"};
+        Object[] arg = {"designation", "id"};
         model.addAttribute("employeeUrl", MvcUriComponentsBuilder
                 .fromMethodName(EmployeeRestController.class, "getEmployeeByWorkingPlace", arg)
                 .build()
@@ -88,8 +90,7 @@ public class PetitionController {
     }
 
     //To get files from the database
-/*
-    public void petitionFiles(Petition petition, Model model) {
+   /* public void petitionFiles(Petition petition, Model model) {
         List< FileInfo > fileInfos = minutePetitionFilesService.findByPetition(petition)
                 .stream()
                 .map(PetitionFiles -> {
@@ -102,8 +103,7 @@ public class PetitionController {
                 })
                 .collect(Collectors.toList());
         model.addAttribute("files", fileInfos);
-    }
-*/
+    }*/
 
     //When scr called file will send to
 /*

@@ -2,6 +2,7 @@ package lk.imms.management_system.asset.minute.entity;
 
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.minute.entity.Enum.MinuteState;
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.audit.AuditEntity;
@@ -18,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
+@ToString
 public class MinutePetition extends AuditEntity {
 
     @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
@@ -39,6 +41,6 @@ public class MinutePetition extends AuditEntity {
     private List< MultipartFile > files = new ArrayList<>();
 
     @Transient
-    private List< String > removeImages = new ArrayList<>();
+    private PetitionStateType petitionStateType;
 
 }
