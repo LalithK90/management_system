@@ -10,138 +10,76 @@
 <div class="container-fluid bg-secondary form-Border">
     <div class="row text-center formManagement border-info">
         <div class="col">
-            <a class="btn btn-primary" href="/home">
-                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
-            </a>
+            <a class="btn btn-success" href="/petition/add"><i class="fa fa-file"></i>
+                &nbsp; New Petition</a>
         </div>
         <div class="col">
-            <h4 class="text-light text-center">
+            <h4 class="text-info text-center">
                 <strong>
-                    <span id="formHeader"></span>
+                    Petition Management
                 </strong>
             </h4>
         </div>
         <div class="col">
-            <a href="/workingPlace" class="btn btn-primary">
-                <i class="fa fa-list"></i>&nbsp; View List
+            <a href="/petition/search" id="searchShow" class="btn btn-primary">
+                <i class="fa fa-file " style="font-size: 20px"></i>&nbsp;Search&nbsp; <i class="fa fa-search"
+                                                                                         style="font-size: 20px"></i>
+
+                                                                   &nbsp;
             </a>
         </div>
     </div>
 </div>
-
-<div class="container-fluid bg-dark formBorder">
-    <div class="col-sm-12 flex-column ">
-        <form id="form" class="form-horizontal" method="POST">
-            <div class="row">
-                <!--Left Side-->
-                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-                    <!--Province-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="province">Province:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select class="form-control province" id="province" name="province" required>
-                                <option value="">Please select</option>
-                                <option id="provinceSelectList"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--Station-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="station">Station:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="station" name="workingPlace" class="form-control" required>
-                                <option value="">Please select</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--Village-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="village">Village :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="village" class="form-control" type="text" required/>
-                            <span class="error" id="nameError">Error Number</span>
-                        </div>
-                    </div>
-                </div>
-                <!--Right Side-->
-                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
-                    <!--District-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="district">District:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select class="form-control district" name="district" id="district" required>
-                                <option value="">Please select</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--AGA Division-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="agaDivision">AGA Division :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input class="form-control" id="agaDivision" type="text" required/>
-                        </div>
-                    </div>
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="priority">Priority:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select class="form-control province" id="priority" name="province" required>
-                                <option value="">Please select</option>
-                                <option id="prioritySelectList"></option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <!--petition note are-->
-                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-                    <div class="input-field">
-                        <label class="control-label col-sm-4" for="description">Description</label>
-                        <div>
-                            <textarea class="form-control" id="description"
-                                      name="description" placeholder="Enter Description"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <!--photos -->
-                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-                    <div class="input-field">
-                        <label class="active ">Photos :</label>
-                        <div class="input-images" style="padding-top: .5rem;"></div>
-                    </div>
-                </div>
-                <!--Complaint directed to-->
-                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-<!--todo -> need to more details-->
-                </div>
-                <!--button-->
-                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                    <div class="input-field">
-                        <button class="btn btn-success" type="submit">
-                            <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
-                                id="submit"></span>
-                        </button>
-                    </div>
-                </div>
-                <!--Errors -->
-                <div class="form-row">
-                    <label id="errorLabel">Errors: </label>
-                    <ul>
-                        <li id="error" class="error"></li>
-                    </ul>
-                </div>
+<!--Petition Lists -->
+<div class="container-fluid bg-dark formBorder text-center">
+    <div class="col">
+        <div class="col" id="petitionListPresent">
+            <table class="table table-hover table-striped" id="myTable">
+                <thead>
+                <tr>
+                    <th> Index</th>
+                    <th> Petition Number</th>
+                    <th> Subject</th>
+                    <th> Village</th>
+                    <th> Petition Priority</th>
+                    <th> Working Place</th>
+                    <th> Modify</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="petitionList">
+                    <th id="index"></th>
+                    <th id="petitionNumber"></th>
+                    <th id="subject"></th>
+                    <th id="village"></th>
+                    <th id="petitionPriority"></th>
+                    <th id="workingPlace"></th>
+                    <th>
+                        <a id="petitionView" class="btn btn-success"><i
+                                class="fa fa-folder-open"></i>&nbsp;View</a>
+                        <a id="petitionMinute" class="btn btn-primary"><i class="fa fa-file"></i> &nbsp;Minute</a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" id="petitionListNotPresent">
+        <div class="col-sm-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="text-center text-danger">
+                    <strong>There is no employee upto know please add user to the system
+                            using add user button.
+                    </strong>
+                </h3>
             </div>
-        </form>
+        </div>
+        <script>
+            $(".alert").alert();
+        </script>
     </div>
 </div>
 
@@ -149,13 +87,5 @@
 <footer id="footer" class="page-footer"></footer>
 <!--script include-->
 <script id="script"></script>
-<script>
-    //WYSIWYG add to text area
-    bkLib.onDomLoaded(function () {
-        nicEditors.allTextAreas()
-    });
-    $('.input-images').imageUploader();
-    $(".alert").alert();
-</script>
 </body>
 </html>

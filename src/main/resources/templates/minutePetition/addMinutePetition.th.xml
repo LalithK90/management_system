@@ -7,12 +7,14 @@
 
     <!--Form -->
     <attr sel="#form" th:action="${'/minutePetition/add'}" th:object="${minutePetition}"/>
+    <!--Petition Detail-->
+    <attr sel="#petition" th:field="*{petition}"/>
     <!--Minute Petition State -->
     <attr sel="#minuteState" th:field="*{minuteState}"/>
     <attr sel="#minuteStateList" th:each="minuteState : ${minuteStates}"
           th:text="${minuteState.minuteState}"
           th:value="${minuteState}"/>
-<!--    Description-->
+    <!--    Description-->
     <attr sel="#description" th:field="*{detail}"/>
     <!--Petition State Type-->
     <attr sel="#petitionStateType" th:field="*{petitionStateType}"/>

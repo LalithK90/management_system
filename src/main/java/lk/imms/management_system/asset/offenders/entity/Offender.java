@@ -4,6 +4,7 @@ import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
 import lk.imms.management_system.asset.crime.entity.Crime;
+import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
@@ -99,6 +100,14 @@ public class Offender extends AuditEntity {
             inverseJoinColumns = @JoinColumn( name = "offender_id" ) )
     @Fetch( value = FetchMode.SUBSELECT )
     private List< Crime > crimes;
+
+    @ManyToMany( fetch = FetchType.EAGER )
+    @JoinTable( name = "petition_offender",
+            joinColumns = @JoinColumn( name = "petition_id" ),
+            inverseJoinColumns = @JoinColumn( name = "offender_id" ) )
+    @Fetch( value = FetchMode.SUBSELECT )
+    private List< Petition > petitions;
+
 
     @Transient
     private List< MultipartFile > files = new ArrayList<>();

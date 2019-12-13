@@ -5,9 +5,13 @@ import lk.imms.management_system.asset.employee.controller.EmployeeRestControlle
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.minute.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.minute.entity.MinutePetition;
+import lk.imms.management_system.asset.minute.entity.MinutePetitionFiles;
 import lk.imms.management_system.asset.minute.service.MinutePetitionFilesService;
 import lk.imms.management_system.asset.minute.service.MinutePetitionService;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
+import lk.imms.management_system.asset.petition.entity.PetitionState;
+import lk.imms.management_system.asset.petition.service.PetitionService;
+import lk.imms.management_system.asset.petition.service.PetitionStateService;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,31 +19,40 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping( "/minutePetition" )
 public class MinutePetitionController {
     private final MinutePetitionService minutePetitionService;
     private final MinutePetitionFilesService minutePetitionFilesService;
+    private final PetitionService petitionService;
+    private final PetitionStateService petitionStateService;
 
     @Autowired
     public MinutePetitionController(MinutePetitionService minutePetitionService,
-                                    MinutePetitionFilesService minutePetitionFilesService) {
+                                    MinutePetitionFilesService minutePetitionFilesService,
+                                    PetitionService petitionService, PetitionStateService petitionStateService) {
         this.minutePetitionService = minutePetitionService;
         this.minutePetitionFilesService = minutePetitionFilesService;
+        this.petitionService = petitionService;
+        this.petitionStateService = petitionStateService;
     }
 
-    @GetMapping
-    public String getForm(Model model) {
+    private String commonCode(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("designations", Designation.values());
         model.addAttribute("provinces", Province.values());
         model.addAttribute("minuteStates", MinuteState.values());
         model.addAttribute("petitionStateTypes", PetitionStateType.values());
-        model.addAttribute("minutePetition", new MinutePetition());
         model.addAttribute("districtUrl", MvcUriComponentsBuilder
                 .fromMethodName(WorkingPlaceRestController.class, "getDistrict", "")
                 .build()
@@ -56,151 +69,54 @@ public class MinutePetitionController {
         return "minutePetition/addMinutePetition";
     }
 
-    @RequestMapping( value = {"/add", "/update"}, method = RequestMethod.POST )
-    public String persist(@Valid @ModelAttribute("minutePetition") MinutePetition minutePetition, Model model, BindingResult result) {
-
-
-        System.out.println(minutePetition.toString());
-        return "redirect:/minutePetition";
-    }
-/*
-    // Common things for an minutePetition add and update
-    private String commonThings(Model model) {
-        model.addAttribute("civilStatus", CivilStatus.values());
-        model.addAttribute("employeeStatus", EmployeeStatus.values());
-        model.addAttribute("designation", Designation.values());
-        model.addAttribute("bloodGroup", BloodGroup.values());
-        return "minutePetition/addEmployee";
-    }
-
-    //To get files from the database
-    private void employeeFiles(MinutePetition minutePetition, Model model) {
-        List< FileInfo > fileInfos = minutePetitionFilesService.findByMinutePetition(minutePetition)
-                .stream()
-                .map(MinutePetitionFiles -> {
-                    String filename = MinutePetitionFiles.getName();
-                    String url = MvcUriComponentsBuilder
-                            .fromMethodName(MinutePetitionController.class, "downloadFile", MinutePetitionFiles
-                            .getNewId())
-                            .build()
-                            .toString();
-                    return new FileInfo(filename, MinutePetitionFiles.getCreatedAt(), url);
-                })
-                .collect(Collectors.toList());
-        model.addAttribute("files", fileInfos);
-    }
-
-    //When scr called file will send to
-    @GetMapping( "/file/{filename}" )
-    public ResponseEntity< byte[] > downloadFile(@PathVariable( "filename" ) String filename) {
-        MinutePetitionFiles file = minutePetitionFilesService.findByNewID(filename);
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
-                .body(file.getPic());
-    }
-
-    //Send all minutePetition data
-    @RequestMapping
-    public String employeePage(Model model) {
-        model.addAttribute("employees", minutePetitionService.findAll());
-        return "minutePetition/minutePetition";
-    }
-
-    //Send on minutePetition details
-    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
-    public String employeeView(@PathVariable( "id" ) Long id, Model model) {
-        MinutePetition minutePetition = minutePetitionService.findById(id);
-        model.addAttribute("employeeDetail", minutePetition);
-        model.addAttribute("addStatus", false);
-        employeeFiles(minutePetition, model);
-        return "minutePetition/minutePetition-detail";
-    }
-
-    //Send minutePetition data edit
-    @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
-    public String editEmployeeFrom(@PathVariable( "id" ) Long id, Model model) {
-        MinutePetition minutePetition = minutePetitionService.findById(id);
+    @GetMapping( "/{petitionId}" )
+    public String getForm(@PathVariable( "petitionId" ) Long id, Model model) {
+        MinutePetition minutePetition = new MinutePetition();
+        minutePetition.setPetition(petitionService.findById(id));
         model.addAttribute("minutePetition", minutePetition);
-        model.addAttribute("addStatus", false);
-        employeeFiles(minutePetition, model);
-        return commonThings(model);
+        return commonCode(model);
     }
 
-    //Send an minutePetition add from
-    @RequestMapping( value = {"/add"}, method = RequestMethod.GET )
-    public String employeeAddFrom(Model model) {
-        model.addAttribute("addStatus", true);
-        model.addAttribute("minutePetition", new MinutePetition());
-        return commonThings(model);
-    }
-
-    //MinutePetition add and update
     @RequestMapping( value = {"/add", "/update"}, method = RequestMethod.POST )
-    public String addEmployee(@Valid @ModelAttribute MinutePetition minutePetition, BindingResult result, Model model,
-                              RedirectAttributes redirectAttributes) {
-
+    public String persist(@Valid @ModelAttribute( "minutePetition" ) MinutePetition minutePetition, Model model,
+                          BindingResult result) throws IOException {
         if ( result.hasErrors() ) {
-            model.addAttribute("addStatus", true);
-            redirectAttributes.addFlashAttribute("minutePetition", minutePetition);
-            return commonThings(model);
+            model.addAttribute("minutePetition", minutePetition);
+            return commonCode(model);
         }
-        try {
-            //todo->minutePetition controller logic to before save
-            //todo->employeeFiles controller logic to before save
+        MinutePetition minutePetition1 = minutePetitionService.persist(minutePetition);
 
-            System.out.println(minutePetition.getFiles());
+        //petition state change
+        PetitionState petitionState = petitionStateService.findByPetition(minutePetition1.getPetition());
+        petitionState.setPetitionStateType(minutePetition.getPetitionStateType());
+        petitionStateService.persist(petitionState);
 
-            //first save minutePetition and
-            minutePetitionService.persist(minutePetition);
-            //save minutePetition images file
-            List< MinutePetitionFiles > storedFile = new ArrayList<>();
+        // Minute Petition Files
+        List< MinutePetitionFiles > storedFile = new ArrayList<>();
+        //if there is nothing to save files
+        if ( !minutePetition.getFiles().isEmpty() ) {
             for ( MultipartFile file : minutePetition.getFiles() ) {
-                MinutePetitionFiles minutePetitionFiles = minutePetitionFilesService.findByName(file
-                .getOriginalFilename());
-                if ( minutePetitionFiles != null ) {
+                MinutePetitionFiles minutePetitionFile =
+                        minutePetitionFilesService.findByName(file.getOriginalFilename());
+                if ( minutePetitionFile != null ) {
                     // update new contents
-                    minutePetitionFiles.setPic(file.getBytes());
+                    minutePetitionFile.setPic(file.getBytes());
                 } else {
-                    minutePetitionFiles = new MinutePetitionFiles(file.getOriginalFilename(),
-                                                      file.getContentType(),
-                                                      file.getBytes(),
-                                                      minutePetition.getPetition().getIndexNumber().concat("-" +
-                                                      LocalDateTime.now()),
-                                                      UUID.randomUUID().toString().concat("minutePetition"));
+                    minutePetitionFile = new MinutePetitionFiles(file.getOriginalFilename(),
+                                                                 file.getContentType(),
+                                                                 file.getBytes(),
+                                                                 minutePetition1.getPetition().getPetitionNumber().concat("-" + LocalDateTime.now()),
+                                                                 UUID.randomUUID().toString().concat(
+                                                                         "minutePetition"));
                 }
-                minutePetitionFiles.setMinutePetition(minutePetition);
-                storedFile.add(minutePetitionFiles);
+                minutePetitionFile.setMinutePetition(minutePetition1);
+                storedFile.add(minutePetitionFile);
             }
-
-            // Save all Files to database
             minutePetitionFilesService.persist(storedFile);
-            return "redirect:/minutePetition";
-
-        } catch ( Exception e ) {
-            ObjectError error = new ObjectError("minutePetition",
-                                                "There is already in the system. <br>System message -->" + e.toString
-                                                ());
-            result.addError(error);
-            model.addAttribute("addStatus", true);
-            redirectAttributes.addFlashAttribute("minutePetition", minutePetition);
-            return commonThings(model);
         }
+
+        return "redirect:/petition";
     }
 
-    //If need to minutePetition {but not applicable for this }
-    @RequestMapping( value = "/remove/{id}", method = RequestMethod.GET )
-    public String removeEmployee(@PathVariable Long id) {
-        minutePetitionService.delete(id);
-        return "redirect:/minutePetition";
-    }
-
-    //To search minutePetition any giving minutePetition parameter
-    @RequestMapping( value = "/search", method = RequestMethod.GET )
-    public String search(Model model, MinutePetition minutePetition) {
-        model.addAttribute("employeeDetail", minutePetitionService.search(minutePetition));
-        return "minutePetition/minutePetition-detail";
-    }
-
-    */
 
 }

@@ -356,12 +356,6 @@ function conformationAndLoginWindow() {
                 location.reload();
             }
         });
-    /*    let r = confirm("");
-        if (r === true) {
-            location.reload();
-          /*let loginUrl = window.location.protocol + "/login";
-            window.open(loginUrl, '_self');
-        }*/
 }
 
 
@@ -480,7 +474,7 @@ $("#btnSummaryFind").bind("mouseover", function () {
 
 //Customer employee Search filed - start any way in project
 
-/*Employee working place*/
+/*Employee working place - */
 $("#selectParameter").bind("change", function () {
     btnSearchEmployeeShow();
     $("#selectParameter").css('background', '');

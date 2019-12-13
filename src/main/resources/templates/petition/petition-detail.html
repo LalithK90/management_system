@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/petition " class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-dark formBorder" id="petitionDetail">
+    <div class="col-sm-12 flex-column ">
+        <div class="row">
+            <!--Left Side-->
+            <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                <!--ID-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">ID :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="id" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Village-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">Village :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="village" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">Petition State :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="petitionState" class="display_detail"></p>
+                    </div>
+                </div>
+            </div>
+            <!--Right Side-->
+            <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                <!--Petition Number-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">Petition Number :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="petitionNumber" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--AGA Division-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">AGA Division :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="agaDivision" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Petition Priority-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">Petition Priority :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="petitionPriority" class="display_detail"></p>
+                    </div>
+                </div>
+
+            </div>
+            <!--Petition Subject -->
+            <div class="form-group col-md-12 col-sm-12 flex-column">
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">Subject :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="subject" class="display_detail text-lg-left"></p>
+                    </div>
+                </div>
+            </div>
+            <!--PETITIONER AREA-->
+            <!--Petitioner Details Show Button-->
+            <div class="form-group col-md-12 col-sm-12 flex-column ">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#petitionerDetail">
+                    Show Petitioner Detail
+                </button>
+            </div>
+            <!--Petitioner Details-->
+            <div id="petitionerDetail" class="form-group col-md-12 col-sm-12 flex-column  collapse slow">
+                <span id="petitioner"></span>
+            </div>
+            <!--PETITION STATE AREA-->
+            <!--Petition State Show Button -->
+            <div class="form-group col-md-12 col-sm-12 flex-column ">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#petitionStateDetail">
+                    Show State Detail &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </button>
+            </div>
+            <!--Petition State Detail -->
+            <div id="petitionStateDetail" class="form-group col-md-12 col-sm-12 flex-column collapse slow">
+                <span id="petitionStates"></span>
+            </div>
+
+            <!--MINUTE PETITION AREA-->
+            <!--Minute Petition Show Button -->
+            <div class="form-group col-md-12 col-sm-12 flex-column ">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#minutePetitionDetail">
+                    Show Minute Detail &nbsp;&nbsp;
+                </button>
+            </div>
+            <!--Minute Petition Detail -->
+            <div id="minutePetitionDetail" class="form-group col-md-12 col-sm-12 flex-column collapse slow">
+                <span id="minutePetition"></span>
+            </div>
+
+            <!--DETECTION TEAM AREA-->
+            <!--Detection Team Details show button-->
+            <div class="form-group col-md-12 col-sm-12 flex-column ">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#detectionTeamDetail">
+                    Show Detection Team
+                </button>
+            </div>
+            <!--Detection Team Details-->
+            <div id="detectionTeamDetail" class="form-group col-md-12 col-sm-12 flex-column collapse slow">
+                <span id="detectionTeam"></span>
+            </div>
+
+
+            <!--OFFENDER AREA-->
+            <!--offender Detail show button-->
+            <div class="form-group col-md-12 col-sm-12 flex-column ">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#offenderDetail">
+                    Show Offender Detail
+                </button>
+            </div>
+            <!--Offender Detail-->
+            <div id="offenderDetail" class="form-group col-md-12 col-sm-12 flex-column collapse slow">
+                <span id="offender"></span>
+            </div>
+
+            <!--button-->
+            <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                <div class="input-field">
+                    <button class="btn btn-success" type="button">
+                        <i class="fa fa-backward " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                            id="submit"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script>
+    //WYSIWYG add to text area
+    bkLib.onDomLoaded(function () {
+        nicEditors.allTextAreas()
+    });
+    $('.input-images').imageUploader();
+    $(".alert").alert();
+</script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.minute.entity;
 
+import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.minute.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
@@ -38,7 +39,10 @@ public class MinutePetition extends AuditEntity {
     private WorkingPlace workingPlace;
 
     @Transient
-    private List< MultipartFile > files = new ArrayList<>();
+    private List< MultipartFile > files;
+
+    @Transient
+    private List< FileInfo > fileInfos;
 
     @Transient
     private PetitionStateType petitionStateType;

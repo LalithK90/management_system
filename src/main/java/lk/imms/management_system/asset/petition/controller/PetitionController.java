@@ -23,13 +23,12 @@ import lk.imms.management_system.asset.petitioner.service.PetitionerService;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
@@ -89,32 +88,14 @@ public class PetitionController {
         return "petition/addPetition";
     }
 
-    //To get files from the database
-   /* public void petitionFiles(Petition petition, Model model) {
-        List< FileInfo > fileInfos = minutePetitionFilesService.findByPetition(petition)
-                .stream()
-                .map(PetitionFiles -> {
-                    String filename = PetitionFiles.getName();
-                    String url = MvcUriComponentsBuilder
-                            .fromMethodName(PetitionController.class, "downloadFile", PetitionFiles.getNewId())
-                            .build()
-                            .toString();
-                    return new FileInfo(filename, PetitionFiles.getCreatedAt(), url);
-                })
-                .collect(Collectors.toList());
-        model.addAttribute("files", fileInfos);
-    }*/
-
     //When scr called file will send to
-/*
     @GetMapping( "/file/{filename}" )
     public ResponseEntity< byte[] > downloadFile(@PathVariable( "filename" ) String filename) {
-        PetitionFiles file = minutePetitionFilesService.findByNewID(filename);
+        MinutePetitionFiles file = minutePetitionFilesService.findByNewID(filename);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
                 .body(file.getPic());
     }
-*/
 
     //Give all available petition according to login user
     @GetMapping
@@ -123,6 +104,12 @@ public class PetitionController {
         // and rank to display his belongs petition
         model.addAttribute("petitions", petitionService.findAll());
         return "petition/petition";
+    }
+
+    //petition details
+    @GetMapping("/view")
+    public String viewPetition(){
+        return "petition/petition-detail";
     }
 
     //Give a frontend to petition add from
@@ -136,6 +123,12 @@ public class PetitionController {
     @PostMapping( value = {"/add", "/update"} )
     public String persistPetition(@Valid @ModelAttribute( "petition" ) Petition petition, Model model,
                                   BindingResult result) throws IOException {
+      if(result.hasErrors()){
+          model.addAttribute("addStatus", true);
+          model.addAttribute("petition", petition);
+          return commonThings(model);
+      }
+
         String petitionNumber = "IMMSHQ100";
         String indexNumber = "IMMS1000";
         petition.setPetitionNumber(petitionNumber);
@@ -203,9 +196,10 @@ public class PetitionController {
             }
         }
 
-
         return "redirect:/petition/add";
     }
+
+
 }
 
 // -->Auto Generate Year/Month/OfficeType/StationCode/PetitionNumberFromDB

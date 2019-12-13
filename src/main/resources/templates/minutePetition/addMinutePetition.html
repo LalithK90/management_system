@@ -32,17 +32,22 @@
 
 <div class="container-fluid bg-dark formBorder">
     <div class="col-sm-12 flex-column ">
-        <form id="form" class="form-horizontal"  method="POST" enctype="multipart/form-data">
+        <form id="form" class="form-horizontal" method="POST" enctype="multipart/form-data">
             <div class="row">
+                <!--Petition Detail should be there-->
                 <div class="row col-12 col-md-12 col-sm-12 card-body formBorder">
-                    <p class="text-md-left "><strong>Purpose of this minute  </strong></p>
+                    <input type="hidden" id="petition">
+                </div>
+                <!--New minute start-->
+                <div class="row col-12 col-md-12 col-sm-12 card-body formBorder">
+                    <p class="text-md-left "><strong>Purpose of this minute </strong></p>
                     <!--minute petition state Type-->
                     <div class="col-md-4 col-sm-4 text-left ">
                         <div class="col-md-4">
                             <label class="control-label" for="minuteState">To Action</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="minuteState" class="form-control" tabindex="" required>
+                            <select id="minuteState" class="form-control" tabindex="1" required>
                                 <option value="">Please select</option>
                                 <option id="minuteStateList" value=""></option>
                             </select>
@@ -53,7 +58,7 @@
                     <div class="input-field">
                         <label class="control-label col-sm-4" for="description">Description </label>
                         <div>
-                            <textarea class="form-control" id="description"
+                            <textarea class="form-control" id="description" tabindex="2"
                                       name="description" placeholder="Enter Description"></textarea>
                         </div>
                     </div>
@@ -79,7 +84,7 @@
                                 <label class="control-label" for="petitionStateType">To Action</label>
                             </div>
                             <div class="col-md-8">
-                                <select id="petitionStateType" class="form-control" tabindex="" required>
+                                <select id="petitionStateType" class="form-control" tabindex="4" required>
                                     <option value="">Please select</option>
                                     <option id="petitionStateTypeList" value=""></option>
                                 </select>
@@ -91,7 +96,7 @@
                                 <label class="control-label" for="provinces">Province</label>
                             </div>
                             <div class="col-md-8">
-                                <select class="form-control" tabindex="" id="provinces" required>
+                                <select class="form-control" tabindex="5" id="provinces" required>
                                     <option value="">Please select</option>
                                     <option id="provinceSelectList"></option>
                                 </select>
@@ -103,7 +108,7 @@
                                 <label class="control-label" for="districts">District</label>
                             </div>
                             <div class="col-md-8">
-                                <select class="form-control" name="district" id="districts" tabindex="" required>
+                                <select class="form-control" name="district" id="districts" tabindex="6" required>
                                     <option value="">Please select</option>
                                 </select>
                             </div>
@@ -116,7 +121,7 @@
                                 <label class="control-label" for="stations">stations:</label>
                             </div>
                             <div class="col-md-8">
-                                <select id="stations" class="form-control" tabindex="" required>
+                                <select id="stations" class="form-control" tabindex="7" required>
                                     <option value="">Please select</option>
                                 </select>
                             </div>
@@ -127,7 +132,7 @@
                                 <label class="control-label" for="designation">Designation</label>
                             </div>
                             <div class="col-md-8">
-                                <select id="designation" class="form-control" tabindex="" required>
+                                <select id="designation" class="form-control" tabindex="8" required>
                                     <option value="">Please select</option>
                                     <option id="designationList" value=""></option>
                                 </select>
@@ -139,7 +144,7 @@
                                 <label class="control-label" for="employees">Employees</label>
                             </div>
                             <div class="col-md-8">
-                                <select id="employees" class="form-control" tabindex="" required>
+                                <select id="employees" class="form-control" tabindex="9" required>
                                     <option value="">Please select</option>
                                     <option id="employeesList" value=""></option>
                                 </select>
@@ -150,18 +155,11 @@
                 <!--button-->
                 <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
                     <div class="input-field">
-                        <button class="btn btn-success" type="submit">
+                        <button class="btn btn-success" type="submit" tabindex="10">
                             <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
                                 id="submit"></span>
                         </button>
                     </div>
-                </div>
-                <!--Errors -->
-                <div class="form-row">
-                    <label id="errorLabel">Errors: </label>
-                    <ul>
-                        <li id="error" class="error"></li>
-                    </ul>
                 </div>
             </div>
         </form>

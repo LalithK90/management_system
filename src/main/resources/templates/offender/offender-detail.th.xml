@@ -42,14 +42,14 @@
     <attr sel="#email" th:text="${offender.email}"/>
     <!--18. Created at update at-->
     <attr sel="#createdBy" th:text="${offender.createdBy}"/>
-    <attr sel="#createdAt" th:text="${offender.createdAt}"/>
+    <attr sel="#createdAt" th:text="${{offender.createdAt}}"/>
     <attr sel="#updatedBy" th:text="${offender.updatedBy}"/>
-    <attr sel="#updatedAt" th:text="${offender.updatedAt}"/>
+    <attr sel="#updatedAt" th:text="${{offender.updatedAt}}"/>
     <!--19. Calling Names-->
     <attr sel="#callingNameDisplay" th:each="offenderCallingName, status : ${offender.offenderCallingNames}"/>
     <attr sel="#callingNamesDisplay" th:text="${offender.offenderCallingNames[__${status.index}__].callingName}"/>
     <attr sel="#callingNamesCretedByDisplay" th:text="${offender.offenderCallingNames[__${status.index}__].createdBy}"/>
-    <attr sel="#callingNamesCreatedAtDisplay" th:text="${offender.offenderCallingNames[__${status.index}__].createdAt}"/>
+    <attr sel="#callingNamesCreatedAtDisplay" th:text="${{offender.offenderCallingNames[__${status.index}__].createdAt}}"/>
     <attr sel="#callingNamesUpdatedByDisplay" th:text="${offender.offenderCallingNames[__${status.index}__].updatedBy}"/>
 
     <!--20. Description-->
@@ -68,9 +68,9 @@
     <attr sel="#guardianName" th:text="${offender.guardians[__${status.index}__].name}"/>
     <attr sel="#guardianRemark" th:utext="${offender.guardians[__${status.index}__].remark}"/>
     <attr sel="#guardianCreatedBy" th:text="${offender.guardians[__${status.index}__].createdBy}"/>
-    <attr sel="#guardianCreatedAt" th:text="${offender.guardians[__${status.index}__].createdAt}"/>
+    <attr sel="#guardianCreatedAt" th:text="${{offender.guardians[__${status.index}__].createdAt}}"/>
     <attr sel="#guardianUpdatedBy" th:text="${offender.guardians[__${status.index}__].updatedBy}"/>
-    <attr sel="#guardianUpdatedAt" th:text="${offender.guardians[__${status.index}__].updatedAt}"/>
+    <attr sel="#guardianUpdatedAt" th:text="${{offender.guardians[__${status.index}__].updatedAt}}"/>
     <!--Todo -> following things -->
     <!--Contravenes-->
 

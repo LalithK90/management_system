@@ -2,7 +2,9 @@
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
 
-    <attr sel="#formHeader" th:text="${addStatus==true?'Make A Petition ':'Update A Petition Details'}"/>
+<!--
+    <attr sel="#formHeader" th:text="${petition.petitionNumber}+${'  Detail\'s'}"/>
+-->
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
