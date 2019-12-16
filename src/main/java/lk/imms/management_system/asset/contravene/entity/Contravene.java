@@ -1,5 +1,6 @@
-package lk.imms.management_system.asset.offenders.entity;
+package lk.imms.management_system.asset.contravene.entity;
 
+import lk.imms.management_system.asset.offenders.entity.Offender;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 
@@ -23,6 +24,6 @@ public class Contravene extends AuditEntity {
     @JoinTable(name = "offender_contravene",
             joinColumns = @JoinColumn(name = "contravene_id"),
             inverseJoinColumns = @JoinColumn(name = "offender_id"))
-    private List<Offender> offenders;
+    private List< Offender > offenders;
 
 }

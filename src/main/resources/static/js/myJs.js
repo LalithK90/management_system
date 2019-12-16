@@ -350,12 +350,20 @@ async function getData(url) {
 
 // conformation message and to login page
 function conformationAndLoginWindow() {
-    swal(`Could you please wait until re-fresh me.;`)
-        .then((value) => {
-            if (value) {
-                location.reload();
-            }
-        });
+    let message = "Please give me a movement to refresh.";
+    swal({
+        title: "Attention !",
+        icon: "warning",
+        text: message,
+        buttons: {
+            cancel: true,
+            confirm: true,
+        },
+    }).then(value => {
+        if (value) {
+            location.reload();
+        }
+    });
 }
 
 

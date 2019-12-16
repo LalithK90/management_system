@@ -1,7 +1,7 @@
-package lk.imms.management_system.asset.offenders.controller;
+package lk.imms.management_system.asset.contravene.controller;
 
-import lk.imms.management_system.asset.offenders.entity.Contravene;
-import lk.imms.management_system.asset.offenders.service.ContraveneService;
+import lk.imms.management_system.asset.contravene.entity.Contravene;
+import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

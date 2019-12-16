@@ -1,6 +1,6 @@
-package lk.imms.management_system.asset.offenders.dao;
+package lk.imms.management_system.asset.contravene.dao;
 
-import lk.imms.management_system.asset.offenders.entity.Contravene;
+import lk.imms.management_system.asset.contravene.entity.Contravene;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

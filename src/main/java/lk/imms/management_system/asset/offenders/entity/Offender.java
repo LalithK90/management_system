@@ -3,6 +3,7 @@ package lk.imms.management_system.asset.offenders.entity;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
+import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.crime.entity.Crime;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.audit.AuditEntity;

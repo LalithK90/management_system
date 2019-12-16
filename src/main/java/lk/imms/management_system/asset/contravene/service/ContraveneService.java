@@ -1,7 +1,7 @@
-package lk.imms.management_system.asset.offenders.service;
+package lk.imms.management_system.asset.contravene.service;
 
-import lk.imms.management_system.asset.offenders.dao.ContraveneDao;
-import lk.imms.management_system.asset.offenders.entity.Contravene;
+import lk.imms.management_system.asset.contravene.dao.ContraveneDao;
+import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
