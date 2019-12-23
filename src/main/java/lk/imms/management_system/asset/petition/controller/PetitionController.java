@@ -2,11 +2,11 @@ package lk.imms.management_system.asset.petition.controller;
 
 
 import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
-import lk.imms.management_system.asset.minute.entity.Enum.MinuteState;
-import lk.imms.management_system.asset.minute.entity.MinutePetition;
-import lk.imms.management_system.asset.minute.entity.MinutePetitionFiles;
-import lk.imms.management_system.asset.minute.service.MinutePetitionFilesService;
-import lk.imms.management_system.asset.minute.service.MinutePetitionService;
+import lk.imms.management_system.asset.minutePetition.entity.Enum.MinuteState;
+import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
+import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
+import lk.imms.management_system.asset.minutePetition.service.MinutePetitionFilesService;
+import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;

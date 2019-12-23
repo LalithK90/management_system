@@ -58,7 +58,6 @@ public class ContraveneController {
             model.addAttribute("contravene", contravene);
             return "contravene/addContravene";
         }
-        System.out.println(contravene.toString());
         contraveneService.persist(contravene);
         return "redirect:/contravene";
     }

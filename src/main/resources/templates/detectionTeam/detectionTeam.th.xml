@@ -2,6 +2,17 @@
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
 
+    <attr sel="#newTeam" th:href="${'/petition'}"/>
+    <attr sel="#detectionTeamListTable" th:if="${not #lists.isEmpty(detectionTeams)}"/>
+    <attr sel="#userList" th:each="detectionTeam, rowCount : ${detectionTeams}"/>
+    <attr sel="#index" th:text="${rowCount.count}"/>
+    <attr sel="#teamIncharge" th:text="${incharge}"/>
+    <attr sel="#createdDate" th:text="${detectionTeam.createdDate}"/>
+    <attr sel="#detectionTeamView" th:href="${'/detection/' + detectionTeam.id}"/>
+    <attr sel="#detectionTeamEdit" th:href="${'/detection/edit/' + detectionTeam.id}"/>
+    <attr sel="#userRemove" th:href="${'/detection/remove/' + detectionTeam.id}"
+          th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"/>
+    <attr sel="#detectionTeamRemove" th:if="${ #lists.isEmpty(detectionTeams)}"/>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>

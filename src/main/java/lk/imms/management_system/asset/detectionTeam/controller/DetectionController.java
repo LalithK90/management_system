@@ -9,7 +9,7 @@ import lk.imms.management_system.asset.detectionTeam.entity.Enum.DetectionTeamSt
 import lk.imms.management_system.asset.detectionTeam.entity.Enum.TeamAcceptation;
 import lk.imms.management_system.asset.detectionTeam.service.DetectionTeamMemberService;
 import lk.imms.management_system.asset.detectionTeam.service.DetectionTeamService;
-import lk.imms.management_system.asset.minute.service.MinutePetitionService;
+import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
 import lk.imms.management_system.asset.petition.service.PetitionService;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.UserService;
@@ -61,9 +61,9 @@ public class DetectionController {
     public String allTeams(Model model) {
         //get current login user
         User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("detectionTeam",
+        model.addAttribute("detectionTeams",
                            detectionTeamMemberService.findAll());
-        /*model.addAttribute("detectionTeam",
+        /*model.addAttribute("detectionTeams",
                            detectionTeamMemberService.findAll()
                                    .stream()
                                    .filter((x) -> x.getEmployee().equals(currentUser.getEmployee()))
@@ -80,6 +80,7 @@ public class DetectionController {
         model.addAttribute("detectionTeam", detectionTeam);
     }
 
+
     @GetMapping( "/create/{id}" )
     public String createTeam(Model model, @PathVariable Long id) {
         DetectionTeam detectionTeam = new DetectionTeam();
@@ -93,7 +94,7 @@ public class DetectionController {
     public String editTeam(Model model, @PathVariable Long id) {
         DetectionTeam detectionTeam = detectionTeamService.findById(id);
 
-        detectionTeam.getDetectionTeamNotes().forEach(x -> System.out.println("NOte "+ x.getNote()));
+        detectionTeam.getDetectionTeamNotes().forEach(x -> System.out.println("NOte " + x.getNote()));
         //get detection team and check whether employee is in or not in detection
         // team members array and return only employee in team members
         detectionTeam.setDetectionTeamMembers(
@@ -181,14 +182,10 @@ public class DetectionController {
 
     }
 
-//update team status by team leader
-
-
-    //add minute with an arrested offender also need to add
-    public String addMinute() {
-
+    @GetMapping( "/remove/{id}" )
+    public String removeDetectionTeam(@PathVariable Long id) {
+        detectionTeamService.delete(id);
         return "redirect:/detection";
     }
-
 
 }

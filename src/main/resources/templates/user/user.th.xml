@@ -1,6 +1,7 @@
 <thlogic xmlns:th="http://www.thymeleaf.org">
 <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
 <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
 <attr sel="#newUser" th:href="${'/user/add'}"/>
 <attr sel="#userListTable" th:if="${not #lists.isEmpty(users)}"/>
 <attr sel="#userList" th:each="user, rowCount : ${users}"/>
@@ -13,6 +14,7 @@
 <attr sel="#userRemove" th:href="${'/user/remove/' + user.id}"
       th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"/>
 <attr sel="#userNotList" th:if="${ #lists.isEmpty(users)}"/>
+
 <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
 <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
 </thlogic>
