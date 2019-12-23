@@ -1,6 +1,7 @@
 package lk.imms.management_system.asset.crime.entity;
 
-import lk.imms.management_system.asset.detection.entity.DetectionTeam;
+import lk.imms.management_system.asset.court.entity.Court;
+import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.offenders.entity.Offender;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;

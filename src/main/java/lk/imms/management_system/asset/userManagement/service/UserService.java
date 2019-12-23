@@ -6,6 +6,9 @@ import lk.imms.management_system.asset.userManagement.dao.UserDao;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +19,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@CacheConfig( cacheNames = {"user"} ) // tells Spring where to store cache for this class
 public class UserService implements AbstractService< User, Long > {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
@@ -26,6 +30,7 @@ public class UserService implements AbstractService< User, Long > {
         this.userDao = userDao;
     }
 
+    @Cacheable
     public List< User > findAll() {
         return userDao.findAll();
     }
@@ -34,6 +39,7 @@ public class UserService implements AbstractService< User, Long > {
         return userDao.getOne(id);
     }
 
+    @CachePut
     public User persist(User user) {
         user.setEnabled(true);
         user.setUsername(user.getUsername().toLowerCase());

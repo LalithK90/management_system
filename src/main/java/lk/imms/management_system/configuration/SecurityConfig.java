@@ -46,49 +46,50 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll();
 
         //For developing easy to give permission all link
+//
+//      http.
+//                authorizeRequests()
+//                //Anytime users can access without login
+//                .antMatchers(
+//                        "/index",
+//                        "/favicon.ico",
+//                        "/img/**",
+//                        "/css/**",
+//                        "/js/**",
+//                        "/webjars/**").permitAll()
+//                .antMatchers("/login", "/select/**").permitAll()
+//
+//                //Need to login for access those are
+//                .antMatchers("/employee/**").hasRole("ADMIN")
+//                .antMatchers("/employee1/**").hasRole("MANAGER")
+//                .antMatchers("/user/**").hasRole("MANAGER")
+//                .antMatchers("/invoiceProcess/add").hasRole("CASHIER")
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                // Login form
+//                .formLogin()
+//                .loginPage("/login")
+//                //Username and password for validation
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                //todo -> need to change
+//                .defaultSuccessUrl("/index")
+//                .and()
+//                //Logout controlling
+//                .logout()
+//                .invalidateHttpSession(true)
+//                .clearAuthentication(true)
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/index")
+//                .and()
+//                .exceptionHandling()
+//                //Cross site disable
+//                .and()
+//                .csrf()
+//                .disable();
 
-   /*     http.
 
-                authorizeRequests()
-                //Anytime users can access without login
-                .antMatchers(
-                        "/index",
-                        "/favicon.ico",
-                        "/img/**",
-                        "/css/**",
-                        "/js/**",
-                        "/webjars/**").permitAll()
-                .antMatchers("/login", "/select/**").permitAll()
-
-                //Need to login for access those are
-                .antMatchers("/employee/**").hasRole("ADMIN")
-                .antMatchers("/employee1/**").hasRole("MANAGER")
-                .antMatchers("/user/**").hasRole("MANAGER")
-                .antMatchers("/invoiceProcess/add").hasRole("CASHIER")
-                .anyRequest()
-                .authenticated()
-                .and()
-                // Login form
-                .formLogin()
-                .loginPage("/login")
-                //Username and password for validation
-                .usernameParameter("username")
-                .passwordParameter("password")
-                *//*todo -> need to change *//*
-                .defaultSuccessUrl("/employee")
-                .and()
-                //Logout controlling
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/index")
-                .and()
-                .exceptionHandling()
-                //Cross site disable
-                .and()
-                .csrf()
-                .disable();*/
         /* //Header used to Enable HTTP Strict Transport Security (HSTS)
                 .headers()
                 .httpStrictTransportSecurity()
@@ -98,7 +99,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    ;
 
 }
 

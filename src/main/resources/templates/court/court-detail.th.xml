@@ -1,0 +1,15 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <attr sel="#formHeader" th:text="${'Court Detail'}"/>
+    <attr sel="#id" th:text="${courtDetail.id}"/>
+    <attr sel="#name" th:utext="${courtDetail.name}"/>
+    <attr sel="#place" th:utext="${courtDetail.place}"/>
+    <attr sel="#createdBy" th:text="${courtDetail.createdBy}"/>
+    <attr sel="#createdAt" th:text="${{courtDetail.createdAt}}"/>
+
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

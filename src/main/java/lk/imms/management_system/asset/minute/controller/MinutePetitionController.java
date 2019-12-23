@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.minute.controller;
 
 
-import lk.imms.management_system.asset.employee.controller.EmployeeRestController;
+import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.minute.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.minute.entity.MinutePetition;
@@ -12,7 +12,6 @@ import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.PetitionState;
 import lk.imms.management_system.asset.petition.service.PetitionService;
 import lk.imms.management_system.asset.petition.service.PetitionStateService;
-import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -36,36 +34,24 @@ public class MinutePetitionController {
     private final MinutePetitionFilesService minutePetitionFilesService;
     private final PetitionService petitionService;
     private final PetitionStateService petitionStateService;
+    private final CommonCodeService commonCodeService;
 
     @Autowired
     public MinutePetitionController(MinutePetitionService minutePetitionService,
                                     MinutePetitionFilesService minutePetitionFilesService,
-                                    PetitionService petitionService, PetitionStateService petitionStateService) {
+                                    PetitionService petitionService, PetitionStateService petitionStateService,
+                                    CommonCodeService commonCodeService) {
         this.minutePetitionService = minutePetitionService;
         this.minutePetitionFilesService = minutePetitionFilesService;
         this.petitionService = petitionService;
         this.petitionStateService = petitionStateService;
+        this.commonCodeService = commonCodeService;
     }
 
     private String commonCode(Model model) {
-        model.addAttribute("addStatus", true);
-        model.addAttribute("designations", Designation.values());
-        model.addAttribute("provinces", Province.values());
         model.addAttribute("minuteStates", MinuteState.values());
         model.addAttribute("petitionStateTypes", PetitionStateType.values());
-        model.addAttribute("districtUrl", MvcUriComponentsBuilder
-                .fromMethodName(WorkingPlaceRestController.class, "getDistrict", "")
-                .build()
-                .toString());
-        model.addAttribute("stationUrl", MvcUriComponentsBuilder
-                .fromMethodName(WorkingPlaceRestController.class, "getStation", "")
-                .build()
-                .toString());
-        Object[] arg = {"designation", "id"};
-        model.addAttribute("employeeUrl", MvcUriComponentsBuilder
-                .fromMethodName(EmployeeRestController.class, "getEmployeeByWorkingPlace", arg)
-                .build()
-                .toString());
+        commonCodeService.commonUrlBuilder(model);
         return "minutePetition/addMinutePetition";
     }
 

@@ -31,6 +31,9 @@ dependencies {
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
+    //=========================Springboot cache=========//
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+
     //================= Following jar is need to email =================// 
     compile('org.springframework.boot:spring-boot-starter-mail')
     //================= Following jar is need to check url util - https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 =================// 
@@ -39,10 +42,8 @@ dependencies {
     compile group: 'org.apache.poi', name: 'poi', version: '3.8'
    /*pdf generate related*/
 
-
     // https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
     compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.17'
-
 
 
     //================= Following jar is need to generate pdf file -https://mvnrepository.com/artifact/com.itextpdf/itextpdf =================//
@@ -56,12 +57,11 @@ dependencies {
     compile group: 'org.xhtmlrenderer', name: 'flying-saucer-core', version: '9.1.6'
     compile group: 'org.xhtmlrenderer', name: 'flying-saucer-pdf-itext5', version: '9.1.6'
 
-//use as three jars to set bootstrap and front awesome
+//====== use as three jars to set bootstrap and front awesome
 // https://mvnrepository.com/artifact/org.webjars/bootstrap
     compile group: 'org.webjars', name: 'bootstrap', version: '4.3.1'
 // https://mvnrepository.com/artifact/org.webjars/popper.js
     compile group: 'org.webjars', name: 'popper.js', version: '1.15.0'
-
 // https://mvnrepository.com/artifact/org.webjars/jquery
     compile group: 'org.webjars', name: 'jquery', version: '3.4.1'
 // https://mvnrepository.com/artifact/org.webjars/jquery-ui

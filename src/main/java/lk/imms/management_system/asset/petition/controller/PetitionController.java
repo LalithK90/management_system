@@ -1,9 +1,7 @@
 package lk.imms.management_system.asset.petition.controller;
 
 
-import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
-import lk.imms.management_system.asset.employee.controller.EmployeeRestController;
-import lk.imms.management_system.asset.employee.entity.Enum.Designation;
+import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.minute.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.minute.entity.MinutePetition;
 import lk.imms.management_system.asset.minute.entity.MinutePetitionFiles;
@@ -12,7 +10,6 @@ import lk.imms.management_system.asset.minute.service.MinutePetitionService;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
-import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.asset.petition.entity.PetitionState;
 import lk.imms.management_system.asset.petition.service.PetitionService;
@@ -20,11 +17,14 @@ import lk.imms.management_system.asset.petition.service.PetitionStateService;
 import lk.imms.management_system.asset.petitioner.controller.PetitionerRestController;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.asset.petitioner.service.PetitionerService;
-import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
-import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
+import lk.imms.management_system.asset.userManagement.entity.User;
+import lk.imms.management_system.asset.userManagement.service.UserService;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
+import lk.imms.management_system.util.service.MakeAutoGenerateNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +38,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 // This clz is used to manage petition adding process while on this adding
 // Minute, petition, and petitioner details come on one same object MinutePetition
@@ -50,37 +49,31 @@ public class PetitionController {
     private final PetitionStateService petitionStateService;
     private final MinutePetitionService minutePetitionService;
     private final PetitionerService petitionerService;
+    private final UserService userService;
+    private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
+    private final CommonCodeService commonCodeService;
 
     @Autowired
     public PetitionController(PetitionService petitionService, MinutePetitionFilesService minutePetitionFilesService,
                               PetitionStateService petitionStateService, MinutePetitionService minutePetitionService,
-                              PetitionerService petitionerService) {
+                              PetitionerService petitionerService, UserService userService,
+                              MakeAutoGenerateNumberService makeAutoGenerateNumberService,
+                              CommonCodeService commonCodeService) {
         this.petitionService = petitionService;
         this.minutePetitionFilesService = minutePetitionFilesService;
         this.petitionStateService = petitionStateService;
         this.minutePetitionService = minutePetitionService;
         this.petitionerService = petitionerService;
+        this.userService = userService;
+        this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+        this.commonCodeService = commonCodeService;
     }
 
     // Common things for petition add and update
     private String commonThings(Model model) {
         model.addAttribute("petitionTypes", PetitionType.values());
         model.addAttribute("petitionPriorities", PetitionPriority.values());
-        model.addAttribute("designations", Designation.values());
-        model.addAttribute("provinces", Province.values());
-        model.addAttribute("districtUrl", MvcUriComponentsBuilder
-                .fromMethodName(WorkingPlaceRestController.class, "getDistrict", "")
-                .build()
-                .toString());
-        model.addAttribute("stationUrl", MvcUriComponentsBuilder
-                .fromMethodName(WorkingPlaceRestController.class, "getStation", "")
-                .build()
-                .toString());
-        Object[] arg = {"designation", "id"};
-        model.addAttribute("employeeUrl", MvcUriComponentsBuilder
-                .fromMethodName(EmployeeRestController.class, "getEmployeeByWorkingPlace", arg)
-                .build()
-                .toString());
+        commonCodeService.commonUrlBuilder(model);
         model.addAttribute("petitionerUrl", MvcUriComponentsBuilder
                 .fromMethodName(PetitionerRestController.class, "getPetitioner", "")
                 .build()
@@ -100,41 +93,57 @@ public class PetitionController {
     //Give all available petition according to login user
     @GetMapping
     public String petitionPage(Model model) {
-        //todo -> get user from principal object find his working place
-        // and rank to display his belongs petition
-        model.addAttribute("petitions", petitionService.findAll());
+        //get current login user
+        User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+
+       /* model.addAttribute("petitions",
+                           petitionService.findAll()
+                                   .stream()
+                                   .filter((x) -> {
+                                       boolean matched = false;
+                                       for ( WorkingPlace workingPlace : currentUser.getWorkingPlaces() ) {
+                                           matched = x.getWorkingPlace().equals(workingPlace);
+                                       }
+                                       return matched;
+                                   })
+                                   .collect(Collectors.toList()));*/
+        model.addAttribute("petitions",
+                           petitionService.findAll());
         return "petition/petition";
     }
 
     //petition details
-    @GetMapping("/view")
-    public String viewPetition(){
+    @GetMapping( "/view/{id}" )
+    public String viewPetition(@PathVariable Long id) {
         return "petition/petition-detail";
     }
 
     //Give a frontend to petition add from
     @GetMapping( "/add" )
     public String addPetitionPage(Model model) {
-        model.addAttribute("addStatus", true);
         model.addAttribute("petition", new Petition());
         return commonThings(model);
     }
 
-    @PostMapping( value = {"/add", "/update"} )
+    @PostMapping( "/add" )
     public String persistPetition(@Valid @ModelAttribute( "petition" ) Petition petition, Model model,
                                   BindingResult result) throws IOException {
-      if(result.hasErrors()){
-          model.addAttribute("addStatus", true);
-          model.addAttribute("petition", petition);
-          return commonThings(model);
-      }
+        //get current login user
+        User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 
-        String petitionNumber = "IMMSHQ100";
-        String indexNumber = "IMMS1000";
+        if ( result.hasErrors() ) {
+            model.addAttribute("petition", petition);
+            return commonThings(model);
+        }
+
+        WorkingPlace workingPlace = currentUser.getWorkingPlaces().get(0);
+        String petitionNumber =
+                makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()) + "/" + workingPlace.getWorkingPlaceType() + "/" + workingPlace.getCode();
+        String indexNumber =
+                makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()).toString();
         petition.setPetitionNumber(petitionNumber);
         petition.setIndexNumber(indexNumber);
         Petition savedPetition = new Petition();
-        //Todo - > Need to create petition number and index number
         savedPetition.setPetitionNumber(petition.getPetitionNumber());
         savedPetition.setIndexNumber(petition.getIndexNumber());
         savedPetition.setVillage(petition.getVillage());
@@ -144,10 +153,9 @@ public class PetitionController {
         savedPetition.setPetitionPriority(petition.getPetitionPriority());
 
         if ( petition.getPetitioner().getId() != null ) {
-            savedPetition.setPetitioner(petition.getPetitioner());
+            savedPetition.setPetitioner(petitionerService.findById(petition.getPetitioner().getId()));
         } else {
             Petitioner petitioner = petition.getPetitioner();
-            petitioner.setPetitionerType(PetitionerType.OTHER);
             savedPetition.setPetitioner(petitionerService.persist(petitioner));
         }
 

@@ -4,6 +4,9 @@ import lk.imms.management_system.asset.workingPlace.dao.WorkingPlaceDao;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames={"workingPlace"}) // tells Spring where to store cache for this class
 public class WorkingPlaceService implements AbstractService< WorkingPlace, Long > {
     private final WorkingPlaceDao workingPlaceDao;
 
@@ -21,6 +25,7 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
 
 
     @Override
+    @Cacheable
     public List< WorkingPlace > findAll() {
         return workingPlaceDao.findAll();
     }
@@ -31,6 +36,7 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
     }
 
     @Override
+    @CachePut
     public WorkingPlace persist(WorkingPlace workingPlace) {
         return workingPlaceDao.save(workingPlace);
     }

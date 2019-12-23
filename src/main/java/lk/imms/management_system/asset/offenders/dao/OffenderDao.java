@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OffenderDao extends JpaRepository<Offender, Long > {
+    Offender findFirstByOrderByIdDesc();
 }

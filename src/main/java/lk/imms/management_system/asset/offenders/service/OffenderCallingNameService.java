@@ -4,6 +4,9 @@ import lk.imms.management_system.asset.offenders.dao.OffenderCallingNameDao;
 import lk.imms.management_system.asset.offenders.entity.OffenderCallingName;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@CacheConfig( cacheNames = {"offenderCallingName"} ) // tells Spring where to store cache for this class
 public class OffenderCallingNameService implements AbstractService< OffenderCallingName, Long > {
     private final OffenderCallingNameDao offenderCallingNameDao;
 
@@ -19,8 +23,8 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
         this.offenderCallingNameDao = offenderCallingNameDao;
     }
 
-
     @Override
+    @Cacheable
     public List< OffenderCallingName > findAll() {
         return offenderCallingNameDao.findAll();
     }
@@ -31,8 +35,8 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
     }
 
     @Override
+    @CachePut
     public OffenderCallingName persist(OffenderCallingName offenderCallingName) {
-        //todo -> find fact before save
         return offenderCallingNameDao.save(offenderCallingName);
     }
 

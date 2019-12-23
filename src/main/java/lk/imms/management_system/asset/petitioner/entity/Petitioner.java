@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.petitioner.entity;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.audit.AuditEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
+@JsonFilter("Petitioner")
 public class Petitioner extends AuditEntity {
 
     @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
@@ -27,7 +29,7 @@ public class Petitioner extends AuditEntity {
     @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String nameEnglish;
 
-    @Column( columnDefinition = "VARCHAR(2550) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String address;
 
     @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
@@ -44,7 +46,7 @@ public class Petitioner extends AuditEntity {
     private String email;
 
     @Enumerated( EnumType.STRING )
-    private PetitionerType petitionerType;
+    private PetitionerType petitionerType = PetitionerType.OTHER;
 
     @OneToMany(mappedBy = "petitioner")
     private List< Petition > petitions;

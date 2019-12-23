@@ -1,6 +1,6 @@
 package lk.imms.management_system.asset.petition.entity;
 
-import lk.imms.management_system.asset.detection.entity.DetectionTeam;
+import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.minute.entity.MinutePetition;
 import lk.imms.management_system.asset.offenders.entity.Offender;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
@@ -43,7 +43,7 @@ public class Petition extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private PetitionPriority petitionPriority;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Petitioner petitioner;
 
     @ManyToOne

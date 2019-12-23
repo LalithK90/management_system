@@ -13,9 +13,13 @@ import lk.imms.management_system.asset.offenders.entity.OffenderCallingName;
 import lk.imms.management_system.asset.offenders.entity.OffenderFiles;
 import lk.imms.management_system.asset.offenders.service.OffenderFilesService;
 import lk.imms.management_system.asset.offenders.service.OffenderService;
+import lk.imms.management_system.asset.userManagement.entity.User;
+import lk.imms.management_system.asset.userManagement.service.UserService;
+import lk.imms.management_system.util.service.MakeAutoGenerateNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,10 +40,16 @@ import java.util.stream.Collectors;
 public class OffenderController {
     private final OffenderService offenderService;
     private final OffenderFilesService offenderFilesService;
-@Autowired
-    public OffenderController(OffenderService offenderService, OffenderFilesService offenderFilesService) {
+    private final UserService userService;
+    private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
+
+    @Autowired
+    public OffenderController(OffenderService offenderService, OffenderFilesService offenderFilesService,
+                              UserService userService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
         this.offenderService = offenderService;
         this.offenderFilesService = offenderFilesService;
+        this.userService = userService;
+        this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     }
 
     // Common things for an offender add and update
@@ -118,7 +128,9 @@ public class OffenderController {
     @RequestMapping( value = {"/add", "/update"}, method = RequestMethod.POST )
     public String addOffender(@Valid @ModelAttribute( "offender" ) Offender offender, BindingResult result,
                               Model model) {
-        System.out.println(offender.toString());
+        //get current login user
+        User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
             commonThings(model);
@@ -143,7 +155,11 @@ public class OffenderController {
 
         offender.setOffenderCallingNames(offenderCallingNames);
         offender.setGuardians(guardians);
-        //todo -> created offender registration code OfficeCode/auto incerement
+
+        //last offender Id offender registration number
+        String regNumber =
+                makeAutoGenerateNumberService.numberAutoGen(offenderService.getLastOne().getOffenderRegisterNumber()) + "/" + currentUser.getWorkingPlaces().get(0).getCode() + "/OF";
+        offender.setOffenderRegisterNumber(regNumber);
 
         // System.out.println("after set guardian and calling name " + offender.toString());
         try {

@@ -87,10 +87,10 @@ body {
 /* for sbilling test show - end*/
 /*main window  - start*/
 .mainWindowText {
-    font-size: 18px;
-    text-shadow: 0 1px 0 #17E,
-    0 2px 0 #c9c9c9,
-    0 3px 0 #bbb,
+    font-size: 1.5rem;
+    text-shadow: 0 1px 0 #EEE428,
+    0 2px 0 #adc945,
+    0 3px 0 #ACA7C9,
     0 4px 0 #b9b9b9,
     0 5px 0 #aaa,
     0 6px 1px rgba(0, 0, 1, .1),
@@ -107,7 +107,7 @@ body {
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
     -o-transform: scale(1.1);
-    text-shadow: 2px 2px 0 #29A1D5;
+    text-shadow: 5px 5px 2px #EEE428;
 }
 
 .mainWindImg:hover {
@@ -265,8 +265,8 @@ button .btn {
 
 /*form  - start*/
 label {
-   font-size: 16px !important;
-    font-max-size: 20px;
+   font-size: 18px !important;
+    font-max-size: 22px;
     font-min-size: 12px;
     font-weight: bold;
     color: white;

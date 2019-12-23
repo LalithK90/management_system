@@ -1,8 +1,63 @@
 <thlogic xmlns:th="http://www.thymeleaf.org">
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+    <!--form header-->
+    <attr sel="#formHeader" th:text="${addStatus==true?'Create A Team ':'Update A Team Details'}"/>
 
+    <!--Form -->
+    <attr sel="#form" th:action="${addStatus==true?'/detection/add':'/detection/add'}" th:object="${detectionTeam}"/>
+    <!--Id-->
+    <attr sel="#idStatus" th:if="${addStatus==false}"/>
+    <attr sel="#id" th:field="*{id}"/>
+    <!--Number-->
+    <attr sel="#numberStatus" th:if="${addStatus==false}"/>
+    <attr sel="#number" th:field="*{number}"/>
+    <!--Name -->
+    <attr sel="#name" th:field="*{name}"/>
+    <!--Petition-->
+    <attr sel="#petition" th:field="*{petition}"/>
+    <!--Detection team note -->
+    <attr sel="#teamNoteList"
+          th:each="detectionTeamNote , status : ${detectionTeamNotes}"/>
+    <attr sel="#note" th:utext="${detectionTeamNotes[__${status.index}__].note}"/>
+    <attr sel="#createdBy" th:text="${detectionTeamNotes[__${status.index}__].createdBy}"/>
+    <attr sel="#createdAt" th:text="${{detectionTeamNotes[__${status.index}__].createdAt}}"/>
+    <attr sel="#detectionTeamNoteHide"  th:name="${'detectionTeamNotes[__${status.count}__].note'}"/>
+
+    <!--Team Acceptation-->
+    <attr sel="#teamAcceptationDiv" th:if="${addStatus==false}"/>
+    <attr sel="#teamAccept" th:if="${addStatus==false}" th:each="teamAcceptation, lineCount : ${teamAcceptations}">
+        <attr sel="#teamAcceptation" th:id="${'TA'}+${lineCount.count}" th:value="${teamAcceptation}"
+              th:field="*{teamAcceptation}"/>
+        <attr sel="#radioLabel" th:for="${'TA'}+${lineCount.count}" th:text="${teamAcceptation.teamAcceptation}"/>
+    </attr>
+    <!--Team Status-->
+    <attr sel="#teamStatusShow" th:if="${addStatus==false}"/>
+    <attr sel="#teamStatus" th:if="${addStatus==false}"
+          th:each="detectionTeamStatus, lineCount : ${detectionTeamStatuses}">
+        <attr sel="#teamStatusValue" th:id="${'DTS'}+${lineCount.count}" th:value="${detectionTeamStatus}"
+              th:field="*{detectionTeamStatus}"/>
+        <attr sel="#teamStatusValueLabel" th:for="${'DTS'}+${lineCount.count}"
+              th:text="${detectionTeamStatus.detectionTeamStatus}"/>
+    </attr>
+    <!--provinces-->
+    <attr sel="#provinceSelectList" th:each="province : ${provinces}"
+          th:text="${province.province}"
+          th:value="${province}"/>
+    <!--Designation -->
+    <attr sel="#designationList" th:each="designation : ${designations}"
+          th:text="${designation.designation}"
+          th:value="${designation}"/>
+
+    <!--Button-->
+    <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
+
+    <!--URL Comes -->
+    <attr sel="#districtUrl" th:value="${districtUrl}"/>
+    <attr sel="#stationUrl" th:value="${stationUrl}"/>
+    <attr sel="#employeeUrl" th:value="${employeeUrl}"/>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+    <attr sel="#customScript" th:src="@{/js/employeeFindUsingWorkingPlace.js}"/>
 </thlogic>

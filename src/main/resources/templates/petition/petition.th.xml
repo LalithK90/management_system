@@ -16,7 +16,7 @@
     <attr sel="#petitionNumber" th:text="${petition.petitionNumber}"/>
 
     <!--Petition Subject-->
-    <attr sel="#subject" th:text="${petition.subject}"/>
+    <attr sel="#subject" th:utext="${petition.subject}"/>
 
     <!--Petition Village-->
     <attr sel="#village" th:text="${petition.village}"/>
@@ -28,10 +28,13 @@
     <attr sel="#workingPlace" th:text="${petition.workingPlace.name}"/>
 
     <!--Petition Details View-->
-    <attr sel="#petitionView" th:href="${'/petition/' + petition.id}"/>
+    <attr sel="#petitionView" th:href="${'/petition/view/' + petition.id}"/>
 
     <!--Petition Create minute-->
     <attr sel="#petitionMinute" th:href="${'/minutePetition/' + petition.id}"/>
+
+    <!--Petition Details View-->
+    <attr sel="#teamCreate" th:href="${'/detection/create/' + petition.id}"/>
 
     <!--Petition list is not-->
     <attr sel="#petitionListNotPresent" th:if="${ #lists.isEmpty(petitions)}"/>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+
+
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/contravene" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+<!--Form Content - start -->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="form-horizontal" method="POST">
+            <div class="row">
+                <!--Left Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <!--Pay role Number-->
+                    <div class="form-row text-right" >
+                        <div class="col-md-4">
+                            <label class="control-label" for="contravene">Contravene :</label>
+                        </div>
+                        <div class="col-md-12">
+                            <textarea id="contravene" class="form-control" tabindex="1" ></textarea>
+                            <span id="contraveneError" class="error">Error Pay Role Number</span>
+                        </div>
+                    </div>
+                </div>
+                <!--Right Side-->
+                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <!--Id-->
+                    <div id="idStatus" class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="id">ID :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="id" class="form-control" type="text" readonly/>
+                        </div>
+                    </div>
+                    <!--Created by and created at-->
+                    <div id="updateStatus">
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="createdBy">Created By :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="createdBy" class="form-control" type="text" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="createdAt">Created At :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="createdAt" class="form-control" type="text" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Button-->
+                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                    <button class="btn btn-success" type="submit">
+                        <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script>
+    $(document).ready(function () {
+
+        //WYSIWYG add to text area
+        bkLib.onDomLoaded(function () {
+            nicEditors.allTextAreas()
+        });
+    });
+</script>
+</body>
+</html>

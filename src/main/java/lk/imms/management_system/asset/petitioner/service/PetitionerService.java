@@ -1,10 +1,13 @@
 package lk.imms.management_system.asset.petitioner.service;
 
-import lk.imms.management_system.asset.petitioner.dao.PetitionerDao;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
+import lk.imms.management_system.asset.petitioner.dao.PetitionerDao;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@CacheConfig( cacheNames = {"petitioner"} ) // tells Spring where to store cache for this class
 public class PetitionerService implements AbstractService< Petitioner, Long > {
     private final PetitionerDao petitionerDao;
 
@@ -21,6 +25,7 @@ public class PetitionerService implements AbstractService< Petitioner, Long > {
     }
 
     @Override
+    @Cacheable
     public List< Petitioner > findAll() {
         return petitionerDao.findAll();
     }
@@ -31,6 +36,7 @@ public class PetitionerService implements AbstractService< Petitioner, Long > {
     }
 
     @Override
+    @CachePut
     public Petitioner persist(Petitioner petitioner) {
         return petitionerDao.save(petitioner);
     }

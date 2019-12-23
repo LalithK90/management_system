@@ -37,7 +37,7 @@ public class EmployeeWorkingPlaceHistoryService implements AbstractService< Empl
 
     @Override
     public boolean delete(Long id) {
-        //todo -> delete is a not a function in this system
+        //-> delete is a not a function in this system
         return false;
     }
 

@@ -5,7 +5,7 @@
     <attr sel="#formHeader" th:text="${addStatus==true?'Make A Petition ':'Update A Petition Details'}"/>
 
     <!--Form -->
-    <attr sel="#from" th:action="${'/petition/add'}" th:object="${petition}"/>
+    <attr sel="#form" th:action="${'/petition/add'}" th:object="${petition}"/>
     <!--Village-->
     <attr sel="#village" th:field="*{petition.village}"/>
     <!--Division-->

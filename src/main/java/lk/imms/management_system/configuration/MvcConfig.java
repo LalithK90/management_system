@@ -11,13 +11,31 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.config.annotation.*;
+import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 
+import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @Configuration
 @EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
+    //to activate the thymeleaf decouple logic - start
+    // == fields ==
+    private final SpringResourceTemplateResolver templateResolver;
 
+    // == constructor
+    public MvcConfig(SpringResourceTemplateResolver templateResolver) {
+        this.templateResolver = templateResolver;
+    }
+
+    // == init ==
+    @PostConstruct
+    public void init() {
+        templateResolver.setUseDecoupledLogic(true);
+    }
+//to activate the thymeleaf decouple logic - end
+
+    //config web mvc config - start
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
@@ -35,29 +53,14 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //can be impliment like folowing also
-        //registry.addResourceHandler("/resources/**").addResourceLocations("file:/resources/upload/");
         registry.addResourceHandler("/img/**")
                 .addResourceLocations("classpath:/static/img/");
         registry.addResourceHandler("/css/**")
                 .addResourceLocations("classpath:/static/css/");
         registry.addResourceHandler("/js/**")
                 .addResourceLocations("classpath:/static/js/");
-        registry.addResourceHandler("/fontawesome/**")
-                .addResourceLocations("classpath:/static/fontawesome/");
-        registry.addResourceHandler("/font/**")
-                .addResourceLocations("classpath:/static/font/");
-        registry.addResourceHandler("/favicon/**")
-                .addResourceLocations("classpath:/static/");
     }
-    //Bean configuration
-/*    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/resources/templates/");
-        resolver.setSuffix(".html");
-        return resolver;
-    }*/
+    //config web mvc config - end
 
     //time zone set to
     @Bean
@@ -65,7 +68,7 @@ public class MvcConfig implements WebMvcConfigurer {
         return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.timeZone(TimeZone.getTimeZone("Asia/Colombo"));
     }
 
-    //Manage all errors
+    //Manage all errors using one template and one method
     @ControllerAdvice
     public static class ErrorController {
 
@@ -80,7 +83,6 @@ public class MvcConfig implements WebMvcConfigurer {
             return "error/error";
         }
     }
-
 
 }
 

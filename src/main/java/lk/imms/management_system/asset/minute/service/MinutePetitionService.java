@@ -8,6 +8,9 @@ import lk.imms.management_system.asset.petition.controller.PetitionController;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@CacheConfig( cacheNames = {"minutePetition"} ) // tells Spring where to store cache for this class
 public class MinutePetitionService implements AbstractService< MinutePetition, Long > {
     private final MinutePetitionDao minutePetitionDao;
     private final MinutePetitionFilesService minutePetitionFilesService;
@@ -30,6 +34,7 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
     }
 
     @Override
+    @Cacheable
     public List< MinutePetition > findAll() {
         return minutePetitionDao.findAll();
     }
@@ -40,8 +45,8 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
     }
 
     @Override
+    @CachePut
     public MinutePetition persist(MinutePetition minutePetition) {
-        //todo -> find what are the things to check before save
         return minutePetitionDao.save(minutePetition);
     }
 
@@ -65,7 +70,7 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
         List< MinutePetition > minutePetitions = new ArrayList<>();
         //taken all minute petition according to the petition and
         // taken minute petition files belong to minute petition
-        for ( MinutePetition minutePetition : minutePetitionDao.findByPetition(petition) ){
+        for ( MinutePetition minutePetition : minutePetitionDao.findByPetition(petition) ) {
             List< FileInfo > fileInfos = minutePetitionFilesService.findByMinutePetition(minutePetition)
                     .stream()
                     .map(PetitionFiles -> {

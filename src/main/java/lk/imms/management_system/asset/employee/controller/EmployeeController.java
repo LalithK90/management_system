@@ -73,7 +73,7 @@ public class EmployeeController {
         return "employee/addEmployee";
     }
 
-    //To get files from the database
+    //To get files form the database
     private void employeeFiles(Employee employee, Model model) {
         List< FileInfo > fileInfos = employeeFilesService.findByEmployee(employee)
                 .stream()
@@ -117,7 +117,7 @@ public class EmployeeController {
 
     //Send employee data edit
     @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
-    public String editEmployeeFrom(@PathVariable( "id" ) Long id, Model model) {
+    public String editEmployeeForm(@PathVariable( "id" ) Long id, Model model) {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
         model.addAttribute("newEmployee", employee.getPayRoleNumber());
@@ -126,9 +126,9 @@ public class EmployeeController {
         return commonThings(model);
     }
 
-    //Send an employee add from
+    //Send an employee add form
     @RequestMapping( value = {"/add"}, method = RequestMethod.GET )
-    public String employeeAddFrom(Model model) {
+    public String employeeAddForm(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("employee", new Employee());
         return commonThings(model);
@@ -145,11 +145,6 @@ public class EmployeeController {
             return commonThings(model);
         }
         try {
-            //todo->employee controller logic to before save
-            //todo->employeeFiles controller logic to before save
-
-            System.out.println(employee.getFiles());
-
             //first save employee and
             employeeService.persist(employee);
             //save employee images file
@@ -202,9 +197,9 @@ public class EmployeeController {
     //````````````````````````````````````````````````````````````````````````````//
 //----> EmployeeWorkingPlace - details management - start <----//
 
-    //Send from to add working place before find employee
+    //Send form to add working place before find employee
     @RequestMapping( value = "/workingPlace", method = RequestMethod.GET )
-    public String addEmployeeWorkingPlaceFrom(Model model) {
+    public String addEmployeeWorkingPlaceForm(Model model) {
         model.addAttribute("employee", new Employee());
         model.addAttribute("employeeDetailShow", false);
         return "employeeWorkingPlace/addEmployeeWorkingPlace";
@@ -245,7 +240,7 @@ public class EmployeeController {
     @RequestMapping( value = "/workingPlace/add", method = RequestMethod.POST )
     public String addWorkingPlaceEmployee(@ModelAttribute( "employeeWorkingPlaceHistory" ) EmployeeWorkingPlaceHistory employeeWorkingPlaceHistory, Model model) {
         System.out.println(employeeWorkingPlaceHistory.toString());
-        //Todo -> need to write validation before the save working place
+        // -> need to write validation before the save working place
         //before saving set employee current working palace
         WorkingPlace workingPlace = employeeWorkingPlaceHistory.getWorkingPlace();
 
