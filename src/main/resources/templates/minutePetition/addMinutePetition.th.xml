@@ -16,6 +16,12 @@
           th:value="${minuteState}"/>
     <!--    Description-->
     <attr sel="#description" th:field="*{detail}"/>
+
+    <!--Singlish to sinhala Translator-->
+    <attr sel="#translatorSinhala" th:replace="~{fragments/unicodeSinhala :: unicodeSinhalaFragment}"/>
+    <!--Tamish to Tamil Translator-->
+    <attr sel="#translatorTamil" th:replace="~{fragments/unicodeTamil :: unicodeTamilFragment}"/>
+
     <!--Petition State Type-->
     <attr sel="#petitionStateType" th:field="*{petitionStateType}"/>
     <attr sel="#petitionStateTypeList" th:each="petitionStateType : ${petitionStateTypes}"
@@ -41,7 +47,6 @@
 
     <!--Button-->
     <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
-
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>

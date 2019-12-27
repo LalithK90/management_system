@@ -62,7 +62,7 @@ public class DetectionController {
         //get current login user
         User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("detectionTeams",
-                           detectionTeamMemberService.findAll());
+                           detectionTeamService.findAll());
         /*model.addAttribute("detectionTeams",
                            detectionTeamMemberService.findAll()
                                    .stream()
@@ -93,8 +93,6 @@ public class DetectionController {
     @GetMapping( "/edit/{id}" )
     public String editTeam(Model model, @PathVariable Long id) {
         DetectionTeam detectionTeam = detectionTeamService.findById(id);
-
-        detectionTeam.getDetectionTeamNotes().forEach(x -> System.out.println("NOte " + x.getNote()));
         //get detection team and check whether employee is in or not in detection
         // team members array and return only employee in team members
         detectionTeam.setDetectionTeamMembers(
@@ -102,7 +100,7 @@ public class DetectionController {
                         .stream()
                         .filter(x -> x.getEmployee() != null)
                         .collect(Collectors.toList()));
-//common code for detection team
+        //common code for detection team
         commonCode(model, detectionTeam);
         model.addAttribute("detectionTeamNotes", detectionTeam.getDetectionTeamNotes());
         model.addAttribute("addStatus", false);
@@ -112,13 +110,15 @@ public class DetectionController {
 
     @PostMapping( value = {"/add", "/update"} )
     public String persistTeam(@Valid @ModelAttribute DetectionTeam detectionTeam, Model model, BindingResult result) {
-        //get current login user
+//get current login user
         User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 
         if ( result.hasErrors() ) {
             commonCode(model, detectionTeam);
             return "detectionTeam/addDetectionTeam";
         }
+        boolean inChargeInOrExit = false;
+
         List< DetectionTeamMember > detectionTeamMemberList = new ArrayList<>();
 //if there are no members in detection team automatically delete
         if ( detectionTeam.getDetectionTeamMembers() != null ) {
@@ -126,12 +126,24 @@ public class DetectionController {
                 teamMember.setDetectionTeam(detectionTeam);
                 detectionTeamMemberList.add(teamMember);
             }
+//if there is no team without in-charge in team
+            for ( DetectionTeamMember teamMember : detectionTeam.getDetectionTeamMembers() ) {
+                if ( teamMember.getDetectionTeamMemberRole().equals(DetectionTeamMemberRole.INCHARGE) ) {
+                    inChargeInOrExit = true;
+                    break;
+                }
+            }
+            if (!inChargeInOrExit ){
+                commonCode(model, detectionTeam);
+                return "detectionTeam/addDetectionTeam";
+            }
         } else if ( !detectionTeam.getDetectionTeamStatus().equals(DetectionTeamStatus.SUCCESS) ) {
             //successfully completed team cannot be deleted
             detectionTeamService.delete(detectionTeam.getId());
             return "redirect:/petition";
         }
-        // detection team is not null need to add detection team to it
+
+// detection team is not null need to add detection team to it
         if ( detectionTeam.getDetectionTeamNotes() != null ) {
             List< DetectionTeamNote > detectionTeamNotes = new ArrayList<>();
             for ( DetectionTeamNote detectionTeamNote : detectionTeam.getDetectionTeamNotes() ) {
@@ -187,5 +199,6 @@ public class DetectionController {
         detectionTeamService.delete(id);
         return "redirect:/detection";
     }
+
 
 }

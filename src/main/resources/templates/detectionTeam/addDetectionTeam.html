@@ -191,8 +191,7 @@
                                         <th>Action</th>
                                     </tr>
                                     <tr th:if="${ #lists.isEmpty(detectionTeamMembers)}"
-                                        th:each="detectionTeamMember, status : ${detectionTeam.detectionTeamMembers}"
-                                    >
+                                        th:each="detectionTeamMember, status : ${detectionTeam.detectionTeamMembers}"                                    >
                                         <th th:text="${status.count}">No</th>
                                         <th th:text="${detectionTeamMember.employee.id}"></th>
                                         <th><input type="hidden"
@@ -240,6 +239,16 @@
                     <div class="form-row col-md-12">
                         <textarea id="detectionTeamNote" class="form-control"></textarea>
                     </div>
+                    <div class="form-row">
+                        <!--Translator Sinhala-->
+                        <div class="container-fluid col-sm-6 text-center">
+                            <span id="translatorSinhala"></span>
+                        </div>
+                        <!--Translator Tamil-->
+                        <div class="container-fluid col-sm-6 text-center">
+                            <span id="translatorTamil"></span>
+                        </div>
+                    </div>
                 </div>
                 <!--Button-->
                 <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
@@ -257,13 +266,11 @@
         </form>
     </div>
 </div>
+
 <!--footer include-->
 <footer id="footer" class="page-footer"></footer>
 <!--script include-->
 <script id="script"></script>
 <script id="customScript"></script>
-<script>
-
-</script>
 </body>
 </html>

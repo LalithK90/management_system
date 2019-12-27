@@ -1,8 +1,10 @@
 package lk.imms.management_system.asset.offenders.entity;
 
+import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
+import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
 import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.crime.entity.Crime;
 import lk.imms.management_system.asset.petition.entity.Petition;
@@ -115,5 +117,8 @@ public class Offender extends AuditEntity {
 
     @Transient
     private List< String > removeImages = new ArrayList<>();
+
+    @Transient
+    private List< FileInfo > fileInfos = new ArrayList<>();
 
 }

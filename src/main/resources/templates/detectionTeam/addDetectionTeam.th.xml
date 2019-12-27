@@ -22,7 +22,7 @@
     <attr sel="#note" th:utext="${detectionTeamNotes[__${status.index}__].note}"/>
     <attr sel="#createdBy" th:text="${detectionTeamNotes[__${status.index}__].createdBy}"/>
     <attr sel="#createdAt" th:text="${{detectionTeamNotes[__${status.index}__].createdAt}}"/>
-    <attr sel="#detectionTeamNoteHide"  th:name="${'detectionTeamNotes[__${status.count}__].note'}"/>
+    <attr sel="#detectionTeamNoteHide" th:name="${'detectionTeamNotes[__${status.count}__].note'}"/>
 
     <!--Team Acceptation-->
     <attr sel="#teamAcceptationDiv" th:if="${addStatus==false}"/>
@@ -51,6 +51,12 @@
 
     <!--Button-->
     <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
+
+
+    <!--Singlish to sinhala Translator-->
+    <attr sel="#translatorSinhala" th:replace="~{fragments/unicodeSinhala :: unicodeSinhalaFragment}"/>
+    <!--Tamish to Tamil Translator-->
+    <attr sel="#translatorTamil" th:replace="~{fragments/unicodeTamil :: unicodeTamilFragment}"/>
 
     <!--URL Comes -->
     <attr sel="#districtUrl" th:value="${districtUrl}"/>

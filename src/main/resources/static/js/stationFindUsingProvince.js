@@ -1,8 +1,4 @@
 $(document).ready(function () {
-    //WYSIWYG add to text area
-    bkLib.onDomLoaded(function () {
-        nicEditors.allTextAreas()
-    });
 
 //According to province need to find district and station
     $("#districtShow, #stationShow").hide();

@@ -34,19 +34,18 @@ $(document).ready(function () {
     /* Patient and employee Nic Validation - end*/
 
 
-
-/*
-//prevent checkbox==null before submit -start
-    $(function () {
-        $('#btnSubmit').on("click", function (e) {
-            let checked = $(':checkbox:checked').length;
-            if (checked === 0) {
-                swal("Oops", "At least One Lab Test Should Be Selected!", "error");
-                e.preventDefault();
-            }
+    /*
+    //prevent checkbox==null before submit -start
+        $(function () {
+            $('#btnSubmit').on("click", function (e) {
+                let checked = $(':checkbox:checked').length;
+                if (checked === 0) {
+                    swal("Oops", "At least One Lab Test Should Be Selected!", "error");
+                    e.preventDefault();
+                }
+            });
         });
-    });
-*/
+    */
 
 });
 /*jquery - ui function*/
@@ -66,14 +65,14 @@ let invoiceNumberRegex = /^[0-9]{10}$/;
 
 
 //Nic - data of birth - start
-function dateLengthValidate(day) {
+let dateLengthValidate = function (day) {
     if (day.toLocaleString().length === 1) {
         return day = '0' + day;
     }
     return day;
-}
+};
 
-function calculateDateOfBirth(nic) {
+let calculateDateOfBirth = function (nic) {
     let dateOfBirth = null;
     let day = null;
     let month;
@@ -204,16 +203,21 @@ function calculateDateOfBirth(nic) {
         }
     }
     return dateOfBirth;
-}
+};
 
 //Nic - data of birth - end
 
 //Nic - gender - start
-function calculateGender(nic) {
+let calculateGender = function (nic) {
     let genders = null;
     if (nic.length === 10 && nic[9] === "V" || nic[9] === "v" || nic[9] === "x" || nic[9] === "X") {
         if (nic[9] === "v" || nic[9] === "x") {
-            alert(` Please change "v" or "x" to "V" or "X" `);
+            let message = `Please change "v" or "x" to "V" or "X" `;
+            swal({
+                title: "Could you please check NIC",
+                icon: "warning",
+                text: message,
+            });
         }
         if (+nic.substr(2, 3) < 500) genders = 'MALE';
         else genders = 'FEMALE';
@@ -223,7 +227,7 @@ function calculateGender(nic) {
         else genders = 'FEMALE';
     }
     return genders;
-}
+};
 
 //Nic - gender - end
 
@@ -240,7 +244,7 @@ $(".fax").bind("keyup", function () {
     landValidate($(this));
 });
 
-function mobileValidate(val) {
+let mobileValidate = function (val) {
     let mobile = $(val).val();
     if (mobileRegex.test(mobile)) {
         backgroundColourChangeGood(val);
@@ -249,9 +253,9 @@ function mobileValidate(val) {
     } else {
         backgroundColourChangeBad(val);
     }
-}
+};
 
-function landValidate(val) {
+let landValidate = function (val) {
     let land = $(val).val();
     if (landRegex.test(land)) {
         backgroundColourChangeGood(val);
@@ -260,7 +264,7 @@ function landValidate(val) {
     } else {
         backgroundColourChangeBad(val);
     }
-}
+};
 
 //NIC colour change
 $("#nic").bind("keyup", function () {
@@ -308,24 +312,24 @@ $("#invoiceNumber").bind("keyup", function () {
 });
 
 //colour change function --start
-function backgroundColourChangeGood(id) {
+let backgroundColourChangeGood = function (id) {
     $(id).css('background-color', '#00FFFF');
-}
+};
 
-function backgroundColourChangeBad(id) {
+let backgroundColourChangeBad = function (id) {
     $(id).css('background-color', '#FF00AA');
-}
+};
 
-function backgroundColourChangeNothingToChange(id) {
+let backgroundColourChangeNothingToChange = function (id) {
     $(id).css('background-color', '#ffffff');
-}
+};
 
 //colour change function -- end
 
 /* some content need to print use this method */
 
 // el (id of content)is variable that need to give when function call
-function printContent(el) {
+let printContent = function (el) {
     // restorepage = current document
     let restorepage = document.body.innerHTML;
     // printcontent = need to print area that area must enclosed with div
@@ -334,7 +338,7 @@ function printContent(el) {
     window.print();
     //after print set current web page
     document.body.innerHTML = restorepage;
-}
+};
 
 //AJAX FUNCTION CALL
 async function getData(url) {
@@ -349,7 +353,7 @@ async function getData(url) {
 }
 
 // conformation message and to login page
-function conformationAndLoginWindow() {
+let conformationAndLoginWindow = function () {
     let message = "Please give me a movement to refresh.";
     swal({
         title: "Attention !",
@@ -364,8 +368,7 @@ function conformationAndLoginWindow() {
             location.reload();
         }
     });
-}
-
+};
 
 //custom invoice search page validation - start
 $("#invoiceFindBy").bind("change", function () {
@@ -374,6 +377,7 @@ $("#invoiceFindBy").bind("change", function () {
     document.getElementById("invoiceFindValue").style.setProperty('background-color', '#ffffff', 'important');
     $("#invoiceFindValue").val("");
 });
+
 $("#invoiceFindValue").bind("keyup", function () {
     let selectedInvoiceSearch = document.getElementById("invoiceFindBy").value;
     let enterValue = $(this).val();
@@ -423,6 +427,7 @@ $("#invoiceFindValue").bind("keyup", function () {
 
 //search form date validation - start
 const milliSecondToDay = Date.parse(new Date());
+
 $("#startDate").bind("input", function () {
     let startDate = document.getElementById("startDate").value;
 
@@ -465,7 +470,6 @@ $("#btnSummaryFind").bind("mouseover", function () {
         let milliSecondEndDate = Date.parse(endDate);
 
         if (milliSecondToDay < milliSecondStartDate || milliSecondToDay < milliSecondEndDate) {
-
             swal({
                 title: "Date range is not valid",
                 icon: "warning",
@@ -516,13 +520,13 @@ $("#valueEmployee").bind("keyup", function () {
 
 });
 
-function btnSearchEmployeeShow() {
+let btnSearchEmployeeShow = function () {
     if ($("#selectParameter").val() !== '' && $("#valueEmployee").val() !== '') {
         $("#btnSearchEmployee").css('display', '');
     } else {
         $("#btnSearchEmployee").css('display', 'none');
     }
-}
+};
 
 
 //Customer employee Search filed - end any way in project

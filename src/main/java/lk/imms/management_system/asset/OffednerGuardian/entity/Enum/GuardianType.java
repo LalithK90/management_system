@@ -1,4 +1,4 @@
-package lk.imms.management_system.asset.offenders.entity.Enum;
+package lk.imms.management_system.asset.OffednerGuardian.entity.Enum;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

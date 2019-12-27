@@ -14,4 +14,15 @@ public class UiController {
     public String getLogin(){
         return "login/login";
     }
+
+    @GetMapping(value = {"/unicodeTamil"})
+    public String getUnicodeTamil(){
+        return "fragments/unicodeTamil";
+    }
+
+    @GetMapping(value = {"/unicodeSinhala"})
+    public String getUnicodeSinhala(){
+        return "fragments/unicodeSinhala";
+    }
+
 }

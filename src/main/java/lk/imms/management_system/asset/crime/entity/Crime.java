@@ -28,14 +28,14 @@ public class Crime extends AuditEntity {
 
     private String compoundedChargeSheetNumber;
 
-    @Column( columnDefinition = "VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(10000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String result;
 
     private String rewardSheetNumber;
 
     private String remark;
 
-    @Column( columnDefinition = "VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(10000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String placeOfOffence;
 
     @ManyToOne

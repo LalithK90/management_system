@@ -25,7 +25,7 @@
     <attr sel="#subject" th:field="*{petition.subject}"/>
     <!--Minute petition details -->
     <attr sel="#description" th:name="${'minutePetitions[0].detail'}"/>
-    <!--Direct to petition -->
+       <!--Direct to petition -->
     <attr sel="#directedTo" th:fragment="directedToFragment"/>
     <!--Relevant Station -->
     <attr sel="#stations" th:name="${'minutePetitions[0].workingPlace'}"/>
@@ -89,6 +89,26 @@
     <attr sel="#stationUrl" th:value="${stationUrl}"/>
     <attr sel="#employeeUrl" th:value="${employeeUrl}"/>
     <attr sel="#petitionerUrl" th:value="${petitionerUrl}"/>
+
+    <!--Singlish to sinhala Translator-->
+    <attr sel="#translatorSinhala" th:replace="~{fragments/unicodeSinhala :: unicodeSinhalaFragment}"/>
+    <!--Tamish to Tamil Translator-->
+    <attr sel="#translatorTamil" th:replace="~{fragments/unicodeTamil :: unicodeTamilFragment}"/>
+
+    <!--
+    <div class="form-row">
+                        Translator Sinhala
+    <div class="container-fluid col-sm-6 text-center">
+        <span id="translatorSinhala"></span>
+    </div>
+    Translator Tamil
+    <div class="container-fluid col-sm-6 text-center">
+        <span id="translatorTamil"></span>
+    </div>
+</div>
+
+
+    -->
 
     <!--Script -->
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>

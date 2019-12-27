@@ -8,7 +8,12 @@
     <attr sel="#form" th:action="${addStatus==true?'/contravene/add':'/contravene/update'}"
           th:object="${contravene}"/>
 
-    <!--Pay role number-->
+    <!--contravene code-->
+    <attr sel="#code" th:field="*{code}"/>
+    <attr sel="#codeError" th:errors="*{code}"
+          th:if="${#fields.hasErrors('code')}"/>
+
+    <!--contravene details-->
     <attr sel="#contravene" th:field="*{detail}"/>
     <attr sel="#contraveneError" th:errors="*{detail}"
           th:if="${#fields.hasErrors('detail')}"/>

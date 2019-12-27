@@ -1,8 +1,7 @@
-package lk.imms.management_system.asset.offenders.entity;
+package lk.imms.management_system.asset.OffednerGuardian.entity;
 
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
-import lk.imms.management_system.asset.offenders.entity.Enum.GuardianType;
+import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
+import lk.imms.management_system.asset.offenders.entity.Offender;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 
@@ -15,7 +14,6 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
-@ToString
 public class Guardian extends AuditEntity {
 
     @Enumerated( EnumType.STRING )

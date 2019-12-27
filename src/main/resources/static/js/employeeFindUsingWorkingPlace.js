@@ -1,7 +1,7 @@
 $(document).ready(function () {
     //WYSIWYG add to text area
     bkLib.onDomLoaded(function () {
-        nicEditors.allTextAreas()
+        nicEditors.findEditor()
     });
 
     $('.input-images').imageUploader();
@@ -12,7 +12,10 @@ $(document).ready(function () {
     noteNameSet();
 
 //if already saved employee comes to frontend, need to add they SelectedEmployeeList before check already in array
-    alreadySelectedEmployeeList();
+    if (document.getElementById("selectedEmployee") !== null) {
+        alreadySelectedEmployeeList();
+    }
+
 
 //Get district list
     $("#provinces").bind("change", function () {
@@ -193,7 +196,6 @@ let alreadySelectedEmployeeList = function () {
             SelectedEmployeeList.push(rowDataToEmployee(objCells));
         }
     }
-    console.log(SelectedEmployeeList);
 };
 
 //remove selected table show list
@@ -245,8 +247,6 @@ let checkEmployeeInArrayOrNot = function (rowDetails) {
 
     } else {
         for (let i = 0; i < SelectedEmployeeList.length; i++) {
-            console.log("Selected list employee id = " + SelectedEmployeeList[i].id.length +"type of "+typeof SelectedEmployeeList[i].id
-                + "employee id = " + employee.id.length + "type of "+ typeof  employee.id);
             if (SelectedEmployeeList[i].id === employee.id) {
                 console.log(" im here both same");
                 existOrNot = true;
@@ -270,11 +270,11 @@ let addRowToSelectedTable = function (employee) {
 
     let tableRowCount = table.rows.length;
     let row = table.insertRow(tableRowCount);
-    let innerHtml = employee.id.split(">");
+    /*let innerHtml = employee.id.split(">");*/
 
     row.insertCell(0).innerHTML = tableRowCount;
     row.insertCell(1).innerHTML = employee.id;
-    row.insertCell(2).innerHTML = `${innerHtml[0]}  name="detectionTeamMembers[${tableRowCount - 1}].employee" />`;
+    row.insertCell(2).innerHTML = `<input type="hidden" name="detectionTeamMembers[${tableRowCount - 1}].employee" value="${employee.id}" />`;
     row.insertCell(3).innerHTML = employee.name;
     row.insertCell(4).innerHTML = `<div>
                                             <input type="radio" id="teamMemberStatusValue${tableRowCount}" name="detectionTeamMembers[${tableRowCount - 1}].detectionTeamMemberRole" value="INCHARGE" required/> 

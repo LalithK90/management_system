@@ -37,13 +37,23 @@
             <div class="row">
                 <!--Left Side-->
                 <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-                    <!--Pay role Number-->
+                    <!--code-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="code">Code :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="code" class="form-control" tabindex="1" type="text" required/>
+                            <span class="error" id="codeError">Error Code</span>
+                        </div>
+                    </div>
+                    <!--contravene-->
                     <div class="form-row text-right" >
                         <div class="col-md-4">
                             <label class="control-label" for="contravene">Contravene :</label>
                         </div>
                         <div class="col-md-12">
-                            <textarea id="contravene" class="form-control" tabindex="1" ></textarea>
+                            <textarea id="contravene" class="form-control" tabindex="2" ></textarea>
                             <span id="contraveneError" class="error">Error Pay Role Number</span>
                         </div>
                     </div>

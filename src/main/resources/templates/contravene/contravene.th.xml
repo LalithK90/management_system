@@ -6,8 +6,8 @@
     <attr sel="#userListTable" th:if="${not #lists.isEmpty(contravenes)}"/>
     <attr sel="#userList" th:each="contravene, rowCount : ${contravenes}"/>
     <attr sel="#index" th:text="${rowCount.count}"/>
+    <attr sel="#code" th:utext="${contravene.code}"/>
     <attr sel="#contravene" th:utext="${contravene.detail}"/>
-    <attr sel="#createdDate" th:text="${contravene.createdAt}"/>
     <attr sel="#contraveneView" th:href="${'/contravene/' + contravene.id}"/>
     <attr sel="#contraveneEdit" th:href="${'/contravene/edit/' + contravene.id}"/>
     <attr sel="#contraveneRemove" th:href="${'/contravene/remove/' + contravene.id}"

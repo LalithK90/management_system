@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/offender" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+<!--Form Content - start -->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="form-horizontal" method="POST">
+            <!--Button list to show-->
+            <div class="form-row col-sm-12 col-md-12 col-12">
+                <!--Offender button-->
+                <div class="col-3">
+                    <label class="control-label " for="description">
+                        <strong>Offender
+                                Details :</strong>
+                    </label>
+                    <div class="col">
+                        <button type="button" id="offenderButton" class="btn btn-sm btn-warning"
+                        ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
+                        </button>
+                    </div>
+                </div>
+                <!--Calling Name button-->
+                <div class="col-3">
+                    <label class="control-label"><strong>Calling Name :</strong></label>
+                    <div class="col">
+                        <button type="button" id="callingNameButton" class="btn btn-sm btn-warning"
+                        ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
+                        </button>
+                    </div>
+                </div>
+                <!--Guardian button-->
+                <div class="col-3">
+                    <label class="control-label " for="description">
+                        <strong>Guardians Details :</strong></label>
+                    <div class="col">
+                        <button type="button" id="guardianButton" class="btn btn-sm btn-warning"
+                        ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
+                        </button>
+                    </div>
+                </div>
+                <!--contravene button-->
+                <div class="col-3">
+                    <label class="control-label " for="description">
+                        <strong>Contravene Details :</strong></label>
+                    <div class="col">
+                        <button type="button" id="contraveneButton" class="btn btn-sm btn-warning"
+                        ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--Offender details -->
+            <div class="container-fluid" id="offenderDetailShow">
+                <div class="form-row col-md-12 col-sm-12 text-left flex-column">
+                    <label class="control-label" for="teamStatusValue">Offender Detail :</label>
+                </div>
+                <div class="row">
+                    <!--Left Side-->
+                    <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                        <!--Id-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="id">ID :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="id" class="form-control" type="text"/>
+                            </div>
+                        </div>
+                        <!--Offender Registration Number-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="offenderRegisterNumber">Offender Reg No :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="offenderRegisterNumber" class="form-control" type="text"/>
+                            </div>
+                        </div>
+                        <!--Name Sinhala-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="nameSinhala">Name ( Sinhala ) :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="nameSinhala" class="form-control" type="text"/>
+                            </div>
+                        </div>
+                        <!--Name Tamil-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="nameTamil">Name ( Tamil ) :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="nameTamil" class="form-control" type="text"/>
+                            </div>
+                        </div>
+                        <!--Name English-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="nameEnglish">Name ( English ) :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="nameEnglish" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <!--NIC no-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="nic">NIC No :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="nic" class="form-control" type="text" maxlength="12"
+                                       minlength="10"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Right Side-->
+                    <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                        <!--Passport Number -->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="passportNumber">Passport No :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="passportNumber" class="form-control" type="text" maxlength="12"
+                                       minlength="10"/>
+                            </div>
+                        </div>
+                        <!--Driving Licence Number -->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="drivingLicenceNumber">Driving Licence No :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="drivingLicenceNumber" class="form-control" type="text"
+                                       maxlength="12"
+                                       minlength="10"/>
+                            </div>
+                        </div>
+                        <!--Mobile one-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="mobileOne">Mobile One No :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="mobileOne" class="form-control mobile" type="text"
+                                       maxlength="10" min="9"
+                                />
+                            </div>
+                        </div>
+                        <!--Mobile two-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="mobileTwo">Mobile Two No :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="mobileTwo" class="form-control mobile" type="text"
+                                       maxlength="10" min="9"/>
+                            </div>
+                        </div>
+                        <!--Land-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="land">Land No :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="land" class="form-control land" type="text" maxlength="10"
+                                       min="9"/>
+                            </div>
+                        </div>
+                        <!--Email-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="email">Email :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="email" class="form-control" type="email"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Description -->
+                <div class="form-row col-md-12 col-sm-12 text-left flex-column">
+                    <div class="form-row">
+                        <label class="control-label" for="description">Description:</label>
+                    </div>
+                    <textarea class="form-control" id="description"
+                              placeholder="Enter Description"></textarea>
+                </div>
+            </div>
+            <!--Calling Name-->
+            <div class="form-group col-md-12 col-sm-12 text-left flex-column" id="callingNameShow">
+                <div class="form-row">
+                    <label class="control-label" for="teamStatusValue">Calling Name :</label>
+                </div>
+                <!--List Of Calling Name-->
+                <div class="form-row" id="callingNameList">
+                    <div class="item" id="callingName">
+                        <div class=" d-none">
+                            <input id="callingNameId" type="hidden"/>
+                            <input id="callingNames" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Guardians Details-->
+            <div class="form-row col-sm-12 col-md-12 col-12" id="guardianShow">
+                <div class="form-row">
+                    <label class="control-label" for="teamStatusValue">Guardian :</label>
+                </div>
+                <!--to add new guardian -->
+                <div class="row col-md-12 col-sm-12 col-12 table-responsive">
+                    <table id="guardianTable" class="table">
+                    </table>
+                </div>
+            </div>
+            <!--Contravene Details-->
+            <div class="form-row col-sm-12 col-md-12 col-12" id="contraveneShow">
+                <div class="form-row">
+                    <label class="control-label" for="contraveneValue">Contravene :</label>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-row text-left">
+                        <div class="col-6" id="contraveneStatus">
+                            <input type="checkbox" id="contraveneValue"/>
+                            <label class="display_detail" id="contraveneLabel"> Male</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Button-->
+            <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                <button class="btn btn-success" type="submit">
+                    <i class="fa fa-search " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div>
+        <br/>
+    </div>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script id="offenderJs"></script>
+</body>
+</html>
+

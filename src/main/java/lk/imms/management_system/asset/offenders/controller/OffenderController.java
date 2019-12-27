@@ -1,16 +1,19 @@
 package lk.imms.management_system.asset.offenders.controller;
 
+import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
+import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
+import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
 import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
+import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
-import lk.imms.management_system.asset.offenders.entity.Enum.GuardianType;
-import lk.imms.management_system.asset.offenders.entity.Guardian;
 import lk.imms.management_system.asset.offenders.entity.Offender;
 import lk.imms.management_system.asset.offenders.entity.OffenderCallingName;
 import lk.imms.management_system.asset.offenders.entity.OffenderFiles;
+import lk.imms.management_system.asset.offenders.service.OffenderCallingNameService;
 import lk.imms.management_system.asset.offenders.service.OffenderFilesService;
 import lk.imms.management_system.asset.offenders.service.OffenderService;
 import lk.imms.management_system.asset.userManagement.entity.User;
@@ -42,14 +45,22 @@ public class OffenderController {
     private final OffenderFilesService offenderFilesService;
     private final UserService userService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
+    private final ContraveneService contraveneService;
+    private final OffenderCallingNameService offenderCallingNameService;
+    private final GuardianService guardianService;
 
     @Autowired
     public OffenderController(OffenderService offenderService, OffenderFilesService offenderFilesService,
-                              UserService userService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+                              UserService userService, MakeAutoGenerateNumberService makeAutoGenerateNumberService,
+                              ContraveneService contraveneService,
+                              OffenderCallingNameService offenderCallingNameService, GuardianService guardianService) {
         this.offenderService = offenderService;
         this.offenderFilesService = offenderFilesService;
         this.userService = userService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+        this.contraveneService = contraveneService;
+        this.offenderCallingNameService = offenderCallingNameService;
+        this.guardianService = guardianService;
     }
 
     // Common things for an offender add and update
@@ -63,7 +74,7 @@ public class OffenderController {
     }
 
     //To get files from the database
-    private void offenderFiles(Offender offender, Model model) {
+    private List<FileInfo> offenderFiles(Offender offender) {
         List< FileInfo > fileInfos = offenderFilesService.findByOffender(offender)
                 .stream()
                 .map(OffenderFiles -> {
@@ -75,7 +86,7 @@ public class OffenderController {
                     return new FileInfo(filename, OffenderFiles.getCreatedAt(), url);
                 })
                 .collect(Collectors.toList());
-        model.addAttribute("files", fileInfos);
+        return fileInfos;
     }
 
     //When called file will send to 
@@ -90,7 +101,12 @@ public class OffenderController {
     //Send all offender data
     @RequestMapping
     public String offenderPage(Model model) {
-        model.addAttribute("offenders", offenderService.findAll());
+        List<Offender> offenders = new ArrayList<>();
+      for  (Offender offender : offenderService.findAll()){
+          offender.setFileInfos(offenderFiles(offender));
+          offenders.add(offender);
+      }
+        model.addAttribute("offenders",offenders);
         return "offender/offender";
     }
 
@@ -100,7 +116,7 @@ public class OffenderController {
         Offender offender = offenderService.findById(id);
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
-        offenderFiles(offender, model);
+        model.addAttribute("files", offenderFiles(offender));
         return "offender/offender-detail";
     }
 
@@ -110,7 +126,7 @@ public class OffenderController {
         Offender offender = offenderService.findById(id);
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
-        offenderFiles(offender, model);
+        model.addAttribute("files", offenderFiles(offender));
         commonThings(model);
         return "offender/addOffender";
     }
@@ -206,10 +222,147 @@ public class OffenderController {
         return "redirect:/offender";
     }
 
+    //To search form page to visible
+    @GetMapping( "/search" )
+    public String searchForm(Model model) {
+        model.addAttribute("offender", new Offender());
+        commonThings(model);
+        model.addAttribute("contravenes", contraveneService.findAll());
+        return "offender/offenderSearch";
+    }
+
     //To search offender any giving offender parameter
-    @RequestMapping( value = "/search", method = RequestMethod.GET )
-    public String search(Model model, Offender offender) {
-        model.addAttribute("offenderDetail", offenderService.search(offender));
-        return "offender/offender-detail";
+    @RequestMapping( value = "/search", method = RequestMethod.POST )
+    public String search(@ModelAttribute( "offender" ) Offender offender, Model model) {
+        Offender searchOffender = new Offender();
+        //all offenders which all provided search, collect to this list
+        List< Offender > offenders = new ArrayList<>();
+
+        //offender calling name set
+        if ( offender.getOffenderCallingNames() != null ) {
+            offenders.addAll(offenderCallingNameService.findByOffendersUsingCallingNames(offender.getOffenderCallingNames()));
+        }
+        //guardian details' offender set
+        if ( offender.getGuardians() != null ) {
+            offenders.addAll(guardianService.findByOffendersUsingGuardian(offender.getGuardians()));
+        }
+        //contravene is there
+        if ( offender.getContravenes() != null ) {
+            offenders = contraveneService.findByOffendersUsingContravene(offender.getContravenes());
+        }
+
+        //id
+        if ( offender.getId() != null ) {
+            searchOffender.setId(offender.getId());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setId(null);
+        }
+        //registration number
+        if ( offender.getOffenderRegisterNumber() != null ) {
+            searchOffender.setOffenderRegisterNumber(offender.getOffenderRegisterNumber());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setOffenderRegisterNumber(null);
+        }
+        //name sinhala
+        if ( offender.getNameSinhala() != null ) {
+            searchOffender.setNameSinhala(offender.getNameSinhala());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setNameSinhala(null);
+        }
+        //name tamil
+        if ( offender.getNameTamil() != null ) {
+            searchOffender.setNameTamil(offender.getNameTamil());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setNameTamil(null);
+        }
+        //name english
+        if ( offender.getNameEnglish() != null ) {
+            searchOffender.setNameEnglish(offender.getNameEnglish());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setNameEnglish(null);
+        }
+        //nic
+        if ( offender.getNic() != null ) {
+            searchOffender.setNic(offender.getNic());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setNic(null);
+        }
+        //passport
+        if ( offender.getPassportNumber() != null ) {
+            searchOffender.setPassportNumber(offender.getPassportNumber());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setPassportNumber(null);
+        }
+        //driving licence
+        if ( offender.getDrivingLicenceNumber() != null ) {
+            searchOffender.setDrivingLicenceNumber(offender.getDrivingLicenceNumber());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setDrivingLicenceNumber(null);
+        }
+        //mobile one
+        if ( offender.getMobileOne() != null ) {
+            searchOffender.setMobileOne(offender.getMobileOne());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setMobileOne(null);
+            searchOffender.setMobileTwo(offender.getMobileOne());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setMobileTwo(null);
+            searchOffender.setLand(offender.getMobileOne());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setLand(null);
+        }
+        //mobile two
+        if ( offender.getMobileTwo() != null ) {
+            searchOffender.setMobileOne(offender.getMobileTwo());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setMobileOne(null);
+            searchOffender.setMobileTwo(offender.getMobileTwo());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setMobileTwo(null);
+            searchOffender.setLand(offender.getMobileTwo());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setLand(null);
+        }
+        //land
+        if ( offender.getLand() != null ) {
+            searchOffender.setMobileOne(offender.getLand());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setMobileOne(null);
+            searchOffender.setMobileTwo(offender.getLand());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setMobileTwo(null);
+            searchOffender.setLand(offender.getLand());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setLand(null);
+        }
+        //email
+        if ( offender.getEmail() != null ) {
+            searchOffender.setEmail(offender.getEmail());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setEmail(null);
+        }
+        //description
+        if ( offender.getDescription() != null ) {
+            searchOffender.setDescription(offender.getDescription());
+            offenders.addAll(offenderService.search(searchOffender));
+            searchOffender.setDescription(null);
+        }
+
+
+        //final stage before send data to frontend
+        // if there is any duplicate remove from the list
+        List< Offender > offenderList = offenders.stream()
+                .distinct()
+                .collect(Collectors.toList());
+
+        if ( offenderList.size() == 1 ) {
+            model.addAttribute("offender", offenderList.get(0));
+            model.addAttribute("addStatus", false);
+            model.addAttribute("files", offenderFiles(offenders.get(0)));
+            return "offender/offender-detail";
+        } else {
+            model.addAttribute("offenders", offenderList);
+            return "offender/offender";
+        }
     }
 }
