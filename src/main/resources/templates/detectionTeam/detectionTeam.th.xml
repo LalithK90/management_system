@@ -11,6 +11,10 @@
     <attr sel="#createdDate" th:text="${{detectionTeam.createdAt}}"/>
     <attr sel="#detectionTeamView" th:href="${'/detection/' + detectionTeam.id}"/>
     <attr sel="#detectionTeamEdit" th:href="${'/detection/edit/' + detectionTeam.id}"/>
+    <!--Add offender-->
+    <attr sel="#offenderAdd" th:href="${'/petition/addOffender/' + detectionTeam.petition.id}"/>
+    <!--Add crime-->
+    <attr sel="#crimeAdd" th:href="${'/crime/' + detectionTeam.id}"/>
     <attr sel="#userRemove" th:href="${'/detection/remove/' + detectionTeam.id}"
           th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"/>
     <attr sel="#detectionTeamNotList" th:if="${ #lists.isEmpty(detectionTeams)}"/>

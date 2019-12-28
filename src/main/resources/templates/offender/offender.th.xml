@@ -10,13 +10,16 @@
     <!--Name in English-->
     <attr sel="#nameEnglish" th:text="${offender.nameEnglish}"/>
     <!--Calling Names-->
-    <attr sel="#callingName" th:each="callingName, rowCount : ${offender.offenderCallingNames}"/>
+   <!-- <attr sel="#callingName" th:each="callingName, rowCount : ${offender.offenderCallingNames}"/>
+   -->
     <!--Calling Name-->
     <attr sel="#callingName" th:text="${callingName.callingName}"/>
     <!--Mobile one-->
     <attr sel="#mobileOne" th:text="${offender.mobileOne}"/>
     <!--Land one-->
     <attr sel="#land" th:text="${offender.land}"/>
+    <!--image-->
+    <attr sel="#img" th:src="${offender.fileInfos[__${1}__].url}"/>
     <!--offender Details view-->
     <attr sel="#offenderView" th:href="${'/offender/' + offender.id}"/>
     <!--Offender edit-->

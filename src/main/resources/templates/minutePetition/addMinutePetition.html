@@ -40,17 +40,30 @@
                 </div>
                 <!--New minute start-->
                 <div class="row col-12 col-md-12 col-sm-12 card-body formBorder">
-                    <p class="text-md-left "><strong>Purpose of this minute </strong></p>
-                    <!--minute petition state Type-->
-                    <div class="col-md-4 col-sm-4 text-left ">
-                        <div class="col-md-4">
-                            <label class="control-label" for="minuteState">To Action</label>
+                    <h3 class="text-lg-left "><strong>Purpose of this minute </strong></h3>
+                    <div class="form-row col-12 col-md-12 col-sm-12 card-body formBorder">
+                        <!--minute petition state Type-->
+                        <div class="col-md-4 col-sm-4 text-left ">
+                            <div class="col-md-4">
+                                <label class="control-label" for="minuteState">To Action</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select id="minuteState" class="form-control" tabindex="1" required>
+                                    <option value="">Please select</option>
+                                    <option id="minuteStateList" value=""></option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <select id="minuteState" class="form-control" tabindex="1" required>
-                                <option value="">Please select</option>
-                                <option id="minuteStateList" value=""></option>
-                            </select>
+                       <!--offender search-->
+                        <div class="col-md-8 col-sm-8 text-left ">
+                            <div class="col-md-4">
+                                <label class="control-label" for="minuteState">To Get Any Sugession</label>
+                            </div>
+                            <div class="col-md-8">
+                                <a href="/offender/search" target="_blank" class="btn btn-outline-warning">
+                                    <i class="fa fa-users "></i>&nbsp; Offender &nbsp; <i class="fa fa-search"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +97,7 @@
                 <!--Complaint directed to-->
                 <div class="row col-12 col-md-12 col-sm-12 card-body formBorder" id="directedTo">
                     <div class="row col-12 col-md-12 col-sm-12 text-left">
-                        <p class="text-md-left "><strong>Direct To </strong></p>
+                        <h3 class="text-lg-left "><strong>Direct To </strong></h3>
                     </div>
                     <!--Working Place Complaint Direct -->
                     <div class="row col-12 col-md-12 col-sm-12">

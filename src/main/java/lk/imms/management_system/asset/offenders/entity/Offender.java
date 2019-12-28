@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.offenders.entity;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
@@ -29,7 +30,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
-@ToString
+@JsonFilter("Offender")
 public class Offender extends AuditEntity {
 
     @Column( unique = true )
@@ -121,4 +122,6 @@ public class Offender extends AuditEntity {
     @Transient
     private List< FileInfo > fileInfos = new ArrayList<>();
 
+    @Transient
+    private String age;
 }

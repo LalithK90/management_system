@@ -18,9 +18,6 @@
     <!--Petition Subject-->
     <attr sel="#subject" th:utext="${petition.subject}"/>
 
-    <!--Petition Village-->
-    <attr sel="#village" th:text="${petition.village}"/>
-
     <!--Petition Priority-->
     <attr sel="#petitionPriority" th:text="${petition.petitionPriority.petitionPriority}"/>
 
@@ -35,6 +32,9 @@
 
     <!--Petition Details View-->
     <attr sel="#teamCreate" th:href="${'/detection/create/' + petition.id}"/>
+
+    <!--Add offender-->
+    <attr sel="#offenderAdd" th:href="${'/petition/addOffender/' + petition.id}"/>
 
     <!--Petition list is not-->
     <attr sel="#petitionListNotPresent" th:if="${ #lists.isEmpty(petitions)}"/>

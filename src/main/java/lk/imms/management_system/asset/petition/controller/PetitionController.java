@@ -207,7 +207,12 @@ public class PetitionController {
         return "redirect:/petition/add";
     }
 
-
+    //Give a frontend to petition offender from
+    @GetMapping( "/addOffender/{id}" )
+    public String addPetitionOffenderPage(Model model, @PathVariable Long id) {
+        model.addAttribute("petition", petitionService.findById(id));
+        return "petition/petitionAddOffender";
+    }
 }
 
 // -->Auto Generate Year/Month/OfficeType/StationCode/PetitionNumberFromDB

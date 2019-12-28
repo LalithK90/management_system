@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" href="/petition/add"><i class="fa fa-file"></i>
+                &nbsp; New Petition</a>
+        </div>
+        <div class="col">
+            <h4 class="text-info text-center">
+                <strong>
+                    Offender Petition Management
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/petition/search" id="searchShow" class="btn btn-primary">
+                <i class="fa fa-file " style="font-size: 20px"></i>&nbsp;Search&nbsp; <i class="fa fa-search"
+                                                                                         style="font-size: 20px"></i>
+
+                                                                   &nbsp;
+            </a>
+        </div>
+    </div>
+</div>
+<!--petition details should be there-->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+    </div>
+</div>
+
+<!--Form Content - start -->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="form-horizontal" method="POST">
+            <input type="hidden" id="petitionId"/>
+             <!--Offender search-->
+            <div class="row">
+
+
+            </div>
+            <!--searched offender show-->
+            <div class="row">
+
+
+            </div>
+        </form>
+    </div>
+</div>
+<span id="petition"></span>
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script id="customScript"></script>
+</body>
+</html>
