@@ -28,7 +28,7 @@
     <attr sel="#dateOfAssignment" th:text="${{employeeDetail.dateOfAssignment}}"/>
     <attr sel="#employeeStatus" th:text="${employeeDetail.employeeStatus.employeeStatus}"/>
     <attr sel="#createdBy" th:text="${employeeDetail.createdBy}"/>
-    <attr sel="#createdAt" th:text="${{employeeDetail.createdAt}}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(employeeDetail.createdAt, 'dd-MM-yyyy HH:mm')}"/>
     <attr sel="#updatedBy" th:text="${employeeDetail.updatedBy}"/>
     <attr sel="#updatedAt" th:text="${{employeeDetail.updatedAt}}"/>
 
@@ -46,7 +46,7 @@
     <attr sel="#employeeWorkingPlaceLandFour" th:text="${employeeDetail.workingPlace.landFour}"/>
     <attr sel="#employeeWorkingPlaceFaxNumber" th:text="${employeeDetail.workingPlace.faxNumber}"/>
     <attr sel="#employeeWorkingPlaceCreatedBy" th:text="${employeeDetail.workingPlace.createdBy}"/>
-    <attr sel="#employeeWorkingPlaceCreatedAt" th:text="${{employeeDetail.workingPlace.createdAt}}"/>
+    <attr sel="#employeeWorkingPlaceCreatedAt" th:text="${#temporals.format(employeeDetail.workingPlace.createdAt, 'dd-MM-yyyy HH:mm')}"/>
 
 
     <attr sel="#filesList" th:each="file, rowStat: ${files}"/>

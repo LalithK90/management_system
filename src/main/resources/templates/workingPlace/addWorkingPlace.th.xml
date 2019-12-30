@@ -45,7 +45,7 @@
     <attr sel="#createdByDiv" th:if="${addStatus==false}"/>
     <attr sel="#createdBy" th:field="*{createdBy}"/>
     <attr sel="#createdAtDiv" th:if="${addStatus==false}"/>
-    <attr sel="#createdAt" th:field="*{{createdAt}}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(createdAt, 'dd-MM-yyyy HH:mm')}"/>
     <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
     <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
     <attr sel="#errorDisplay" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>

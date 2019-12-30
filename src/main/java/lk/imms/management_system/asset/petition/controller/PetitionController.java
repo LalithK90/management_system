@@ -7,6 +7,7 @@ import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionFilesService;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
+import lk.imms.management_system.asset.offenders.controller.OffenderRestController;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
@@ -115,6 +116,7 @@ public class PetitionController {
     //petition details
     @GetMapping( "/view/{id}" )
     public String viewPetition(@PathVariable Long id) {
+        //TODO-> need to view petition details
         return "petition/petition-detail";
     }
 
@@ -211,6 +213,10 @@ public class PetitionController {
     @GetMapping( "/addOffender/{id}" )
     public String addPetitionOffenderPage(Model model, @PathVariable Long id) {
         model.addAttribute("petition", petitionService.findById(id));
+        model.addAttribute("offenderUrl", MvcUriComponentsBuilder
+                .fromMethodName(OffenderRestController.class, "getOffender", "")
+                .build()
+                .toString());
         return "petition/petitionAddOffender";
     }
 }

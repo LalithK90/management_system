@@ -8,9 +8,12 @@
     <attr sel="#index" th:text="${rowCount.count}"/>
     <attr sel="#number" th:text="${detectionTeam.number}"/>
     <attr sel="#name" th:text="${detectionTeam.name}"/>
-    <attr sel="#createdDate" th:text="${{detectionTeam.createdAt}}"/>
+    <attr sel="#createdDate" th:text="${#temporals.format(detectionTeam.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
     <attr sel="#detectionTeamView" th:href="${'/detection/' + detectionTeam.id}"/>
     <attr sel="#detectionTeamEdit" th:href="${'/detection/edit/' + detectionTeam.id}"/>
+    <!--Petition Create minute-->
+    <attr sel="#petitionMinute" th:href="${'/minutePetition/' + detectionTeam.petition.id}"/>
     <!--Add offender-->
     <attr sel="#offenderAdd" th:href="${'/petition/addOffender/' + detectionTeam.petition.id}"/>
     <!--Add crime-->

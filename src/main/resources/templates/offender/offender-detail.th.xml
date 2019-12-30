@@ -42,7 +42,7 @@
     <attr sel="#email" th:text="${offender.email}"/>
     <!--18. Created at update at-->
     <attr sel="#createdBy" th:text="${offender.createdBy}"/>
-    <attr sel="#createdAt" th:text="${{offender.createdAt}}"/>
+    th:text="${#temporals.format(offender.createdAt, 'dd-MM-yyyy HH:mm')}"
     <attr sel="#updatedBy" th:text="${offender.updatedBy}"/>
     <attr sel="#updatedAt" th:text="${{offender.updatedAt}}"/>
     <!--19. Calling Names-->

@@ -38,7 +38,50 @@
 
 <!--Form Content - start -->
 <div class="container-fluid bg-dark formBorder">
-    <div class="col-sm-12 flex-column ">
+    <div class="col-sm-12 flex-col  umn ">
+        <!--Button list to show-->
+        <div class="form-row col-sm-12 col-md-12 col-12">
+            <!--Offender button-->
+            <div class="col-3">
+                <label class="control-label " for="offenderButton">
+                    <strong>Offender
+                            Details :</strong>
+                </label>
+                <div class="col">
+                    <button type="button" id="offenderButton" class="btn btn-sm btn-warning"
+                    ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
+                    </button>
+                </div>
+            </div>
+            <!--Calling Name button-->
+            <div class="col-3">
+                <label class="control-label"><strong>Calling Name :</strong></label>
+                <div class="col">
+                    <button type="button" id="callingNameButton" class="btn btn-sm btn-warning"
+                    ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
+                    </button>
+                </div>
+            </div>
+            <!--Guardian button-->
+            <div class="col-3">
+                <label class="control-label " for="guardianButton">
+                    <strong>Guardians Details :</strong></label>
+                <div class="col">
+                    <button type="button" id="guardianButton" class="btn btn-sm btn-warning"
+                    ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
+                    </button>
+                </div>
+            </div>
+            <!--contravene button-->
+            <div class="col-3">
+                <label class="control-label " for="contraveneButton">
+                    <strong>Contravene Details :</strong></label>
+                <div class="col">
+                    <button type="button" id="contraveneButton" class="btn btn-sm btn-warning"
+                    ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
+                    </button>
+                </div>
+            </div>
         <form id="form" class="form-horizontal" method="POST">
             <input type="hidden" id="petitionId"/>
              <!--Offender search-->
@@ -55,6 +98,8 @@
     </div>
 </div>
 <span id="petition"></span>
+<!--hidden values for find offender-->
+<input type="hidden" id="offenderURL">
 <!--footer include-->
 <footer id="footer" class="page-footer"></footer>
 <!--script include-->

@@ -16,7 +16,7 @@
     <attr sel="#landFour" th:text="${workingPlace.landFour}"/>
     <attr sel="#faxNumber" th:text="${workingPlace.faxNumber}"/>
     <attr sel="#createdBy" th:text="${workingPlace.createdBy}"/>
-    <attr sel="#createdAt" th:text="${{workingPlace.createdAt}}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(workingPlace.createdAt, 'dd-MM-yyyy HH:mm')}"/>
     <attr sel="#edit" th:href="${'/workingPlace/edit/' + workingPlace.id}"/>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>

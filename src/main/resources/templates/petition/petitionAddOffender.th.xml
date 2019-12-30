@@ -9,6 +9,9 @@
     <!--Petition-->
     <attr sel="#petitionId" th:filed="*{id}"/>
 
+    <!--Offender Url-->
+    <attr sel="#offenderURL" th:value="${offenderUrl}"/>
+
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
     <attr sel="#customScript" th:src="@{/js/petitionOffenderAdd.js}"/>

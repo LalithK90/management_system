@@ -105,7 +105,7 @@
     <!--Created at update at-->
     <attr sel="#updateStatus" th:if="${addStatus==false}"/>
     <attr sel="#createdBy" th:field="*{createdBy}"/>
-    <attr sel="#createdAt" th:field="*{{createdAt}}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(createdAt, 'dd-MM-yyyy HH:mm')}"/>
     <!--Photos -->
     <attr sel="#photoDetails" th:if="${addStatus==false}"/>
     <attr sel="#filesList" th:each="file, rowStat: ${files}"/>

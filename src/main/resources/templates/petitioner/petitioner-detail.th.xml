@@ -26,7 +26,7 @@
     <attr sel="#land" th:text="${petitionerDetail.land}"/>
     <!--Created by and created at-->
     <attr sel="#createdBy" th:text="${petitionerDetail.createdBy}"/>
-    <attr sel="#createdAt" th:text="${{petitionerDetail.createdAt}}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(petitionerDetail.createdAt, 'dd-MM-yyyy HH:mm')}"/>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>

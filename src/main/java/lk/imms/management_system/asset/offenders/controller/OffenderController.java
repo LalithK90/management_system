@@ -2,18 +2,15 @@ package lk.imms.management_system.asset.offenders.controller;
 
 import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
-import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
-import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.offenders.entity.Offender;
 import lk.imms.management_system.asset.offenders.entity.OffenderCallingName;
 import lk.imms.management_system.asset.offenders.entity.OffenderFiles;
-import lk.imms.management_system.asset.offenders.service.OffenderCallingNameService;
 import lk.imms.management_system.asset.offenders.service.OffenderFilesService;
 import lk.imms.management_system.asset.offenders.service.OffenderService;
 import lk.imms.management_system.asset.userManagement.entity.User;
@@ -29,7 +26,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -46,21 +42,16 @@ public class OffenderController {
     private final UserService userService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
     private final ContraveneService contraveneService;
-    private final OffenderCallingNameService offenderCallingNameService;
-    private final GuardianService guardianService;
 
     @Autowired
     public OffenderController(OffenderService offenderService, OffenderFilesService offenderFilesService,
                               UserService userService, MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                              ContraveneService contraveneService,
-                              OffenderCallingNameService offenderCallingNameService, GuardianService guardianService) {
+                              ContraveneService contraveneService) {
         this.offenderService = offenderService;
         this.offenderFilesService = offenderFilesService;
         this.userService = userService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
         this.contraveneService = contraveneService;
-        this.offenderCallingNameService = offenderCallingNameService;
-        this.guardianService = guardianService;
     }
 
     // Common things for an offender add and update
@@ -73,23 +64,8 @@ public class OffenderController {
         model.addAttribute("guardianTypes", GuardianType.values());
     }
 
-    //To get files from the database
-    private List<FileInfo> offenderFiles(Offender offender) {
-        List< FileInfo > fileInfos = offenderFilesService.findByOffender(offender)
-                .stream()
-                .map(OffenderFiles -> {
-                    String filename = OffenderFiles.getName();
-                    String url = MvcUriComponentsBuilder
-                            .fromMethodName(OffenderController.class, "downloadFile", OffenderFiles.getNewId())
-                            .build()
-                            .toString();
-                    return new FileInfo(filename, OffenderFiles.getCreatedAt(), url);
-                })
-                .collect(Collectors.toList());
-        return fileInfos;
-    }
 
-    //When called file will send to 
+    //When called file will send to offender image
     @GetMapping( "/file/{filename}" )
     public ResponseEntity< byte[] > downloadFile(@PathVariable( "filename" ) String filename) {
         OffenderFiles file = offenderFilesService.findByNewID(filename);
@@ -101,12 +77,12 @@ public class OffenderController {
     //Send all offender data
     @RequestMapping
     public String offenderPage(Model model) {
-        List<Offender> offenders = new ArrayList<>();
-      for  (Offender offender : offenderService.findAll()){
-          offender.setFileInfos(offenderFiles(offender));
-          offenders.add(offender);
-      }
-        model.addAttribute("offenders",offenders);
+        List< Offender > offenders = new ArrayList<>();
+        for ( Offender offender : offenderService.findAll() ) {
+            offender.setFileInfos(offenderFilesService.offenderFileDownloadLinks(offender));
+            offenders.add(offender);
+        }
+        model.addAttribute("offenders", offenders);
         return "offender/offender";
     }
 
@@ -116,7 +92,7 @@ public class OffenderController {
         Offender offender = offenderService.findById(id);
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
-        model.addAttribute("files", offenderFiles(offender));
+        model.addAttribute("files", offenderFilesService.offenderFileDownloadLinks(offender));
         return "offender/offender-detail";
     }
 
@@ -126,7 +102,7 @@ public class OffenderController {
         Offender offender = offenderService.findById(id);
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
-        model.addAttribute("files", offenderFiles(offender));
+        model.addAttribute("files", offenderFilesService.offenderFileDownloadLinks(offender));
         commonThings(model);
         return "offender/addOffender";
     }
@@ -244,11 +220,12 @@ public class OffenderController {
         if ( offenderList.size() == 1 ) {
             model.addAttribute("offender", offenderList.get(0));
             model.addAttribute("addStatus", false);
-            model.addAttribute("files", offenderFiles(offenderService.search(offender).get(0)));
+            model.addAttribute("files",
+                               offenderFilesService.offenderFileDownloadLinks(offenderService.search(offender).get(0)));
             return "offender/offender-detail";
         } else {
-            for  (Offender offender1 : offenderList){
-                offender1.setFileInfos(offenderFiles(offender1));
+            for ( Offender offender1 : offenderList ) {
+                offender1.setFileInfos(offenderFilesService.offenderFileDownloadLinks(offender1));
                 offenderList.add(offender1);
             }
             model.addAttribute("offenders", offenderList);

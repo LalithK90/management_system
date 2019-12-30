@@ -7,7 +7,7 @@
     <attr sel="#name" th:utext="${courtDetail.name}"/>
     <attr sel="#place" th:utext="${courtDetail.place}"/>
     <attr sel="#createdBy" th:text="${courtDetail.createdBy}"/>
-    <attr sel="#createdAt" th:text="${{courtDetail.createdAt}}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(courtDetail.createdAt, 'dd-MM-yyyy HH:mm')}"/>
 
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>

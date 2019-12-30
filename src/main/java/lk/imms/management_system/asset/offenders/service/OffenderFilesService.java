@@ -1,5 +1,7 @@
 package lk.imms.management_system.asset.offenders.service;
 
+import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
+import lk.imms.management_system.asset.offenders.controller.OffenderController;
 import lk.imms.management_system.asset.offenders.dao.OffenderFilesDao;
 import lk.imms.management_system.asset.offenders.entity.Offender;
 import lk.imms.management_system.asset.offenders.entity.OffenderFiles;
@@ -10,8 +12,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @CacheConfig( cacheNames = {"offenderFiles"} ) // tells Spring where to store cache for this class
@@ -57,5 +61,20 @@ public class OffenderFilesService {
 
     public OffenderFiles findByNewID(String filename) {
         return offenderFilesDao.findByNewId(filename);
+    }
+
+    //To get files from the database
+    public List< FileInfo > offenderFileDownloadLinks(Offender offender) {
+        return offenderFilesDao.findByOffenderOrderByIdDesc(offender)
+                .stream()
+                .map(OffenderFiles -> {
+                    String filename = OffenderFiles.getName();
+                    String url = MvcUriComponentsBuilder
+                            .fromMethodName(OffenderController.class, "downloadFile", OffenderFiles.getNewId())
+                            .build()
+                            .toString();
+                    return new FileInfo(filename, OffenderFiles.getCreatedAt(), url);
+                })
+                .collect(Collectors.toList());
     }
 }
