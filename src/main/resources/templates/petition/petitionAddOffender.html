@@ -35,69 +35,86 @@
     <div class="col-sm-12 flex-column ">
     </div>
 </div>
-
-<!--Form Content - start -->
 <div class="container-fluid bg-dark formBorder">
-    <div class="col-sm-12 flex-col  umn ">
-        <!--Button list to show-->
-        <div class="form-row col-sm-12 col-md-12 col-12">
-            <!--Offender button-->
-            <div class="col-3">
-                <label class="control-label " for="offenderButton">
-                    <strong>Offender
-                            Details :</strong>
-                </label>
-                <div class="col">
-                    <button type="button" id="offenderButton" class="btn btn-sm btn-warning"
-                    ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
-                    </button>
+    <!--offender Search criteria-->
+    <div class="container-fluid form-inline" id="offenderSearchShow">
+        <div class="col-sm-12 form-row">
+            <div class="col-md-3 col-sm-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        <label class="control-label" for="searchCriteria">Search Select :</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="searchCriteria" class="form-control" required>
+                            <option value="" selected disabled>Please Select</option>
+                            <option value="NAME">Name</option>
+                            <option value="NIC">NIC</option>
+                            <option value="PASSPORT">Passport</option>
+                            <option value="MOBILE">Phone Number</option>
+                            <option value="CALLING">Calling Name</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <!--Calling Name button-->
-            <div class="col-3">
-                <label class="control-label"><strong>Calling Name :</strong></label>
-                <div class="col">
-                    <button type="button" id="callingNameButton" class="btn btn-sm btn-warning"
-                    ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
-                    </button>
+            <div class="col-md-7 col-sm-5">
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="searchValue">Value :</label>
+                    <input id="searchValue" class="form-control col-md-9" type="text" aria-describedby="helpId"/>
                 </div>
             </div>
-            <!--Guardian button-->
-            <div class="col-3">
-                <label class="control-label " for="guardianButton">
-                    <strong>Guardians Details :</strong></label>
-                <div class="col">
-                    <button type="button" id="guardianButton" class="btn btn-sm btn-warning"
-                    ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
-                    </button>
-                </div>
+            <div class="col-md-2 col-sm-2">
+                <button id="btnOffenderSearch" type="button" class="btn btn-outline-warning btn-info"><i
+                        class="fa fa-search"></i> Search
+                </button>
             </div>
-            <!--contravene button-->
-            <div class="col-3">
-                <label class="control-label " for="contraveneButton">
-                    <strong>Contravene Details :</strong></label>
-                <div class="col">
-                    <button type="button" id="contraveneButton" class="btn btn-sm btn-warning"
-                    ><i class="fa fa-user-circle"></i> &nbsp;Search Details &nbsp;<i class="fa fa-search "></i>
-                    </button>
-                </div>
-            </div>
-        <form id="form" class="form-horizontal" method="POST">
-            <input type="hidden" id="petitionId"/>
-             <!--Offender search-->
-            <div class="row">
-
-
-            </div>
-            <!--searched offender show-->
-            <div class="row">
-
-
-            </div>
-        </form>
+        </div>
+        <div class="col-sm-12 form-row">
+            <small id="helpId" class="text-danger ">Please add comma to separate calling name
+                <i class="text-white">Ex:- kota,banda,sudda,kaluwa,sf lokka,</i> </small>
+        </div>
     </div>
 </div>
-<span id="petition"></span>
+<!--db offenders display-->
+<div class="col-sm-12 flex-col bg-dark formBorder" id="findOffenderShow">
+    <h4 class="text-center text-white"><strong><i>Offender List</i></strong></h4>
+    <table class="table table-hover table-striped" id="myTable">
+        <tr>
+            <th> Index</th>
+            <th> Register Number</th>
+            <th> Name</th>
+            <th> Nic</th>
+            <th> Passport Number</th>
+            <th> Age</th>
+            <th> Image</th>
+            <th> Action</th>
+        </tr>
+    </table>
+    <!--Form Content - start -->
+    <!--data request from start-->
+    <form id="form" class="form" method="POST">
+        <input type="hidden" id="petitionId"/>
+        <!--selected offender view -->
+        <div class="row" id="selectedOffenderShow">
+            <h4 class="text-center text-white"><strong><i>Selected Offender With Contravene</i></strong></h4>
+            <table class="table " id="selectedOffenderTable">
+                <tr>
+                    <th> Index</th>
+                    <th> Register Number</th>
+                    <th> Name</th>
+                    <th> Contravenes</th>
+                    <th> Action</th>
+                </tr>
+            </table>
+        </div>
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+            <button class="btn btn-success" type="submit">
+                <i class="fa fa-upload" aria-hidden="true"></i>&nbsp; &nbsp;<span id="submit"></span>
+            </button>
+        </div>
+    </form>
+    <br/>
+</div>
 <!--hidden values for find offender-->
 <input type="hidden" id="offenderURL">
 <!--footer include-->
@@ -105,5 +122,59 @@
 <!--script include-->
 <script id="script"></script>
 <script id="customScript"></script>
+
+<!-- Large modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">
+    Large modal
+</button>
+
+<div class="modal fade bd-example-modal-xl " tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <!--Model header-->
+            <div class="modal-header text-center bg-light">
+                <h5 class="offset-4" id="exampleModalLongTitle">Add Contravenes to
+                                                                offender</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--model body-->
+            <div class="modal-body bg-transparent">
+                <!--selected offender detail's display -->
+                <div class="container-fluid">
+                    <!--Contravene Details-->
+                    <div class="form-inline col-sm-12 col-md-12 col-12" id="contraveneShow">
+                        <div class="form-row">
+                            <label class="control-label" for="contraveneValue">Contravene :</label>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-row text-left">
+                                <div class="col-6 form-row" id="contraveneStatus">
+                                    <div class="col-1">
+                                        <input type="checkbox" class="checkbox-round contraveneCheckBox"
+                                               id="contraveneValue"/></div>
+                                    <div class="col-11">
+                                        <span id="contraveneLabel">
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnModelClose" type="button" class="btn btn-outline-success btn-secondary"
+                        data-dismiss="modal"><i
+                        class="fa fa-thumbs-up"
+                        aria-hidden="true"></i> Select
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+

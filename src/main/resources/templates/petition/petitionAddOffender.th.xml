@@ -8,7 +8,16 @@
 
     <!--Petition-->
     <attr sel="#petitionId" th:filed="*{id}"/>
-
+    <!--Contravene-->
+    <attr sel="#contraveneStatus"
+          th:each="contravene, lineCount : ${contravenes}">
+        <attr sel="#contraveneValue" th:id="${'DTS'}+${lineCount.count}" th:value="${contravene.id}"
+              />
+        <attr sel="#contraveneLabel" th:for="${'DTS'}+${lineCount.count}" th:class="${'DTS'}+${lineCount.count} + ${'  text-primary'}"
+              th:text="${contravene.code}+${'-'}+${contravene.detail}"/>
+    </attr>
+<!--button-->
+    <attr sel="#submit" th:text="${'Update'}"/>
     <!--Offender Url-->
     <attr sel="#offenderURL" th:value="${offenderUrl}"/>
 

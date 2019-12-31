@@ -2,6 +2,7 @@ package lk.imms.management_system.asset.petition.controller;
 
 
 import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
+import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.minutePetition.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
@@ -53,13 +54,14 @@ public class PetitionController {
     private final UserService userService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
     private final CommonCodeService commonCodeService;
+    private final ContraveneService contraveneService;
 
     @Autowired
     public PetitionController(PetitionService petitionService, MinutePetitionFilesService minutePetitionFilesService,
                               PetitionStateService petitionStateService, MinutePetitionService minutePetitionService,
                               PetitionerService petitionerService, UserService userService,
                               MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                              CommonCodeService commonCodeService) {
+                              CommonCodeService commonCodeService, ContraveneService contraveneService) {
         this.petitionService = petitionService;
         this.minutePetitionFilesService = minutePetitionFilesService;
         this.petitionStateService = petitionStateService;
@@ -68,6 +70,7 @@ public class PetitionController {
         this.userService = userService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
         this.commonCodeService = commonCodeService;
+        this.contraveneService = contraveneService;
     }
 
     // Common things for petition add and update
@@ -213,6 +216,7 @@ public class PetitionController {
     @GetMapping( "/addOffender/{id}" )
     public String addPetitionOffenderPage(Model model, @PathVariable Long id) {
         model.addAttribute("petition", petitionService.findById(id));
+        model.addAttribute("contravenes", contraveneService.findAll());
         model.addAttribute("offenderUrl", MvcUriComponentsBuilder
                 .fromMethodName(OffenderRestController.class, "getOffender", "")
                 .build()

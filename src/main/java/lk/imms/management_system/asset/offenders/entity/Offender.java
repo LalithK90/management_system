@@ -31,6 +31,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
 @JsonFilter("Offender")
+@ToString
 public class Offender extends AuditEntity {
 
     @Column( unique = true )

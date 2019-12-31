@@ -104,7 +104,7 @@ $(document).ready(function () {
     });
 
 //remove option tag filed in selection
-    function remove_options(id) {
+ let remove_options  = function (id) {
         $(id)
             .empty()
             .append('<option selected="selected" value="">Please select</option>');
