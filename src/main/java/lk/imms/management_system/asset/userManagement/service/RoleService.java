@@ -36,7 +36,7 @@ public class RoleService implements AbstractService< Role, Long > {
         return roleDao.getOne(id);
     }
 
-    @CachePut
+    @CachePut("role")
     public Role persist(Role role) {
         role.setRoleName(role.getRoleName().toUpperCase());
         return roleDao.save(role);

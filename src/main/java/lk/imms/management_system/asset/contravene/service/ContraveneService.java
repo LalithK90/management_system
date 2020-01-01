@@ -28,7 +28,7 @@ public class ContraveneService implements AbstractService< Contravene, Long > {
     }
 
     @Override
-    @Cacheable
+    @Cacheable()
     public List< Contravene > findAll() {
         return contraveneDao.findAll();
     }
@@ -39,14 +39,14 @@ public class ContraveneService implements AbstractService< Contravene, Long > {
     }
 
     @Override
-    @CachePut
+    @CachePut("contravene")
     public Contravene persist(Contravene contravene) {
         return contraveneDao.save(contravene);
     }
 
     @Override
     //@CacheEvict(allEntries = true) if you want to flush all the cache
-    @CacheEvict( key = "#contravene.id" )
+    @CacheEvict(value = "contravene",key = "#contravene.id" )
     public boolean delete(Long id) {
         //there are no possibilities to delete
         contraveneDao.deleteById(id);

@@ -27,7 +27,7 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
     }
 
     @Override
-    @Cacheable
+    @Cacheable("offenderCallingName")
     public List< OffenderCallingName > findAll() {
         return offenderCallingNameDao.findAll();
     }
@@ -38,7 +38,7 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
     }
 
     @Override
-    @CachePut
+    @CachePut("")
     public OffenderCallingName persist(OffenderCallingName offenderCallingName) {
         return offenderCallingNameDao.save(offenderCallingName);
     }

@@ -45,7 +45,7 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
     }
 
     @Override
-    @CachePut
+    @CachePut("minutePetition")
     public MinutePetition persist(MinutePetition minutePetition) {
         return minutePetitionDao.save(minutePetition);
     }

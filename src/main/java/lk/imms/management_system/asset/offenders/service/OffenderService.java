@@ -45,7 +45,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
     }
 
     @Override
-    @CachePut
+    @CachePut("offender")
     public Offender persist(Offender offender) {
         return offenderDao.save(offender);
     }

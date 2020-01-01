@@ -36,7 +36,7 @@ public class PetitionerService implements AbstractService< Petitioner, Long > {
     }
 
     @Override
-    @CachePut
+    @CachePut("petitioner")
     public Petitioner persist(Petitioner petitioner) {
         return petitionerDao.save(petitioner);
     }

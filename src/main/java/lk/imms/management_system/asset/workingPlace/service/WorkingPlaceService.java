@@ -25,7 +25,7 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
 
 
     @Override
-    @Cacheable
+    @Cacheable("workingPlace")
     public List< WorkingPlace > findAll() {
         return workingPlaceDao.findAll();
     }

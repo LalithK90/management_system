@@ -35,7 +35,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     }
 
     @Override
-    @CachePut
+   @CachePut
     public Petition persist(Petition petition) {
         return petitionDao.save(petition);
     }

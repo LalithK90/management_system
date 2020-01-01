@@ -24,7 +24,7 @@ public class PetitionStateService {
         return petitionStatusDao.save(petitionState);
     }
 
-    @Cacheable
+
     public PetitionState findByPetition(Petition petition) {
         return petitionStatusDao.findByPetition(petition);
     }

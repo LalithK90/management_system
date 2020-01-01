@@ -6,6 +6,8 @@
     <attr sel="#dTCss" th:href="@{/css/dataTables.bootstrap.min.css}"/>
     <attr sel="#mCCss" th:href="@{/css/myCss.css}"/>
     <attr sel="#fWCss" th:href="@{/webjars/font-awesome/5.11.2/css/fontawesome.min.css} "/>
+
+
     <attr sel="#imagesUploader" th:href="@{/css/image-uploader.min.css}"/>
     <attr sel="#floatingLabel" th:href="@{/css/floating-labels.css}"/>
 </thlogic>

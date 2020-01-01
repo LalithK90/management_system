@@ -3,6 +3,9 @@ package lk.imms.management_system.configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,7 @@ import java.util.TimeZone;
 
 @Configuration
 @EnableWebMvc
+@EnableCaching
 public class MvcConfig implements WebMvcConfigurer {
     //to activate the thymeleaf decouple logic - start
     // == fields ==
@@ -83,6 +87,10 @@ public class MvcConfig implements WebMvcConfigurer {
             return "error/error";
         }
     }
-
+    //to enable Cache in spring boot
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager();
+    }
 }
 
