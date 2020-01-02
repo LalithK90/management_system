@@ -77,13 +77,14 @@
 <!--db offenders display-->
 <div class="col-sm-12 flex-col bg-dark formBorder" id="findOffenderShow">
     <h4 class="text-center text-white"><strong><i>Offender List</i></strong></h4>
-    <table class="table table-hover table-striped" id="myTable">
+    <table class="table table-hover table-striped" id="myTableData">
         <tr>
             <th> Index</th>
-            <th> Register Number</th>
+            <th> Reg. Id</th>
+            <th> Reg. No.</th>
             <th> Name</th>
-            <th> Nic</th>
-            <th> Passport Number</th>
+            <th> NIC</th>
+            <th> Passport No.</th>
             <th> Age</th>
             <th> Image</th>
             <th> Action</th>
@@ -99,7 +100,8 @@
             <table class="table " id="selectedOffenderTable">
                 <tr>
                     <th> Index</th>
-                    <th> Register Number</th>
+                    <th> Reg. Id</th>
+                    <th> Reg. No</th>
                     <th> Name</th>
                     <th> Contravenes</th>
                     <th> Action</th>
@@ -129,7 +131,7 @@
 </button>
 
 <div class="modal fade bd-example-modal-xl " tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-     aria-hidden="true">
+     aria-hidden="true" id="Model">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <!--Model header-->

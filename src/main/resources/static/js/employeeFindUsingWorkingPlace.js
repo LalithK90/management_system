@@ -104,7 +104,7 @@ $(document).ready(function () {
     });
 
 //remove option tag filed in selection
- let remove_options  = function (id) {
+    let remove_options = function (id) {
         $(id)
             .empty()
             .append('<option selected="selected" value="">Please select</option>');
@@ -178,7 +178,7 @@ let addRow = function (data, id) {
     row.insertCell(2).innerHTML = data.name;
     row.insertCell(3).innerHTML = data.payRoleNumber;
     row.insertCell(4).innerHTML = data.designation;
-    row.insertCell(5).innerHTML = '<button type="button" class="btn btn-primary btn-sm " onclick="showSelect(this)"> Select &nbsp;<i class="fa fa-thumbs-up"></i></button>';
+    row.insertCell(5).innerHTML = `<button type="button" class="btn btn-primary btn-sm " onclick="showSelect(this)"> Select &nbsp;<i class="fa fa-thumbs-up"></i></button>`;
 
 };
 
@@ -321,14 +321,5 @@ let noteNameSet = function () {
     let countFiledLength = $(".detectionTeamNoteHide").length;
     let fieldName = `detectionTeamNotes[${countFiledLength}].note`;
     $("#detectionTeamNote").attr("name", fieldName);
-};
-
-//delete all row before show objects in table
-let deleteAllTableRow = function (tableName) {
-    let table = tableName;
-    let rowCount = table.rows.length;
-    for (let x = rowCount - 1; x > 0; x--) {
-        table.deleteRow(x);
-    }
 };
 

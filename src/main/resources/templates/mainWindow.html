@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-
-    <style th:replace="fragments/header"></style>
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
 </head>
 <body>
-<nav class="navbar navbar-default" th:replace="fragments/navBar :: header"></nav>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
 <div class="container-fluid" style="margin-top: 60px">
     <div class="row">
 
@@ -163,8 +163,11 @@
         </div>
     </div>
 </div>
-</div>
-<footer class="page-footer" th:replace="fragments/footer"></footer>
-<script th:replace="fragments/script"></script>
+<input type="hidden" id="offenderURL">
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script id="customScript"></script>
 </body>
 </html>

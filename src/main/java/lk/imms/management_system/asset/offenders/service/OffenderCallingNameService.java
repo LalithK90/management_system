@@ -38,7 +38,7 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
     }
 
     @Override
-    @CachePut("")
+    @CachePut("offenderCallingName")
     public OffenderCallingName persist(OffenderCallingName offenderCallingName) {
         return offenderCallingNameDao.save(offenderCallingName);
     }

@@ -527,6 +527,15 @@ let btnSearchEmployeeShow = function () {
         $("#btnSearchEmployee").css('display', 'none');
     }
 };
-
-
 //Customer employee Search filed - end any way in project
+
+//If there is any need to clean filled data in table to clean plz use this mwthod
+
+//delete all row before show objects in table
+let deleteAllTableRow = function (tableName) {
+    let table = tableName;
+    let rowCount = table.rows.length;
+    for (let x = rowCount - 1; x > 0; x--) {
+        table.deleteRow(x);
+    }
+};

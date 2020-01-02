@@ -1,12 +1,53 @@
+<nav id="navBar" class="navbar navbar-expand-lg navbar-light bg-light" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#" sec:authorize="hasRole('ROLE_MANGER')">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button sec:authorize="!isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                Search</button>
+        </form>
+    </div>
+</nav>
+
+
+
+
+<!--
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <body>
 <nav id="navBar" class="navbar navbar-default navbar-fixed-top" >
     <div class="container-fluid">
         <div class="navbar-header">
-            <h2 class="text-info mainWindowText navbar-header-text"><b> &nbsp; Excise Department - Sri Lanka</b>
+           &lt;!&ndash; <h2 class="text-info mainWindowText navbar-header-text"><b> &nbsp; Excise Department - Sri Lanka</b>
                 &nbsp;&nbsp;
-            </h2>
+            </h2>&ndash;&gt;
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -16,7 +57,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="dropdown dropdown-toggle"><a href="/home">Home</a></li>
-                <li class="dropdown dropdown-toggle" sec:authorize="!isAuthenticated()"><a href="/invoiceProcess">Lab
+                <li class="dropdown dropdown-toggle" ><a href="/invoiceProcess">Lab
                                                                                                                   test
                                                                                                                   &amp;
                                                                                                                   Medical
@@ -25,25 +66,25 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" sec:authorize="isAuthenticated()">General
                         <span class="caret"></span></a>
-                    <!--CASHIER NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_CASHIER'')')}">
+                    &lt;!&ndash;CASHIER NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/patient">Patient Management</a></li>
                         <li><a href="/doctor">Doctor Management </a></li>
                     </ul>
-                    <!--MLT1 NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_MLT1'')')}">
+                    &lt;!&ndash;MLT1 NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/lab/searchReportFrom">Search Patient</a></li>
                         <li><a href="/lab/worksheetPrinted">Pending Report</a></li>
-                        <!--<li><a href="#">Report Reprint</a></li>-->
+                        &lt;!&ndash;<li><a href="#">Report Reprint</a></li>&ndash;&gt;
                     </ul>
-                    <!--MLT2 NAV BAR CONTENT -->
+                    &lt;!&ndash;MLT2 NAV BAR CONTENT &ndash;&gt;
                     <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_MLT2'')')}">
                         <li><a href="/lab/searchReportFrom">Search Patient</a></li>
                         <li><a href="/lab/worksheetPrinted">Pending Report</a></li>
-                        <!--<li><a href="#">Report Reprint</a></li>-->
+                        &lt;!&ndash;<li><a href="#">Report Reprint</a></li>&ndash;&gt;
                     </ul>
-                    <!--MANAGER NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}">
+                    &lt;!&ndash;MANAGER NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/employee">Employee Management</a></li>
                         <li><a href="/patient">Patient Management </a></li>
                         <li><a href="/doctor">Doctor Management </a></li>
@@ -54,25 +95,25 @@
                         <li><a href="/refund">Refund Management </a></li>
                         <li><a href="/user">User Management </a></li>
                     </ul>
-                    <!--PHLABOTO NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_PHLEBOTOMY'')')}">
+                    &lt;!&ndash;PHLABOTO NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/phlaboto">Pending Patient</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" sec:authorize="isAuthenticated()">Transaction<span
                             class="caret"></span></a>
-                    <!--CASHIER NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_CASHIER'')')}">
+                    &lt;!&ndash;CASHIER NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')"
                         <li><a href="/invoiceProcess">Make Invoice</a></li>
                         <li><a href="/patient">Search Patient</a></li>
-                        <!--<li><a href="#" >Search Invoice</a></li>-->
+                        &lt;!&ndash;<li><a href="#" >Search Invoice</a></li>&ndash;&gt;
                         <li><a href="/labTest">Search Lab Test</a></li>
                         <li><a href="/medicalPackage">Search Medical Package</a></li>
                         <li><a href="/refund/add">Refund</a></li>
                     </ul>
-                    <!--MLT1 NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_MLT1'')')}">
+                    &lt;!&ndash;MLT1 NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li class="dropdown-header text-center">Laboratory</li>
                         <li><a href="/labTest">Laboratory Test </a></li>
                         <li><a href="/lab/sampleCollect">Print Request Form</a></li>
@@ -89,8 +130,8 @@
                         <li class="dropdown-header text-center">Invoice Related</li>
                         <li><a href="/refund">Refund</a></li>
                     </ul>
-                    <!--MLT2 NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_MLT2'')')}">
+                    &lt;!&ndash;MLT2 NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li class="dropdown-header text-center">Laboratory</li>
                         <li><a href="/labTest">Laboratory Test </a></li>
                         <li><a href="/lab/sampleCollect">Print Request Form</a></li>
@@ -104,8 +145,8 @@
                         <li><a href="/collectingCenter">Collecting Center </a></li>
                         <li class="divider"></li>
                     </ul>
-                    <!--MANAGER NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}">
+                    &lt;!&ndash;MANAGER NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/employee/add">Employee Registration</a></li>
                         <li><a href="/patient/add">Patient Registration</a></li>
                         <li><a href="/doctor/add">Doctor Registration</a></li>
@@ -115,34 +156,34 @@
                         <li><a href="/labTest">Lab Test Find</a></li>
                         <li><a href="/refund/add">Refund Add</a></li>
                     </ul>
-                    <!--PHLABOTO NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_PHLEBOTOMY'')')}">
+                    &lt;!&ndash;PHLABOTO NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/phlaboto/repeatSamplePatientForm">Repeat Sample Taken Enter</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"
                        sec:authorize="isAuthenticated()">Report<span class="caret"></span></a>
-                    <!--CASHIER NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_CASHIER'')')}">
+                    &lt;!&ndash;CASHIER NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/process/summary">Summury </a></li>
                     </ul>
-                    <!--MLT1 NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_MLT1'')')}">
+                    &lt;!&ndash;MLT1 NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/process/summary">Summary</a></li>
                     </ul>
-                    <!--MLT2 NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_MLT2'')')}">
+                    &lt;!&ndash;MLT2 NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/process/summary">Summary </a></li>
                     </ul>
-                    <!--MANAGER NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}">
+                    &lt;!&ndash;MANAGER NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/sammary">Summary </a></li>
                         <li><a href="#">Medical Center </a></li>
                         <li><a href="#">Referral Doctor </a></li>
                     </ul>
-                    <!--PHLABOTO NAV BAR CONTENT -->
-                    <ul class="dropdown-menu" th:if="${#authorization.expression('hasRole(''ROLE_PHLEBOTOMY'')')}">
+                    &lt;!&ndash;PHLABOTO NAV BAR CONTENT &ndash;&gt;
+                    <ul class="dropdown-menu" sec:authorize="hasRole('ROLE_ADMIN')">
                         <li><a href="/process/summary">Patient Count </a></li>
                     </ul>
                 </li>
@@ -183,4 +224,4 @@
     </div>
 </nav>
 </body>
-</html>
+</html>-->
