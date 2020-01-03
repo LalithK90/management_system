@@ -2,6 +2,7 @@ package lk.imms.management_system.asset.offenders.controller;
 
 import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
+import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
@@ -42,16 +43,18 @@ public class OffenderController {
     private final UserService userService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
     private final ContraveneService contraveneService;
+    private final GuardianService guardianService;
 
     @Autowired
     public OffenderController(OffenderService offenderService, OffenderFilesService offenderFilesService,
                               UserService userService, MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                              ContraveneService contraveneService) {
+                              ContraveneService contraveneService, GuardianService guardianService) {
         this.offenderService = offenderService;
         this.offenderFilesService = offenderFilesService;
         this.userService = userService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
         this.contraveneService = contraveneService;
+        this.guardianService = guardianService;
     }
 
     // Common things for an offender add and update
@@ -127,7 +130,6 @@ public class OffenderController {
             model.addAttribute("addStatus", true);
             commonThings(model);
             model.addAttribute("offender", offender);
-            System.out.println(" i am here now ");
             return "offender/addOffender";
         }
 
@@ -141,7 +143,12 @@ public class OffenderController {
         //guardian details' offender set
         List< Guardian > guardians = new ArrayList<>();
         for ( Guardian guardian : offender.getGuardians() ) {
-            guardian.setOffender(offender);
+            //if this guardian already in system it was added to this offender
+            if ( guardianService.findByNic(guardian.getNic()) != null ) {
+                guardian = guardianService.findByNic(guardian.getNic());
+            } else {
+                guardian.setOffender(offender);
+            }
             guardians.add(guardian);
         }
 

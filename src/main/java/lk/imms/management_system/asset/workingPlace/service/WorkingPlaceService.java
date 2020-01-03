@@ -36,7 +36,7 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
     }
 
     @Override
-    @CachePut
+    @CachePut("workingPlace")
     public WorkingPlace persist(WorkingPlace workingPlace) {
         return workingPlaceDao.save(workingPlace);
     }

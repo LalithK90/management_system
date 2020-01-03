@@ -24,7 +24,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     }
 
     @Override
-    @Cacheable
+    @Cacheable( "petition" )
     public List< Petition > findAll() {
         return petitionDao.findAll();
     }
@@ -35,7 +35,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     }
 
     @Override
-   @CachePut
+    @CachePut("petition")
     public Petition persist(Petition petition) {
         return petitionDao.save(petition);
     }

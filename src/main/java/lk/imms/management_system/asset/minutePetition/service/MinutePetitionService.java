@@ -34,7 +34,7 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
     }
 
     @Override
-    @Cacheable
+    @Cacheable("minutePetition")
     public List< MinutePetition > findAll() {
         return minutePetitionDao.findAll();
     }

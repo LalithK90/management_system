@@ -30,7 +30,7 @@ public class UserService implements AbstractService< User, Long > {
         this.userDao = userDao;
     }
 
-    @Cacheable
+    @Cacheable("user")
     public List< User > findAll() {
         return userDao.findAll();
     }
@@ -39,7 +39,7 @@ public class UserService implements AbstractService< User, Long > {
         return userDao.getOne(id);
     }
 
-    @CachePut
+    @CachePut("user")
     public User persist(User user) {
         user.setEnabled(true);
         user.setUsername(user.getUsername().toLowerCase());

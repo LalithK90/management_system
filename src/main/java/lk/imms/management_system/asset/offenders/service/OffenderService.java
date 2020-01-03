@@ -34,7 +34,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
     }
 
     @Override
-    @Cacheable
+    @Cacheable("offender")
     public List< Offender > findAll() {
         return offenderDao.findAll();
     }

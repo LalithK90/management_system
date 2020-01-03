@@ -26,7 +26,7 @@ public class RoleService implements AbstractService< Role, Long > {
         this.roleDao = roleDao;
     }
 
-    @Cacheable
+    @Cacheable("role")
     public List< Role > findAll() {
         return roleDao.findAll();
     }

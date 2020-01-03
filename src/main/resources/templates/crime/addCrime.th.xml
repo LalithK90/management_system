@@ -2,7 +2,24 @@
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
 
+    <!--
 
+    crimeNumber
+    courtCaseNumber
+    compoundedChargeSheetNumber
+    result
+    rewardSheetNumber
+    remark
+    placeOfOffence
+    detectionTeam
+    court -> List
+    dateOfDetection -> Local Date
+    compoundedChargeSheetDate -> Local Date
+    dateOfOrderOfPersecution -> Local Date
+    dateOfFillingPlaint -> Local Date
+    dateOfJudgement -> Local Date
+
+-->
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
 </thlogic>

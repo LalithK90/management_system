@@ -28,7 +28,7 @@ public class GuardianService implements AbstractService< Guardian, Long > {
     }
 
     @Override
-    @Cacheable
+    @Cacheable("guardian")
     public List< Guardian > findAll() {
         return guardianDao.findAll();
     }
@@ -39,7 +39,7 @@ public class GuardianService implements AbstractService< Guardian, Long > {
     }
 
     @Override
-    @CachePut
+    @CachePut("guardian")
     public Guardian persist(Guardian guardian) {
         return guardianDao.save(guardian);
     }
@@ -75,5 +75,9 @@ public class GuardianService implements AbstractService< Guardian, Long > {
         return offenders.stream()
                 .distinct()
                 .collect(Collectors.toList());
+    }
+
+    public Guardian findByNic(String nic) {
+        return guardianDao.findByNic(nic);
     }
 }

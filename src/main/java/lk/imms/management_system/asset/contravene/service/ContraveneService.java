@@ -28,7 +28,7 @@ public class ContraveneService implements AbstractService< Contravene, Long > {
     }
 
     @Override
-    @Cacheable()
+    @Cacheable("contravene")
     public List< Contravene > findAll() {
         return contraveneDao.findAll();
     }

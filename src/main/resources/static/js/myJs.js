@@ -535,7 +535,9 @@ let btnSearchEmployeeShow = function () {
 let deleteAllTableRow = function (tableName) {
     let table = tableName;
     let rowCount = table.rows.length;
-    for (let x = rowCount - 1; x > 0; x--) {
-        table.deleteRow(x);
+    if (rowCount > 1) {
+        for (let x = rowCount - 1; x > 0; x--) {
+            table.deleteRow(x);
+        }
     }
 };

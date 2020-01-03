@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GuardianDao extends JpaRepository< Guardian, Long > {
+    Guardian findByNic(String nic);
 }

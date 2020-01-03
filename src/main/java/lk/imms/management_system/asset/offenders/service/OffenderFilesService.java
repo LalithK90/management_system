@@ -27,7 +27,7 @@ public class OffenderFilesService {
         this.offenderFilesDao = offenderFilesDao;
     }
 
-    @Cacheable
+    @Cacheable("offenderFiles")
     public List< OffenderFiles > findByOffender(Offender offender) {
         //return employeeFilesDao.findByEmployee(employee);
         return offenderFilesDao.findByOffenderOrderByIdDesc(offender);
@@ -37,7 +37,7 @@ public class OffenderFilesService {
         return offenderFilesDao.findByName(filename);
     }
 
-    @CachePut
+    @CachePut("offenderFiles")
     public void persist(List< OffenderFiles > storedFile) {
         offenderFilesDao.saveAll(storedFile);
     }

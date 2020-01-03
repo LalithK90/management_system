@@ -25,7 +25,7 @@ public class PetitionerService implements AbstractService< Petitioner, Long > {
     }
 
     @Override
-    @Cacheable
+    @Cacheable("petitioner")
     public List< Petitioner > findAll() {
         return petitionerDao.findAll();
     }

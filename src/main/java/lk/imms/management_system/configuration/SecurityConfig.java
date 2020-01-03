@@ -42,56 +42,56 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-  /*      http.csrf().disable();
-        http.authorizeRequests().antMatchers("/").permitAll();*/
+        http.csrf().disable();
+        http.authorizeRequests().antMatchers("/").permitAll();
 
        // For developing easy to give permission all link
 
-      http.
-                authorizeRequests()
-                //Anytime users can access without login
-                .antMatchers(
-                        "/index",
-                        "/favicon.ico",
-                        "/img/**",
-                        "/css/**",
-                        "/js/**",
-                        "/webjars/**").permitAll()
-                .antMatchers("/login", "/select/**").permitAll()
-//this is used normal admin to give access every url mapping
-              .antMatchers("/").hasRole("/ADMIN")
-                //Need to login for access those are
-                .antMatchers("/employee/**").hasRole("ADMIN")
-                .antMatchers("/employee1/**").hasRole("MANAGER")
-                .antMatchers("/user/**").hasRole("ADMIN")
-                .antMatchers("/petition/**").hasRole("ADMIN")
-                .antMatchers("/minutePetition/**").hasRole("MANAGER")
-                .antMatchers("/invoiceProcess/add").hasRole("CASHIER")
-                .anyRequest()
-                .authenticated()
-                .and()
-                // Login form
-                .formLogin()
-                .loginPage("/login")
-                //Username and password for validation
-                .usernameParameter("username")
-                .passwordParameter("password")
-                //todo -> need to change
-                .defaultSuccessUrl("/index")
-                .and()
-                //Logout controlling
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/index")
-                .and()
-                .exceptionHandling()
-                //Cross site disable
-                .and()
-                .csrf()
-                .disable();
-
+//      http.
+//                authorizeRequests()
+//                //Anytime users can access without login
+//                .antMatchers(
+//                        "/index",
+//                        "/favicon.ico",
+//                        "/img/**",
+//                        "/css/**",
+//                        "/js/**",
+//                        "/webjars/**").permitAll()
+//                .antMatchers("/login", "/select/**").permitAll()
+////this is used normal admin to give access every url mapping
+//              .antMatchers("/").hasRole("/ADMIN")
+//                //Need to login for access those are
+//                .antMatchers("/employee/**").hasRole("ADMIN")
+//                .antMatchers("/employee1/**").hasRole("MANAGER")
+//                .antMatchers("/user/**").hasRole("ADMIN")
+//                .antMatchers("/petition/**").hasRole("ADMIN")
+//                .antMatchers("/minutePetition/**").hasRole("MANAGER")
+//                .antMatchers("/invoiceProcess/add").hasRole("CASHIER")
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                // Login form
+//                .formLogin()
+//                .loginPage("/login")
+//                //Username and password for validation
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                //todo -> need to change
+//                .defaultSuccessUrl("/index")
+//                .and()
+//                //Logout controlling
+//                .logout()
+//                .invalidateHttpSession(true)
+//                .clearAuthentication(true)
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/index")
+//                .and()
+//                .exceptionHandling()
+//                //Cross site disable
+//                .and()
+//                .csrf()
+//                .disable();
+//
 
         /* //Header used to Enable HTTP Strict Transport Security (HSTS)
                 .headers()

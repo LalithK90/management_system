@@ -100,6 +100,9 @@
     <attr sel="#filesList" th:each="file, rowStat: ${files}"/>
     <attr sel="#img" th:src="${file.url}"/>
 
+    <!--new guardian add -->
+    <attr sel="#guardianDetailNew" th:if="${ #lists.isEmpty(offender.guardians)}"/>
+
     <!--21. Guardian Details-->
     <attr sel="#guardianTypesList" th:each="guardianType : ${guardianTypes}"
           th:text="${guardianType.guardianType}"
