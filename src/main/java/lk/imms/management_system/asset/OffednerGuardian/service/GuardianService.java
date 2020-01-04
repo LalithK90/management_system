@@ -46,7 +46,7 @@ public class GuardianService implements AbstractService< Guardian, Long > {
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+    @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
         guardianDao.deleteById(id);
         return true;
@@ -79,6 +79,7 @@ public class GuardianService implements AbstractService< Guardian, Long > {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable
     public Guardian findByNic(String nic) {
         return guardianDao.findByNic(nic);
     }
