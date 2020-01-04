@@ -7,9 +7,205 @@
 <body>
 <!--nav Bar include-->
 <nav id="navBar"></nav>
+<!--Form Content - start -->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="form-horizontal" method="POST">
+            <input type="hidden" id="detectionTeam"/>
+            <div class="row">
+                <!--Left Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <!--Id-->
+                    <div id="idStatus" class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="id">ID :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="id" class="form-control" type="text" readonly/>
+                        </div>
+                    </div>
+                    <!--Crime Number-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="crimeNumber">Crime No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="crimeNumber" class="form-control" tabindex="1" type="text" required/>
+                            <span id="crimeNumberError" class="error">Error Crime Number</span>
+                        </div>
+                    </div>
+                    <!--Court Case Number-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="courtCaseNumber">Court Case Number :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="courtCaseNumber" class="form-control" tabindex="2" type="text"/>
+                            <span id="courtCaseNumberError" class="error">Error Court Case Number</span></div>
+                    </div>
+                    <!--Compounded Charge Sheet Number -->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="compoundedChargeSheetNumber">Compounded Charge Sheet
+                                                                                           Number :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="compoundedChargeSheetNumber" class="form-control" tabindex="2" type="text"/>
+                            <span id="compoundedChargeSheetNumberError" class="error">Error Compounded Charge Sheet Number</span>
+                        </div>
+                    </div>
+                    <!--Result-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="result">Result :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <textarea id="result" class="form-control" tabindex="12" required></textarea>
+                            <span class="error" id="resultError">Error Result</span>
 
+                        </div>
+                    </div>
+                    <!--Reward Sheet Number-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="rewardSheetNumber">Reward Sheet Number :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="rewardSheetNumber" class="form-control" tabindex="5" type="text" minlength="5"/>
+                            <span class="error" id="rewardSheetNumberError">Error Reward Number</span>
+                        </div>
+                    </div>
+                    <!--Remark-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="remark">Remark :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="remark" class="form-control" tabindex="6" type="text"/>
+                            <span class="error" id="remarkError">Error Remark</span>
+                        </div>
+                    </div>
+                </div>
+                <!--Right Side-->
+                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <!--Place of offence-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="placeOfOffence">Place of Offence :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="placeOfOffence" class="form-control" tabindex="6" type="text"/>
+                            <span class="error" id="placeOfOffenceError">Error Place of Offence</span>
+                        </div>
+                    </div>
+                    <!--Court-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="court">Court :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="court" class="form-control" tabindex="7" required>
+                                <option value="">Please select</option>
+                                <option id="courtList"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Date of detection-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="dateOfDetection">Date of Detection :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="dateOfDetection" class="form-control"
+                                   placeholder="Ex: 1990 - 01 - 20"
+                                   required type="date"/>
+                        </div>
+                    </div>
+                    <!--compounded Charge Sheet Date-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="compoundedChargeSheetDate">Compounded Charge Sheet Date
+                                                                                         :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="compoundedChargeSheetDate" class="form-control"
+                                   placeholder="Ex: 1990 - 01 - 20"
+                                   required type="date"/>
+                        </div>
+                    </div>
+                    <!--date Of Order Of Persecution-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="dateOfOrderOfPersecution">Date Of Order Of Persecution
+                                                                                        :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="dateOfOrderOfPersecution" class="form-control"
+                                   placeholder="Ex: 1990 - 01 - 20"
+                                   required type="date"/>
+                        </div>
+                    </div>
+                    <!--dateOfFillingPlaint-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="dateOfFillingPlaint">Date Of Filling Plaint
+                                                                                   :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="dateOfFillingPlaint" class="form-control"
+                                   placeholder="Ex: 1990 - 01 - 20"
+                                   required type="date"/>
+                        </div>
+                    </div>
+                    <!--dateOfJudgement-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="dateOfJudgement">Date Of Judgement
+                                                                               :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="dateOfJudgement" class="form-control"
+                                   placeholder="Ex: 1990 - 01 - 20"
+                                   required type="date"/>
+                        </div>
+                    </div>
+                    <!--Created by and created at-->
+                    <div id="updateStatus">
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="createdBy">Created By :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="createdBy" class="form-control" type="text" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="createdAt">Created At :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="createdAt" class="form-control" type="text" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Button-->
+            <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                <button class="btn btn-success" type="submit" tabindex="21">
+                    <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
+                </button>
+            </div>
 
-<!--Container spaces-->
+            <div class="form-row">
+                <label id="errorLabel">Errors: </label>
+                <ul>
+                    <li id="error" class="error"></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
 
 
 <!--footer include-->

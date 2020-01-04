@@ -5,6 +5,7 @@ import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
@@ -24,12 +25,13 @@ public class PetitionService implements AbstractService< Petition, Long > {
     }
 
     @Override
-    @Cacheable( "petition" )
+    @Cacheable("petition")
     public List< Petition > findAll() {
         return petitionDao.findAll();
     }
 
     @Override
+    @Cacheable("petition")
     public Petition findById(Long id) {
         return petitionDao.getOne(id);
     }
@@ -41,6 +43,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     }
 
     @Override
+    @CacheEvict("petition")
     public boolean delete(Long id) {
         petitionDao.deleteById(id);
         return true;

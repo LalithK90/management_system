@@ -44,8 +44,6 @@ public class PetitionerController {
         model.addAttribute("petitionerDetail", petitionerService.findById(id));
         return "petitioner/petitioner-detail";
     }
-
-
     //Send employee data edit
     @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
     public String editPetitionerFrom(@PathVariable( "id" ) Long id, Model model) {
@@ -66,8 +64,8 @@ public class PetitionerController {
         }
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
-            model.addAttribute("petitionerType", PetitionerType.values());
-            model.addAttribute("petitioners", petitioner);
+            model.addAttribute("petitionerTypes", PetitionerType.values());
+            model.addAttribute("petitioner", petitioner);
             return "petitioner/addPetitioner";
         }
         petitionerService.persist(petitioner);

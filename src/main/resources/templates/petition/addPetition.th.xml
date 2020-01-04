@@ -5,28 +5,27 @@
     <attr sel="#formHeader" th:text="${addStatus==true?'Make A Petition ':'Update A Petition Details'}"/>
 
     <!--Form -->
-    <attr sel="#form" th:action="${'/petition/add'}" th:object="${petition}"/>
+    <attr sel="#from" th:action="${'/petition/add'}" th:object="${petition}"/>
     <!--Village-->
-    <attr sel="#village" th:field="*{petition.village}"/>
+    <attr sel="#village" th:field="*{village}"/>
     <!--Division-->
-    <attr sel="#agaDivision" th:field="*{petition.agaDivision}"/>
+    <attr sel="#agaDivision" th:field="*{agaDivision}"/>
     <!--provinces-->
     <attr sel="#provinceSelectList" th:each="province : ${provinces}"
           th:text="${province.province}"
           th:value="${province}"/>
     <!--Petition Type-->
-    <attr sel="#petitionType" th:field="*{petition.petitionType}"/>
+    <attr sel="#petitionType" th:field="*{petitionType}"/>
     <attr sel="#petitionTypeList" th:each="petitionType : ${petitionTypes}"
           th:text="${petitionType.petitionType}"
           th:value="${petitionType}"/>
     <!--Relevant Station-->
-    <attr sel="#station" th:field="*{petition.workingPlace}"/>
+    <attr sel="#station" th:field="*{workingPlace}"/>
     <!--Petition subject-->
-    <attr sel="#subject" th:field="*{petition.subject}"/>
+    <attr sel="#subject" th:field="*{subject}"/>
     <!--Minute petition details -->
     <attr sel="#description" th:name="${'minutePetitions[0].detail'}"/>
-       <!--Direct to petition -->
-    <attr sel="#directedTo" th:fragment="directedToFragment"/>
+    <!--Direct to petition -->
     <!--Relevant Station -->
     <attr sel="#stations" th:name="${'minutePetitions[0].workingPlace'}"/>
     <!--Relevant Employee-->
@@ -35,50 +34,52 @@
     <attr sel="#designationList" th:each="designation : ${designations}"
           th:text="${designation.designation}"
           th:value="${designation}"/>
+    <!--Employee-->
+    <attr sel="#employees"/>
     <!--Petition priority-->
-    <attr sel="#petitionPriority" th:field="*{petition.petitionPriority}">
+    <attr sel="#petitionPriority" th:field="*{petitionPriority}">
         <attr sel="#petitionPriorityList" th:each="petitionPriority : ${petitionPriorities}"
               th:text="${petitionPriority.petitionPriority}"
               th:value="${petitionPriority}"/>
     </attr>
     <!--Petitioner Details-->
     <!--Id-->
-    <attr sel="#petitionerId" th:field="*{petition.petitioner.id}"/>
+    <attr sel="#petitionerId" th:field="*{petitioner.id}"/>
     <!--Name in sinhala-->
-    <attr sel="#nameSinhala" th:field="*{petition.petitioner.nameSinhala}"/>
-    <attr sel="#nameSinhalaError" th:errors="*{petition.petitioner.nameSinhala}"
-          th:if="${#fields.hasErrors('petition.petitioner.nameSinhala')}"/>
+    <attr sel="#nameSinhala" th:field="*{petitioner.nameSinhala}"/>
+    <attr sel="#nameSinhalaError" th:errors="*{petitioner.nameSinhala}"
+          th:if="${#fields.hasErrors('petitioner.nameSinhala')}"/>
     <!--Name in tamil-->
-    <attr sel="#nameTamil" th:field="*{petition.petitioner.nameTamil}"/>
-    <attr sel="#nameTamilError" th:errors="*{petition.petitioner.nameTamil}"
-          th:if="${#fields.hasErrors('petition.petitioner.nameTamil')}"/>
+    <attr sel="#nameTamil" th:field="*{petitioner.nameTamil}"/>
+    <attr sel="#nameTamilError" th:errors="*{petitioner.nameTamil}"
+          th:if="${#fields.hasErrors('petitioner.nameTamil')}"/>
     <!--Name in English-->
-    <attr sel="#nameEnglish" th:field="*{petition.petitioner.nameEnglish}"/>
-    <attr sel="#nameEnglishError" th:errors="*{petition.petitioner.nameEnglish}"
-          th:if="${#fields.hasErrors('petition.petitioner.nameEnglish')}"/>
+    <attr sel="#nameEnglish" th:field="*{petitioner.nameEnglish}"/>
+    <attr sel="#nameEnglishError" th:errors="*{petitioner.nameEnglish}"
+          th:if="${#fields.hasErrors('petitioner.nameEnglish')}"/>
     <!--Email-->
-    <attr sel="#email" th:field="*{petition.petitioner.email}"/>
-    <attr sel="#emailError" th:errors="*{petition.petitioner.email}"
-          th:if="${#fields.hasErrors('petition.petitioner.email')}"/>
+    <attr sel="#email" th:field="*{petitioner.email}"/>
+    <attr sel="#emailError" th:errors="*{petitioner.email}"
+          th:if="${#fields.hasErrors('petitioner.email')}"/>
     <!--Land-->
-    <attr sel="#land" th:field="*{petition.petitioner.land}"/>
-    <attr sel="#landError" th:errors="*{petition.petitioner.land}"
-          th:if="${#fields.hasErrors('petition.petitioner.land')}"/>
+    <attr sel="#land" th:field="*{petitioner.land}"/>
+    <attr sel="#landError" th:errors="*{petitioner.land}"
+          th:if="${#fields.hasErrors('petitioner.land')}"/>
     <!--Address-->
-    <attr sel="#address" th:field="*{petition.petitioner.address}"/>
-    <attr sel="#addressError" th:errors="*{petition.petitioner.address}"
-          th:if="${#fields.hasErrors('petition.petitioner.address')}"/>
+    <attr sel="#address" th:field="*{petitioner.address}"/>
+    <attr sel="#addressError" th:errors="*{petitioner.address}"
+          th:if="${#fields.hasErrors('petitioner.address')}"/>
     <!--Mobile One-->
-    <attr sel="#mobileOne" th:field="*{petition.petitioner.mobileOne}"/>
-    <attr sel="#mobileOneError" th:errors="*{petition.petitioner.mobileOne}"
-          th:if="${#fields.hasErrors('petition.petitioner.mobileOne')}"/>
+    <attr sel="#mobileOne" th:field="*{petitioner.mobileOne}"/>
+    <attr sel="#mobileOneError" th:errors="*{petitioner.mobileOne}"
+          th:if="${#fields.hasErrors('petitioner.mobileOne')}"/>
     <!--Mobile two-->
-    <attr sel="#mobileTwo" th:field="*{petition.petitioner.mobileTwo}"/>
-    <attr sel="#mobileTwoError" th:errors="*{petition.petitioner.mobileTwo}"
-          th:if="${#fields.hasErrors('petition.petitioner.mobileTwo')}"/>
+    <attr sel="#mobileTwo" th:field="*{petitioner.mobileTwo}"/>
+    <attr sel="#mobileTwoError" th:errors="*{petitioner.mobileTwo}"
+          th:if="${#fields.hasErrors('petitioner.mobileTwo')}"/>
     <!--Created by and created at-->
-    <attr sel="#createdBy" th:field="*{petition.petitioner.createdBy}"/>
-    <attr sel="#createdAt" th:field="*{{petition.petitioner.createdAt}}"/>
+    <attr sel="#createdBy" th:field="*{petitioner.createdBy}"/>
+    <attr sel="#createdAt" th:field="*{{petitioner.createdAt}}"/>
 
     <!--Button-->
     <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
@@ -89,26 +90,6 @@
     <attr sel="#stationUrl" th:value="${stationUrl}"/>
     <attr sel="#employeeUrl" th:value="${employeeUrl}"/>
     <attr sel="#petitionerUrl" th:value="${petitionerUrl}"/>
-
-    <!--Singlish to sinhala Translator-->
-    <attr sel="#translatorSinhala" th:replace="~{fragments/unicodeSinhala :: unicodeSinhalaFragment}"/>
-    <!--Tamish to Tamil Translator-->
-    <attr sel="#translatorTamil" th:replace="~{fragments/unicodeTamil :: unicodeTamilFragment}"/>
-
-    <!--
-    <div class="form-row">
-                        Translator Sinhala
-    <div class="container-fluid col-sm-6 text-center">
-        <span id="translatorSinhala"></span>
-    </div>
-    Translator Tamil
-    <div class="container-fluid col-sm-6 text-center">
-        <span id="translatorTamil"></span>
-    </div>
-</div>
-
-
-    -->
 
     <!--Script -->
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>

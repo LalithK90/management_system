@@ -6,6 +6,7 @@ import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
@@ -25,29 +26,32 @@ public class PetitionerService implements AbstractService< Petitioner, Long > {
     }
 
     @Override
-    @Cacheable("petitioner")
+    @Cacheable
     public List< Petitioner > findAll() {
         return petitionerDao.findAll();
     }
 
     @Override
+    @Cacheable
     public Petitioner findById(Long id) {
         return petitionerDao.getOne(id);
     }
 
     @Override
-    @CachePut("petitioner")
+    @CachePut
     public Petitioner persist(Petitioner petitioner) {
         return petitionerDao.save(petitioner);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     public boolean delete(Long id) {
         petitionerDao.deleteById(id);
         return true;
     }
 
     @Override
+    @Cacheable
     public List< Petitioner > search(Petitioner petitioner) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

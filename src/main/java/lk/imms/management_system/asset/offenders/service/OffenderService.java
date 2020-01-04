@@ -7,6 +7,7 @@ import lk.imms.management_system.asset.offenders.entity.Offender;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
@@ -34,12 +35,13 @@ public class OffenderService implements AbstractService< Offender, Long > {
     }
 
     @Override
-    @Cacheable("offender")
+    @Cacheable
     public List< Offender > findAll() {
         return offenderDao.findAll();
     }
 
     @Override
+    @Cacheable
     public Offender findById(Long id) {
         return offenderDao.getOne(id);
     }
@@ -51,6 +53,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
     }
 
     @Override
+    @CacheEvict
     public boolean delete(Long id) {
         //there are no possibilities to delete an offender from system
         //more than 100 years need to save the in the system
@@ -59,6 +62,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
     }
 
     @Override
+    @Cacheable
     public List< Offender > search(Offender offender) {
         Offender searchOffender = new Offender();
         //all offenders which all provided search, collect to this list

@@ -1,116 +1,112 @@
-$(document).ready(function () {
 //default help id was disable if user which find offender using calling name advice will show
-    $('#helpId, #selectedOffenderShow, #findOffenderShow').hide();
-
-    const urlCame = $('#offenderURL').val();
+$('#helpId, #selectedOffenderShow, #findOffenderShow').hide();
+//search button display or not
+let searchButton = function () {
+    if ($('#searchValue').val() === '' || $('#searchCriteria').val() === '') {
+        //Check to see if there is any text entered
+        // If there is no text within the input ten disable the button
+        $('#btnOffenderSearch').prop('disabled', true);
+    } else {
+        //If there is text in the input, then enable the button
+        $('#btnOffenderSearch').prop('disabled', false);
+    }
+};
+searchButton();
+//url from backend
+const urlCame = $('#offenderURL').val();
 
 // post body data
-    let offender = {};
+let offender = {};
 //post data array to attach body
-    let callingName = {};
-    callingName.callingName = '';
-
+let callingName = {};
+callingName.callingName = '';
 //Offender list came form db
-    let dbOffenderList = [];
+let dbOffenderList = [];
 //searching criteria was selected need to add value add filed to it name
-    $('#searchCriteria').bind('change', function () {
-        searchButton();
-        let searchValue = $('#searchValue');
-        let helpId = $('#helpId');
+$('#searchCriteria').bind('change', function () {
+    searchButton();
+    let searchValue = $('#searchValue');
+    let helpId = $('#helpId');
 
-        searchValue.val('');
-        let selectedParameter = $(this).val();
+    searchValue.val('');
+    let selectedParameter = $(this).val();
 
-        if (selectedParameter === "NAME") {
-            searchValue.attr("name", "nameEnglish");
-            helpId.hide();
-        }
-        if (selectedParameter === "NIC") {
-            searchValue.attr({"name": "nic", "class": "nic form-control col-md-9"});
-            helpId.hide();
-        }
-        if (selectedParameter === "PASSPORT") {
-            searchValue.attr("name", "passportNumber");
-            helpId.hide();
-        }
-        if (selectedParameter === "MOBILE") {
-            searchValue.attr({"name": "mobileOne", "class": "mobile form-control col-md-9"});
-            helpId.hide();
-        }
-        if (selectedParameter === "CALLING") {
-            searchValue.attr("name", "callingName");
-            helpId.show();
-        }
-    });
+    if (selectedParameter === "NAME") {
+        searchValue.attr("name", "nameEnglish");
+        helpId.hide();
+    }
+    if (selectedParameter === "NIC") {
+        searchValue.attr({"name": "nic", "class": "nic form-control col-md-9"});
+        helpId.hide();
+    }
+    if (selectedParameter === "PASSPORT") {
+        searchValue.attr("name", "passportNumber");
+        helpId.hide();
+    }
+    if (selectedParameter === "MOBILE") {
+        searchValue.attr({"name": "mobileOne", "class": "mobile form-control col-md-9"});
+        helpId.hide();
+    }
+    if (selectedParameter === "CALLING") {
+        searchValue.attr("name", "callingName");
+        helpId.show();
+    }
+});
 //if there is nothing on search filed search button will disable
-    $('#searchValue').keyup(function () {
-        searchButton();
-    });
-
-    let searchButton = function () {
-        if ($('#searchValue').val() === '' || $('#searchCriteria').val() === '') {
-            //Check to see if there is any text entered
-            // If there is no text within the input ten disable the button
-            $('#btnOffenderSearch').prop('disabled', true);
-        } else {
-            //If there is text in the input, then enable the button
-            $('#btnOffenderSearch').prop('disabled', false);
-        }
-    };
-
+$('#searchValue').keyup(function () {
+    searchButton();
+});
 //when search button click
-    $('#btnOffenderSearch').bind('click', function () {
+$('#btnOffenderSearch').bind('click', function () {
 
-        let searchValue = $('#searchValue');
+    let searchValue = $('#searchValue');
 
-        let attributeName = searchValue.attr('name');
-        if (attributeName === "nameEnglish") {
-            offender.nameSinhala = searchValue.val();
+    let attributeName = searchValue.attr('name');
+    if (attributeName === "nameEnglish") {
+        offender.nameSinhala = searchValue.val();
+    }
+    if (attributeName === "nic") {
+        offender.nic = searchValue.val();
+    }
+    if (attributeName === "passportNumber") {
+        offender.passportNumber = searchValue.val();
+    }
+    if (attributeName === "mobileOne") {
+        offender.mobileOne = searchValue.val();
+    }
+    if (attributeName === "callingName") {
+        offender.offenderCallingNames = [];
+        let callingNames = searchValue.val().split(',');
+        for (let i = 0; i < callingNames.length; i++) {
+            callingName.callingName = callingNames[i];
+            offender.offenderCallingNames.push(callingName);
         }
-        if (attributeName === "nic") {
-            offender.nic = searchValue.val();
-        }
-        if (attributeName === "passportNumber") {
-            offender.passportNumber = searchValue.val();
-        }
-        if (attributeName === "mobileOne") {
-            offender.mobileOne = searchValue.val();
-        }
-        if (attributeName === "callingName") {
-            offender.offenderCallingNames = [];
-            let callingNames = searchValue.val().split(',');
-            for (let i = 0; i < callingNames.length; i++) {
-                callingName.callingName = callingNames[i];
-                offender.offenderCallingNames.push(callingName);
+    }
+
+    $.ajax({
+
+        type: "post",
+        dataType: 'json',
+        contentType: 'application/json',
+        url: urlCame,
+        data: JSON.stringify(offender),
+
+        success: function (data, textStatus) {
+            //table show myTableData
+            $('#findOffenderShow').show();
+            //table exiting row delete myTableData
+            deleteAllTableRow(document.getElementById('myTableData'));
+            if (textStatus === 'success') {
+                dbOffenderListFill(data);
             }
-        }
-
-        $.ajax({
-
-            type: "post",
-            dataType: 'json',
-            contentType: 'application/json',
-            url: urlCame,
-            data: JSON.stringify(offender),
-
-            success: function (data, textStatus) {
-                //table show myTableData
-                $('#findOffenderShow').show();
-                //table exiting row delete myTableData
-                deleteAllTableRow(document.getElementById('myTableData'));
-                if (textStatus === 'success') {
-                    dbOffenderListFill(data);
-                }
 //alert("success");
-            },
-            error: function (xhr, textStatus, errorThrown) {
+        },
+        error: function (xhr, textStatus, errorThrown) {
 //alert('request failed'+errorThrown);
-                console.log('request failed   ' + errorThrown);
-            }
-        });
-
-
+            console.log('request failed   ' + errorThrown);
+        }
     });
+
 
 //received offender set dbOffenderList array
     let dbOffenderListFill = function (data) {
@@ -158,145 +154,131 @@ $(document).ready(function () {
         }
         dbOffenderList = [];
     };
+    searchButton();
+});
 //selected Offender list
-    let selectedOffenderList = [];
+let selectedOffenderList = [];
 //selected offender
-    let selectedOffender = {};
-    let showSelectOffender = function (obj) {
-        $('#selectedOffenderShow').show();
-        let index = obj.parentNode.parentNode.rowIndex;
-        // GET THE CELLS COLLECTION OF THE CURRENT ROW.
-        let objCells = myTableData.rows.item(index).cells;
+let selectedOffender = {};
+//a selected offender would show
+let showSelectOffender = function (obj) {
+    $('#selectedOffenderShow').show();
+    let index = obj.parentNode.parentNode.rowIndex;
+    // GET THE CELLS COLLECTION OF THE CURRENT ROW.
+    let objCells = myTableData.rows.item(index).cells;
 
-        // check this employee already selected or not
-        checkOffenderInArrayOrNot(objCells);
-    };
-
-
+    // check this employee already selected or not
+    checkOffenderInArrayOrNot(objCells);
+};
 //already in array or not
-    let checkOffenderInArrayOrNot = function (rowDetails) {
-        let existOrNot;
-        //take an employee which was selected
-        let offender = rowDataToOffender(rowDetails);
-        // no employee test in Array
-        if (selectedOffenderList.length === 0) {
-            selectedOffenderList.push(offender);
-
+let checkOffenderInArrayOrNot = function (rowDetails) {
+    let existOrNot;
+    //take an employee which was selected
+    let offender = rowDataToOffender(rowDetails);
+    // no employee test in Array
+    if (selectedOffenderList.length === 0) {
+        selectedOffenderList.push(offender);
+    } else {
+        for (let i = 0; i < selectedOffenderList.length; i++) {
+            if (selectedOffenderList[i].id === offender.id) {
+                existOrNot = true;
+                break;
+            }
+        }
+        if (existOrNot) {
+            swal({
+                title: "Already selected one ",
+                icon: "warning",
+            });
         } else {
-            for (let i = 0; i < selectedOffenderList.length; i++) {
-                if (selectedOffenderList[i].id === offender.id) {
-                    existOrNot = true;
-                    break;
-                }
-            }
-            if (existOrNot) {
-                swal({
-                    title: "Already selected one ",
-                    icon: "warning",
-                });
-            } else {
-                selectedOffenderList.push(offender);
-            }
+            selectedOffender = (offender);
         }
-    };
+    }
+};
 // row data convert to selected offender
-    let rowDataToOffender = function (rowDetails) {
-        for (let i = 0; i <= rowDetails.length; i++) {
-            switch (i) {
-                case 0:
-                    break;
-                case 1:
-                    selectedOffender.id = rowDetails[i].innerHTML;
-                    break;
-                case 2:
-                    selectedOffender.offenderRegisterNumber = rowDetails[i].innerHTML;
-                    break;
-                case 3:
-                    selectedOffender.nameEnglish = rowDetails[i].innerHTML;
-                    break;
-                default:
-                    break;
-            }
-            return selectedOffender;
+let rowDataToOffender = function (rowDetails) {
+    for (let i = 0; i <= rowDetails.length; i++) {
+        switch (i) {
+            case 0:
+                break;
+            case 1:
+                selectedOffender.id = rowDetails[i].innerHTML;
+                break;
+            case 2:
+                selectedOffender.offenderRegisterNumber = rowDetails[i].innerHTML;
+                break;
+            case 3:
+                selectedOffender.nameEnglish = rowDetails[i].innerHTML;
+                break;
+            default:
+                break;
         }
-    };
+        return selectedOffender;
+    }
+};
+//model is closed and get selected contravenes
+$('#btnModelClose').bind('click', function () {
+    let checkField;
+    let contravenes = [];
+    checkField = $(".contraveneCheckBox:checked");
+    const contravene = {};
 
-//model is closed
-    $("#btnModelClose").click(function () {
-        $(".bd-example-modal-xl").modal('hide');
-    });
-    $("#btnModelClose").bind('click', function () {
+    for (let i = 0; i < checkField.length; i++) {
+        contravene.id = checkField[i].id;
+        contravene.detail = $(`.${checkField[i].id}`).html();
+        contravenes.push(contravene);
+    }
+    selectedOffender.contravenes = contravenes;
+    selectedOffenderList.push(selectedOffender)
+    deleteAllTableRow(document.getElementById("selectedOffenderTable"));
 
+    for (let i = 0; i < selectedOffenderList.length; i++) {
+        addRowToSelectedOffenderTable(selectedOffenderList[i]);
+    }
 
-        alert(" herherer");
-        let checkField;
-        selectedOffender.contravenes = [];
-        checkField = $(".contraveneCheckBox:checked");
-        const contravene = {};
+});
 
-        for (let i = 0; i < checkField.length; i++) {
-            console.log("selected one id" + checkField[i].id + " value " + $(`.${checkField[i].id}`).html())
-            contravene.id = checkField[i].id;
-            contravene.detail = $(`.${checkField[i].id}`).html();
-            selectedOffender.contravenes.push(contravene);
-        }
+let addRowToSelectedOffenderTable = function (offender) {
+    console.log("offender " + offender.toString());
+    let selectedOffenderTable = document.getElementById("selectedOffenderTable");
+    let rowCount = selectedOffenderTable.rows.length;
+    let row = selectedOffenderTable.insertRow(rowCount);
+    /*let innerHtml = employee.id.split(">");*/
 
-        console.log(selectedOffender.toString() + " selected offender");
-    });
-
-
-    let addRowToSelectedOffenderTable = function (offender) {
-        let selectedOffenderTable = document.getElementById("selectedOffenderTable");
-        let rowCount = selectedOffenderTable.rows.length;
-        let row = selectedOffenderTable.insertRow(rowCount);
-        /*let innerHtml = employee.id.split(">");*/
-
-        row.insertCell(0).innerHTML = rowCount;
-        row.insertCell(1).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].offender" value="${offender.id}" readonly/>`;
-        row.insertCell(2).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].offenderRegisterNumber" value="${offender.offenderRegisterNumber}" readonly/>`;
-        row.insertCell(3).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].offender" value="${offender.nameEnglish}" readonly/>`;
-        let innerHtmlList = "";
-        for (let i = 0; i < offender.contravenes.length; i++) {
-            innerHtmlList += `<ul class="list-group list-group-flush">
+    row.insertCell(0).innerHTML = rowCount;
+    row.insertCell(1).innerHTML = `<input type="text" name="offenders[${rowCount - 1}]" value="${offender.id}" readonly/>`;
+    row.insertCell(2).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].offenderRegisterNumber" value="${offender.offenderRegisterNumber}" readonly/>`;
+    row.insertCell(3).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].offender" value="${offender.nameEnglish}" readonly/>`;
+    let innerHtmlList = "";
+    for (let i = 0; i < offender.contravenes.length; i++) {
+        innerHtmlList += `<ul class="list-group list-group-flush">
                             <li class="list-group-item"><input type="hidden" name="offenders[${rowCount - 1}].offender.contravenes[${i}].id" value="${offender.contravenes[i].id}" /> <input type="text" name="offenders[${rowCount - 1}].offender.contravenes[${i}].detail" value="${offender.contravenes[i].detail}"  readonly/></li>
                           </ul>`
-        }
+    }
 
-        row.insertCell(4).innerHTML = innerHtmlList;
-        row.insertCell(5).innerHTML = `<button type="button" class="btn btn-danger btn-sm " onclick="deletedSelect(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
+    row.insertCell(4).innerHTML = innerHtmlList;
+    row.insertCell(5).innerHTML = `<button type="button" class="btn btn-danger btn-sm " onclick="deletedSelectOffender(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
 
-    };
+};
 
-    /*
-    let deletedSelect = function (obj) {
-        let index = obj.parentNode.parentNode.rowIndex;
-        let table = document.getElementById("selectedEmployee");
-        // GET THE CELLS COLLECTION OF THE CURRENT ROW.
-        let rowDetails = selectedEmployee.rows.item(index).cells;
-        //REMOVE DELETED EMPLOYEE FORM SELECTED EMPLOYEE LIST
-        let employee = rowDataToEmployee(rowDetails);
+let deletedSelectOffender = function (obj) {
+    let index = obj.parentNode.parentNode.rowIndex;
+    let table = document.getElementById("selectedOffenderTable");
+    // GET THE CELLS COLLECTION OF THE CURRENT ROW.
+    let rowDetails = table.rows.item(index).cells;
+    //REMOVE DELETED EMPLOYEE FORM SELECTED EMPLOYEE LIST
+    let deleteOffender = rowDataToOffender(rowDetails);
 
-        let removeSelectedEmployee;
-        for (let i = 0; i < SelectedEmployeeList.length; i++) {
-            if (SelectedEmployeeList[i].id === employee.id) {
-                if (SelectedEmployeeList.length === 0) {
-                    SelectedEmployeeList = [];
-                } else {
-                    removeSelectedEmployee = SelectedEmployeeList.splice(i, 1);
-                    break;
-                }
+    let removeSelectedOffender;
+    for (let i = 0; i < selectedOffenderList.length; i++) {
+        if (selectedOffenderList[i].id === deleteOffender.id) {
+            if (selectedOffenderList.length === 0) {
+                selectedOffenderList = [];
+            } else {
+                removeSelectedOffender = selectedOffenderList.splice(i, 1);
+                break;
             }
         }
-        table.deleteRow(index);
-    };
-    */
-
-//get a final name and set it to next note name
-    let noteNameSet = function () {
-        let countFiledLength = $(".detectionTeamNoteHide").length;
-        let fieldName = `detectionTeamNotes[${countFiledLength}].note`;
-        $("#detectionTeamNote").attr("name", fieldName);
-    };
-
-searchButton();
-});
+    }
+    table.deleteRow(index);
+};

@@ -19,7 +19,6 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
 @JsonIgnoreProperties( "teamAcceptedDateTime" )
-@ToString
 public class DetectionTeam extends AuditEntity {
 
     private String number;

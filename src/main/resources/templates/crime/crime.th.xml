@@ -2,6 +2,29 @@
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
 
+    <!--Employee List is present-->
+    <attr sel="#crimeListPresent" th:if="${not #lists.isEmpty(crimes)}"/>
+    <!--Employee list-->
+    <attr sel="#crimeList" th:each="crime, rowCount : ${crimes}"/>
+    <!--Index-->
+    <attr sel="#index" th:text="${rowCount.count}"/>
+    <!--crimeNumber-->
+    <attr sel="#crimeNumber" th:text="${crime.crimeNumber}"/>
+    <!--courtCaseNumber-->
+    <attr sel="#courtCaseNumber" th:text="${crime.courtCaseNumber}"/>
+    <!--detectionTeam-->
+    <attr sel="#detectionTeam" th:text="${crime.detectionTeam.name}"/>
+      <!--court-->
+    <attr sel="#court" th:text="${crime.court.name}"/>
+    <!--Crime view-->
+    <attr sel="#crimeView" th:href="${'/crime/' + crime.id}"/>
+    <!--Crime Edit-->
+    <attr sel="#crimeEdit" th:href="${'/crime/edit/' + crime.id}"/>
+    <!--Crime Delete-->
+    <attr sel="#crimeRemove" th:href="${'/crime/remove/' + crime.id}"
+          th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"/>
+    <!--Employee List Not Present-->
+    <attr sel="#crimeListNotPresent" th:if="${ #lists.isEmpty(crimes)}"/>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>

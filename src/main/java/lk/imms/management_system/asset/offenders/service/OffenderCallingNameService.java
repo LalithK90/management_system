@@ -6,6 +6,7 @@ import lk.imms.management_system.asset.offenders.entity.OffenderCallingName;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
@@ -27,23 +28,25 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
     }
 
     @Override
-    @Cacheable("offenderCallingName")
+    @Cacheable
     public List< OffenderCallingName > findAll() {
         return offenderCallingNameDao.findAll();
     }
 
     @Override
+    @Cacheable
     public OffenderCallingName findById(Long id) {
         return offenderCallingNameDao.getOne(id);
     }
 
     @Override
-    @CachePut("offenderCallingName")
+    @CachePut
     public OffenderCallingName persist(OffenderCallingName offenderCallingName) {
         return offenderCallingNameDao.save(offenderCallingName);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     public boolean delete(Long id) {
         //there should not be possibilities to delete
         offenderCallingNameDao.deleteById(id);
@@ -51,6 +54,7 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
     }
 
     @Override
+    @Cacheable
     public List< OffenderCallingName > search(OffenderCallingName offenderCallingName) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

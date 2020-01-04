@@ -134,7 +134,7 @@ Keep in mind that using iText to set access permissions, we are also creating a 
             // Now set the actual message
             messageBodyPart.setText("Please find the attachment");
 
-            // Create a multipar message
+            // Create a multipart message
             Multipart multipart = new MimeMultipart();
 
             // Set text message part

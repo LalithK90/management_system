@@ -12,7 +12,7 @@
     <attr sel="#faxNumber" th:text="${workingPlace.faxNumber}"/>
     <attr sel="#view" th:href="${'/workingPlace/' + workingPlace.id}"/>
     <attr sel="#edit" th:href="${'/workingPlace/edit/' + workingPlace.id}"/>
-    <attr sel="#remove" th:href="${'/user/remove/' + workingPlace.id}"
+    <attr sel="#remove" th:href="${'/workingPlace/remove/' + workingPlace.id}"
           th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"/>
 
 

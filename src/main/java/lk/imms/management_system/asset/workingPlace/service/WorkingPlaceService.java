@@ -5,6 +5,7 @@ import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
@@ -25,29 +26,32 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
 
 
     @Override
-    @Cacheable("workingPlace")
+    @Cacheable
     public List< WorkingPlace > findAll() {
         return workingPlaceDao.findAll();
     }
 
     @Override
+    @Cacheable
     public WorkingPlace findById(Long id) {
         return workingPlaceDao.getOne(id);
     }
 
     @Override
-    @CachePut("workingPlace")
+    @CachePut
     public WorkingPlace persist(WorkingPlace workingPlace) {
         return workingPlaceDao.save(workingPlace);
     }
 
     @Override
+    @CacheEvict
     public boolean delete(Long id) {
         workingPlaceDao.deleteById(id);
         return true;
     }
 
     @Override
+    @Cacheable
     public List< WorkingPlace > search(WorkingPlace workingPlace) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

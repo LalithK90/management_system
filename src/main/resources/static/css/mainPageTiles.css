@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+
+/** {*/
+/*    font-family: 'Open Sans', sans-serif;*/
+/*    font-size:12px;*/
+/*}*/
+
+body {
+    /*background-color:#ececec;*/
+}
+
+
+.container {
+    max-width: 1150px;
+    margin: 50px 0 0 50px;
+}
+.main-section{
+    border-radius:4px;
+    background: linear-gradient(90deg, rgba(85,209,204,0.78529410055037643) 0%, rgba(25,134,199,0.8738095067128414) 19%, rgba(32,185,127,0.77128849830948) 93%);
+}
+.welcome-Notes{
+    color:white;
+    padding-top: 20px;
+    text-align: center;
+    padding-left: 20px;
+    font-size: 26px;
+    font-style: italic;
+}
+.section{
+    box-shadow: 2px 2px 4px 0 rgba(230,230,230,0.15);
+    padding: 20px 20px 20px 20px;
+}
+.tile {
+    /*width:160px;*/
+    height:180px;
+    border-radius:4px;
+    box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.15);
+    margin-top:20px;
+    margin-left:20px;
+    /*float:left;*/
+}
+
+.tile.wide {
+    width: 320px;
+}
+
+.tile a {
+    text-decoration: none;
+}
+
+.tile .header {
+    height:120px;
+    background-color:#f4f4f4;
+    border-radius: 4px 4px 0 0;
+    color:white;
+    font-weight:300;
+}
+
+.tile.wide .header .left, .tile.wide .header .right {
+    width:160px;
+    float:left;
+}
+
+.tile .header .count {
+    font-size: 48px;
+    text-align:center;
+    padding:10px 0 0;
+}
+
+.tile .header .title {
+    font-size: 20px;
+    text-align:center;
+}
+
+.tile .body {
+    height:60px;
+    border-radius: 0 0 4px 4px;
+    color:#333333;
+    background-color:white;
+}
+
+
+.tile .body .title {
+    text-align:center;
+    font-size:20px;
+    padding-top:2%;
+}
+
+.tile.wide .body .title {
+    padding:4%;
+}
+
+.tile.job .header {
+    background: linear-gradient(to bottom right, #609931, #87bc27);
+}
+
+.tile.job  .body {
+    color: #609931;
+}
+
+.tile.job .body :hover{
+    color:white;
+    background-color:#609931;
+}
+
+.tile.resource .header {
+    background: linear-gradient(to bottom right, #ef7f00, #f7b200);
+}
+
+.tile.resource  .body {
+    color: #ef7f00;
+}
+
+.tile.resource .body :hover{
+    color:white;
+    background-color:#ef7f00;
+}
+.tile.quote .header {
+    background: linear-gradient(to bottom right, #1f6abb, #4f9cf2);
+}
+
+.tile.quote  .body {
+    color: #1f6abb;
+}
+
+.tile.quote  .body :hover{
+    color:white;
+    background-color:#1f6abb;
+}
+
+.tile.invoice .header {
+    background: linear-gradient(to bottom right, #0aa361, #1adc88);
+}
+
+.tile.invoice  .body {
+    color: #0aa361;
+}
+
+.tile.invoice  .body :hover{
+    color:white;
+    background-color:#0aa361;
+}

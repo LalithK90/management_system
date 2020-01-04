@@ -28,30 +28,32 @@ public class GuardianService implements AbstractService< Guardian, Long > {
     }
 
     @Override
-    @Cacheable("guardian")
+    @Cacheable
     public List< Guardian > findAll() {
         return guardianDao.findAll();
     }
 
     @Override
+    @Cacheable
     public Guardian findById(Long id) {
         return guardianDao.getOne(id);
     }
 
     @Override
-    @CachePut("guardian")
+    @CachePut
     public Guardian persist(Guardian guardian) {
         return guardianDao.save(guardian);
     }
 
     @Override
-    @CacheEvict(key = "#guardian.id")
+    @CacheEvict(allEntries = true)
     public boolean delete(Long id) {
         guardianDao.deleteById(id);
         return true;
     }
 
     @Override
+    @Cacheable
     public List< Guardian > search(Guardian guardian) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

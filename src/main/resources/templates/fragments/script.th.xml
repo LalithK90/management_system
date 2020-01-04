@@ -1,9 +1,9 @@
 <thlogic xmlns:th="http://www.thymeleaf.org">
     <attr sel="#script" th:fragment="scriptFragment"/>
-    <attr sel="#jQJs" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"/>
+    <attr sel="#jQJs" th:src="@{/webjars/jquery/3.4.1/jquery.js}"/>
     <attr sel="#jQUI" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"/>
-    <attr sel="#bSJs" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"/>
     <attr sel="#bPRO" th:src="@{/webjars/popper.js/1.15.0/popper.min.js}"/>
+    <attr sel="#bSJs" th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"/>
     <attr sel="#sAJs" th:src="@{/js/sweetalert.js}"/>
     <attr sel="#dTJs" th:src="@{/js/pagination.js}"/>
     <attr sel="#fWJs" th:src="@{/webjars/font-awesome/5.11.2/js/all.min.js}"/>

@@ -117,15 +117,7 @@
     </form>
     <br/>
 </div>
-<!--hidden values for find offender-->
-<input type="hidden" id="offenderURL">
-<!--footer include-->
-<footer id="footer" class="page-footer"></footer>
-<!--script include-->
-<script id="script"></script>
-<script id="customScript"></script>
-
-
+<!--Contravene list view in model -->
 <div class="modal fade bd-example-modal-xl " tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
      aria-hidden="true" id="Model">
     <div class="modal-dialog modal-xl">
@@ -165,7 +157,7 @@
             </div>
             <div class="modal-footer">
                 <button id="btnModelClose" type="button" class="btn btn-outline-success btn-secondary"
-                        ><i
+                        data-dismiss="modal"><i
                         class="fa fa-thumbs-up"
                         aria-hidden="true"></i> Select
                 </button>
@@ -173,6 +165,15 @@
         </div>
     </div>
 </div>
+
+<!--hidden values for find offender-->
+<input type="hidden" id="offenderURL">
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script id="customScript"></script>
+
 </body>
 </html>
 

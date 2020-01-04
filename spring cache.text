@@ -1,11 +1,26 @@
 Improving Application Performance Using Caching Patterns
-In previous chapters, we have seen how Spring works in the backend to access data for the application. We also saw how the Spring JDBC Module provides the JdbcTemplate helper class for database access. Spring provides support for integration with ORM solutions such as Hibernate, JPA, JDO, and so on, and manages transactions across application. Now, in this chapter, we will see how Spring provides caching support to improve application performance.
+In previous chapters, we have seen how Spring works in the backend to access data for the application.
+We also saw how the Spring JDBC Module provides the JdbcTemplate helper class for database access.
+Spring provides support for integration with ORM solutions such as Hibernate, JPA, JDO, and so on, and manages transactions across application.
+Now, in this chapter, we will see how Spring provides caching support to improve application performance.
 
-Do you ever face a volley of questions from your wife when you return home very late in the night from your office? Yes, I know it is very irritating to answer so many questions when you are tired and exhausted. It is even more irritating when you're asked the same questions over and over again..
+Do you ever face a volley of questions from your wife when you return home very late in the night from your office? Yes,
+I know it is very irritating to answer so many questions when you are tired and exhausted.
+It is even more irritating when you're asked the same questions over and over again..
 
-Some questions can be answered with a Yes or No, but for some questions, you have to explain in detail. Consider what will happen if you are asked another lengthy question again after some time! Similarly, there are some stateless components in an application, where the components have been designed in such a way that they ask the same questions over and over again to complete each task individually. Similar to some questions asked by your wife, some questions in the system take a while to fetch the appropriate data--it may have some major complex logic behind it, or maybe, it has to fetch data from the database, or call a remote service.
+Some questions can be answered with a Yes or No, but for some questions, you have to explain in detail.
+Consider what will happen if you are asked another lengthy question again after some time! Similarly,
+there are some stateless components in an application, where the components have been designed in such a way
+that they ask the same questions over and over again to complete each task individually. Similar to some questions asked by your wife,
+some questions in the system take a while to fetch the appropriate data--it may have some major complex logic behind it, or maybe,
+it has to fetch data from the database, or call a remote service.
 
-If we know that the answer of a question is not likely to change frequently, we can remember the answer to that question for later when it is asked again by the same system. It doesn't make sense to go through the same channel to fetch it again, as it will impact your application's performance, and will be a wasteful use of your resources. In an enterprise application, caching is a way to store those frequently needed answers so that we fetch from the cache instead of going through the proper channel to get the answer for the same question over and over again. In this chapter, we will discuss Spring's Cache Abstraction feature, and how Spring declaratively supports caching implementation. It will cover the following points:
+If we know that the answer of a question is not likely to change frequently, we can remember the answer to that question
+for later when it is asked again by the same system. It doesn't make sense to go through the same channel to fetch it again,
+as it will impact your application's performance, and will be a wasteful use of your resources. In an enterprise application,
+caching is a way to store those frequently needed answers so that we fetch from the cache instead of going through the proper channel
+to get the answer for the same question over and over again. In this chapter, we will discuss Spring's Cache Abstraction feature, and
+how Spring declaratively supports caching implementation. It will cover the following points:
 
 What is a cache?
 Where do we do this caching?
@@ -18,15 +33,34 @@ Implementing custom cache annotations
 Caching best practices
 
 What is cache?
-In very simple terms, cache is a memory block where we store preprocessed information for the application. In this context, a key-value storage, such as a map, may be a cache in the application. In Spring, cache is an interface to abstract and represent caching. A cache interface provides some methods for placing objects into a cache storage, it can retrieve from the cache storage for given key, it can update the object in the cache storage for a given key, it remove the object from the cache storage for a given key. This cache interface provides many functions to operate with cache.
+In very simple terms, cache is a memory block where we store preprocessed information for the application.
+In this context, a key-value storage, such as a map, may be a cache in the application.
+In Spring, cache is an interface to abstract and represent caching.
+A cache interface provides some methods for placing objects into a cache storage, it can retrieve from the cache storage for given key,
+it can update the object in the cache storage for a given key, it remove the object from the cache storage for a given key.
+This cache interface provides many functions to operate with cache.
 
 Where do we use caching?
-We use caching in cases where a method always returns the same result for the same argument(s). This method could do anything such as calculate data on the fly, execute a database query, and request data via RMI, JMS, and a web-service, and so on. A unique key must be generated from the arguments. That's the cache key.
+We use caching in cases where a method always returns the same result for the same argument(s).
+This method could do anything such as calculate data on the fly, execute a database query, and request data via RMI, JMS, and a web-service,
+and so on. A unique key must be generated from the arguments. That's the cache key.
 
 Understanding cache abstraction
-Basically, caching in Java applications is applied to the Java methods to reduce the number of executions for the same information available in the cache. That means, whenever these Java methods are invoked, the cache abstraction applies the cache behavior to these methods based on the given arguments. If the information for the given argument is already available in the cache, then it is returned without having to execute the target method. If the required information is not available in the cache, then the target method is executed, and the result is cached and returned to the caller. Cache abstraction also provides other cache-related operations such as updating and/or removing the contents in the cache. These operations are useful when the data changes in the application sometimes.
+Basically, caching in Java applications is applied to the Java methods to reduce the number of executions for the same
+information available in the cache. That means, whenever these Java methods are invoked, the cache abstraction applies
+the cache behavior to these methods based on the given arguments. If the information for the given argument is already
+available in the cache, then it is returned without having to execute the target method. If the required information is
+not available in the cache, then the target method is executed, and the result is cached and returned to the caller.
+Cache abstraction also provides other cache-related operations such as updating and/or removing the contents in the cache.
+These operations are useful when the data changes in the application sometimes.
 
-Spring Framework provides cache abstraction for Spring applications by using the org.springframework.cache.Cache and org.springframework.cache.CacheManager interfaces. Caching requires the use of an actual storage to store the cache data. But cache abstraction only provides caching logic. It doesn't provide any physical storage to store the cached data. So, developers need to implement the actual storage for caching in the application. If you have a distributed application, then you will need to configure your cache provider accordingly. It depends on the use cases of your application. You can either make a copy of the same data across nodes for a distributed application, or you can make a centralized cache.
+Spring Framework provides cache abstraction for Spring applications by using the
+org.springframework.cache.Cache and org.springframework.cache.CacheManager interfaces.
+Caching requires the use of an actual storage to store the cache data. But cache abstraction only provides caching logic.
+It doesn't provide any physical storage to store the cached data. So, developers need to implement the actual storage for caching in the application.
+If you have a distributed application, then you will need to configure your cache provider accordingly.
+It depends on the use cases of your application. You can either make a copy of the same data across nodes for a distributed application,
+or you can make a centralized cache.
 
 There are several cache providers in the market, which you could use as per as your application requirement. Some of them are as follows:
 
@@ -38,7 +72,8 @@ Aws DynamoDB Cache Client
 Azure Cache Client
 To implement cache abstraction in your application, you have to take care of the following tasks:
 
-Caching declaration: This means that you have to recognize those methods in the application that need to be cached, and annotate these methods either with caching annotations, or you can use XML configuration by using Spring AOP
+Caching declaration: This means that you have to recognize those methods in the application that need to be cached, and annotate these
+methods either with caching annotations, or you can use XML configuration by using Spring AOP
 Cache configuration: This means that you have to configure the actual storage for the cached data--the storage where the data is stored and read from
 
 Enabling caching via the Proxy pattern
@@ -122,7 +157,9 @@ As seen in the preceding configuration files, whether you use Java configuration
 Declarative Annotation-based caching
 In Spring applications, Spring's abstraction provides the following Annotations for caching declaration:
 
-@Cacheable: This indicates that before execution of the actual method, look at the return value of that method in the cache. If the value is available, return this cached value, if the value is not available, then invoke the actual method, and put the returned value into the cache.
+@Cacheable: This indicates that before execution of the actual method, look at the return value of that method in the cache.
+If the value is available, return this cached value, if the value is not available, then invoke the actual method, and put the
+returned value into the cache.
 @CachePut: This updates the cache without checking if the value is available or not. It always invokes the actual method.
 @CacheEvict: This is responsible for triggering cache eviction.
 @Caching: This is used for grouping multiple annotations to be applied on a method at once.
@@ -189,33 +226,19 @@ Expression
 
 Description
 
-#root.methodName
+#root.methodName : The name of the cached method
 
-The name of the cached method
+#root.method : The cached method, that is, the method being invoked
 
-#root.method
+#root.target : It evaluates the target object being invoked
 
-The cached method, that is, the method being invoked
+#root.targetClass : It evaluates the class of the target object being invoked
 
-#root.target
+#root.caches : An array of caches against which the current method is executed
 
-It evaluates the target object being invoked
+#root.args : An array of the arguments passed into the cached method
 
-#root.targetClass
-
-It evaluates the class of the target object being invoked
-
-#root.caches
-
-An array of caches against which the current method is executed
-
-#root.args
-
-An array of the arguments passed into the cached method
-
-#result
-
-The return value from the cached method; only available in unless expressions for @CachePut
+#result : The return value from the cached method; only available in unless expressions for @CachePut
 
 Spring's @CachePut and @Cacheable annotations should never be used on the same method, because they have different behaviors. The @CachePut annotation forces the execution of the cache method in order to update the caches. But the @Cacheable annotation executes the cached method only if the return value of the method is not available on the cache.
 You have seen how to add information to the cache by using Spring's @CachePut and @Cacheable annotations in a Spring application. But how can we remove that information from the cache? Spring's cache abstraction provides another annotation for removing cached data from the cache--the @CacheEvict annotation. Let's see how to remove the cached data from the cache by using the @CacheEvict annotation.

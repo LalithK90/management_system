@@ -9,6 +9,7 @@ import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
@@ -34,29 +35,32 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
     }
 
     @Override
-    @Cacheable("minutePetition")
+    @Cacheable
     public List< MinutePetition > findAll() {
         return minutePetitionDao.findAll();
     }
 
     @Override
+    @Cacheable
     public MinutePetition findById(Long id) {
         return minutePetitionDao.getOne(id);
     }
 
     @Override
-    @CachePut("minutePetition")
+    @CachePut
     public MinutePetition persist(MinutePetition minutePetition) {
         return minutePetitionDao.save(minutePetition);
     }
 
     @Override
+    @CacheEvict
     public boolean delete(Long id) {
         // there is no possibility to delete any minutePetition
         return false;
     }
 
     @Override
+    @Cacheable
     public List< MinutePetition > search(MinutePetition minutePetition) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
