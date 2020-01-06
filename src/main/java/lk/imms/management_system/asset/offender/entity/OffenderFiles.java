@@ -1,4 +1,4 @@
-package lk.imms.management_system.asset.offenders.entity;
+package lk.imms.management_system.asset.offender.entity;
 
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;

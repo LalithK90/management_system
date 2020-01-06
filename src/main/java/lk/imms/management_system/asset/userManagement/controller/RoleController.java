@@ -73,31 +73,33 @@ public class RoleController {
     public String addRole(@Valid @ModelAttribute Role role, BindingResult result, Model model
             , RedirectAttributes redirectAttributes) {
 
-        if ( result.hasErrors() ) {
+        if ( result.hasErrors() && role.getId() == null ) {
             model.addAttribute("addStatus", true);
-            redirectAttributes.addFlashAttribute("role", role);
+            model.addAttribute("role", role);
             return "role/addRole";
         }
+
         try {
             roleService.persist(role);
             return "redirect:/role";
         } catch ( Exception e ) {
-            ObjectError error = new ObjectError("role", "This role is already in the System <br/>System message -->" + e.toString());
+            ObjectError error = new ObjectError("role",
+                                                "This role is already in the System <br/>System message -->" + e.toString());
             result.addError(error);
-            model.addAttribute("addStatus", true);
-            redirectAttributes.addFlashAttribute("role", role);
-
+            model.addAttribute("addStatus", false);
+            model.addAttribute("role", role);
+            return "role/addRole";
         }
-        return "role/addRole";
+
     }
 
     /*
      * delete role from database
      * */
     @RequestMapping( value = "/remove/{id}", method = RequestMethod.GET )
-    public String removeRole(@PathVariable("id") Long id) {
-            roleService.delete(id);
-            return "redirect:/role";
+    public String removeRole(@PathVariable( "id" ) Long id) {
+        roleService.delete(id);
+        return "redirect:/role";
     }
 
     /*

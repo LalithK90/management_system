@@ -1,4 +1,4 @@
-package lk.imms.management_system.asset.offenders.controller;
+package lk.imms.management_system.asset.offender.controller;
 
 import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
@@ -9,11 +9,11 @@ import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
-import lk.imms.management_system.asset.offenders.entity.Offender;
-import lk.imms.management_system.asset.offenders.entity.OffenderCallingName;
-import lk.imms.management_system.asset.offenders.entity.OffenderFiles;
-import lk.imms.management_system.asset.offenders.service.OffenderFilesService;
-import lk.imms.management_system.asset.offenders.service.OffenderService;
+import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.offender.entity.OffenderCallingName;
+import lk.imms.management_system.asset.offender.entity.OffenderFiles;
+import lk.imms.management_system.asset.offender.service.OffenderFilesService;
+import lk.imms.management_system.asset.offender.service.OffenderService;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.util.service.MakeAutoGenerateNumberService;

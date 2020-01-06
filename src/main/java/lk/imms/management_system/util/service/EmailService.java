@@ -1,3 +1,4 @@
+/*
 package lk.imms.management_system.util.service;
 
 
@@ -51,7 +52,8 @@ public class EmailService {
 
     public void sendPatientReport(String receiverEmail, String subject, String fileName) {
 //todo send pdf as email after encryption
-        /*
+        */
+/*
      File Encryption
 
 In order to apply permission using iText library, we need to have already created pdf document. In our example, we will use our iTextHelloWorld.pdf file generated previously.
@@ -92,7 +94,8 @@ PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_COPY
 Keep in mind that using iText to set access permissions, we are also creating a temporary pdf which should be deleted and if not it could be fully accessible to anybody.
 
 
-     */
+     *//*
+
 
 
 
@@ -168,4 +171,4 @@ Keep in mind that using iText to set access permissions, we are also creating a 
             throw new RuntimeException(e);
         }
     }
-}
+}*/

@@ -8,10 +8,7 @@ import lk.imms.management_system.asset.petition.controller.PetitionController;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -22,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-//@CacheConfig( cacheNames = {"minutePetition"} ) // tells Spring where to store cache for this class
+@CacheConfig( cacheNames = {"minutePetition"} ) // tells Spring where to store cache for this class
 public class MinutePetitionService implements AbstractService< MinutePetition, Long > {
     private final MinutePetitionDao minutePetitionDao;
     private final MinutePetitionFilesService minutePetitionFilesService;
@@ -35,32 +32,33 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
     }
 
     @Override
-   // @Cacheable
+    @Cacheable
     public List< MinutePetition > findAll() {
         return minutePetitionDao.findAll();
     }
 
     @Override
-   // @Cacheable
+    @Cacheable
     public MinutePetition findById(Long id) {
         return minutePetitionDao.getOne(id);
     }
 
     @Override
-   // @CachePut
+    @Caching( evict = {@CacheEvict( value = "minutePetition", allEntries = true )},
+            put = {@CachePut( value = "minutePetition", key = "#minutePetition.id" )} )
     public MinutePetition persist(MinutePetition minutePetition) {
         return minutePetitionDao.save(minutePetition);
     }
 
     @Override
-   // @CacheEvict
+    @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
         // there is no possibility to delete any minutePetition
         return false;
     }
 
     @Override
-   // @Cacheable
+    @Cacheable
     public List< MinutePetition > search(MinutePetition minutePetition) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
@@ -70,6 +68,7 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
         return minutePetitionDao.findAll(minuteExample);
     }
 
+    @Cacheable
     public List< MinutePetition > findByPetition(Petition petition) {
         List< MinutePetition > minutePetitions = new ArrayList<>();
         //taken all minute petition according to the petition and

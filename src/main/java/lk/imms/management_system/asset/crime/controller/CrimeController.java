@@ -35,7 +35,7 @@ public class CrimeController {
 
     }
 
-    @GetMapping( "{id}" )
+    @GetMapping( "/{id}" )
     public String addForm(Model model, @PathVariable Long id) {
         Crime crime = new Crime();
         crime.setDetectionTeam(detectionTeamService.findById(id));

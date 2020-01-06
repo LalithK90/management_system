@@ -1,4 +1,4 @@
-package lk.imms.management_system.asset.offenders.entity;
+package lk.imms.management_system.asset.offender.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;

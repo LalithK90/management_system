@@ -89,10 +89,6 @@ public class UserController {
 
         List< Employee > employees = employeeService.search(employee);
 
-        for(Employee e : employees){
-            System.out.println(employeeService.findById( e.getId()));
-            System.out.println(e.getName());
-        }
         if ( employees.size() == 1 ) {
             model.addAttribute("addStatus", true);
             model.addAttribute("employeeDetailShow", true);
@@ -141,12 +137,12 @@ public class UserController {
         }
         if (user.isEnabled()) {
             user.setCreatedDate(dateTimeAgeService.getCurrentDate());
-            user.setEnabled(true);
             userService.persist(user);
         } else {
             user.setCreatedDate(dateTimeAgeService.getCurrentDate());
             user.setEnabled(true);
-            System.out.println(  userService.persist(user));
+            User user1 = userService.persist(user);
+            System.out.println("User "+ user1.toString() );
         }
         return "redirect:/user";
     }

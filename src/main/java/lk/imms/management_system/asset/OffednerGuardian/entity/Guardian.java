@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.OffednerGuardian.entity;
 
 import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
-import lk.imms.management_system.asset.offenders.entity.Offender;
+import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 

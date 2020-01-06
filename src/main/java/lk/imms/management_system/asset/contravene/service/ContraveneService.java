@@ -2,13 +2,10 @@ package lk.imms.management_system.asset.contravene.service;
 
 import lk.imms.management_system.asset.contravene.dao.ContraveneDao;
 import lk.imms.management_system.asset.contravene.entity.Contravene;
-import lk.imms.management_system.asset.offenders.entity.Offender;
+import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -18,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-//@CacheConfig( cacheNames = {"contravene"} ) // tells Spring where to store cache for this class
+@CacheConfig( cacheNames = {"contravene"} ) // tells Spring where to store cache for this class
 public class ContraveneService implements AbstractService< Contravene, Long > {
     private final ContraveneDao contraveneDao;
 
@@ -40,7 +37,8 @@ public class ContraveneService implements AbstractService< Contravene, Long > {
     }
 
     @Override
-    @CachePut
+    @Caching( evict = {@CacheEvict( value = "contravene", allEntries = true )},
+            put = {@CachePut( value = "contravene", key = "#contravene.id" )} )
     public Contravene persist(Contravene contravene) {
         return contraveneDao.save(contravene);
     }

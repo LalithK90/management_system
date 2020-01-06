@@ -1,0 +1,159 @@
+<config xmlns='http://www.ehcache.org/v3'
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:jsr107="http://www.ehcache.org/v3/jsr107"
+        xsi:schemaLocation="http://www.ehcache.org/v3 https://www.ehcache.org/schema/ehcache-core-3.0.xsd
+							http://www.ehcache.org/v3/jsr107 https://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
+
+    <!--Contravene-->
+    <cache alias="contravene">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">40</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--Court-->
+    <cache alias="court">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--crime-->
+    <cache alias="crime">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">400</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--detectionTeam-->
+    <cache alias="detectionTeam">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">400</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--detectionTeamMember-->
+    <cache alias="detectionTeamMember">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">400</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--employee-->
+    <cache alias="employee">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">400</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--employeeWorkingPlaceHistory-->
+    <cache alias="employeeWorkingPlaceHistory">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--minutePetitionFiles-->
+    <cache alias="minutePetitionFiles">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">1000</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--minutePetition-->
+    <cache alias="minutePetition">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">1000</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--guardian-->
+    <cache alias="guardian">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--offender-->
+    <cache alias="offender">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--offenderCallingName-->
+    <cache alias="offenderCallingName">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--offenderFiles-->
+    <cache alias="offenderFiles">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--petition-->
+    <cache alias="petition">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--petitionState-->
+    <cache alias="petitionState">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--petitioner-->
+    <cache alias="petitioner">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--Role cache-->
+    <cache alias="role">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">20</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--user-->
+    <cache alias="user">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">20</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--workingPlace-->
+    <cache alias="workingPlace">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">150</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+</config>

@@ -8,7 +8,7 @@ import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionFilesService;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
-import lk.imms.management_system.asset.offenders.controller.OffenderRestController;
+import lk.imms.management_system.asset.offender.controller.OffenderRestController;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;

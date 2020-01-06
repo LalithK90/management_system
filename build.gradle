@@ -32,32 +32,24 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 
     //=========================Springboot cache=========//
     implementation 'org.springframework.boot:spring-boot-starter-cache'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-cache
+    //compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.2.2.RELEASE'
 
-    //================= Following jar is need to email =================// 
-    compile('org.springframework.boot:spring-boot-starter-mail')
     //================= Following jar is need to check url util - https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 =================// 
     compile group: 'org.apache.commons', name: 'commons-lang3'
     //================= Following jar is need to generate excel file - https://mvnrepository.com/artifact/org.apache.poi/poi=================//
     compile group: 'org.apache.poi', name: 'poi', version: '3.8'
     /*pdf generate related*/
-
-    // https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
-    compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.17'
-
-
     //================= Following jar is need to generate pdf file -https://mvnrepository.com/artifact/com.itextpdf/itextpdf =================//
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.9'
     // ==== this is need to html content convert to pdf 
     compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.5.9'
 
-
-    // https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-pdf  for testpurpose not used
-    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-pdf', version: '9.1.18'
-    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-core', version: '9.1.6'
-    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-pdf-itext5', version: '9.1.6'
 
 //====== use as three jars to set bootstrap and front awesome
 // https://mvnrepository.com/artifact/org.webjars/bootstrap
@@ -68,13 +60,18 @@ dependencies {
     compile group: 'org.webjars', name: 'jquery', version: '3.4.1'
 // https://mvnrepository.com/artifact/org.webjars/jquery-ui
     compile group: 'org.webjars', name: 'jquery-ui', version: '1.12.1'
-
-
-    // https://mvnrepository.com/artifact/org.webjars/font-awesome
+// https://mvnrepository.com/artifact/org.webjars/font-awesome
     compile group: 'org.webjars', name: 'font-awesome', version: '5.11.2'
 
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin -- from build jar file
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin -- from build jar file
     compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.2.2.RELEASE', ext: 'pom'
+
+    //====== use as three jars use to enable eh caches
+// https://mvnrepository.com/artifact/org.ehcache/ehcache
+    compile group: 'org.ehcache', name: 'ehcache', version: '3.8.1'
+// https://mvnrepository.com/artifact/javax.cache/cache-api
+    compile group: 'javax.cache', name: 'cache-api', version: '1.1.1'
+
 
 
     compileOnly 'org.projectlombok:lombok'

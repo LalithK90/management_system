@@ -1,14 +1,12 @@
-package lk.imms.management_system.asset.offenders.service;
+package lk.imms.management_system.asset.offender.service;
 
 import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
-import lk.imms.management_system.asset.offenders.controller.OffenderController;
-import lk.imms.management_system.asset.offenders.dao.OffenderFilesDao;
-import lk.imms.management_system.asset.offenders.entity.Offender;
-import lk.imms.management_system.asset.offenders.entity.OffenderFiles;
+import lk.imms.management_system.asset.offender.controller.OffenderController;
+import lk.imms.management_system.asset.offender.dao.OffenderFilesDao;
+import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.offender.entity.OffenderFiles;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-//@CacheConfig( cacheNames = {"offenderFiles"} ) // tells Spring where to store cache for this class
+@CacheConfig( cacheNames = {"offenderFiles"} ) // tells Spring where to store cache for this class
 public class OffenderFilesService {
     private final OffenderFilesDao offenderFilesDao;
 
@@ -27,17 +25,19 @@ public class OffenderFilesService {
         this.offenderFilesDao = offenderFilesDao;
     }
 
-    //@Cacheable("offenderFiles")
+    @Cacheable
     public List< OffenderFiles > findByOffender(Offender offender) {
         //return employeeFilesDao.findByEmployee(employee);
         return offenderFilesDao.findByOffenderOrderByIdDesc(offender);
     }
 
+    @Cacheable
     public OffenderFiles findByName(String filename) {
         return offenderFilesDao.findByName(filename);
     }
 
-   // @CachePut("offenderFiles")
+    @Caching( evict = {@CacheEvict( value = "offenderFiles", allEntries = true )},
+            put = {@CachePut( value = "offenderFiles", key = "#offenderFiles.id" )} )
     public void persist(List< OffenderFiles > storedFile) {
         offenderFilesDao.saveAll(storedFile);
     }
@@ -51,6 +51,7 @@ public class OffenderFilesService {
         return offenderFilesDao.findAll(offenderFilesExample);
     }
 
+    @Cacheable
     public OffenderFiles findById(Long id) {
         return offenderFilesDao.getOne(id);
     }
@@ -59,11 +60,13 @@ public class OffenderFilesService {
         return offenderFilesDao.findByNewName(filename);
     }
 
+    @Cacheable
     public OffenderFiles findByNewID(String filename) {
         return offenderFilesDao.findByNewId(filename);
     }
 
     //To get files from the database
+    @Cacheable
     public List< FileInfo > offenderFileDownloadLinks(Offender offender) {
         return offenderFilesDao.findByOffenderOrderByIdDesc(offender)
                 .stream()

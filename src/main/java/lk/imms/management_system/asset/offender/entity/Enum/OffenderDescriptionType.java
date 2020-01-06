@@ -1,4 +1,4 @@
-package lk.imms.management_system.asset.offenders.entity.Enum;
+package lk.imms.management_system.asset.offender.entity.Enum;
 
 import lombok.Getter;
 

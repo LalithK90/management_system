@@ -5,20 +5,16 @@ import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional// spring transactional annotation need to tell spring to this method work through the project
-//@CacheConfig( cacheNames = "employee" )
+// spring transactional annotation need to tell spring to this method work through the project
+@CacheConfig( cacheNames = "employee" )
 public class EmployeeService implements AbstractService< Employee, Long > {
 
     private final EmployeeDao employeeDao;
@@ -28,28 +24,29 @@ public class EmployeeService implements AbstractService< Employee, Long > {
         this.employeeDao = employeeDao;
     }
 
-   // @Cacheable
+    @Cacheable
     public List< Employee > findAll() {
         return employeeDao.findAll();
     }
 
-   // @Cacheable
+    @Cacheable
     public Employee findById(Long id) {
         return employeeDao.getOne(id);
     }
 
-   // @CachePut
+    @Caching( evict = {@CacheEvict( value = "employee", allEntries = true )},
+            put = {@CachePut( value = "employee", key = "#employee.id" )} )
     public Employee persist(Employee employee) {
         return employeeDao.save(employee);
     }
 
-   // @CacheEvict( allEntries = true )
+    @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
         employeeDao.deleteById(id);
         return false;
     }
 
-    //@Cacheable
+    @Cacheable
     public List< Employee > search(Employee employee) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

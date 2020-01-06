@@ -2,13 +2,10 @@ package lk.imms.management_system.asset.OffednerGuardian.service;
 
 import lk.imms.management_system.asset.OffednerGuardian.dao.GuardianDao;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
-import lk.imms.management_system.asset.offenders.entity.Offender;
+import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -18,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-//@CacheConfig( cacheNames = {"guardian"} )
+@CacheConfig( cacheNames = {"guardian"} )
 public class GuardianService implements AbstractService< Guardian, Long > {
     private final GuardianDao guardianDao;
 
@@ -34,26 +31,27 @@ public class GuardianService implements AbstractService< Guardian, Long > {
     }
 
     @Override
-    //@Cacheable
+    @Cacheable
     public Guardian findById(Long id) {
         return guardianDao.getOne(id);
     }
 
     @Override
-    //@CachePut
+    @Caching( evict = {@CacheEvict( value = "guardian", allEntries = true )},
+            put = {@CachePut( value = "guardian", key = "#guardian.id" )} )
     public Guardian persist(Guardian guardian) {
         return guardianDao.save(guardian);
     }
 
     @Override
-    //@CacheEvict( allEntries = true )
+    @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
         guardianDao.deleteById(id);
         return true;
     }
 
     @Override
-    //@Cacheable
+    @Cacheable
     public List< Guardian > search(Guardian guardian) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
@@ -63,6 +61,7 @@ public class GuardianService implements AbstractService< Guardian, Long > {
         return guardianDao.findAll(guardianExample);
     }
 
+    @Cacheable
     public List< Offender > findByOffendersUsingGuardian(List< Guardian > guardians) {
         List< Offender > offenders = new ArrayList<>();
         guardians.forEach(guardian -> {
@@ -79,7 +78,7 @@ public class GuardianService implements AbstractService< Guardian, Long > {
                 .collect(Collectors.toList());
     }
 
-    //@Cacheable
+    @Cacheable
     public Guardian findByNic(String nic) {
         return guardianDao.findByNic(nic);
     }

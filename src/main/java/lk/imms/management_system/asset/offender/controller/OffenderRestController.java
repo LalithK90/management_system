@@ -1,17 +1,15 @@
-package lk.imms.management_system.asset.offenders.controller;
+package lk.imms.management_system.asset.offender.controller;
 
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
-import lk.imms.management_system.asset.offenders.entity.Offender;
-import lk.imms.management_system.asset.offenders.service.OffenderFilesService;
-import lk.imms.management_system.asset.offenders.service.OffenderService;
+import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.offender.service.OffenderFilesService;
+import lk.imms.management_system.asset.offender.service.OffenderService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.util.List;
 import java.util.stream.Collectors;

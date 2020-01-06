@@ -4,10 +4,7 @@ import lk.imms.management_system.asset.court.dao.CourtDao;
 import lk.imms.management_system.asset.court.entity.Court;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -15,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-//@CacheConfig(cacheNames = "court")
+@CacheConfig(cacheNames = "court")
 public class CourtService implements AbstractService< Court, Long > {
     private final CourtDao courtDao;
 
@@ -25,32 +22,33 @@ public class CourtService implements AbstractService< Court, Long > {
     }
 
     @Override
-    //@Cacheable
+    @Cacheable
     public List< Court > findAll() {
         return courtDao.findAll();
     }
 
     @Override
-    //@Cacheable
+    @Cacheable
     public Court findById(Long id) {
         return courtDao.getOne(id);
     }
 
     @Override
-    //@CachePut
+    @Caching( evict = {@CacheEvict( value = "court", allEntries = true )},
+            put = {@CachePut( value = "court", key = "#court.id" )} )
     public Court persist(Court court) {
         return courtDao.save(court);
     }
 
     @Override
-   // @CacheEvict(allEntries = true)
+    @CacheEvict(allEntries = true)
     public boolean delete(Long id) {
        courtDao.deleteById(id);
         return true;
     }
 
     @Override
-    //@Cacheable
+    @Cacheable
     public List< Court > search(Court court) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

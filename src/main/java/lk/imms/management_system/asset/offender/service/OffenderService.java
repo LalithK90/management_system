@@ -1,15 +1,12 @@
-package lk.imms.management_system.asset.offenders.service;
+package lk.imms.management_system.asset.offender.service;
 
 import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
-import lk.imms.management_system.asset.offenders.dao.OffenderDao;
-import lk.imms.management_system.asset.offenders.entity.Offender;
+import lk.imms.management_system.asset.offender.dao.OffenderDao;
+import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -18,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-//@CacheConfig( cacheNames = {"offender"} ) // tells Spring where to store cache for this class
+@CacheConfig( cacheNames = {"offender"} ) // tells Spring where to store cache for this class
 public class OffenderService implements AbstractService< Offender, Long > {
     private final OffenderDao offenderDao;
     private final ContraveneService contraveneService;
@@ -35,25 +32,26 @@ public class OffenderService implements AbstractService< Offender, Long > {
     }
 
     @Override
-    //@Cacheable
+    @Cacheable
     public List< Offender > findAll() {
         return offenderDao.findAll();
     }
 
     @Override
-   // @Cacheable
+    @Cacheable
     public Offender findById(Long id) {
         return offenderDao.getOne(id);
     }
 
     @Override
-   // @CachePut("offender")
+    @Caching( evict = {@CacheEvict( value = "offender", allEntries = true )},
+            put = {@CachePut( value = "offender", key = "#offender.id" )} )
     public Offender persist(Offender offender) {
         return offenderDao.save(offender);
     }
 
     @Override
-    //@CacheEvict
+    @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
         //there are no possibilities to delete an offender from system
         //more than 100 years need to save the in the system
@@ -62,7 +60,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
     }
 
     @Override
-   // @Cacheable
+    @Cacheable
     public List< Offender > search(Offender offender) {
         Offender searchOffender = new Offender();
         //all offenders which all provided search, collect to this list
@@ -189,6 +187,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
         return offenderDao.findAll(offenderExample);
     }
 
+    @Cacheable
     public Offender getLastOne() {
         return offenderDao.findFirstByOrderByIdDesc();
     }

@@ -1,7 +1,7 @@
-package lk.imms.management_system.asset.offenders.dao;
+package lk.imms.management_system.asset.offender.dao;
 
-import lk.imms.management_system.asset.offenders.entity.Offender;
-import lk.imms.management_system.asset.offenders.entity.OffenderFiles;
+import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.offender.entity.OffenderFiles;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

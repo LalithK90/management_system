@@ -2,7 +2,7 @@ package lk.imms.management_system.asset.petition.entity;
 
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
-import lk.imms.management_system.asset.offenders.entity.Offender;
+import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;

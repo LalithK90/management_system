@@ -1,14 +1,11 @@
-package lk.imms.management_system.asset.offenders.service;
+package lk.imms.management_system.asset.offender.service;
 
-import lk.imms.management_system.asset.offenders.dao.OffenderCallingNameDao;
-import lk.imms.management_system.asset.offenders.entity.Offender;
-import lk.imms.management_system.asset.offenders.entity.OffenderCallingName;
+import lk.imms.management_system.asset.offender.dao.OffenderCallingNameDao;
+import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.offender.entity.OffenderCallingName;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -18,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-//@CacheConfig( cacheNames = {"offenderCallingName"} ) // tells Spring where to store cache for this class
+@CacheConfig( cacheNames = {"offenderCallingName"} ) // tells Spring where to store cache for this class
 public class OffenderCallingNameService implements AbstractService< OffenderCallingName, Long > {
     private final OffenderCallingNameDao offenderCallingNameDao;
 
@@ -34,19 +31,20 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
     }
 
     @Override
-   // @Cacheable
+    @Cacheable
     public OffenderCallingName findById(Long id) {
         return offenderCallingNameDao.getOne(id);
     }
 
     @Override
-    //@CachePut
+    @Caching( evict = {@CacheEvict( value = "offenderCallingName", allEntries = true )},
+            put = {@CachePut( value = "offenderCallingName", key = "#offenderCallingName.id" )} )
     public OffenderCallingName persist(OffenderCallingName offenderCallingName) {
         return offenderCallingNameDao.save(offenderCallingName);
     }
 
     @Override
-    //@CacheEvict(allEntries = true)
+    @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
         //there should not be possibilities to delete
         offenderCallingNameDao.deleteById(id);
@@ -54,7 +52,7 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
     }
 
     @Override
-   // @Cacheable
+    @Cacheable
     public List< OffenderCallingName > search(OffenderCallingName offenderCallingName) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
@@ -64,6 +62,7 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
         return offenderCallingNameDao.findAll(offenderCallingNameExample);
     }
 
+    @Cacheable
     public List< Offender > findByOffendersUsingCallingNames(List< OffenderCallingName > offenderCallingNames) {
         List< Offender > offenders = new ArrayList<>();
         offenderCallingNames.forEach(callingName -> {

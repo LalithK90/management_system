@@ -6,20 +6,16 @@ import lk.imms.management_system.asset.userManagement.dao.UserDao;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
-//@CacheConfig( cacheNames = {"user"} ) // tells Spring where to store cache for this class
+@CacheConfig( cacheNames = {"user"} ) // tells Spring where to store cache for this class
 public class UserService implements AbstractService< User, Long > {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
@@ -30,32 +26,36 @@ public class UserService implements AbstractService< User, Long > {
         this.userDao = userDao;
     }
 
+    @Cacheable
     public List< User > findAll() {
         return userDao.findAll();
     }
 
+    @Cacheable
     public User findById(Long id) {
         return userDao.getOne(id);
     }
 
+    @Caching( evict = {@CacheEvict( value = "user", allEntries = true )},
+            put = {@CachePut( value = "user", key = "#user.id" )} )
     public User persist(User user) {
-        user.setEnabled(true);
         user.setUsername(user.getUsername().toLowerCase());
         if ( user.getPassword() != null ) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         } else {
             user.setPassword(userDao.getOne(user.getId()).getPassword());
         }
         return userDao.save(user);
     }
 
+    @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
+        //according to this project can not be deleted user
         userDao.deleteById(id);
         return false;
     }
 
-
+    @Cacheable
     public List< User > search(User user) {
         ExampleMatcher matcher =
                 ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
@@ -67,14 +67,17 @@ public class UserService implements AbstractService< User, Long > {
         return userDao.findByEmployeeId(id);
     }
 
+    @Cacheable
     public Long findByUserIdByUserName(String userName) {
         return userDao.findUserIdByUserName(userName);
     }
 
+    @Cacheable
     public User findByUserName(String name) {
         return userDao.findByUsername(name);
     }
 
+    @Cacheable
     public User findUserByEmployee(Employee employee) {
         return userDao.findByEmployee(employee);
     }
