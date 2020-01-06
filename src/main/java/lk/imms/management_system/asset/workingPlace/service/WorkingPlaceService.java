@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames={"workingPlace"}) // tells Spring where to store cache for this class
+//@CacheConfig(cacheNames={"workingPlace"}) // tells Spring where to store cache for this class
 public class WorkingPlaceService implements AbstractService< WorkingPlace, Long > {
     private final WorkingPlaceDao workingPlaceDao;
 
@@ -26,32 +26,32 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
 
 
     @Override
-    @Cacheable
+   // @Cacheable
     public List< WorkingPlace > findAll() {
         return workingPlaceDao.findAll();
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public WorkingPlace findById(Long id) {
         return workingPlaceDao.getOne(id);
     }
 
     @Override
-    @CachePut
+    //@CachePut
     public WorkingPlace persist(WorkingPlace workingPlace) {
         return workingPlaceDao.save(workingPlace);
     }
 
     @Override
-    @CacheEvict
+    //@CacheEvict
     public boolean delete(Long id) {
         workingPlaceDao.deleteById(id);
         return true;
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public List< WorkingPlace > search(WorkingPlace workingPlace) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

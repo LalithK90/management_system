@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = "court")
+//@CacheConfig(cacheNames = "court")
 public class CourtService implements AbstractService< Court, Long > {
     private final CourtDao courtDao;
 
@@ -25,32 +25,32 @@ public class CourtService implements AbstractService< Court, Long > {
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public List< Court > findAll() {
         return courtDao.findAll();
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public Court findById(Long id) {
         return courtDao.getOne(id);
     }
 
     @Override
-    @CachePut
+    //@CachePut
     public Court persist(Court court) {
         return courtDao.save(court);
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+   // @CacheEvict(allEntries = true)
     public boolean delete(Long id) {
        courtDao.deleteById(id);
         return true;
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public List< Court > search(Court court) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

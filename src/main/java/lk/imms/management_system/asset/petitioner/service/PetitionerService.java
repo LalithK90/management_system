@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig( cacheNames = {"petitioner"} ) // tells Spring where to store cache for this class
+//@CacheConfig( cacheNames = {"petitioner"} ) // tells Spring where to store cache for this class
 public class PetitionerService implements AbstractService< Petitioner, Long > {
     private final PetitionerDao petitionerDao;
 
@@ -26,32 +26,32 @@ public class PetitionerService implements AbstractService< Petitioner, Long > {
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public List< Petitioner > findAll() {
         return petitionerDao.findAll();
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public Petitioner findById(Long id) {
         return petitionerDao.getOne(id);
     }
 
     @Override
-    @CachePut
+    //@CachePut
     public Petitioner persist(Petitioner petitioner) {
         return petitionerDao.save(petitioner);
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+    //@CacheEvict(allEntries = true)
     public boolean delete(Long id) {
         petitionerDao.deleteById(id);
         return true;
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public List< Petitioner > search(Petitioner petitioner) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

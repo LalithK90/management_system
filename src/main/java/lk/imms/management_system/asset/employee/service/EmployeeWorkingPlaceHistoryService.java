@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = "employeeWorkingPlaceHistory")
+//@CacheConfig(cacheNames = "employeeWorkingPlaceHistory")
 public class EmployeeWorkingPlaceHistoryService implements AbstractService< EmployeeWorkingPlaceHistory, Long > {
     private final EmployeeWorkingPlaceHistoryDao employeeWorkingPlaceHistoryDao;
 
@@ -27,32 +27,32 @@ public class EmployeeWorkingPlaceHistoryService implements AbstractService< Empl
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public List< EmployeeWorkingPlaceHistory > findAll() {
         return employeeWorkingPlaceHistoryDao.findAll();
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public EmployeeWorkingPlaceHistory findById(Long id) {
         return employeeWorkingPlaceHistoryDao.getOne(id);
     }
 
     @Override
-    @CachePut
+   // @CachePut
     public EmployeeWorkingPlaceHistory persist(EmployeeWorkingPlaceHistory employeeWorkingPlaceHistory) {
         return employeeWorkingPlaceHistoryDao.save(employeeWorkingPlaceHistory);
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+   // @CacheEvict(allEntries = true)
     public boolean delete(Long id) {
         //-> delete is a not a function in this system
         return false;
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public List< EmployeeWorkingPlaceHistory > search(EmployeeWorkingPlaceHistory employeeWorkingPlaceHistory) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

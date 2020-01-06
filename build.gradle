@@ -4,9 +4,6 @@ plugins {
     id 'java'
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 configurations {
     developmentOnly
@@ -19,6 +16,15 @@ repositories {
     mavenCentral()
 }
 
+springBoot {
+    buildInfo {
+        properties {
+            group = 'com.example'
+            version = '0.0.1-SNAPSHOT'
+            sourceCompatibility = '11'
+        }
+    }
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -36,7 +42,7 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3'
     //================= Following jar is need to generate excel file - https://mvnrepository.com/artifact/org.apache.poi/poi=================//
     compile group: 'org.apache.poi', name: 'poi', version: '3.8'
-   /*pdf generate related*/
+    /*pdf generate related*/
 
     // https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
     compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.17'
@@ -64,8 +70,11 @@ dependencies {
     compile group: 'org.webjars', name: 'jquery-ui', version: '1.12.1'
 
 
-// https://mvnrepository.com/artifact/org.webjars/font-awesome
+    // https://mvnrepository.com/artifact/org.webjars/font-awesome
     compile group: 'org.webjars', name: 'font-awesome', version: '5.11.2'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin -- from build jar file
+    compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.2.2.RELEASE', ext: 'pom'
 
 
     compileOnly 'org.projectlombok:lombok'

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@CacheConfig( cacheNames = {"offenderCallingName"} ) // tells Spring where to store cache for this class
+//@CacheConfig( cacheNames = {"offenderCallingName"} ) // tells Spring where to store cache for this class
 public class OffenderCallingNameService implements AbstractService< OffenderCallingName, Long > {
     private final OffenderCallingNameDao offenderCallingNameDao;
 
@@ -34,19 +34,19 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public OffenderCallingName findById(Long id) {
         return offenderCallingNameDao.getOne(id);
     }
 
     @Override
-    @CachePut
+    //@CachePut
     public OffenderCallingName persist(OffenderCallingName offenderCallingName) {
         return offenderCallingNameDao.save(offenderCallingName);
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+    //@CacheEvict(allEntries = true)
     public boolean delete(Long id) {
         //there should not be possibilities to delete
         offenderCallingNameDao.deleteById(id);
@@ -54,7 +54,7 @@ public class OffenderCallingNameService implements AbstractService< OffenderCall
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public List< OffenderCallingName > search(OffenderCallingName offenderCallingName) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

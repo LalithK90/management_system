@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@CacheConfig( cacheNames = {"offenderFiles"} ) // tells Spring where to store cache for this class
+//@CacheConfig( cacheNames = {"offenderFiles"} ) // tells Spring where to store cache for this class
 public class OffenderFilesService {
     private final OffenderFilesDao offenderFilesDao;
 
@@ -27,7 +27,7 @@ public class OffenderFilesService {
         this.offenderFilesDao = offenderFilesDao;
     }
 
-    @Cacheable("offenderFiles")
+    //@Cacheable("offenderFiles")
     public List< OffenderFiles > findByOffender(Offender offender) {
         //return employeeFilesDao.findByEmployee(employee);
         return offenderFilesDao.findByOffenderOrderByIdDesc(offender);
@@ -37,7 +37,7 @@ public class OffenderFilesService {
         return offenderFilesDao.findByName(filename);
     }
 
-    @CachePut("offenderFiles")
+   // @CachePut("offenderFiles")
     public void persist(List< OffenderFiles > storedFile) {
         offenderFilesDao.saveAll(storedFile);
     }

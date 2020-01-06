@@ -59,11 +59,4 @@ public class Crime extends AuditEntity {
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfJudgement;
 
-    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
-    @JoinTable( name = "crime_offender",
-            joinColumns = @JoinColumn( name = "crime_id" ),
-            inverseJoinColumns = @JoinColumn( name = "offender_id" ) )
-    @Fetch( value = FetchMode.SUBSELECT )
-    private List< Offender > offenders;
-
 }

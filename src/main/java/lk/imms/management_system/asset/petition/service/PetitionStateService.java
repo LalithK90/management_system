@@ -10,7 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
-@CacheConfig( cacheNames = {"petitionState"} ) // tells Spring where to store cache for this class
+//@CacheConfig( cacheNames = {"petitionState"} ) // tells Spring where to store cache for this class
 public class PetitionStateService {
     private final PetitionStatusDao petitionStatusDao;
 
@@ -19,7 +19,7 @@ public class PetitionStateService {
         this.petitionStatusDao = petitionStatusDao;
     }
 
-    @CachePut("petitionState")
+   // @CachePut("petitionState")
     public PetitionState persist(PetitionState petitionState) {
         return petitionStatusDao.save(petitionState);
     }

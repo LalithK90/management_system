@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@CacheConfig( cacheNames = {"minutePetition"} ) // tells Spring where to store cache for this class
+//@CacheConfig( cacheNames = {"minutePetition"} ) // tells Spring where to store cache for this class
 public class MinutePetitionService implements AbstractService< MinutePetition, Long > {
     private final MinutePetitionDao minutePetitionDao;
     private final MinutePetitionFilesService minutePetitionFilesService;
@@ -35,32 +35,32 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public List< MinutePetition > findAll() {
         return minutePetitionDao.findAll();
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public MinutePetition findById(Long id) {
         return minutePetitionDao.getOne(id);
     }
 
     @Override
-    @CachePut
+   // @CachePut
     public MinutePetition persist(MinutePetition minutePetition) {
         return minutePetitionDao.save(minutePetition);
     }
 
     @Override
-    @CacheEvict
+   // @CacheEvict
     public boolean delete(Long id) {
         // there is no possibility to delete any minutePetition
         return false;
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public List< MinutePetition > search(MinutePetition minutePetition) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

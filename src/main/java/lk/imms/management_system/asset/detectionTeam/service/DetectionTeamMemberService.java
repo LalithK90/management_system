@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = "detectionTeamMember")
+//@CacheConfig(cacheNames = "detectionTeamMember")
 public class DetectionTeamMemberService implements AbstractService< DetectionTeamMember, Long > {
     private final DetectionTeamMemberDao detectionTeamMemberDao;
 @Autowired
@@ -24,32 +24,32 @@ public class DetectionTeamMemberService implements AbstractService< DetectionTea
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public List< DetectionTeamMember > findAll() {
         return detectionTeamMemberDao.findAll();
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public DetectionTeamMember findById(Long id) {
         return detectionTeamMemberDao.getOne(id);
     }
 
     @Override
-    @CachePut
+    //@CachePut
     public DetectionTeamMember persist(DetectionTeamMember detectionTeamMember) {
    return detectionTeamMemberDao.save(detectionTeamMember);
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+    //@CacheEvict(allEntries = true)
     public boolean delete(Long id) {
    detectionTeamMemberDao.deleteById(id);
     return true;
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public List< DetectionTeamMember > search(DetectionTeamMember detectionTeamMember) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service
 @Transactional
-@CacheConfig( cacheNames = {"user"} ) // tells Spring where to store cache for this class
+//@CacheConfig( cacheNames = {"user"} ) // tells Spring where to store cache for this class
 public class UserService implements AbstractService< User, Long > {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
@@ -30,7 +30,6 @@ public class UserService implements AbstractService< User, Long > {
         this.userDao = userDao;
     }
 
-    @Cacheable("user")
     public List< User > findAll() {
         return userDao.findAll();
     }
@@ -39,7 +38,6 @@ public class UserService implements AbstractService< User, Long > {
         return userDao.getOne(id);
     }
 
-    @CachePut("user")
     public User persist(User user) {
         user.setEnabled(true);
         user.setUsername(user.getUsername().toLowerCase());

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = "crime")
+//@CacheConfig(cacheNames = "crime")
 public class CrimeService implements AbstractService< Crime, Long > {
     private final CrimeDao crimeDao;
 
@@ -25,19 +25,19 @@ public class CrimeService implements AbstractService< Crime, Long > {
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public List< Crime > findAll() {
         return crimeDao.findAll();
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public Crime findById(Long id) {
         return crimeDao.getOne(id);
     }
 
     @Override
-    @CachePut
+    //@CachePut
     public Crime persist(Crime crime)
     {
         //todo -> find fact before save
@@ -45,7 +45,7 @@ public class CrimeService implements AbstractService< Crime, Long > {
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+    //@CacheEvict(allEntries = true)
     public boolean delete(Long id) {
         //todo -> find fact what are the criteria before the delete
         crimeDao.deleteById(id);
@@ -53,7 +53,7 @@ public class CrimeService implements AbstractService< Crime, Long > {
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public List< Crime > search(Crime crime) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

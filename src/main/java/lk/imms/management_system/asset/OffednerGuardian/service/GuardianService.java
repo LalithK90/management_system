@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@CacheConfig( cacheNames = {"guardian"} )
+//@CacheConfig( cacheNames = {"guardian"} )
 public class GuardianService implements AbstractService< Guardian, Long > {
     private final GuardianDao guardianDao;
 
@@ -34,26 +34,26 @@ public class GuardianService implements AbstractService< Guardian, Long > {
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public Guardian findById(Long id) {
         return guardianDao.getOne(id);
     }
 
     @Override
-    @CachePut
+    //@CachePut
     public Guardian persist(Guardian guardian) {
         return guardianDao.save(guardian);
     }
 
     @Override
-    @CacheEvict( allEntries = true )
+    //@CacheEvict( allEntries = true )
     public boolean delete(Long id) {
         guardianDao.deleteById(id);
         return true;
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public List< Guardian > search(Guardian guardian) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
@@ -79,7 +79,7 @@ public class GuardianService implements AbstractService< Guardian, Long > {
                 .collect(Collectors.toList());
     }
 
-    @Cacheable
+    //@Cacheable
     public Guardian findByNic(String nic) {
         return guardianDao.findByNic(nic);
     }

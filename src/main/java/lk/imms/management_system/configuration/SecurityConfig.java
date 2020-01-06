@@ -42,11 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      /*  http.csrf().disable();
-        http.authorizeRequests().antMatchers("/").permitAll();*/
+        http.csrf().disable();
+        http.authorizeRequests().antMatchers("/").permitAll();
 
        // For developing easy to give permission all link
-      http.
+/*      http.
                 authorizeRequests()
                 //Anytime users can access without login
                 .antMatchers(
@@ -89,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //Cross site disable
                 .and()
                 .csrf()
-                .disable();
+                .disable();*/
 
 
         /* //Header used to Enable HTTP Strict Transport Security (HSTS)

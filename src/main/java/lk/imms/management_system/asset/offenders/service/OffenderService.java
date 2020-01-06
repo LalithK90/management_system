@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@CacheConfig( cacheNames = {"offender"} ) // tells Spring where to store cache for this class
+//@CacheConfig( cacheNames = {"offender"} ) // tells Spring where to store cache for this class
 public class OffenderService implements AbstractService< Offender, Long > {
     private final OffenderDao offenderDao;
     private final ContraveneService contraveneService;
@@ -35,25 +35,25 @@ public class OffenderService implements AbstractService< Offender, Long > {
     }
 
     @Override
-    @Cacheable
+    //@Cacheable
     public List< Offender > findAll() {
         return offenderDao.findAll();
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public Offender findById(Long id) {
         return offenderDao.getOne(id);
     }
 
     @Override
-    @CachePut("offender")
+   // @CachePut("offender")
     public Offender persist(Offender offender) {
         return offenderDao.save(offender);
     }
 
     @Override
-    @CacheEvict
+    //@CacheEvict
     public boolean delete(Long id) {
         //there are no possibilities to delete an offender from system
         //more than 100 years need to save the in the system
@@ -62,7 +62,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
     }
 
     @Override
-    @Cacheable
+   // @Cacheable
     public List< Offender > search(Offender offender) {
         Offender searchOffender = new Offender();
         //all offenders which all provided search, collect to this list

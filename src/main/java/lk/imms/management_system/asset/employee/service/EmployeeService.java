@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @Transactional// spring transactional annotation need to tell spring to this method work through the project
-@CacheConfig( cacheNames = "employee" )
+//@CacheConfig( cacheNames = "employee" )
 public class EmployeeService implements AbstractService< Employee, Long > {
 
     private final EmployeeDao employeeDao;
@@ -28,28 +28,28 @@ public class EmployeeService implements AbstractService< Employee, Long > {
         this.employeeDao = employeeDao;
     }
 
-    @Cacheable
+   // @Cacheable
     public List< Employee > findAll() {
         return employeeDao.findAll();
     }
 
-    @Cacheable
+   // @Cacheable
     public Employee findById(Long id) {
         return employeeDao.getOne(id);
     }
 
-    @CachePut
+   // @CachePut
     public Employee persist(Employee employee) {
         return employeeDao.save(employee);
     }
 
-    @CacheEvict( allEntries = true )
+   // @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
         employeeDao.deleteById(id);
         return false;
     }
 
-    @Cacheable
+    //@Cacheable
     public List< Employee > search(Employee employee) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

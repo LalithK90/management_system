@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@CacheConfig( cacheNames = {"contravene"} ) // tells Spring where to store cache for this class
+//@CacheConfig( cacheNames = {"contravene"} ) // tells Spring where to store cache for this class
 public class ContraveneService implements AbstractService< Contravene, Long > {
     private final ContraveneDao contraveneDao;
 
