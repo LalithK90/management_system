@@ -142,12 +142,26 @@ public class PetitionController {
         }
 
         WorkingPlace workingPlace = currentUser.getWorkingPlaces().get(0);
-        String petitionNumber =
-                makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()) + "/" + workingPlace.getWorkingPlaceType() + "/" + workingPlace.getCode();
-        String indexNumber =
-                makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()).toString();
-        petition.setPetitionNumber(petitionNumber);
-        petition.setIndexNumber(indexNumber);
+        if ( petition.getId() == null ) {
+            String petitionNumber;
+            String indexNumber;
+            if ( petitionService.getLastOne() == null ) {
+                petitionNumber =
+                        makeAutoGenerateNumberService.numberAutoGen(null).toString();
+                indexNumber =
+                        makeAutoGenerateNumberService.numberAutoGen(null).toString();
+
+            } else {
+                petitionNumber =
+                        makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()).toString();
+                indexNumber =
+                        makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()).toString();
+
+            }
+            petition.setPetitionNumber(petitionNumber + "/" + workingPlace.getWorkingPlaceType() + "/" + workingPlace.getCode());
+            petition.setIndexNumber(indexNumber);
+        }
+
         Petition savedPetition = new Petition();
         savedPetition.setPetitionNumber(petition.getPetitionNumber());
         savedPetition.setIndexNumber(petition.getIndexNumber());
@@ -181,6 +195,9 @@ public class PetitionController {
         for ( MinutePetition minutePetition : petition.getMinutePetitions() ) {
             minutePetition.setPetition(savedPetition);
             minutePetition.setMinuteState(MinuteState.CURRENTSITUATION);
+//save minute petition before
+            MinutePetition minutePetition1 = minutePetitionService.persist(minutePetition);
+
             // Minute Petition Files
             List< MinutePetitionFiles > storedFile = new ArrayList<>();
             //if there is nothing to save files
@@ -200,15 +217,13 @@ public class PetitionController {
                                                                      UUID.randomUUID().toString().concat(
                                                                              "minutePetition"));
                     }
-                    minutePetitionFile.setMinutePetition(minutePetitionService.persist(minutePetition));
+                    minutePetitionFile.setMinutePetition(minutePetition1);
                     storedFile.add(minutePetitionFile);
                 }
                 minutePetitionFilesService.persist(storedFile);
-            } else {
-                minutePetitionService.persist(minutePetition);
             }
-        }
 
+        }
         return "redirect:/petition/add";
     }
 

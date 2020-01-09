@@ -38,6 +38,7 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
     @Caching( evict = {@CacheEvict( value = "workingPlace", allEntries = true )},
             put = {@CachePut( value = "workingPlace", key = "#workingPlace.id" )} )
     public WorkingPlace persist(WorkingPlace workingPlace) {
+        workingPlace.setCode(workingPlace.getCode().toUpperCase());
         return workingPlaceDao.save(workingPlace);
     }
 

@@ -24,6 +24,7 @@
         <!--When come to edit user employee show-->
         <attr sel="#employeeName"
               th:text="${user.employee.title.title} + ${' '} + ${user.employee.name} +${' - '} + ${user.employee.nic}"/>
+        <attr sel="#employeeSelected" th:field="*{employee}"/>
     </attr>
     <!--User name-->
     <attr sel="#username" th:field="*{username}"/>
@@ -42,7 +43,11 @@
           th:value="${provinces}"/>
 
     <!--Working Place-->
-    <attr sel="#station" th:field="*{workingPlaces}"/>
+    <attr sel="#station" th:name="${'workingPlaces'}"/>
+
+    <!--Alert and working place-->
+    <attr sel="#alert" th:if="${addStatus==false}"/>
+    <attr sel="#stationList" th:each="stationName : ${user.workingPlaces}" th:text="${stationName.name}"/>
 
     <!--URL Comes -->
     <attr sel="#districtUrl" th:value="${districtUrl}"/>

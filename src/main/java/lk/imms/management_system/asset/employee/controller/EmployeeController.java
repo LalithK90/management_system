@@ -1,20 +1,18 @@
 package lk.imms.management_system.asset.employee.controller;
 
 
-import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
 import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
+import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.employee.entity.EmployeeFiles;
 import lk.imms.management_system.asset.employee.entity.EmployeeWorkingPlaceHistory;
-import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
 import lk.imms.management_system.asset.employee.entity.Enum.WorkingPlaceChangeReason;
 import lk.imms.management_system.asset.employee.service.EmployeeFilesService;
 import lk.imms.management_system.asset.employee.service.EmployeeService;
 import lk.imms.management_system.asset.employee.service.EmployeeWorkingPlaceHistoryService;
+import lk.imms.management_system.asset.userManagement.entity.User;
+import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
@@ -47,28 +45,28 @@ public class EmployeeController {
     private final EmployeeFilesService employeeFilesService;
     private final DateTimeAgeService dateTimeAgeService;
     private final WorkingPlaceService workingPlaceService;
+    private final CommonCodeService commonCodeService;
+    private final UserService userService;
 
     @Autowired
     public EmployeeController(EmployeeService employeeService,
                               EmployeeWorkingPlaceHistoryService employeeWorkingPlaceHistoryService,
                               EmployeeFilesService employeeFilesService, DateTimeAgeService dateTimeAgeService,
-                              WorkingPlaceService workingPlaceService) {
+                              WorkingPlaceService workingPlaceService, CommonCodeService commonCodeService,
+                              UserService userService) {
         this.employeeService = employeeService;
         this.employeeWorkingPlaceHistoryService = employeeWorkingPlaceHistoryService;
         this.employeeFilesService = employeeFilesService;
         this.dateTimeAgeService = dateTimeAgeService;
         this.workingPlaceService = workingPlaceService;
+        this.commonCodeService = commonCodeService;
+        this.userService = userService;
     }
 //----> Employee details management - start <----//
 
     // Common things for an employee add and update
     private String commonThings(Model model) {
-        model.addAttribute("title", Title.values());
-        model.addAttribute("gender", Gender.values());
-        model.addAttribute("civilStatus", CivilStatus.values());
-        model.addAttribute("employeeStatus", EmployeeStatus.values());
-        model.addAttribute("designation", Designation.values());
-        model.addAttribute("bloodGroup", BloodGroup.values());
+       commonCodeService.commonEmployeeAndOffender(model);
         model.addAttribute("workingPlaces", workingPlaceService.findAll());
         return "employee/addEmployee";
     }
@@ -145,8 +143,15 @@ public class EmployeeController {
             return commonThings(model);
         }
         try {
-            //first save employee and
-            employeeService.persist(employee);
+            //if employee state is not working he or she cannot access to the system
+            if  (!employee.getEmployeeStatus().equals(EmployeeStatus.WORKING)){
+                User user = userService.findUserByEmployee(employeeService.findByNic(employee.getNic()));
+                //if employee not a user
+                if ( user != null ) {
+                    user.setEnabled(false);
+                    userService.persist(user);
+                }
+            }
             //save employee images file
             List< EmployeeFiles > storedFile = new ArrayList<>();
             for ( MultipartFile file : employee.getFiles() ) {
@@ -167,6 +172,8 @@ public class EmployeeController {
 
             // Save all Files to database
             employeeFilesService.persist(storedFile);
+            //after save employee files and save employee
+            employeeService.persist(employee);
             return "redirect:/employee";
 
         } catch ( Exception e ) {

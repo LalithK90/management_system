@@ -119,11 +119,31 @@
             </div>
             <!--minute petition note are-->
             <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-                <div class="input-field">
-                    <label class="control-label col-sm-4" for="description">Description</label>
-                    <div>
-                            <textarea class="form-control" id="description" tabindex="8"
-                                      name="description" placeholder="Enter Description"></textarea>
+                <div class="form-row">
+                    <label class="control-label" for="description">Description:</label>
+                    <div class="container-fluid">
+                        <div>
+                            <textarea class="form-control" id="description" tabindex="17"
+                                      placeholder="Enter Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!--Translator Sinhala-->
+                    <div class="container-fluid col-sm-6 text-center">
+                        <!--Sinhala modal button -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target=".bd-example-modal-xl"><i
+                                class="fas fa-language"></i> &nbsp;Singlish to Sinhala
+                        </button>
+                    </div>
+                    <!--Translator Tamil-->
+                    <div class="container-fluid col-sm-6 text-center">
+                        <!-- modal tamil button -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#bd-example-modal-xl"><i
+                                class="fas fa-language"></i> &nbsp;Tamilish to Tamil
+                        </button>
                     </div>
                 </div>
             </div>
@@ -131,7 +151,7 @@
             <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
                 <div class="input-field">
                     <label class="active ">Photos </label>
-                    <label >Please remove numbers where included in image number </label>
+                    <label>Please remove numbers where included in image number </label>
                     <div class="input-images" tabindex="10" style="padding-top: .5rem;"></div>
                 </div>
             </div>
@@ -230,7 +250,7 @@
                                 <label class="control-label" for="nameSinhala">Name ( Sinhala ) </label>
                             </div>
                             <div class="col-md-8">
-                                <input id="nameSinhala" class="form-control" tabindex="17"  type="text"/>
+                                <input id="nameSinhala" class="form-control" tabindex="17" type="text"/>
                                 <span id="nameSinhalaError" class="error">Error Name in Sinhala</span>
                             </div>
                         </div>
@@ -283,7 +303,7 @@
                                 <label class="control-label" for="address">Address </label>
                             </div>
                             <div class="col-md-8">
-                                <textarea id="address" class="form-control" tabindex="22" ></textarea>
+                                <textarea id="address" class="form-control" tabindex="22"></textarea>
                                 <span class="error" id="addressError">Error Address</span>
                             </div>
                         </div>
@@ -346,5 +366,8 @@
 <script id="script"></script>
 <script id="customJS"></script>
 <script id="customScript"></script>
+<!--Translator-->
+<span id="translatorSinhala"></span>
+<span id="translatorTamil"></span>
 </body>
 </html>

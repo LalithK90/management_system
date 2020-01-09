@@ -3,12 +3,8 @@ package lk.imms.management_system.asset.offender.controller;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
 import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
+import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
-import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.offender.entity.OffenderCallingName;
 import lk.imms.management_system.asset.offender.entity.OffenderFiles;
@@ -44,29 +40,21 @@ public class OffenderController {
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
     private final ContraveneService contraveneService;
     private final GuardianService guardianService;
+    private final CommonCodeService commonCodeService;
 
     @Autowired
     public OffenderController(OffenderService offenderService, OffenderFilesService offenderFilesService,
                               UserService userService, MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                              ContraveneService contraveneService, GuardianService guardianService) {
+                              ContraveneService contraveneService, GuardianService guardianService,
+                              CommonCodeService commonCodeService) {
         this.offenderService = offenderService;
         this.offenderFilesService = offenderFilesService;
         this.userService = userService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
         this.contraveneService = contraveneService;
         this.guardianService = guardianService;
+        this.commonCodeService = commonCodeService;
     }
-
-    // Common things for an offender add and update
-    private void commonThings(Model model) {
-        model.addAttribute("title", Title.values());
-        model.addAttribute("gender", Gender.values());
-        model.addAttribute("civilStatus", CivilStatus.values());
-        model.addAttribute("designation", Designation.values());
-        model.addAttribute("bloodGroup", BloodGroup.values());
-        model.addAttribute("guardianTypes", GuardianType.values());
-    }
-
 
     //When called file will send to offender image
     @GetMapping( "/file/{filename}" )
@@ -80,12 +68,7 @@ public class OffenderController {
     //Send all offender data
     @RequestMapping
     public String offenderPage(Model model) {
-        List< Offender > offenders = new ArrayList<>();
-        for ( Offender offender : offenderService.findAll() ) {
-            offender.setFileInfos(offenderFilesService.offenderFileDownloadLinks(offender));
-            offenders.add(offender);
-        }
-        model.addAttribute("offenders", offenders);
+        model.addAttribute("offenders", offenderService.findAll());
         return "offender/offender";
     }
 
@@ -106,7 +89,8 @@ public class OffenderController {
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
         model.addAttribute("files", offenderFilesService.offenderFileDownloadLinks(offender));
-        commonThings(model);
+        commonCodeService.commonEmployeeAndOffender(model);
+        model.addAttribute("guardianTypes", GuardianType.values());
         return "offender/addOffender";
     }
 
@@ -115,7 +99,8 @@ public class OffenderController {
     public String offenderAddFrom(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("offender", new Offender());
-        commonThings(model);
+        commonCodeService.commonEmployeeAndOffender(model);
+        model.addAttribute("guardianTypes", GuardianType.values());
         return "offender/addOffender";
     }
 
@@ -125,65 +110,83 @@ public class OffenderController {
                               Model model) {
         //get current login user
         User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        // is there
+        if ( offender.getId() != null ) {
+            offender.setId(offender.getId());
+        } else {
+            //last offender Id offender registration number
+            String regNumber;
+
+            if ( offenderService.getLastOne() == null ) {
+                regNumber = makeAutoGenerateNumberService.numberAutoGen(null).toString();
+            } else {
+                regNumber =
+                        makeAutoGenerateNumberService.numberAutoGen(offenderService.getLastOne().getOffenderRegisterNumber()).toString();
+            }
+            offender.setOffenderRegisterNumber(regNumber + "/" + currentUser.getWorkingPlaces().get(0).getCode() +
+                                                       "/OF");
+        }
 
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
-            commonThings(model);
+            commonCodeService.commonEmployeeAndOffender(model);
+            model.addAttribute("guardianTypes", GuardianType.values());
             model.addAttribute("offender", offender);
             return "offender/addOffender";
         }
 
-        //offender calling name set
-        List< OffenderCallingName > offenderCallingNames = new ArrayList<>();
-        for ( OffenderCallingName offenderCallingName : offender.getOffenderCallingNames() ) {
-            offenderCallingName.setOffender(offender);
-            offenderCallingNames.add(offenderCallingName);
-        }
-
-        //guardian details' offender set
-        List< Guardian > guardians = new ArrayList<>();
-        for ( Guardian guardian : offender.getGuardians() ) {
-            //if this guardian already in system it was added to this offender
-            if ( guardianService.findByNic(guardian.getNic()) != null ) {
-                guardian = guardianService.findByNic(guardian.getNic());
-            } else {
-                guardian.setOffender(offender);
+//offender calling is not
+        if ( offender.getOffenderCallingNames() != null ) {
+            List< OffenderCallingName > offenderCallingNames = null;
+            //offender calling name set
+            offenderCallingNames = new ArrayList<>();
+            for ( OffenderCallingName offenderCallingName : offender.getOffenderCallingNames() ) {
+                offenderCallingName.setOffender(offender);
+                offenderCallingNames.add(offenderCallingName);
             }
-            guardians.add(guardian);
+            offender.setOffenderCallingNames(offenderCallingNames);
         }
-
-        offender.setOffenderCallingNames(offenderCallingNames);
-        offender.setGuardians(guardians);
-
-        //last offender Id offender registration number
-        String regNumber =
-                makeAutoGenerateNumberService.numberAutoGen(offenderService.getLastOne().getOffenderRegisterNumber()) + "/" + currentUser.getWorkingPlaces().get(0).getCode() + "/OF";
-        offender.setOffenderRegisterNumber(regNumber);
+//offender guardian is not
+        if ( offender.getGuardians() != null ) {
+            //guardian details' offender set
+            List< Guardian > guardians = new ArrayList<>();
+            for ( Guardian guardian : offender.getGuardians() ) {
+                //if this guardian already in system it was added to this offender
+                if ( guardianService.findByNic(guardian.getNic()) != null ) {
+                    guardian = guardianService.findByNic(guardian.getNic());
+                } /*else {
+                    guardian.setOffenders(offender);
+                }*/
+                guardians.add(guardian);
+            }
+            offender.setGuardians(guardians);
+        }
 
         // System.out.println("after set guardian and calling name " + offender.toString());
         try {
-            //First save offender and
-            offenderService.persist(offender);
-            //Save offender images file
-            List< OffenderFiles > storedFile = new ArrayList<>();
-            for ( MultipartFile file : offender.getFiles() ) {
-                OffenderFiles offenderFiles = offenderFilesService.findByName(file.getOriginalFilename());
-                if ( offenderFiles != null ) {
-                    // update new contents
-                    offenderFiles.setPic(file.getBytes());
-                } else {
-                    offenderFiles = new OffenderFiles(file.getOriginalFilename(),
-                                                      file.getContentType(),
-                                                      file.getBytes(),
-                                                      offender.getNic().concat("-" + LocalDateTime.now()),
-                                                      UUID.randomUUID().toString().concat("offender"));
+            //after file save offender and
+            Offender offender1 = offenderService.persist(offender);
+            //offender file is not
+            if ( offender.getFiles() != null ) {
+                for ( MultipartFile file : offender.getFiles() ) {
+                    if ( file.getOriginalFilename() != null ) {
+                        OffenderFiles offenderFiles = offenderFilesService.findByNameAndOffender(file.getOriginalFilename(),offender1);
+                        if ( offenderFiles != null ) {
+                            // update new contents
+                            offenderFiles.setPic(file.getBytes());
+                        } else {
+                            offenderFiles = new OffenderFiles(file.getOriginalFilename(),
+                                                              file.getContentType(),
+                                                              file.getBytes(),
+                                                              offender1.getNic().concat("/" + LocalDateTime.now()),
+                                                              UUID.randomUUID().toString().concat("offender"));
+                        }
+                        offenderFiles.setOffender(offender1);
+                        //storedFile.add(offenderFiles);
+                        offenderFilesService.save(offenderFiles);
+                    }
                 }
-                offenderFiles.setOffender(offender);
-                storedFile.add(offenderFiles);
             }
-
-            // Save all Files to database
-            offenderFilesService.persist(storedFile);
             return "redirect:/offender";
 
         } catch ( Exception e ) {
@@ -191,8 +194,13 @@ public class OffenderController {
                                                 "There is already in the system. <br>System message -->" + e.toString
                                                         ());
             result.addError(error);
-            model.addAttribute("addStatus", true);
-            commonThings(model);
+            if ( offender.getId() == null ) {
+                model.addAttribute("addStatus", true);
+            } else {
+                model.addAttribute("addStatus", false);
+            }
+            commonCodeService.commonEmployeeAndOffender(model);
+            model.addAttribute("guardianTypes", GuardianType.values());
             model.addAttribute("offender", offender);
             return "offender/addOffender";
         }
@@ -201,7 +209,7 @@ public class OffenderController {
     //If need to offender {but not applicable for this }
     @RequestMapping( value = "/remove/{id}", method = RequestMethod.GET )
     public String removeOffender(@PathVariable Long id) {
-        offenderService.delete(id);
+       // offenderService.delete(id);
         return "redirect:/offender";
     }
 
@@ -209,7 +217,8 @@ public class OffenderController {
     @GetMapping( "/search" )
     public String searchForm(Model model) {
         model.addAttribute("offender", new Offender());
-        commonThings(model);
+        commonCodeService.commonEmployeeAndOffender(model);
+        model.addAttribute("guardianTypes", GuardianType.values());
         model.addAttribute("contravenes", contraveneService.findAll());
         return "offender/offenderSearch";
     }

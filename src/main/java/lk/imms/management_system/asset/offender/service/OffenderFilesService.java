@@ -32,8 +32,8 @@ public class OffenderFilesService {
     }
 
     @Cacheable
-    public OffenderFiles findByName(String filename) {
-        return offenderFilesDao.findByName(filename);
+    public OffenderFiles findByNameAndOffender(String filename,Offender offender) {
+        return offenderFilesDao.findByNameAndOffender(filename,offender);
     }
 
     @Caching( evict = {@CacheEvict( value = "offenderFiles", allEntries = true )},
@@ -79,5 +79,9 @@ public class OffenderFilesService {
                     return new FileInfo(filename, OffenderFiles.getCreatedAt(), url);
                 })
                 .collect(Collectors.toList());
+    }
+
+    public void save(OffenderFiles offenderFiles) {
+        offenderFilesDao.save(offenderFiles);
     }
 }

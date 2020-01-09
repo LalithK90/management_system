@@ -85,6 +85,12 @@
     <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
 
 
+    <!--Singlish to sinhala Translator-->
+    <attr sel="#translatorSinhala" th:replace="~{fragments/unicodeSinhala :: unicodeSinhalaFragment}"/>
+    <!--Tamish to Tamil Translator-->
+    <attr sel="#translatorTamil" th:replace="~{fragments/unicodeTamil :: unicodeTamilFragment}"/>
+
+
     <!--URL Comes -->
     <attr sel="#districtUrl" th:value="${districtUrl}"/>
     <attr sel="#stationUrl" th:value="${stationUrl}"/>

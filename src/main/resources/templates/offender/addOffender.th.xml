@@ -10,7 +10,7 @@
     <!--Id status-->
     <attr sel="#idStatus" th:if="${addStatus==false}"/>
     <!--1. Id-->
-    <attr sel="#id" th:value="${id}"/>
+    <attr sel="#id" th:field="*{id}"/>
     <!--2. Offender Registration number-->
     <attr sel="#offenderRegisterNumber" th:field="*{offenderRegisterNumber}"/>
     <!--3. Name in Sinhala-->
@@ -94,6 +94,12 @@
     <attr sel="#description" th:field="*{description}"/>
     <attr sel="#descriptionError" th:errors="*{description}"
           th:if="${#fields.hasErrors('description')}"/>
+
+    <!--Singlish to sinhala Translator-->
+    <attr sel="#translatorSinhala" th:replace="~{fragments/unicodeSinhala :: unicodeSinhalaFragment}"/>
+    <!--Tamish to Tamil Translator-->
+    <attr sel="#translatorTamil" th:replace="~{fragments/unicodeTamil :: unicodeTamilFragment}"/>
+
 
     <!--20. Photos -->
     <attr sel="#photoDetails" th:if="${addStatus==false}"/>

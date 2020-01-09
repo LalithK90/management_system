@@ -61,7 +61,7 @@ public class GuardianService implements AbstractService< Guardian, Long > {
         return guardianDao.findAll(guardianExample);
     }
 
-    @Cacheable
+   /* @Cacheable
     public List< Offender > findByOffendersUsingGuardian(List< Guardian > guardians) {
         List< Offender > offenders = new ArrayList<>();
         guardians.forEach(guardian -> {
@@ -76,7 +76,7 @@ public class GuardianService implements AbstractService< Guardian, Long > {
         return offenders.stream()
                 .distinct()
                 .collect(Collectors.toList());
-    }
+    }*/
 
     @Cacheable
     public Guardian findByNic(String nic) {

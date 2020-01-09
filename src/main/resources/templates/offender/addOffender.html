@@ -273,43 +273,51 @@
             </div>
             <!-- Description -->
             <div class="form-group col-md-12 col-sm-12 text-left flex-column">
-                <label class="control-label" for="description">Description:</label>
-                <div class="input-field">
-                    <div>
+                <div class="form-row">
+                    <label class="control-label" for="description">Description:</label>
+                    <div class="container-fluid">
+                        <div>
                             <textarea class="form-control" id="description" tabindex="17"
                                       placeholder="Enter Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!--Translator Sinhala-->
+                    <div class="container-fluid col-sm-6 text-center">
+                        <!--Sinhala modal button -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target=".bd-example-modal-xl"><i
+                                class="fas fa-language"></i> &nbsp;Singlish to Sinhala
+                        </button><!--
+                        <span id="translatorSinhala"></span>-->
+                    </div>
+                    <!--Translator Tamil-->
+                    <div class="container-fluid col-sm-6 text-center">
+                        <!-- modal tamil button -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#bd-example-modal-xl"><i
+                                class="fas fa-language"></i> &nbsp;Tamilish to Tamil
+                        </button><!--
+                        <span id="translatorTamil"></span>-->
                     </div>
                 </div>
             </div>
             <!--Photos-->
             <div class="form-group col-md-12 col-sm-12 text-left flex-column">
-                <div class="input-field">
+                <div>
                     <label class="active ">Photos :</label>
-                    <div class="form-row">
-                        <div class="col-4">
-                            <p><strong>Right Side</strong></p>
-                            <small class="text-danger bg-light"> Please add image with an offender right side
-                                                                 . Image name like this
-                                <br/> Ex: (nic)-right.jpg/.png
-                                                                 {900900900-right.jpg/.png}</small>
-                            <div class="input-images" style="padding-top: .5rem;"></div>
-                        </div>
-                        <div class="col-4">
-                            <p><strong>Font Face</strong></p>
-                            <small id="helpId" class="text-danger bg-light"> Please add image with an offender font face
-                                                                             . Image name like this
-                                <br/> Ex: (nic)-font-face.jpg/.png
-                                                                             {900900900-font-face.jpg/.png}</small>
-                            <div class="input-images" style="padding-top: .5rem;"></div>
-                        </div>
-                        <div class="col-4">
-                            <p><strong>Left Side</strong></p>
-                            <small class="text-danger bg-light"> Please add image with an offender left side
-                                                                 . Image name like this
-                                <br/> Ex: (nic)-left.jpg/.png
-                                                                 {900900900-left.jpg/.png}</small>
-                            <div class="input-images" style="padding-top: .5rem;"></div>
-                        </div>
+                    <label class="text-warning bg-light">
+                        Right Side:- Please add image with an offender right side, Font Face:- Please add image with an
+                        offender font face, Left Side :- Please add image with an offender left side
+                        <br/>
+                        . Image name according to mentioned
+                        <br/>this Ex: (nic)-right.jpg/.png {900900900-right.jpg/.png},
+                        Ex:
+                        (nic)-font-face.jpg/.png {900900900-font-face.jpg/.png}, Ex: (nic)-left.jpg/.png
+                        {900900900-left.jpg/.png}</label>
+                    <div class="input-field">
+                        <div class="input-images" style="padding-top: .5rem;"></div>
                     </div>
                 </div>
                 <div class="col" id="photoDetails">
@@ -491,10 +499,13 @@
 </div>
 
 <!--footer include-->
-<footer id="footer" class="page-footer"></footer>
+<footer id="footer"></footer>
 <!--script include-->
 <script id="script"></script>
 <script id="offenderJs"></script>
+
+<span id="translatorSinhala"></span>
+<span id="translatorTamil"></span>
 </body>
 </html>
 

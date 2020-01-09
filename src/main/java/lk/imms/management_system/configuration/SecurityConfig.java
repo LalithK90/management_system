@@ -17,6 +17,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final String[] ALL_PERMIT_URL = {"/index", "/favicon.ico", "/img/**", "/css/**", "/js/**", "/webjars/**",
+            "/actuator/**", "/login", "/select/**"};
+
     @Bean
     public UserDetailsServiceImpl userDetailsService() {
         return new UserDetailsServiceImpl();
@@ -43,60 +46,59 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-/*        http.csrf().disable();
-        http.authorizeRequests().antMatchers("/").permitAll();*/
-
+ /*       http.csrf().disable();
+        http.authorizeRequests().antMatchers("/").permitAll();
+*/
         // For developing easy to give permission all link
-        http.authorizeRequests(
-                authorizeRequests ->
-                        authorizeRequests
-                                //Anytime users can access without login
-                                .antMatchers(
-                                        "/index",
-                                        "/favicon.ico",
-                                        "/img/**",
-                                        "/css/**",
-                                        "/js/**",
-                                        "/webjars/**").permitAll()
-                                //to see actuator details
-                                .antMatchers("/actuator/**").permitAll()
-                                .antMatchers("/login", "/select/**").permitAll()
-//this is used the normal admin to give access every url mapping
-                                .antMatchers("/").hasRole("/ADMIN")
-                                //Need to login for access those are
-                                .antMatchers("/employee/**").hasRole("ADMIN")
-                                .antMatchers("/employee1/**").hasRole("MANAGER")
-                                .antMatchers("/user/**").hasRole("ADMIN")
-                                .antMatchers("/petition/**").hasRole("ADMIN")
-                                .antMatchers("/minutePetition/**").hasRole("MANAGER")
-                                .antMatchers("/invoiceProcess/add").hasRole("CASHIER")
-                                .anyRequest()
-                                .authenticated())
+        http
+                .authorizeRequests(
+                        authorizeRequests ->
+                                authorizeRequests
+                                        //Anytime users can access without login
+                                        //to see actuator details
+                                        .antMatchers(ALL_PERMIT_URL).permitAll()
+                                        //this is used the normal admin to give access every url mapping
+                                        .antMatchers("/").hasRole("/ADMIN")
+                                        //Need to login for access those are
+                                        /*.antMatchers("/employee/**").hasRole("ADMIN")
+                                        .antMatchers("/employee1/**").hasRole("MANAGER")
+                                        .antMatchers("/user/**").hasRole("ADMIN")
+                                        .antMatchers("/petition/**").hasRole("ADMIN")
+                                        .antMatchers("/minutePetition/**").hasRole("MANAGER")
+                                        .antMatchers("/invoiceProcess/add").hasRole("CASHIER")
+                                      */.anyRequest()
+                                        .authenticated())
                 // Login form
-                .formLogin(formLogin ->
-                                   formLogin
-                                           .loginPage("/login")
-                                           //Username and password for validation
-                                           .usernameParameter("username")
-                                           .passwordParameter("password")
-                                           .defaultSuccessUrl("/index"))
+                .formLogin(
+                        formLogin ->
+                                formLogin
+                                        .loginPage("/login")
+                                        //Username and password for validation
+                                        .usernameParameter("username")
+                                        .passwordParameter("password")
+                                        .defaultSuccessUrl("/mainWindow"))
                 //session management
-                .sessionManagement(sessionManagement ->
-                                           sessionManagement
-                                                   .maximumSessions(1)
-                                                   .maxSessionsPreventsLogin(true)
-                                                   .expiredUrl("/login"))
+                .sessionManagement(
+                        sessionManagement ->
+                                sessionManagement
+                                        .maximumSessions(1)
+                                        .maxSessionsPreventsLogin(true)
+                                        .expiredUrl("/login"))
                 //Logout controlling
-                .logout(logout ->
+                .logout(
+                        logout ->
                                 logout
                                         .invalidateHttpSession(true)
                                         .clearAuthentication(true)
                                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                        .logoutSuccessUrl("/index"))
+                                        .logoutSuccessUrl("/login"))
+                //Port mapper
+          /*      .portMapper(portMapper ->
+                                    portMapper
+                                            .http(9090).mapsTo(8080))*/
                 //Cross site disable
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling();
-
 
         /* //Header used to Enable HTTP Strict Transport Security (HSTS)
                 .headers()
@@ -104,7 +106,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .includeSubdomains(true)
                 .maxAgeSeconds(31536000);
                 */
-
     }
 
 }

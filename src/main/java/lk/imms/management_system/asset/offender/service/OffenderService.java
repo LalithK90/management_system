@@ -1,6 +1,5 @@
 package lk.imms.management_system.asset.offender.service;
 
-import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.offender.dao.OffenderDao;
 import lk.imms.management_system.asset.offender.entity.Offender;
@@ -20,21 +19,27 @@ public class OffenderService implements AbstractService< Offender, Long > {
     private final OffenderDao offenderDao;
     private final ContraveneService contraveneService;
     private final OffenderCallingNameService offenderCallingNameService;
-    private final GuardianService guardianService;
+    private final OffenderFilesService offenderFilesService;
 
     @Autowired
     public OffenderService(OffenderDao offenderDao, ContraveneService contraveneService,
-                           OffenderCallingNameService offenderCallingNameService, GuardianService guardianService) {
+                           OffenderCallingNameService offenderCallingNameService,
+                           OffenderFilesService offenderFilesService) {
         this.offenderDao = offenderDao;
         this.contraveneService = contraveneService;
         this.offenderCallingNameService = offenderCallingNameService;
-        this.guardianService = guardianService;
+        this.offenderFilesService = offenderFilesService;
     }
 
     @Override
     @Cacheable
     public List< Offender > findAll() {
-        return offenderDao.findAll();
+        List< Offender > offenders = new ArrayList<>();
+        for ( Offender offender : offenderDao.findAll() ) {
+            offender.setFileInfos(offenderFilesService.offenderFileDownloadLinks(offender));
+            offenders.add(offender);
+        }
+        return offenders;
     }
 
     @Override
@@ -69,10 +74,6 @@ public class OffenderService implements AbstractService< Offender, Long > {
         //offender calling name set
         if ( offender.getOffenderCallingNames() != null ) {
             offenders.addAll(offenderCallingNameService.findByOffendersUsingCallingNames(offender.getOffenderCallingNames()));
-        }
-        //guardian details' offender set
-        if ( offender.getGuardians() != null ) {
-            offenders.addAll(guardianService.findByOffendersUsingGuardian(offender.getGuardians()));
         }
         //contravene is there
         if ( offender.getContravenes() != null ) {
@@ -187,7 +188,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
         return offenderDao.findAll(offenderExample);
     }
 
-    @Cacheable
+
     public Offender getLastOne() {
         return offenderDao.findFirstByOrderByIdDesc();
     }

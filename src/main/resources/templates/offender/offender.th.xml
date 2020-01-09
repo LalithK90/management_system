@@ -19,7 +19,7 @@
     <!--Land one-->
     <attr sel="#land" th:text="${offender.land}"/>
     <!--image-->
-    <attr sel="#img" th:src="${offender.fileInfos[__${1}__].url}"/>
+    <attr sel="#img" th:if="${offender.fileInfos[__${0}__].url != null}" th:src="${offender.fileInfos[__${0}__].url}"/>
     <!--offender Details view-->
     <attr sel="#offenderView" th:href="${'/offender/' + offender.id}"/>
     <!--Offender edit-->

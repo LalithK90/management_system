@@ -30,7 +30,6 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
 @JsonFilter( "Offender" )
-@ToString
 public class Offender extends AuditEntity {
 
     @Column( unique = true )
@@ -86,10 +85,14 @@ public class Offender extends AuditEntity {
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfBirth;
 
-    @OneToMany( mappedBy = "offender", cascade = CascadeType.PERSIST )
+    @OneToMany( mappedBy = "offender", cascade = CascadeType.ALL )
     private List< OffenderCallingName > offenderCallingNames;
 
-    @OneToMany( mappedBy = "offender", cascade = CascadeType.PERSIST )
+    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+    @JoinTable( name = "offender_guardian",
+            joinColumns = @JoinColumn( name = "offender_id" ),
+            inverseJoinColumns = @JoinColumn( name = "guardian_id" ) )
+    @Fetch( value = FetchMode.SUBSELECT )
     private List< Guardian > guardians;
 
     @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )

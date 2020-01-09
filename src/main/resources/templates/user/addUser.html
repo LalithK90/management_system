@@ -113,6 +113,7 @@
                         <div id="employeeNameBox">
                             <strong>
                                 <span id="employeeName"></span>
+                                <input type="hidden" id="employeeSelected">
                             </strong>
                         </div>
                     </div>
@@ -177,6 +178,22 @@
                     <select id="roles" class="form-control" size="12" multiple required>
                         <option id="roleList" value=""></option>
                     </select>
+                </div>
+                <div class="form-row" id="alert">
+                    <div class="form-row alert alert-danger text-center"><strong>Attention !</strong>
+                        <br/>You have to select following
+                             working place also before update user
+                        <strong>ANY DETAILS BELONG THIS USER </strong>.
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row"><label class="control-label" for="roles">Working place to watch :</label>
+                        </div>
+                        <div class="form-row">
+                            <ol>
+                                <li id="stationList"></li>
+                            </ol>
+                        </div>
+                    </div>
                 </div>
             </div>
 

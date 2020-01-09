@@ -1,8 +1,4 @@
 $(document).ready(function () {
-    //WYSIWYG add to text area
-    bkLib.onDomLoaded(function () {
-        nicEditors.allTextAreas()
-    });
     $('.input-images').imageUploader();
 
     $('#callingNameButton').bind('click', function () {
@@ -14,7 +10,12 @@ $(document).ready(function () {
         let listName = 'offenderCallingNames'; //List name in an offender.class
         let fieldsNames = ['callingName']; //Field names from callingName.class
         let rowIndex = document.querySelectorAll('.item').length; //we can add mock class to each calling-name-row
-
+        let callingNameId;
+        if (rowIndex === 0) {
+            callingNameId = rowIndex;
+        } else {
+            callingNameId = rowIndex - 1;
+        }
         let row = document.createElement('div');
         row.classList.add('form-row', 'item', 'col-md-3');
 
@@ -30,13 +31,12 @@ $(document).ready(function () {
             input.type = 'text';
             input.classList.add('form-control');
             input.id = listName + rowIndex + '.' + fieldName;
-            input.setAttribute('name', listName + '[' + rowIndex + '].' + fieldName);
+            input.setAttribute('name', listName + '[' + callingNameId + '].' + fieldName);
             input.setAttribute('placeholder', 'Enter Calling Name');
 
             col.appendChild(input);
             row.appendChild(col);
         });
-
         document.getElementById('callingNameList').appendChild(row);
     };
     /*
@@ -47,7 +47,7 @@ $(document).ready(function () {
         }*/
 // guardian details
     $("#guardianButton").bind('click', function () {
-$("#guardianShow").show();
+        $("#guardianShow").show();
         let table = document.getElementById("guardianTable");
         let rowCount = table.rows.length;
 
@@ -57,7 +57,6 @@ $("#guardianShow").show();
         row.insertCell(1).innerHTML = `<input id="guardian_Nic" class="form-control" type="text" name="guardians[${rowCount}].nic" maxlength="12" minlength="10"/>`;
         row.insertCell(2).innerHTML = `<label class="control-label" for="guardian_Name">Guardian Name :</label>`;
         row.insertCell(3).innerHTML = `<input id="guardian_Name" class="form-control" name="guardians[${rowCount}].name" type="text"/>`;
-
     });
     //offender details
     $("#offenderButton").bind('click', function () {

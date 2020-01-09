@@ -10,7 +10,7 @@ public class UiController {
         return "mainWindow";
     }
 
-    @GetMapping(value = {"/","/login"})
+    @GetMapping(value = {"/login"})
     public String getLogin(){
         return "login/login";
     }

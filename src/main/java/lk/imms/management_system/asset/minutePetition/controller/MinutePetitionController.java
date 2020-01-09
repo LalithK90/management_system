@@ -89,7 +89,7 @@ public class MinutePetitionController {
                     minutePetitionFile = new MinutePetitionFiles(file.getOriginalFilename(),
                                                                  file.getContentType(),
                                                                  file.getBytes(),
-                                                                 minutePetition1.getPetition().getPetitionNumber().concat("-" + LocalDateTime.now()),
+                                                                 minutePetition.getPetition().getPetitionNumber().concat("-" + LocalDateTime.now()),
                                                                  UUID.randomUUID().toString().concat(
                                                                          "minutePetition"));
                 }

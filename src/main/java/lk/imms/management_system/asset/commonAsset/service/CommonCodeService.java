@@ -1,7 +1,12 @@
 package lk.imms.management_system.asset.commonAsset.service;
 
+import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
+import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
+import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
+import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
 import lk.imms.management_system.asset.employee.controller.EmployeeRestController;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
+import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import org.springframework.stereotype.Service;
@@ -28,5 +33,14 @@ public class CommonCodeService {
                 .fromMethodName(EmployeeRestController.class, "getEmployeeByWorkingPlace", arg)
                 .build()
                 .toString());
+    }
+
+    public void commonEmployeeAndOffender(Model model){
+        model.addAttribute("title", Title.values());
+        model.addAttribute("gender", Gender.values());
+        model.addAttribute("civilStatus", CivilStatus.values());
+        model.addAttribute("employeeStatus", EmployeeStatus.values());
+        model.addAttribute("designation", Designation.values());
+        model.addAttribute("bloodGroup", BloodGroup.values());
     }
 }

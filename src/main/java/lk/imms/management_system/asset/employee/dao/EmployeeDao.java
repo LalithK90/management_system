@@ -14,4 +14,6 @@ public interface EmployeeDao extends JpaRepository<Employee, Long> {
     Employee findFirstByOrderByIdDesc();
 
     List<Employee> findByWorkingPlace(WorkingPlace workingPlace);
+
+    Employee findByNic(String nic);
 }

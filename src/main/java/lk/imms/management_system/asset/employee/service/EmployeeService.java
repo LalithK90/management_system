@@ -69,4 +69,9 @@ public class EmployeeService implements AbstractService< Employee, Long > {
     public List< Employee > findByWorkingPlace(WorkingPlace workingPlace) {
         return employeeDao.findByWorkingPlace(workingPlace);
     }
+
+    @Cacheable
+    public Employee findByNic(String nic) {
+        return employeeDao.findByNic(nic);
+    }
 }

@@ -54,7 +54,7 @@
                                 </select>
                             </div>
                         </div>
-                       <!--offender search-->
+                        <!--offender search-->
                         <div class="col-md-8 col-sm-8 text-left ">
                             <div class="col-md-4">
                                 <label class="control-label" for="minuteState">To Get Any Sugession</label>
@@ -68,21 +68,31 @@
                     </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-                    <div class="input-field">
-                        <label class="control-label col-sm-4" for="description">Description </label>
-                        <div>
-                            <textarea class="form-control" id="description" tabindex="2"
-                                      name="description" placeholder="Enter Description"></textarea>
+                    <div class="form-row">
+                        <label class="control-label" for="description">Description:</label>
+                        <div class="container-fluid">
+                            <div>
+                            <textarea class="form-control" id="description" tabindex="17"
+                                      placeholder="Enter Description"></textarea>
+                            </div>
                         </div>
-                        <div class="form-row">
-                            <!--Translator Sinhala-->
-                            <div class="container-fluid col-sm-6 text-center">
-                                <span id="translatorSinhala"></span>
-                            </div>
-                            <!--Translator Tamil-->
-                            <div class="container-fluid col-sm-6 text-center">
-                                <span id="translatorTamil"></span>
-                            </div>
+                    </div>
+                    <div class="form-row">
+                        <!--Translator Sinhala-->
+                        <div class="container-fluid col-sm-6 text-center">
+                            <!--Sinhala modal button -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target=".bd-example-modal-xl"><i
+                                    class="fas fa-language"></i> &nbsp;Singlish to Sinhala
+                            </button>
+                        </div>
+                        <!--Translator Tamil-->
+                        <div class="container-fluid col-sm-6 text-center">
+                            <!-- modal tamil button -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#bd-example-modal-xl"><i
+                                    class="fas fa-language"></i> &nbsp;Tamilish to Tamil
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -90,7 +100,7 @@
                 <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
                     <div class="input-field">
                         <label class="active ">Photos </label>
-                        <label >Please remove numbers where included in image number </label>
+                        <label>Please remove numbers where included in image number </label>
                         <div class="input-images" style="padding-top: .5rem;"></div>
                     </div>
                 </div>
@@ -203,5 +213,8 @@
 <!--script include-->
 <script id="script"></script>
 <script id="customScript"></script>
+<!--Translator-->
+<span id="translatorSinhala"></span>
+<span id="translatorTamil"></span>
 </body>
 </html>

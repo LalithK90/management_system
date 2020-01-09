@@ -4,9 +4,12 @@ import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType
 import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,8 +31,12 @@ public class Guardian extends AuditEntity {
     @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String remark;
 
-    @ManyToOne
-    private Offender offender;
+    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+    @JoinTable( name = "offender_guardian",
+            joinColumns = @JoinColumn( name = "guardian_id" ),
+            inverseJoinColumns = @JoinColumn( name = "offender_id" ) )
+    @Fetch( value = FetchMode.SUBSELECT )
+    private List<Offender> offenders;
 
 
 
