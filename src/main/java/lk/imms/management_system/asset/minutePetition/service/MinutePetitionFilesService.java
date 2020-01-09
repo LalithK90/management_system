@@ -61,4 +61,8 @@ public class MinutePetitionFilesService {
         //return employeeFilesDao.findByEmployee(employee);
         return minutePetitionFilesDao.findByMinutePetitionOrderByIdDesc(minutePetition);
     }
+
+    public void save(MinutePetitionFiles minutePetitionFile) {
+        minutePetitionFilesDao.save(minutePetitionFile);
+    }
 }

@@ -37,8 +37,6 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 // This clz is used to manage petition adding process while on this adding
@@ -198,8 +196,6 @@ public class PetitionController {
 //save minute petition before
             MinutePetition minutePetition1 = minutePetitionService.persist(minutePetition);
 
-            // Minute Petition Files
-            List< MinutePetitionFiles > storedFile = new ArrayList<>();
             //if there is nothing to save files
             if ( !petition.getFiles().isEmpty() ) {
                 for ( MultipartFile file : petition.getFiles() ) {
@@ -218,9 +214,8 @@ public class PetitionController {
                                                                              "minutePetition"));
                     }
                     minutePetitionFile.setMinutePetition(minutePetition1);
-                    storedFile.add(minutePetitionFile);
+                    minutePetitionFilesService.save(minutePetitionFile);
                 }
-                minutePetitionFilesService.persist(storedFile);
             }
 
         }

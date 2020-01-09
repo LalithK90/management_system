@@ -25,7 +25,6 @@ import java.util.List;
 @EqualsAndHashCode( callSuper = true )
 public class Petition extends AuditEntity {
 
-    // -->Auto Generate Year/Month/OfficeType/StationCode/PetitionNumberFromDB
     private String petitionNumber;
 
     private String indexNumber;
