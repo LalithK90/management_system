@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
+@ToString
 public class PetitionOffender extends AuditEntity {
 
     @ManyToOne
@@ -25,10 +26,13 @@ public class PetitionOffender extends AuditEntity {
     @ManyToOne
     private Offender offender;
 
-    @ManyToMany( cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable( name = "petition_offender_contravene",
-            joinColumns = @JoinColumn( name = "petition_offender_contravene_id" ),
+            joinColumns = @JoinColumn( name = "petition_offender_id" ),
             inverseJoinColumns = @JoinColumn( name = "contravene_id" ) )
     private List< Contravene > contravenes;
+
+    @Transient
+    private List<Offender> offenders;
 
 }

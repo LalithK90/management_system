@@ -31,7 +31,7 @@ public class OffenderRestController {
     @PostMapping("/getOffender")
     public MappingJacksonValue getOffender(@RequestBody Offender offender) {
         //MappingJacksonValue
-        List< Offender > offenders = offenderService.findAll().stream()
+        List< Offender > offenders = offenderService.search(offender).stream()
                 .distinct()
                 .collect(Collectors.toList());
         //set all offenders their age

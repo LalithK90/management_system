@@ -37,7 +37,7 @@
     <attr sel="#contraveneStatus"
           th:each="contravene, lineCount : ${contravenes}">
         <attr sel="#contraveneValue" th:id="${'DTS'}+${lineCount.count}" th:value="${contravene.id}"
-              th:field="*{contravenes}"/>
+              th:field="*{petitionOffenders.contravenes}"/>
         <attr sel="#contraveneLabel" th:for="${'DTS'}+${lineCount.count}"
               th:text="${contravene.code}+${' - '}+${contravene.detail}"/>
     </attr>

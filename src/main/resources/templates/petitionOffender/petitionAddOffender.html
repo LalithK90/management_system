@@ -98,6 +98,7 @@
             <!--data request from start-->
             <div class="col-sm-6">
                 <input type="hidden" id="petitionId"/>
+                <input type="hidden" id="petitionOffenderId"/>
                 <!--selected offender view -->
                 <div class="row" id="selectedOffenderShow">
                     <h4 class="text-center text-white"><strong><i>Selected Offender</i></strong></h4>
@@ -110,18 +111,18 @@
                             <th> Passport No</th>
                             <th> Action</th>
                         </tr>
-                        <tr th:if="${ #lists.isEmpty(petition.petitionOffenders)}"
-                            th:each="offender, status : ${petition.petitionOffenders}">
+                        <tr th:if="${ #lists.isEmpty(offenders)}"
+                            th:each="offender, status : ${petitionOffender.offenders}">
                             <th th:text="${status.count}"></th>
                             <th><input type="hidden"
-                                       th:field="*{petitionOffenders[__${status.index}__].id}"/>
+                                       th:field="*{offenders[__${status.index}__].id}"/>
                             </th>
                             <th><input id="name" type="text" class="form-row"
-                                       th:field="*{petitionOffenders[__${status.index}__].name}" readonly></th>
+                                       th:field="*{offenders[__${status.index}__].nameEnglish}" readonly></th>
                             <th><input id="nic" type="text" class="form-control"
-                                       th:field="*{petitionOffenders[__${status.index}__].nic}" readonly></th>
+                                       th:field="*{offenders[__${status.index}__].nic}" readonly></th>
                             <th><input id="passport" type="text" class="form-control"
-                                       th:field="*{petitionOffenders[__${status.index}__].passportNumber}" readonly></th>
+                                       th:field="*{offenders[__${status.index}__].passportNumber}" readonly></th>
                             <th>
                                 <button type="button" class="btn btn-danger btn-sm "
                                         onclick="deletedSelectOffender(this)"> Remove &nbsp;<i class="fa fa-trash"></i>
@@ -163,4 +164,3 @@
 
 </body>
 </html>
-

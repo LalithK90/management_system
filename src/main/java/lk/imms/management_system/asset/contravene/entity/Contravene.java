@@ -25,10 +25,10 @@ public class Contravene extends AuditEntity {
     private String code;
 
 
-    @ManyToMany( cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable( name = "petition_offender_contravene",
             joinColumns = @JoinColumn( name = "contravene_id" ),
-            inverseJoinColumns = @JoinColumn( name = "petition_offender_contravene_id" ) )
+            inverseJoinColumns = @JoinColumn( name = "petition_offender_id" ) )
     private List< PetitionOffender > petitionOffenders;
 
 }

@@ -1,5 +1,8 @@
 package lk.imms.management_system.asset.petitionAddOffender.service;
 
+import lk.imms.management_system.asset.contravene.entity.Contravene;
+import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.asset.petitionAddOffender.dao.PetitionOffenderDao;
 import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
 import lk.imms.management_system.util.interfaces.AbstractService;
@@ -12,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = {"petitionOffender"})
+@CacheConfig( cacheNames = {"petitionOffender"} )
 public class PetitionOffenderService implements AbstractService< PetitionOffender, Long > {
     private final PetitionOffenderDao petitionOffenderDao;
 
@@ -41,7 +44,7 @@ public class PetitionOffenderService implements AbstractService< PetitionOffende
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+    @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
         //this is not applicable
         return false;
@@ -57,10 +60,31 @@ public class PetitionOffenderService implements AbstractService< PetitionOffende
         Example< PetitionOffender > petitionOffenderExample = Example.of(petitionOffender, matcher);
         return petitionOffenderDao.findAll(petitionOffenderExample);
     }
+
     @Caching( evict = {@CacheEvict( value = "petitionOffender", allEntries = true )},
             put = {@CachePut( value = "petitionOffender", key = "#petitionOffender.id" )} )
-    public List<PetitionOffender> persistAll(List<PetitionOffender> petitionOffenders) {
+    public List< PetitionOffender > persistAll(List< PetitionOffender > petitionOffenders) {
         return petitionOffenderDao.saveAll(petitionOffenders);
+    }
+
+    @Cacheable
+    public List< PetitionOffender > findByPetition(Petition petition) {
+        return petitionOffenderDao.findByPetition(petition);
+    }
+
+    @CacheEvict( allEntries = true )
+    public void deleteAll(List< PetitionOffender > petitionOffenders) {
+        petitionOffenderDao.deleteAll(petitionOffenders);
+    }
+
+    @Cacheable
+    public PetitionOffender getLast() {
+        return petitionOffenderDao.findFirstByOrderByIdDesc();
+    }
+
+    @Cacheable
+    public PetitionOffender findByPetitionAndOffender(Petition petition, Offender offender) {
+        return petitionOffenderDao.findByPetitionAndOffender(petition, offender);
     }
 
 }

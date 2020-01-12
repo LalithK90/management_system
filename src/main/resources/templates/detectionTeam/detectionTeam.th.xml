@@ -15,7 +15,7 @@
     <!--Petition Create minute-->
     <attr sel="#petitionMinute" th:href="${'/minutePetition/' + detectionTeam.petition.id}"/>
     <!--Add offender-->
-    <attr sel="#offenderAdd" th:href="${'/petition/addOffender/' + detectionTeam.petition.id}"/>
+    <attr sel="#offenderAdd" th:href="${'/petitionOffender/add/' + detectionTeam.petition.id}"/>
     <!--Add crime-->
     <attr sel="#crimeAdd" th:href="${'/crime/' + detectionTeam.id}"/>
     <attr sel="#userRemove" th:href="${'/detection/remove/' + detectionTeam.id}"

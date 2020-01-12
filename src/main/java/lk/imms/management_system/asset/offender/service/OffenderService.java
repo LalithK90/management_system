@@ -1,9 +1,12 @@
 package lk.imms.management_system.asset.offender.service;
 
 import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
+import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.offender.dao.OffenderDao;
 import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
+import lk.imms.management_system.asset.petitionAddOffender.service.PetitionOffenderService;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
@@ -22,16 +25,19 @@ public class OffenderService implements AbstractService< Offender, Long > {
     private final OffenderCallingNameService offenderCallingNameService;
     private final OffenderFilesService offenderFilesService;
     private final GuardianService guardianService;
+    private final PetitionOffenderService petitionOffenderService;
 
     @Autowired
     public OffenderService(OffenderDao offenderDao, ContraveneService contraveneService,
                            OffenderCallingNameService offenderCallingNameService,
-                           OffenderFilesService offenderFilesService, GuardianService guardianService) {
+                           OffenderFilesService offenderFilesService, GuardianService guardianService,
+                           PetitionOffenderService petitionOffenderService) {
         this.offenderDao = offenderDao;
         this.contraveneService = contraveneService;
         this.offenderCallingNameService = offenderCallingNameService;
         this.offenderFilesService = offenderFilesService;
         this.guardianService = guardianService;
+        this.petitionOffenderService = petitionOffenderService;
     }
 
     @Override
@@ -79,9 +85,16 @@ public class OffenderService implements AbstractService< Offender, Long > {
             offenders.addAll(offenderCallingNameService.findByOffendersUsingCallingNames(offender.getOffenderCallingNames()));
         }
         //contravene is there
-/*        if ( offender.getContravenes() != null ) {
-            offenders = contraveneService.findByOffendersUsingContravene(offender.getContravenes());
-        }*/
+        if ( offender.getPetitionOffenders() != null ) {
+            List< Offender > offenders1 = new ArrayList<>();
+            for ( PetitionOffender petitionOffender : offender.getPetitionOffenders() ) {
+                for ( Contravene contravene : petitionOffender.getContravenes() ) {
+                    contraveneService.findById(contravene.getId()).getPetitionOffenders()
+                            .forEach(petitionOffender1 -> offenders1.add(petitionOffender1.getOffender()));
+                }
+            }
+            offenders = offenders1;
+        }
         //id
         if ( offender.getId() != null ) {
             searchOffender.setId(offender.getId());

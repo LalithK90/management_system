@@ -223,14 +223,13 @@ let addRowToSelectedOffenderTable = function (offender) {
     let selectedOffenderTable = document.getElementById("selectedOffenderTable");
     let rowCount = selectedOffenderTable.rows.length;
     let row = selectedOffenderTable.insertRow(rowCount);
-    console.log("id " + offender.id + "  all ofeeender" + offender.toString());
-    let offenderId = offender.id.slice(0, -1) +` name="petitionOffenders[${rowCount - 1}].id" />` ;
-    console.log(" slice offender "+offenderId);
+    let offenderId = offender.id.slice(0, -1) +` name="offenders[${rowCount - 1}].id" />` ;
+
     row.insertCell(0).innerHTML = rowCount;
     row.insertCell(1).innerHTML = offenderId;
-    row.insertCell(2).innerHTML = `<input type="text" name="petitionOffenders[${rowCount - 1}].nameEnglish" value="${offender.nameEnglish}" class="form-control" readonly/>`;
-    row.insertCell(3).innerHTML = `<input type="text" name="petitionOffenders[${rowCount - 1}].nic" class="form-control" value="${offender.nic}" readonly/>`;
-    row.insertCell(4).innerHTML = `<input type="text" name="petitionOffenders[${rowCount - 1}].passportNumber" value="${offender.passportNumber}" class="form-control" readonly/>`;
+    row.insertCell(2).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].nameEnglish" value="${offender.nameEnglish}" class="form-control" readonly/>`;
+    row.insertCell(3).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].nic" class="form-control" value="${offender.nic}" readonly/>`;
+    row.insertCell(4).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].passportNumber" value="${offender.passportNumber}" class="form-control" readonly/>`;
     row.insertCell(5).innerHTML = `<button type="button" class="btn btn-danger btn-sm " onclick="deletedSelectOffender(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
 
 };
