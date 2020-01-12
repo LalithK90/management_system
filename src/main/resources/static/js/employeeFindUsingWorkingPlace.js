@@ -1,8 +1,8 @@
 $(document).ready(function () {
     //WYSIWYG add to text area
-    bkLib.onDomLoaded(function () {
-        nicEditors.findEditor()
-    });
+    /*    bkLib.onDomLoaded(function () {
+            nicEditors.findEditor()
+        });*/
 
     $('.input-images').imageUploader();
 
@@ -323,3 +323,19 @@ let noteNameSet = function () {
     $("#detectionTeamNote").attr("name", fieldName);
 };
 
+//if petitionStateType selected as following value no need to employee select
+$('#petitionStateType').bind('change', function () {
+    console.log($(this).val());
+    let stateValues = ["TODETECT", 'DETECTED', 'COURT', 'CHANGEDATE', 'RECEIVED', 'REJECT', 'ACCEPT']
+    for (let i = 0; i < stateValues.length; i++) {
+        if ($(this).val() === stateValues[i]) {
+            $('#provinceses, #designations,#employee').hide();
+            $("#provinces, #districts, #stations, #designation, #employees").removeAttr('required');
+
+            break;
+        } else {
+            $('#provinceses, #designations,#employee').show();
+            $("#provinces, #districts, #stations, #designation, #employees").attr('required','required');
+        }
+    }
+});

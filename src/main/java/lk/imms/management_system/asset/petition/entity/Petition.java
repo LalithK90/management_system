@@ -2,15 +2,13 @@ package lk.imms.management_system.asset.petition.entity;
 
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
-import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
+import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -48,21 +46,17 @@ public class Petition extends AuditEntity {
     @ManyToOne
     private WorkingPlace workingPlace;
 
-    @OneToMany( mappedBy = "petition" )
+    @OneToMany( mappedBy = "petition")
     private List< PetitionState > petitionStates;
 
-    @OneToMany( mappedBy = "petition" )
+    @OneToMany( mappedBy = "petition")
     private List< MinutePetition > minutePetitions;
 
     @OneToMany( mappedBy = "petition" )
     private List< DetectionTeam > detectionTeams;
 
-    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
-    @JoinTable( name = "petition_offender",
-            joinColumns = @JoinColumn( name = "petition_id" ),
-            inverseJoinColumns = @JoinColumn( name = "offender_id" ) )
-    @Fetch( value = FetchMode.SUBSELECT )
-    private List< Offender > offenders;
+    @OneToMany(mappedBy ="petition" )
+    private List< PetitionOffender > petitionOffenders;
 
     @Transient
     private List< MultipartFile > files = new ArrayList<>();

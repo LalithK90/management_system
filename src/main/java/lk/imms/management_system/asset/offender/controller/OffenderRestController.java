@@ -30,7 +30,6 @@ public class OffenderRestController {
 
     @PostMapping("/getOffender")
     public MappingJacksonValue getOffender(@RequestBody Offender offender) {
-        System.out.println("come offender " + offender.toString());
         //MappingJacksonValue
         List< Offender > offenders = offenderService.findAll().stream()
                 .distinct()

@@ -70,11 +70,11 @@ public class ContraveneService implements AbstractService< Contravene, Long > {
                     .withIgnoreCase()
                     .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
             Example< Contravene > contraveneExample = Example.of(contravene, matcher);
-            for ( Contravene contravene1 : contraveneDao.findAll(contraveneExample) ){
+            /*for ( Contravene contravene1 : contraveneDao.findAll(contraveneExample) ){
                 if ( contravene1.getOffenders() !=null ){
                     offenders.addAll(contravene1.getOffenders());
                 }
-            }
+            }*/
         }
         return offenders.stream()
                 .distinct()

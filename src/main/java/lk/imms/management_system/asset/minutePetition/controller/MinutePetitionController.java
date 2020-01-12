@@ -78,7 +78,7 @@ public class MinutePetitionController {
         // Minute Petition Files
         List< MinutePetitionFiles > storedFile = new ArrayList<>();
         //if there is nothing to save files
-        if ( !minutePetition.getFiles().isEmpty() ) {
+        if ( !minutePetition.getFiles().isEmpty() && minutePetition.getFiles().size() != 0 && minutePetition.getFiles().get(0).getOriginalFilename() != null ) {
             for ( MultipartFile file : minutePetition.getFiles() ) {
                 MinutePetitionFiles minutePetitionFile =
                         minutePetitionFilesService.findByName(file.getOriginalFilename());

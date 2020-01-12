@@ -7,9 +7,9 @@
     <!--Contravene-->
     <cache alias="contravene">
         <expiry>
-            <ttl unit="seconds">600</ttl>
+            <ttl unit="seconds">7000</ttl>
         </expiry>
-        <heap unit="entries">40</heap>
+        <heap unit="entries">30</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
     <!--Court-->
@@ -71,7 +71,7 @@
     <!--minutePetition-->
     <cache alias="minutePetition">
         <expiry>
-            <ttl unit="seconds">600</ttl>
+            <ttl unit="seconds">6000</ttl>
         </expiry>
         <heap unit="entries">1000</heap>
         <jsr107:mbeans enable-statistics="true"/>
@@ -111,7 +111,7 @@
     <!--petition-->
     <cache alias="petition">
         <expiry>
-            <ttl unit="seconds">600</ttl>
+            <ttl unit="seconds">6000</ttl>
         </expiry>
         <heap unit="entries">200</heap>
         <jsr107:mbeans enable-statistics="true"/>
@@ -150,6 +150,14 @@
     </cache>
     <!--workingPlace-->
     <cache alias="workingPlace">
+        <expiry>
+            <ttl unit="seconds">6000</ttl>
+        </expiry>
+        <heap unit="entries">120</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--petition offender-->
+    <cache alias="petitionOffender">
         <expiry>
             <ttl unit="seconds">600</ttl>
         </expiry>

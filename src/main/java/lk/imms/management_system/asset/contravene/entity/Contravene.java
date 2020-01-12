@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.contravene.entity;
 
 
-import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 
@@ -20,14 +20,15 @@ public class Contravene extends AuditEntity {
     @Column( columnDefinition = "VARCHAR(10000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String detail;
 
-    @Column(unique = true)
+    @Column( unique = true )
     @NotNull
     private String code;
 
-    @ManyToMany(fetch = FetchType.EAGER )
-    @JoinTable(name = "offender_contravene",
-            joinColumns = @JoinColumn(name = "contravene_id"),
-            inverseJoinColumns = @JoinColumn(name = "offender_id"))
-    private List< Offender > offenders;
+
+    @ManyToMany( cascade = CascadeType.ALL)
+    @JoinTable( name = "petition_offender_contravene",
+            joinColumns = @JoinColumn( name = "contravene_id" ),
+            inverseJoinColumns = @JoinColumn( name = "petition_offender_contravene_id" ) )
+    private List< PetitionOffender > petitionOffenders;
 
 }

@@ -30,9 +30,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -52,14 +54,13 @@ public class PetitionController {
     private final UserService userService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
     private final CommonCodeService commonCodeService;
-    private final ContraveneService contraveneService;
 
     @Autowired
     public PetitionController(PetitionService petitionService, MinutePetitionFilesService minutePetitionFilesService,
                               PetitionStateService petitionStateService, MinutePetitionService minutePetitionService,
                               PetitionerService petitionerService, UserService userService,
                               MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                              CommonCodeService commonCodeService, ContraveneService contraveneService) {
+                              CommonCodeService commonCodeService) {
         this.petitionService = petitionService;
         this.minutePetitionFilesService = minutePetitionFilesService;
         this.petitionStateService = petitionStateService;
@@ -68,7 +69,6 @@ public class PetitionController {
         this.userService = userService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
         this.commonCodeService = commonCodeService;
-        this.contraveneService = contraveneService;
     }
 
     // Common things for petition add and update
@@ -222,17 +222,4 @@ public class PetitionController {
         return "redirect:/petition/add";
     }
 
-    //Give a frontend to petition offender from
-    @GetMapping( "/addOffender/{id}" )
-    public String addPetitionOffenderPage(Model model, @PathVariable Long id) {
-        model.addAttribute("petition", petitionService.findById(id));
-        model.addAttribute("contravenes", contraveneService.findAll());
-        model.addAttribute("offenderUrl", MvcUriComponentsBuilder
-                .fromMethodName(OffenderRestController.class, "getOffender", "")
-                .build()
-                .toString());
-        return "petition/petitionAddOffender";
-    }
 }
-
-// -->Auto Generate Year/Month/OfficeType/StationCode/PetitionNumberFromDB

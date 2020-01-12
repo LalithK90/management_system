@@ -63,6 +63,10 @@ dependencies {
 // https://mvnrepository.com/artifact/org.webjars/font-awesome
     compile group: 'org.webjars', name: 'font-awesome', version: '5.11.2'
 
+// https://mvnrepository.com/artifact/org.webjars/pdf-js
+    compile group: 'org.webjars', name: 'pdf-js', version: '2.3.200'
+
+
 // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin -- from build jar file
     compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.2.2.RELEASE', ext: 'pom'
 

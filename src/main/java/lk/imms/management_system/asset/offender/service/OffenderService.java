@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.offender.service;
 
+import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.offender.dao.OffenderDao;
 import lk.imms.management_system.asset.offender.entity.Offender;
@@ -20,15 +21,17 @@ public class OffenderService implements AbstractService< Offender, Long > {
     private final ContraveneService contraveneService;
     private final OffenderCallingNameService offenderCallingNameService;
     private final OffenderFilesService offenderFilesService;
+    private final GuardianService guardianService;
 
     @Autowired
     public OffenderService(OffenderDao offenderDao, ContraveneService contraveneService,
                            OffenderCallingNameService offenderCallingNameService,
-                           OffenderFilesService offenderFilesService) {
+                           OffenderFilesService offenderFilesService, GuardianService guardianService) {
         this.offenderDao = offenderDao;
         this.contraveneService = contraveneService;
         this.offenderCallingNameService = offenderCallingNameService;
         this.offenderFilesService = offenderFilesService;
+        this.guardianService = guardianService;
     }
 
     @Override
@@ -76,9 +79,9 @@ public class OffenderService implements AbstractService< Offender, Long > {
             offenders.addAll(offenderCallingNameService.findByOffendersUsingCallingNames(offender.getOffenderCallingNames()));
         }
         //contravene is there
-        if ( offender.getContravenes() != null ) {
+/*        if ( offender.getContravenes() != null ) {
             offenders = contraveneService.findByOffendersUsingContravene(offender.getContravenes());
-        }
+        }*/
         //id
         if ( offender.getId() != null ) {
             searchOffender.setId(offender.getId());
@@ -144,6 +147,10 @@ public class OffenderService implements AbstractService< Offender, Long > {
             searchOffender.setDescription(offender.getDescription());
             offenders.addAll(searchAnyAttributeOffender(searchOffender));
             searchOffender.setDescription(null);
+        }
+        //guardian list
+        if ( offender.getGuardians() != null ) {
+            offenders.addAll(guardianService.findByOffendersUsingGuardian(offender.getGuardians()));
         }
         return searchAnyAttributeOffender(searchOffender);
     }

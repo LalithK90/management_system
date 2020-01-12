@@ -163,7 +163,7 @@ public class DetectionController {
 
         if ( detectionTeam.getId() == null ) {
             if ( detectionTeamService.getLastTeam() == null ) {
-                detectionTeam.setNumber(makeAutoGenerateNumberService.numberAutoGen("").toString());
+                detectionTeam.setNumber(makeAutoGenerateNumberService.numberAutoGen(null).toString());
             } else {
                 String number =
                         makeAutoGenerateNumberService.numberAutoGen(detectionTeamService.getLastTeam().getNumber()).toString();

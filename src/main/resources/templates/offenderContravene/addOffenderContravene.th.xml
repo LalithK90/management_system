@@ -1,27 +1,18 @@
 <thlogic xmlns:th="http://www.thymeleaf.org">
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
-    <!--Page header-->
-    <attr sel="#formHeader" th:text="${'Petition\'s Offender Add'}"/>
-    <!--Form -->
-    <attr sel="#form" th:action="${'/petition/add'}" th:object="${petition}"/>
 
-    <!--Petition-->
-    <attr sel="#petitionId" th:filed="*{id}"/>
+
+
     <!--Contravene-->
     <attr sel="#contraveneStatus"
           th:each="contravene, lineCount : ${contravenes}">
         <attr sel="#contraveneValue" th:id="${'DTS'}+${lineCount.count}" th:value="${contravene.id}"
-              />
+        />
         <attr sel="#contraveneLabel" th:for="${'DTS'}+${lineCount.count}" th:class="${'DTS'}+${lineCount.count} + ${'  text-primary'}"
               th:text="${contravene.code}+${'-'}+${contravene.detail}"/>
     </attr>
-<!--button-->
-    <attr sel="#submit" th:text="${'Update'}"/>
-    <!--Offender Url-->
-    <attr sel="#offenderURL" th:value="${offenderUrl}"/>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
-    <attr sel="#customScript" th:src="@{/js/petitionOffenderAdd.js}"/>
 </thlogic>

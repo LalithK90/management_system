@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UiController {
     @GetMapping(value = {"/","/home","/mainWindow"})
     public String getHome() {
-        System.out.println("came here");
         return "mainWindow";
     }
 

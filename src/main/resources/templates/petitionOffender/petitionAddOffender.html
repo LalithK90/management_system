@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--header Include-->
+<head id="header">
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" href="/petition/add"><i class="fa fa-file"></i>
+                &nbsp; New Petition</a>
+        </div>
+        <div class="col">
+            <h4 class="text-info text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/petition/search" id="searchShow" class="btn btn-primary">
+                <i class="fa fa-file " style="font-size: 20px"></i>&nbsp;Search&nbsp; <i class="fa fa-search"
+                                                                                         style="font-size: 20px"></i>
+
+                                                                   &nbsp;
+            </a>
+        </div>
+    </div>
+</div>
+<!--petition details should be there-->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+    </div>
+</div>
+<div class="container-fluid bg-dark formBorder">
+    <!--offender Search criteria-->
+    <div class="container-fluid form-inline" id="offenderSearchShow">
+        <div class="col-sm-12 form-row">
+            <div class="col-md-3 col-sm-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        <label class="control-label" for="searchCriteria">Search Select :</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="searchCriteria" class="form-control" required>
+                            <option value="" selected disabled>Please Select</option>
+                            <option value="NAME">Name</option>
+                            <option value="NIC">NIC</option>
+                            <option value="PASSPORT">Passport</option>
+                            <option value="MOBILE">Phone Number</option>
+                            <option value="CALLING">Calling Name</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-5">
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="searchValue">Value :</label>
+                    <input id="searchValue" class="form-control col-md-9" type="text" aria-describedby="helpId"/>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <button id="btnOffenderSearch" type="button" class="btn btn-outline-warning btn-info"><i
+                        class="fa fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-12 form-row">
+            <small id="helpId" class="text-danger ">Please add comma to separate calling name
+                <i class="text-white">Ex:- kota,banda,sudda,kaluwa,sf lokka,</i> </small>
+        </div>
+    </div>
+</div>
+<form id="form" class="form" method="POST">
+    <!--db offenders display-->
+    <div class="col-sm-12 bg-dark formBorder" id="findOffenderShow">
+        <div class="form-row">
+            <div class="col-sm-6 ">
+                <h4 class="text-center text-white"><strong><i>Offender List</i></strong></h4>
+                <table class="table-responsive table-responsive text-center" id="dbOffenderListShow">
+                    <tr>
+                        <th> Index</th>
+                        <th></th>
+                        <!--   <th> Reg. No.</th>-->
+                        <th> Name</th>
+                        <th> NIC</th>
+                        <th> Passport No.</th>
+                        <!--   <th> Age</th>-->
+                        <th> Image</th>
+                        <th> Action</th>
+                    </tr>
+                </table>
+            </div>
+            <!--Form Content - start -->
+            <!--data request from start-->
+            <div class="col-sm-6">
+                <input type="hidden" id="petitionId"/>
+                <!--selected offender view -->
+                <div class="row" id="selectedOffenderShow">
+                    <h4 class="text-center text-white"><strong><i>Selected Offender</i></strong></h4>
+                    <table class="table-responsive table-responsive text-center " id="selectedOffenderTable">
+                        <tr>
+                            <th> Index</th>
+                            <th></th>
+                            <th> Name</th>
+                            <th> NIC</th>
+                            <th> Passport No</th>
+                            <th> Action</th>
+                        </tr>
+                        <tr th:if="${ #lists.isEmpty(petition.petitionOffenders)}"
+                            th:each="offender, status : ${petition.petitionOffenders}">
+                            <th th:text="${status.count}"></th>
+                            <th><input type="hidden"
+                                       th:field="*{petitionOffenders[__${status.index}__].id}"/>
+                            </th>
+                            <th><input id="name" type="text" class="form-row"
+                                       th:field="*{petitionOffenders[__${status.index}__].name}" readonly></th>
+                            <th><input id="nic" type="text" class="form-control"
+                                       th:field="*{petitionOffenders[__${status.index}__].nic}" readonly></th>
+                            <th><input id="passport" type="text" class="form-control"
+                                       th:field="*{petitionOffenders[__${status.index}__].passportNumber}" readonly></th>
+                            <th>
+                                <button type="button" class="btn btn-danger btn-sm "
+                                        onclick="deletedSelectOffender(this)"> Remove &nbsp;<i class="fa fa-trash"></i>
+                                </button>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--Button-->
+        </div>
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+            <div class="form-row">
+                <div class="col-sm-6 col-md-6">
+                    <a href="/petition">
+                        <button class="btn btn-info" type="button">
+                            <i class="fa fa-backward" aria-hidden="true"></i>&nbsp; &nbsp;Back
+                        </button>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <button class="btn btn-success" type="submit">
+                        <i class="fas fa-users-cog" aria-hidden="true"></i>&nbsp; &nbsp;<span id="submit"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br/>
+    </div>
+</form>
+
+<!--hidden values for find offender-->
+<input type="hidden" id="offenderURL">
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script id="customScript"></script>
+
+</body>
+</html>
+

@@ -34,7 +34,7 @@
     <attr sel="#teamCreate" th:href="${'/detection/create/' + petition.id}"/>
 
     <!--Add offender-->
-    <attr sel="#offenderAdd" th:href="${'/petition/addOffender/' + petition.id}"/>
+    <attr sel="#offenderAdd" th:href="${'/petitionOffender/add/' + petition.id}"/>
 
     <!--Petition list is not-->
     <attr sel="#petitionListNotPresent" th:if="${ #lists.isEmpty(petitions)}"/>

@@ -1,5 +1,5 @@
 //default help id was disable if user which find offender using calling name advice will show
-$('#helpId, #selectedOffenderShow, #findOffenderShow').hide();
+$('#helpId, #findOffenderShow').hide();
 //search button display or not
 let searchButton = function () {
     if ($('#searchValue').val() === '' || $('#searchCriteria').val() === '') {
@@ -95,7 +95,7 @@ $('#btnOffenderSearch').bind('click', function () {
             //table show myTableData
             $('#findOffenderShow').show();
             //table exiting row delete myTableData
-            deleteAllTableRow(document.getElementById('myTableData'));
+            deleteAllTableRow(document.getElementById('dbOffenderListShow'));
             if (textStatus === 'success') {
                 dbOffenderListFill(data);
             }
@@ -130,45 +130,42 @@ $('#btnOffenderSearch').bind('click', function () {
             dbOffenderList.push(receivedOffender);
         }
         if (dbOffenderList.length !== 0) {
-            dbListToShowTable();
+            for (let i = 0; i < dbOffenderList.length; i++) {
+                dbListToShowTable(dbOffenderList[i]);
+            }
         }
     };
 
 //offender display which came in db
-    let dbListToShowTable = function () {
-        let table = document.getElementById("myTableData");
+    let dbListToShowTable = function (dbOffender) {
+        let table = document.getElementById("dbOffenderListShow");
         let tableRowCount = table.rows.length;
         let row = table.insertRow(tableRowCount);
-
-        for (let i = 0; i < dbOffenderList.length; i++) {
-            let index = i + 1;
-            row.insertCell(0).innerHTML = index;
-            row.insertCell(1).innerHTML = dbOffenderList[i].id;
-            row.insertCell(2).innerHTML = dbOffenderList[i].offenderRegisterNumber;
-            row.insertCell(3).innerHTML = dbOffenderList[i].nameEnglish;
-            row.insertCell(4).innerHTML = dbOffenderList[i].nic;
-            row.insertCell(5).innerHTML = dbOffenderList[i].passportNumber;
-            row.insertCell(6).innerHTML = dbOffenderList[i].age;
-            row.insertCell(7).innerHTML = `<img src="${dbOffenderList[i].fileInfos[1].url}" class="rounded" style="height: 150px; width: 150px; border-radius: 10px" alt="Offender image"/>`;
-            row.insertCell(8).innerHTML = `<button type="button" class="btn btn-primary btn-sm " onclick="showSelectOffender(this)" data-toggle="modal" data-target=".bd-example-modal-xl"> Select &nbsp;<i class="fa fa-thumbs-up"></i></button>`;
-        }
-        dbOffenderList = [];
+        row.insertCell(0).innerHTML = tableRowCount;
+        row.insertCell(1).innerHTML = `<input type="hidden" value="${dbOffender.id}"/>`;
+        //row.insertCell(2).innerHTML = dbOffender.offenderRegisterNumber;
+        row.insertCell(2).innerHTML = dbOffender.nameEnglish;
+        row.insertCell(3).innerHTML = dbOffender.nic;
+        row.insertCell(4).innerHTML = dbOffender.passportNumber;
+        //row.insertCell(6).innerHTML = dbOffender.age;
+        row.insertCell(5).innerHTML = `<img src="${dbOffender.fileInfos[1].url}" class="rounded" style="height: 150px; width: 150px; border-radius: 10px" alt="Offender image"/>`;
+        row.insertCell(6).innerHTML = `<button type="button" class="btn btn-primary btn-sm " onclick="showSelectOffender(this)"> Select &nbsp;<i class="fa fa-thumbs-up"></i></button>`;
+// data-toggle="modal" data-target=".bd-example-modal-xl"
     };
     searchButton();
 });
 //selected Offender list
 let selectedOffenderList = [];
-//selected offender
-let selectedOffender = {};
+
 //a selected offender would show
 let showSelectOffender = function (obj) {
     $('#selectedOffenderShow').show();
     let index = obj.parentNode.parentNode.rowIndex;
     // GET THE CELLS COLLECTION OF THE CURRENT ROW.
-    let objCells = myTableData.rows.item(index).cells;
-
+    let objCells = dbOffenderListShow.rows.item(index).cells;
     // check this employee already selected or not
     checkOffenderInArrayOrNot(objCells);
+
 };
 //already in array or not
 let checkOffenderInArrayOrNot = function (rowDetails) {
@@ -178,6 +175,7 @@ let checkOffenderInArrayOrNot = function (rowDetails) {
     // no employee test in Array
     if (selectedOffenderList.length === 0) {
         selectedOffenderList.push(offender);
+        addRowToSelectedOffenderTable(offender);
     } else {
         for (let i = 0; i < selectedOffenderList.length; i++) {
             if (selectedOffenderList[i].id === offender.id) {
@@ -191,12 +189,14 @@ let checkOffenderInArrayOrNot = function (rowDetails) {
                 icon: "warning",
             });
         } else {
-            selectedOffender = (offender);
+            selectedOffenderList.push(offender);
+            addRowToSelectedOffenderTable(offender);
         }
     }
 };
 // row data convert to selected offender
 let rowDataToOffender = function (rowDetails) {
+    const selectedOffender = {};
     for (let i = 0; i <= rowDetails.length; i++) {
         switch (i) {
             case 0:
@@ -205,58 +205,32 @@ let rowDataToOffender = function (rowDetails) {
                 selectedOffender.id = rowDetails[i].innerHTML;
                 break;
             case 2:
-                selectedOffender.offenderRegisterNumber = rowDetails[i].innerHTML;
-                break;
-            case 3:
                 selectedOffender.nameEnglish = rowDetails[i].innerHTML;
                 break;
-            default:
+            case 3:
+                selectedOffender.nic = rowDetails[i].innerHTML;
                 break;
+            case 4:
+                selectedOffender.passportNumber = rowDetails[i].innerHTML;
+                break;
+            default:
+                return selectedOffender;
         }
-        return selectedOffender;
     }
 };
-//model is closed and get selected contravenes
-$('#btnModelClose').bind('click', function () {
-    let checkField;
-    let contravenes = [];
-    checkField = $(".contraveneCheckBox:checked");
-    const contravene = {};
-
-    for (let i = 0; i < checkField.length; i++) {
-        contravene.id = checkField[i].id;
-        contravene.detail = $(`.${checkField[i].id}`).html();
-        contravenes.push(contravene);
-    }
-    selectedOffender.contravenes = contravenes;
-    selectedOffenderList.push(selectedOffender)
-    deleteAllTableRow(document.getElementById("selectedOffenderTable"));
-
-    for (let i = 0; i < selectedOffenderList.length; i++) {
-        addRowToSelectedOffenderTable(selectedOffenderList[i]);
-    }
-
-});
 
 let addRowToSelectedOffenderTable = function (offender) {
-    console.log("offender " + offender.toString());
     let selectedOffenderTable = document.getElementById("selectedOffenderTable");
     let rowCount = selectedOffenderTable.rows.length;
     let row = selectedOffenderTable.insertRow(rowCount);
-    /*let innerHtml = employee.id.split(">");*/
-
+    console.log("id " + offender.id + "  all ofeeender" + offender.toString());
+    let offenderId = offender.id.slice(0, -1) +` name="petitionOffenders[${rowCount - 1}].id" />` ;
+    console.log(" slice offender "+offenderId);
     row.insertCell(0).innerHTML = rowCount;
-    row.insertCell(1).innerHTML = `<input type="text" name="offenders[${rowCount - 1}]" value="${offender.id}" readonly/>`;
-    row.insertCell(2).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].offenderRegisterNumber" value="${offender.offenderRegisterNumber}" readonly/>`;
-    row.insertCell(3).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].offender" value="${offender.nameEnglish}" readonly/>`;
-    let innerHtmlList = "";
-    for (let i = 0; i < offender.contravenes.length; i++) {
-        innerHtmlList += `<ul class="list-group list-group-flush">
-                            <li class="list-group-item"><input type="hidden" name="offenders[${rowCount - 1}].offender.contravenes[${i}].id" value="${offender.contravenes[i].id}" /> <input type="text" name="offenders[${rowCount - 1}].offender.contravenes[${i}].detail" value="${offender.contravenes[i].detail}"  readonly/></li>
-                          </ul>`
-    }
-
-    row.insertCell(4).innerHTML = innerHtmlList;
+    row.insertCell(1).innerHTML = offenderId;
+    row.insertCell(2).innerHTML = `<input type="text" name="petitionOffenders[${rowCount - 1}].nameEnglish" value="${offender.nameEnglish}" class="form-control" readonly/>`;
+    row.insertCell(3).innerHTML = `<input type="text" name="petitionOffenders[${rowCount - 1}].nic" class="form-control" value="${offender.nic}" readonly/>`;
+    row.insertCell(4).innerHTML = `<input type="text" name="petitionOffenders[${rowCount - 1}].passportNumber" value="${offender.passportNumber}" class="form-control" readonly/>`;
     row.insertCell(5).innerHTML = `<button type="button" class="btn btn-danger btn-sm " onclick="deletedSelectOffender(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
 
 };
@@ -268,6 +242,12 @@ let deletedSelectOffender = function (obj) {
     let rowDetails = table.rows.item(index).cells;
     //REMOVE DELETED EMPLOYEE FORM SELECTED EMPLOYEE LIST
     let deleteOffender = rowDataToOffender(rowDetails);
+//if table row length is one selected offender list should be null
+    let tableRowCount = table.rows.length;
+    if (tableRowCount === 2) {
+        selectedOffenderList = [];
+        $('#selectedOffenderShow').hide();
+    }
 
     let removeSelectedOffender;
     for (let i = 0; i < selectedOffenderList.length; i++) {
