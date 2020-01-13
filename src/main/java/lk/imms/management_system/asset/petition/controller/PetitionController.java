@@ -2,13 +2,11 @@ package lk.imms.management_system.asset.petition.controller;
 
 
 import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
-import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.minutePetition.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionFilesService;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
-import lk.imms.management_system.asset.offender.controller.OffenderRestController;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
@@ -34,11 +32,11 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 // This clz is used to manage petition adding process while on this adding
@@ -92,14 +90,13 @@ public class PetitionController {
                 .body(file.getPic());
     }
 
-    //Give all available petition according to login user
-    @GetMapping
-    public String petitionPage(Model model) {
+    //common code from petitions list
+    private String commonCodeFromPetitionList(Model model, List< Petition > petitions) {
         //get current login user
         User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 
-       /* model.addAttribute("petitions",
-                           petitionService.findAll()
+ /*       model.addAttribute("petitions",
+                           petitions
                                    .stream()
                                    .filter((x) -> {
                                        boolean matched = false;
@@ -109,9 +106,15 @@ public class PetitionController {
                                        return matched;
                                    })
                                    .collect(Collectors.toList()));*/
-        model.addAttribute("petitions",
-                           petitionService.findAll());
+        model.addAttribute("petitions", petitions);
         return "petition/petition";
+    }
+
+
+    //Give all available petition according to login user
+    @GetMapping
+    public String petitionPage(Model model) {
+        return commonCodeFromPetitionList(model, petitionService.findAll());
     }
 
     //petition details
@@ -222,4 +225,28 @@ public class PetitionController {
         return "redirect:/petition/add";
     }
 
+
+    //common code for search from
+    private String commonCodeForSearch(Model model, Petition petition) {
+        model.addAttribute("petition", petition);
+        model.addAttribute("petitionTypes", PetitionType.values());
+        model.addAttribute("petitionPriorities", PetitionPriority.values());
+        return "petition/petitionSearch";
+    }
+
+    @GetMapping( "/search" )
+    public String searchForm(Model model) {
+        return commonCodeForSearch(model, new Petition());
+    }
+
+    @PostMapping( "/search" )
+    public String searchedPetitions(@ModelAttribute Petition petition, Model model, BindingResult result) {
+        if ( result.hasErrors() && petition == null ) {
+            ObjectError objectError = new ObjectError("petition", "There is not details what you did not provide " +
+                    "petition\n if you do not mind, cloud you please provide details.. ");
+            result.addError(objectError);
+            return commonCodeForSearch(model, petition);
+        }
+        return commonCodeFromPetitionList(model, petitionService.search(petition));
+    }
 }

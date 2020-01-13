@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.employee.service;
 
+import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.employee.dao.EmployeeDao;
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
@@ -18,10 +19,12 @@ import java.util.List;
 public class EmployeeService implements AbstractService< Employee, Long > {
 
     private final EmployeeDao employeeDao;
+    private final CommonCodeService commonCodeService;
 
     @Autowired
-    public EmployeeService(EmployeeDao employeeDao) {
+    public EmployeeService(EmployeeDao employeeDao, CommonCodeService commonCodeService) {
         this.employeeDao = employeeDao;
+        this.commonCodeService = commonCodeService;
     }
 
     @Cacheable
@@ -37,6 +40,10 @@ public class EmployeeService implements AbstractService< Employee, Long > {
     @Caching( evict = {@CacheEvict( value = "employee", allEntries = true )},
             put = {@CachePut( value = "employee", key = "#employee.id" )} )
     public Employee persist(Employee employee) {
+        employee.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(employee.getMobileOne()));
+        employee.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(employee.getMobileTwo()));
+        employee.setLand(commonCodeService.commonMobileNumberLengthValidator(employee.getLand()));
+
         return employeeDao.save(employee);
     }
 

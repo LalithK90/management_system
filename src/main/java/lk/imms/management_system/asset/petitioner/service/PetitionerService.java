@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.petitioner.service;
 
+import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
 import lk.imms.management_system.asset.petitioner.dao.PetitionerDao;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
@@ -16,10 +17,12 @@ import java.util.List;
 @CacheConfig( cacheNames = {"petitioner"} ) // tells Spring where to store cache for this class
 public class PetitionerService implements AbstractService< Petitioner, Long > {
     private final PetitionerDao petitionerDao;
+    private final CommonCodeService commonCodeService;
 
     @Autowired
-    public PetitionerService(PetitionerDao petitionerDao) {
+    public PetitionerService(PetitionerDao petitionerDao, CommonCodeService commonCodeService) {
         this.petitionerDao = petitionerDao;
+        this.commonCodeService = commonCodeService;
     }
 
     @Override
@@ -38,6 +41,9 @@ public class PetitionerService implements AbstractService< Petitioner, Long > {
     @Caching( evict = {@CacheEvict( value = "petitioner", allEntries = true )},
             put = {@CachePut( value = "petitioner", key = "#petitioner.id" )} )
     public Petitioner persist(Petitioner petitioner) {
+        petitioner.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(petitioner.getMobileOne()));
+        petitioner.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(petitioner.getMobileTwo()));
+        petitioner.setLand(commonCodeService.commonMobileNumberLengthValidator(petitioner.getLand()));
         return petitionerDao.save(petitioner);
     }
 

@@ -533,6 +533,7 @@ let btnSearchEmployeeShow = function () {
 
 //delete all row before show objects in table
 let deleteAllTableRow = function (tableName) {
+    console.log(" come to delete");
     let table = tableName;
     let rowCount = table.rows.length;
     if (rowCount > 1) {

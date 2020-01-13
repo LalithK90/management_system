@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 @Service
 public class CommonCodeService {
-
+    //common things to employee and offender - start
     public void commonUrlBuilder(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("designations", Designation.values());
@@ -42,5 +42,14 @@ public class CommonCodeService {
         model.addAttribute("employeeStatus", EmployeeStatus.values());
         model.addAttribute("designation", Designation.values());
         model.addAttribute("bloodGroup", BloodGroup.values());
+    }
+    //common things to employee and offender - end
+    //common mobile number length employee,offender,guardian, petitioner - start
+    // private final mobile length validator
+    public String commonMobileNumberLengthValidator(String number){
+        if ( number.length() == 9 ) {
+            number = "0".concat(number);
+        }
+        return number;
     }
 }

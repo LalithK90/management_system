@@ -82,20 +82,15 @@ $('#btnOffenderSearch').bind('click', function () {
             offender.offenderCallingNames.push(callingName);
         }
     }
-
     $.ajax({
-
         type: "post",
         dataType: 'json',
         contentType: 'application/json',
         url: urlCame,
         data: JSON.stringify(offender),
-
         success: function (data, textStatus) {
             //table show myTableData
             $('#findOffenderShow').show();
-            //table exiting row delete myTableData
-            deleteAllTableRow(document.getElementById('dbOffenderListShow'));
             if (textStatus === 'success') {
                 dbOffenderListFill(data);
             }
@@ -104,12 +99,20 @@ $('#btnOffenderSearch').bind('click', function () {
         error: function (xhr, textStatus, errorThrown) {
 //alert('request failed'+errorThrown);
             console.log('request failed   ' + errorThrown);
+            location.reload();
         }
     });
 
 
 //received offender set dbOffenderList array
     let dbOffenderListFill = function (data) {
+        //table exiting row delete myTableData
+        let table = document.getElementById('dbOffenderListShow');
+        if (table.rows.length > 1) {
+            deleteAllTableRow(table);
+            dbOffenderList = [];
+        }
+        console.log("length of db offender list " + dbOffenderList.length);
         for (let i = 0; i < data.length; i++) {
             //received data filled object
             let receivedOffender = {};
@@ -150,7 +153,6 @@ $('#btnOffenderSearch').bind('click', function () {
         //row.insertCell(6).innerHTML = dbOffender.age;
         row.insertCell(5).innerHTML = `<img src="${dbOffender.fileInfos[1].url}" class="rounded" style="height: 150px; width: 150px; border-radius: 10px" alt="Offender image"/>`;
         row.insertCell(6).innerHTML = `<button type="button" class="btn btn-primary btn-sm " onclick="showSelectOffender(this)"> Select &nbsp;<i class="fa fa-thumbs-up"></i></button>`;
-// data-toggle="modal" data-target=".bd-example-modal-xl"
     };
     searchButton();
 });
@@ -223,7 +225,7 @@ let addRowToSelectedOffenderTable = function (offender) {
     let selectedOffenderTable = document.getElementById("selectedOffenderTable");
     let rowCount = selectedOffenderTable.rows.length;
     let row = selectedOffenderTable.insertRow(rowCount);
-    let offenderId = offender.id.slice(0, -1) +` name="offenders[${rowCount - 1}].id" />` ;
+    let offenderId = offender.id.slice(0, -1) + ` name="offenders[${rowCount - 1}].id" />`;
 
     row.insertCell(0).innerHTML = rowCount;
     row.insertCell(1).innerHTML = offenderId;

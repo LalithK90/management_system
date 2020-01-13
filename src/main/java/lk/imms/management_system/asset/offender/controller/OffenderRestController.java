@@ -56,6 +56,7 @@ public class OffenderRestController {
         //Employee :- need to annotate relevant class with JosonFilter  {@JsonFilter("Employee") }
         mappingJacksonValue.setFilters(filters);
 
+        System.out.println(" offender details  "+ mappingJacksonValue.getValue());
         return mappingJacksonValue;
     }
 

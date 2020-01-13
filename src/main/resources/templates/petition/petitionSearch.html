@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/petition" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+<!--Petition content start-->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form id="from" class="form-horizontal" method="POST">
+            <div class="form-row col-md-12 col-sm-12 text-center flex-column">
+                <div id="accordion">
+                    <!--Petition-->
+                    <div class="card">
+                        <div class="card-header text-center bg-info">
+                            <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                <label><h4><strong>Petition Details </strong></h4></label>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show">
+                            <div class="card-body">
+                                <!--Normal Petition details-->
+                                <div class="form-row col-12 col-md-12 col-sm-12 bg-dark formBorder">
+                                    <!--index number-->
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="indexNumber">Index Number</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input id="indexNumber" class="form-control" tabindex="1" type="text"
+                                                   required/>
+                                        </div>
+                                    </div>
+                                    <!--petition number-->
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <div class="col-md-6">
+                                            <label class="control-label" for="petitionNumber">Petition Number</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input class="form-control" id="petitionNumber" tabindex="2" type="text"
+                                                   required/>
+                                        </div>
+                                    </div>
+                                    <!--petition type-->
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="petitionType">Petition Type</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <select id="petitionType" class="form-control" tabindex="3" required>
+                                                <option value="">Please select</option>
+                                                <option id="petitionTypeList" value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12 col-md-12 col-sm-12 bg-dark formBorder">
+                                    <!--village-->
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="village">Village</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input id="village" class="form-control" tabindex="1" type="text" required/>
+                                        </div>
+                                    </div>
+                                    <!--AGA Division-->
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <div class="col-md-6">
+                                            <label class="control-label" for="agaDivision">AGA Division</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input class="form-control" id="agaDivision" tabindex="2" type="text"
+                                                   required/>
+                                        </div>
+                                    </div>
+                                    <!--petition priority-->
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="petitionPriority">Petition
+                                                                                                Priority</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <select id="petitionPriority" class="form-control" tabindex="3" required>
+                                                <option value="">Please select</option>
+                                                <option id="petitionPriorityList" value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Working Place-->
+                    <div class="card">
+                        <div class="card-header text-center bg-info">
+                            <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseTwo">
+                                <label><h4><strong>Working Place Details </strong></h4></label>
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="collapse">
+                            <div class="card-body">
+                                <!--working place-->
+                                <div class="form-row col-12 col-md-12 col-sm-12 bg-dark formBorder">
+                                    <!--Left Side-->
+                                    <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                                        <div id="idHide" class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="id">ID :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input class="form-control" id="id" type="text" readonly/>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="name">Name :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="name" class="form-control" tabindex="1" type="text"
+                                                       minlength="6"
+                                                       required/>
+                                                <span class="error" id="nameError">Error Number</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="code">Code :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="code" class="form-control" tabindex="2" type="text"
+                                                       required/>
+                                                <span class="error" id="codeError">Error Code</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="province">Province :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control province" id="province" tabindex="3"
+                                                        required>
+                                                    <option value="">Please select</option>
+                                                    <option id="provinceSelect"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="district">District :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control district" id="district" tabindex="4"
+                                                        required>
+                                                    <option value="">Please select</option>
+                                                    <option id="districtSelect"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="workingPlaceType">Working Place Type
+                                                                                                    :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control" id="workingPlaceType" tabindex="5"
+                                                        required>
+                                                    <option value="">Please select</option>
+                                                    <option id="workingPlaceTypeSelect"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="emailOne">Email One:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="emailOne" class="form-control" tabindex="6" type="email"/>
+                                                <span id="emailOneError" class="error">Error Email</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="emailTwo">Email Two:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="emailTwo" class="form-control" tabindex="7" type="email"/>
+                                                <span id="emailTwoError" class="error">Error Email</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Right Side-->
+                                    <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="landOne">Land No One:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="landOne" class="form-control land" tabindex="8" type="text"
+                                                       minlength="9"
+                                                       maxlength="10"
+                                                       required/>
+                                                <span id="landOneError" class="error">Error One Number</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="landTwo">Land No Two:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="landTwo" class="form-control land" tabindex="9" type="text"
+                                                       minlength="9"
+                                                       maxlength="10"/>
+                                                <span id="landTwoError" class="error">Error Land Number Two
+
+                                                                  Number</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label " for="landThree">Land No Three :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="landThree" class="form-control land" tabindex="10"
+                                                       type="text"
+                                                       minlength="9"
+                                                       maxlength="10"/>
+                                                <span id="landThreeError" class="error">Error Land Number Three</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="landFour">Land No Four :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="landFour" class="form-control land" tabindex="11" type="text"
+                                                       minlength="9"
+                                                       maxlength="10"
+                                                />
+                                                <span id="landFourError" class="error">Error Land Four Number</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="faxNumber">Fax No :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="faxNumber" class="form-control land" tabindex="12"
+                                                       type="text" minlength="9"
+                                                       maxlength="10"/>
+                                                <span id="faxNumberError" class="error">Error Fax Number</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="address">Address :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                    <textarea id="address" class="form-control" tabindex="13"
+                                              required="required"></textarea>
+                                                <span id="addressError" class="error">Error Address</span>
+                                            </div>
+                                        </div>
+                                        <div id="createdByDiv" class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="createdBy">Created By :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="createdBy" class="form-control" type="text" readonly/>
+                                            </div>
+                                        </div>
+                                        <div class="form-row text-right" id="createdAtDiv">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="createdAt">Created At :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="createdAt" class="form-control" type="text" readonly/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--petition offender-->
+                    <div class="card">
+                        <div class="card-header text-center bg-info">
+                            <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseThree">
+                                <label><h4><strong>offender Details </strong></h4></label>
+                            </a>
+                        </div>
+                        <div id="collapseThree" class="collapse">
+                            <div class="card-body">
+                                <!--offender details-->
+                                <div class="form-row col-12 col-md-12 col-sm-12 bg-dark formBorder">
+                                    <!--Left Side-->
+                                    <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                                        <div id="idStatus">
+                                            <!--Id-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="id">ID :</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="id" class="form-control" type="text" readonly/>
+                                                </div>
+                                            </div>
+                                            <!--Offender Registration Number-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="offenderRegisterNumber">Offender
+                                                                                                              Reg No
+                                                                                                              :</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="offenderRegisterNumber" class="form-control" type="text"
+                                                           readonly/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Name Sinhala-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="nameSinhala">Name ( Sinhala )
+                                                                                               :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="nameSinhala" class="form-control" tabindex="1" type="text"/>
+                                                <span id="nameSinhalaError" class="error">Error Name in Sinhala</span>
+                                            </div>
+                                        </div>
+                                        <!--Name Tamil-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="nameTamil">Name ( Tamil ) :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="nameTamil" class="form-control" tabindex="2" type="text"/>
+                                                <span id="nameTamilError" class="error">Error Name In Tamil</span></div>
+                                        </div>
+                                        <!--Name English-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="nameEnglish">Name ( English )
+                                                                                               :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="nameEnglish" class="form-control" tabindex="3" type="text"
+                                                       required>
+                                                <span id="nameEnglishError" class="error">Error Name in English</span>
+                                            </div>
+                                        </div>
+                                        <!--NIC no-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="nic">NIC No :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="nic" class="form-control" tabindex="4" type="text"
+                                                       maxlength="12"
+                                                       minlength="10" required/>
+                                                <span class="error" id="nicError">Error NIC Number</span>
+                                            </div>
+                                        </div>
+                                        <!--Passport Number -->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="passportNumber">Passport No :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="passportNumber" class="form-control" tabindex="5" type="text"
+                                                       maxlength="12"
+                                                       minlength="10"/>
+                                                <span class="error" id="passportNumberError">Error                                                                                                     NIC Number</span>
+                                            </div>
+                                        </div>
+                                        <!--Driving Licence Number -->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="drivingLicenceNumber">Driving Licence
+                                                                                                        No :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="drivingLicenceNumber" class="form-control" tabindex="6"
+                                                       type="text"
+                                                       maxlength="12"
+                                                       minlength="10"/>
+                                                <span class="error" id="drivingLicenceNumberError">Error                                                                                                     NIC Number</span>
+                                            </div>
+                                        </div>
+                                        <!--Gender-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="gender">Gender :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select id="gender" class="form-control" tabindex="7" required>
+                                                    <option value="" selected disabled>Please select</option>
+                                                    <option id="genderList"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--Date of birth-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="dateOfBirth">Birth date :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="dateOfBirth" class="form-control" tabindex="8"
+                                                       placeholder="Ex: 1990 - 01 - 20"
+                                                       required type="date"/>
+                                                <span id="dateOfBirthError" class="error">Error Birthday</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Right Side-->
+                                    <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                                        <!--Blood group-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="bloodGroup">Blood Group :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select id="bloodGroup" class="form-control" tabindex="9" required>
+                                                    <option value="" selected disabled>Please select</option>
+                                                    <option id="bloodGroupList">Please select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--Civil Status-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="civilStatus">Civil State :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select id="civilStatus" class="form-control" tabindex="10" required>
+                                                    <option value="" selected disabled>Please select</option>
+                                                    <option id="civilStatusList"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--Address-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="address">Address :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <textarea id="address" class="form-control" tabindex="11"></textarea>
+                                                <span class="error" id="addressError">Error Address</span>
+                                            </div>
+                                        </div>
+                                        <!--Mobile one-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="mobileOne">Mobile One No :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="mobileOne" class="form-control mobile" tabindex="12"
+                                                       type="text"
+                                                       maxlength="10" min="9"
+                                                       required/>
+                                                <span class="error" id="mobileOneError">Error Mobile Number</span>
+                                            </div>
+                                        </div>
+                                        <!--Mobile two-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="mobileTwo">Mobile Two No :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="mobileTwo" class="form-control mobile" tabindex="13"
+                                                       type="text"
+                                                       maxlength="10" min="9"/>
+                                                <span class="error" id="mobileTwoError">Error Mobile  Number</span>
+                                            </div>
+                                        </div>
+                                        <!--Land-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="land">Land No :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="land" class="form-control land" type="text" tabindex="14"
+                                                       maxlength="10"
+                                                       min="9"/>
+                                                <span class="error" id="landError">Error Land Number</span>
+                                            </div>
+                                        </div>
+                                        <!--Email-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="email">Email :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="email" class="form-control" tabindex="15" type="email"/>
+                                                <span class="error" id="emailError">Error Email</span>
+                                            </div>
+                                        </div>
+                                        <!--Created by and created at-->
+                                        <div id="updateStatus">
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="createdBy">Created By :</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="createdBy" class="form-control" type="text" readonly/>
+                                                </div>
+                                            </div>
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="createdAt">Created At :</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="createdAt" class="form-control" type="text" readonly/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Calling Name-->
+                                    <div class="form-group col-md-12 col-sm-12 text-left flex-column">
+                                        <div class="form-row"><label class="control-label"><h3><strong>Calling Name
+                                                                                                       :</strong></h3>
+                                        </label>
+                                            <!--ADD NEW ROW BUTTON-->
+                                            <div class="col">
+                                                <button type="button" id="callingNameButton" tabindex="16"
+                                                        class="btn btn-sm btn-primary"
+                                                ><i class="fa fa-user-circle"></i> &nbsp;New
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--Calling name display -->
+                                        <div class="form-row" id="callingNameListDisplay">
+                                            <div class="item form-row col-md-3" id="callingNameDisplay">
+                                                <input id="callingNameIdDisplay" type="hidden"/>
+                                                <input id="callingNamesDisplay" type="text" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <!--List Of Calling Name-->
+                                        <div class="form-row" id="callingNameList">
+                                            <div class="item" id="callingName">
+                                                <div class=" d-none">
+                                                    <input id="callingNameId" type="hidden"/>
+                                                    <input id="callingNames" type="text" class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Description -->
+                                    <div class="form-group col-md-12 col-sm-12 text-left flex-column">
+                                        <div class="form-row">
+                                            <label class="control-label" for="description">Description:</label>
+                                            <div class="container-fluid">
+                                                <div>
+                            <textarea class="form-control" id="description" tabindex="17"
+                                      placeholder="Enter Description"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <!--Translator Sinhala-->
+                                            <div class="container-fluid col-sm-6 text-center">
+                                                <!--Sinhala modal button -->
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target=".bd-example-modal-xl"><i
+                                                        class="fas fa-language"></i> &nbsp;Singlish to Sinhala
+                                                </button><!--
+                        <span id="translatorSinhala"></span>-->
+                                            </div>
+                                            <!--Translator Tamil-->
+                                            <div class="container-fluid col-sm-6 text-center">
+                                                <!-- modal tamil button -->
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#bd-example-modal-xl"><i
+                                                        class="fas fa-language"></i> &nbsp;Tamilish to Tamil
+                                                </button><!--
+                        <span id="translatorTamil"></span>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Photos-->
+                                    <div class="form-group col-md-12 col-sm-12 text-left flex-column">
+                                        <div>
+                                            <label class="active ">Photos :</label>
+                                            <label class="text-warning bg-light">
+                                                Right Side:- Please add image with an offender right side, Font Face:-
+                                                Please add image with
+                                                an
+                                                offender font face, Left Side :- Please add image with an offender left
+                                                side
+                                                <br/>
+                                                . Image name according to mentioned
+                                                <br/>this Ex: (nic)-right.jpg/.png {900900900-right.jpg/.png},
+                                                Ex:
+                                                (nic)-font-face.jpg/.png {900900900-font-face.jpg/.png}, Ex:
+                                                (nic)-left.jpg/.png
+                                                {900900900-left.jpg/.png}</label>
+                                            <div class="input-field">
+                                                <div class="input-images" style="padding-top: .5rem;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col" id="photoDetails">
+                                            <div>
+                                                <label class="control-label ">Photo Details : </label>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col" id="filesList">
+                                                    <div class="col">
+                                                        <div class="alert alert-warning alert-dismissible fade show"
+                                                             role="alert">
+                                                            <button id="alertClose" type="button" class="close"
+                                                                    data-dismiss="alert"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            <div class="card text-center">
+                                                                <div class="card-header" hidden>
+                                                                    <input id="removeImages" type="text"
+                                                                           name="removeImages"></div>
+                                                                <div class="card-body">
+                                                                    <img id="img" class="rounded"
+                                                                         style="height: 150px; width: 150px; border-radius: 10px"/>
+                                                                </div>
+                                                                <div class="card-footer bg-secondary text-light text-center">
+                                                                    <p id="imgName"></p>
+                                                                    <p> Uploaded Date : <span id="imgCreateAt"></span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <script>
+                                                        $(".alert").alert();
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Guardians Details-->
+                                    <div class="form-row col-sm-12 col-md-12 col-12">
+                                        <label class="control-label " for="description"><h3><strong>Guardians
+                                                                                                    Details:</strong>
+                                        </h3></label>
+                                    </div>
+                                    <!--to add new guardian -->
+                                    <div class="form-row col-sm-12 col-md-12 col-12" id="guardianDetailNew">
+                                        <div class="row col-md-12 col-sm-12 col-12">
+                                            <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                                                <div class="form-row text-right">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label" for="guardianTypes">Guardian Type
+                                                                                                         :</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select id="guardianTypes" class="form-control"
+                                                                name="guardians[0].guardianType"
+                                                                required>
+                                                            <option value="" selected disabled>Please select</option>
+                                                            <option id="guardianTypesList"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row text-right">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label" for="guardian_Nic">NIC No :</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input id="guardian_Nic" class="form-control" type="text"
+                                                               name="guardians[0].nic"
+                                                               maxlength="12"
+                                                               minlength="10" required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                                                <div class="form-row text-right">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label" for="guardian_Name">Guardian Name
+                                                                                                         :</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input id="guardian_Name" class="form-control"
+                                                               name="guardians[0].name"
+                                                               type="text" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row text-right">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label" for="guardian_Remark">Remarks
+                                                                                                           :</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                        <textarea id="guardian_Remark" class="form-control"
+                                                  name="guardians[0].remark">
+                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--To display guardian-->
+                                    <div id="guardianDetails" class="row col-12 col-sm-12 col-md-12">
+                                        <!--Left Side-->
+                                        <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="guardianType">Guardian Type
+                                                                                                    :</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="hidden" id="guardianId">
+                                                    <select id="guardianType" class="form-control" tabindex="18"
+                                                            required>
+                                                        <option value="" selected disabled>Please select</option>
+                                                        <option id="guardianTypeList"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!--Guardian NIC no-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="guardianNic">NIC No :</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="guardianNic" class="form-control" tabindex="19"
+                                                           type="text"
+                                                           maxlength="12"
+                                                           minlength="10" required/>
+                                                </div>
+                                            </div>
+                                            <!--Guardian Created By-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="guardianCreatedBy">Created By
+                                                                                                         :</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="guardianCreatedBy" class="form-control" tabindex="19"
+                                                           type="text"
+                                                           maxlength="12"
+                                                           minlength="10" readonly/>
+                                                </div>
+                                            </div>
+                                            <!--Guardian Created At-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="guardianCreatedAt">Created At
+                                                                                                         :</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="guardianCreatedAt" class="form-control" tabindex="19"
+                                                           type="text"
+                                                           maxlength="12"
+                                                           minlength="10" readonly/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Right Side-->
+                                        <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                                            <!--Guardian Name-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="guardianName">Guardian Name
+                                                                                                    :</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="guardianName" class="form-control" tabindex="20"
+                                                           type="text"/>
+                                                </div>
+                                            </div>
+                                            <!--Address-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="guardianRemark">Remarks :</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                    <textarea id="guardianRemark" class="form-control" tabindex="21"
+                                              required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--petitioner details-->
+                    <div class="card">
+                        <div class="card-header text-center bg-info">
+                            <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseFour">
+                                <label><h4><strong>Petitioner Details </strong></h4></label>
+                            </a>
+                        </div>
+                        <div id="collapseFour" class="collapse">
+                            <div class="card-body">
+                                <!--Petitioner details-->
+                                <div class="row col-12 col-md-12 col-sm-12 card-body formBorder">
+                                    <p class="text-md-left "><strong>Petitioner Details :- </strong></p>
+                                    <div class="row col-12 col-md-12 col-sm-12 text-left" id="petitionerDetails">
+                                        <!--Add petitioner-->
+                                        <!--Left Side-->
+                                        <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                                            <!--Name Sinhala-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <input id="petitionerId" class="form-control" type="hidden"
+                                                           readonly/>
+                                                    <label class="control-label" for="nameSinhala">Name ( Sinhala
+                                                                                                   ) </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="nameSinhala" class="form-control" tabindex="17"
+                                                           type="text"/>
+                                                    <span id="nameSinhalaError"
+                                                          class="error">Error Name in Sinhala</span>
+                                                </div>
+                                            </div>
+                                            <!--Name Tamil-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="nameTamil">Name ( Tamil ) </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="nameTamil" class="form-control" tabindex="18"
+                                                           type="text"/>
+                                                    <span id="nameTamilError" class="error">Error Name In Tamil</span>
+                                                </div>
+                                            </div>
+                                            <!--Name English-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="nameEnglish">Name ( English
+                                                                                                   ) </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="nameEnglish" class="form-control" tabindex="19"
+                                                           type="text" required/>
+                                                    <span id="nameEnglishError"
+                                                          class="error">Error Name in English</span>
+                                                </div>
+                                            </div>
+                                            <!--Email -->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="email">Email </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="email" class="form-control" tabindex="20" type="email"/>
+                                                    <span class="error" id="emailError">Error Email</span>
+                                                </div>
+                                            </div>
+                                            <!--Land-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="land">Land No </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="land" class="form-control land" type="text" tabindex="21"
+                                                           maxlength="10"
+                                                           min="9"/>
+                                                    <span class="error" id="landError">Error Land Number</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Right Side-->
+                                        <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                                            <!--Address-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="address">Address </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <textarea id="address" class="form-control"
+                                                              tabindex="22"></textarea>
+                                                    <span class="error" id="addressError">Error Address</span>
+                                                </div>
+                                            </div>
+                                            <!--Mobile one-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="mobileOne">Mobile One No </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="mobileOne" class="form-control mobile" tabindex="23"
+                                                           type="text"
+                                                           maxlength="10" min="9"/>
+                                                    <span class="error" id="mobileOneError">Error Mobile Number</span>
+                                                </div>
+                                            </div>
+                                            <!--Mobile Two-->
+                                            <div class="form-row text-right">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="mobileTwo">Mobile Two No </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="mobileTwo" class="form-control mobile" tabindex="24"
+                                                           type="text"
+                                                           maxlength="10" min="9"/>
+                                                    <span class="error" id="mobileTwoError">Error Mobile  Number</span>
+                                                </div>
+                                            </div>
+                                            <!--Created by-->
+                                            <div class="form-row text-right" id="updateStatus">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="createdBy">Created By </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input id="createdBy" class="form-control" type="text" readonly/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--button-->
+            <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                <div class="input-field">
+                    <button class="btn btn-success" type="submit" tabindex="25">
+                        <i class="fa fa-search " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                            id="submit"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+    <!--footer include-->
+    <footer id="footer" class="page-footer"></footer>
+</div>
+
+<!--script include-->
+<script id="script"></script>
+</body>
+</html>

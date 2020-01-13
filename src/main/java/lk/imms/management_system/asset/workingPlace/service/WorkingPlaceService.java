@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.workingPlace.service;
 
+import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.workingPlace.dao.WorkingPlaceDao;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.interfaces.AbstractService;
@@ -15,10 +16,12 @@ import java.util.List;
 @CacheConfig( cacheNames = {"workingPlace"} ) // tells Spring where to store cache for this class
 public class WorkingPlaceService implements AbstractService< WorkingPlace, Long > {
     private final WorkingPlaceDao workingPlaceDao;
+    private final CommonCodeService commonCodeService;
 
     @Autowired
-    public WorkingPlaceService(WorkingPlaceDao workingPlaceDao) {
+    public WorkingPlaceService(WorkingPlaceDao workingPlaceDao, CommonCodeService commonCodeService) {
         this.workingPlaceDao = workingPlaceDao;
+        this.commonCodeService = commonCodeService;
     }
 
 
@@ -39,6 +42,11 @@ public class WorkingPlaceService implements AbstractService< WorkingPlace, Long 
             put = {@CachePut( value = "workingPlace", key = "#workingPlace.id" )} )
     public WorkingPlace persist(WorkingPlace workingPlace) {
         workingPlace.setCode(workingPlace.getCode().toUpperCase());
+        workingPlace.setLandOne(commonCodeService.commonMobileNumberLengthValidator(workingPlace.getEmailOne()));
+        workingPlace.setLandTwo(commonCodeService.commonMobileNumberLengthValidator(workingPlace.getEmailTwo()));
+        workingPlace.setLandThree(commonCodeService.commonMobileNumberLengthValidator(workingPlace.getLandThree()));
+        workingPlace.setLandFour(commonCodeService.commonMobileNumberLengthValidator(workingPlace.getLandFour()));
+        workingPlace.setFaxNumber(commonCodeService.commonMobileNumberLengthValidator(workingPlace.getFaxNumber()));
         return workingPlaceDao.save(workingPlace);
     }
 

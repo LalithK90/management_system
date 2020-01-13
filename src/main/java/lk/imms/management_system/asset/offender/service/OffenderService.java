@@ -1,12 +1,12 @@
 package lk.imms.management_system.asset.offender.service;
 
 import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
+import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.offender.dao.OffenderDao;
 import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
-import lk.imms.management_system.asset.petitionAddOffender.service.PetitionOffenderService;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @CacheConfig( cacheNames = {"offender"} ) // tells Spring where to store cache for this class
@@ -25,19 +28,19 @@ public class OffenderService implements AbstractService< Offender, Long > {
     private final OffenderCallingNameService offenderCallingNameService;
     private final OffenderFilesService offenderFilesService;
     private final GuardianService guardianService;
-    private final PetitionOffenderService petitionOffenderService;
+    private final CommonCodeService commonCodeService;
 
     @Autowired
     public OffenderService(OffenderDao offenderDao, ContraveneService contraveneService,
                            OffenderCallingNameService offenderCallingNameService,
                            OffenderFilesService offenderFilesService, GuardianService guardianService,
-                           PetitionOffenderService petitionOffenderService) {
+                           CommonCodeService commonCodeService) {
         this.offenderDao = offenderDao;
         this.contraveneService = contraveneService;
         this.offenderCallingNameService = offenderCallingNameService;
         this.offenderFilesService = offenderFilesService;
         this.guardianService = guardianService;
-        this.petitionOffenderService = petitionOffenderService;
+        this.commonCodeService = commonCodeService;
     }
 
     @Override
@@ -61,6 +64,10 @@ public class OffenderService implements AbstractService< Offender, Long > {
     @Caching( evict = {@CacheEvict( value = "offender", allEntries = true )},
             put = {@CachePut( value = "offender", key = "#offender.id" )} )
     public Offender persist(Offender offender) {
+        offender.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(offender.getMobileOne()));
+        offender.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(offender.getMobileTwo()));
+        offender.setLand(commonCodeService.commonMobileNumberLengthValidator(offender.getLand()));
+
         return offenderDao.save(offender);
     }
 
@@ -76,7 +83,6 @@ public class OffenderService implements AbstractService< Offender, Long > {
     @Override
     @Cacheable
     public List< Offender > search(Offender offender) {
-        Offender searchOffender = new Offender();
         //all offenders which all provided search, collect to this list
         List< Offender > offenders = new ArrayList<>();
 
@@ -97,105 +103,157 @@ public class OffenderService implements AbstractService< Offender, Long > {
         }
         //id
         if ( offender.getId() != null ) {
-            searchOffender.setId(offender.getId());
-            offenders.addAll(searchAnyAttributeOffender(searchOffender));
-            searchOffender.setId(null);
+            offenders.add(offenderDao.getOne(offender.getId()));
         }
         //registration number
         if ( offender.getOffenderRegisterNumber() != null ) {
-            searchOffender.setOffenderRegisterNumber(offender.getOffenderRegisterNumber());
-            offenders.addAll(searchAnyAttributeOffender(searchOffender));
-            searchOffender.setOffenderRegisterNumber(null);
+            offenders.add(offenderDao.findByOffenderRegisterNumber(offender.getOffenderRegisterNumber()));
         }
         //name sinhala
         if ( offender.getNameSinhala() != null ) {
-            commonSearchName(searchOffender, offender, offenders);
+            //sinhala
+            offenders.addAll(commonSearchName(offender));
         }
         //name tamil
         if ( offender.getNameTamil() != null ) {
-            commonSearchName(searchOffender, offender, offenders);
+            //tamil
+            offenders.addAll(commonSearchName(offender));
         }
         //name english
         if ( offender.getNameEnglish() != null ) {
-            commonSearchName(searchOffender, offender, offenders);
+            //english
+            offenders.addAll(commonSearchName(offender));
         }
         //nic
         if ( offender.getNic() != null ) {
-            searchOffender.setNic(offender.getNic());
-            offenders.addAll(searchAnyAttributeOffender(searchOffender));
-            searchOffender.setNic(null);
+            offenders.add(offenderDao.findByNic(offender.getNic()));
         }
         //passport
         if ( offender.getPassportNumber() != null ) {
-            searchOffender.setPassportNumber(offender.getPassportNumber());
-            offenders.addAll(searchAnyAttributeOffender(searchOffender));
-            searchOffender.setPassportNumber(null);
+            offenders.add(offenderDao.findByPassportNumber(offender.getPassportNumber()));
         }
         //driving licence
         if ( offender.getDrivingLicenceNumber() != null ) {
-            searchOffender.setDrivingLicenceNumber(offender.getDrivingLicenceNumber());
-            offenders.addAll(searchAnyAttributeOffender(searchOffender));
-            searchOffender.setDrivingLicenceNumber(null);
+            offenders.add(offenderDao.findByDrivingLicenceNumber(offender.getDrivingLicenceNumber()));
         }
         //mobile one
         if ( offender.getMobileOne() != null ) {
-            commonSearchMobile(searchOffender, offenders, offender.getMobileOne());
+            offenders.addAll(commonSearchMobile(offender));
         }
         //mobile two
         if ( offender.getMobileTwo() != null ) {
-            commonSearchMobile(searchOffender, offenders, offender.getMobileTwo());
+            offenders.addAll(commonSearchMobile(offender));
         }
         //land
         if ( offender.getLand() != null ) {
-            commonSearchMobile(searchOffender, offenders, offender.getLand());
+            offenders.addAll(commonSearchMobile(offender));
         }
         //email
         if ( offender.getEmail() != null ) {
-            searchOffender.setEmail(offender.getEmail());
-            offenders.addAll(searchAnyAttributeOffender(searchOffender));
-            searchOffender.setEmail(null);
+            offenders.add(offenderDao.findByEmail(offender.getEmail()));
         }
         //description
         if ( offender.getDescription() != null ) {
-            searchOffender.setDescription(offender.getDescription());
-            offenders.addAll(searchAnyAttributeOffender(searchOffender));
-            searchOffender.setDescription(null);
+            offenders.addAll(offenderDao.findByDescription(offender.getDescription()));
         }
         //guardian list
         if ( offender.getGuardians() != null ) {
             offenders.addAll(guardianService.findByOffendersUsingGuardian(offender.getGuardians()));
         }
-        return searchAnyAttributeOffender(searchOffender);
+        return offenders;
     }
 
     //this used to find offender using any name in every were in db
-    private void commonSearchName(Offender searchOffender, Offender offender, List< Offender > offenders) {
+    private List< Offender > commonSearchName(Offender offender) {
+        List< Offender > offenders = new ArrayList<>();
         //sinhala
-        searchOffender.setNameSinhala(offender.getNameSinhala());
-        offenders.addAll(searchAnyAttributeOffender(searchOffender));
-        searchOffender.setNameSinhala(null);
+        if ( offender.getNameSinhala() != null ) {
+            offenders.addAll(offenderDao.findByNameSinhala(offender.getNameSinhala()));
+            offenders.addAll(offenderDao.findByNameTamil(offender.getNameSinhala()));
+            offenders.addAll(offenderDao.findByNameEnglish(offender.getNameSinhala()));
+            offenders
+                    .stream()
+                    .collect(Collectors
+                                     .groupingBy(Function.identity(), Collectors.counting()))   // perform group by
+                    // count
+                    .entrySet().stream()
+                    .filter(e -> e.getValue() > 1L)                                        // using take only those
+                    // element whose count is greater than 1
+                    .map(Map.Entry::getKey)                                                  // using map take only
+                    // value
+                    .collect(Collectors.toList());
+        }
         //tamil
-        searchOffender.setNameSinhala(offender.getNameTamil());
-        offenders.addAll(searchAnyAttributeOffender(searchOffender));
-        searchOffender.setNameSinhala(null);
+        if ( offender.getNameTamil() != null ) {
+            offenders.addAll(offenderDao.findByNameSinhala(offender.getNameTamil()));
+            offenders.addAll(offenderDao.findByNameTamil(offender.getNameTamil()));
+            offenders.addAll(offenderDao.findByNameEnglish(offender.getNameTamil()));
+            offenders
+                    .stream()
+                    .collect(Collectors
+                                     .groupingBy(Function.identity(), Collectors.counting()))   // perform group by
+                    // count
+                    .entrySet().stream()
+                    .filter(e -> e.getValue() > 1L)                                        // using take only those
+                    // element whose count is greater than 1
+                    .map(Map.Entry::getKey)                                                  // using map take only
+                    // value
+                    .collect(Collectors.toList());
+        }
         //english
-        searchOffender.setNameSinhala(offender.getNameEnglish());
-        offenders.addAll(searchAnyAttributeOffender(searchOffender));
-        searchOffender.setNameSinhala(null);
+        if ( offender.getNameEnglish() != null ) {
+            offenders.addAll(offenderDao.findByNameSinhala(offender.getNameEnglish()));
+            offenders.addAll(offenderDao.findByNameTamil(offender.getNameEnglish()));
+            offenders.addAll(offenderDao.findByNameEnglish(offender.getNameEnglish()));
+            offenders
+                    .stream()
+                    .collect(Collectors
+                                     .groupingBy(Function.identity(), Collectors.counting()))   // perform group by
+                    // count
+                    .entrySet().stream()
+                    .filter(e -> e.getValue() > 1L)                                        // using take only those
+                    // element whose count is greater than 1
+                    .map(Map.Entry::getKey)                                                  // using map take only
+                    // value
+                    .collect(Collectors.toList());
+        }
+        return offenders;
     }
 
     //this use any contact number using find
-    private void commonSearchMobile(Offender searchOffender, List< Offender > offenders, String mobileNumber) {
-        searchOffender.setMobileOne(mobileNumber);
-        offenders.addAll(searchAnyAttributeOffender(searchOffender));
-        searchOffender.setMobileOne(null);
-        searchOffender.setMobileTwo(mobileNumber);
-        offenders.addAll(searchAnyAttributeOffender(searchOffender));
-        searchOffender.setMobileTwo(null);
-        searchOffender.setLand(mobileNumber);
-        offenders.addAll(searchAnyAttributeOffender(searchOffender));
-        searchOffender.setLand(null);
-
+    private List< Offender > commonSearchMobile(Offender offender) {
+        List< Offender > offenders = new ArrayList<>();
+        //mobile one
+        if ( offender.getMobileOne() != null ) {
+            final String mobileFinal = commonCodeService.commonMobileNumberLengthValidator(offender.getMobileOne());
+            offenders.addAll(offenderDao.findByMobileOne(mobileFinal));
+            offenders.addAll(offenderDao.findByMobileTwo(mobileFinal));
+            offenders.addAll(offenderDao.findByLand(mobileFinal));
+            offenders.stream()
+                    .filter(offender1 -> offender1.getMobileOne().equals(mobileFinal))
+                    .collect(Collectors.toList());
+        }
+        //mobile two
+        if ( offender.getMobileTwo() != null ) {
+            final String mobileFinal = commonCodeService.commonMobileNumberLengthValidator(offender.getMobileTwo());
+            offenders.addAll(offenderDao.findByMobileOne(mobileFinal));
+            offenders.addAll(offenderDao.findByMobileTwo(mobileFinal));
+            offenders.addAll(offenderDao.findByLand(mobileFinal));
+            offenders.stream()
+                    .filter(offender1 -> offender1.getMobileOne().equals(mobileFinal))
+                    .collect(Collectors.toList());
+        }
+        //mobile land
+        if ( offender.getLand() != null ) {
+            final String landFinal = commonCodeService.commonMobileNumberLengthValidator(offender.getLand());
+            offenders.addAll(offenderDao.findByMobileOne(landFinal));
+            offenders.addAll(offenderDao.findByMobileTwo(landFinal));
+            offenders.addAll(offenderDao.findByLand(landFinal));
+            offenders.stream()
+                    .filter(offender1 -> offender1.getLand().equals(landFinal))
+                    .collect(Collectors.toList());
+        }
+        return offenders;
     }
 
     //using dao search employee
@@ -207,7 +265,6 @@ public class OffenderService implements AbstractService< Offender, Long > {
         Example< Offender > offenderExample = Example.of(offender, matcher);
         return offenderDao.findAll(offenderExample);
     }
-
 
     public Offender getLastOne() {
         return offenderDao.findFirstByOrderByIdDesc();
