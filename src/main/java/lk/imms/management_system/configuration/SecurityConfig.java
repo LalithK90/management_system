@@ -17,7 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final String[] ALL_PERMIT_URL = {"/favicon.ico", "/img/**", "/css/**", "/js/**", "/webjars/**",
+    private final String[] ALL_PERMIT_URL = {"/static/favicon.ico", "/img/**", "/css/**", "/js/**", "/webjars/**",
             "/actuator/**", "/login", "/select/**"};
 
     @Bean

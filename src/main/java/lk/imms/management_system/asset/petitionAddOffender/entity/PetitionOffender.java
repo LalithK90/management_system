@@ -5,8 +5,6 @@ import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,5 +62,12 @@ public class PetitionService implements AbstractService< Petition, Long > {
     @Cacheable
     public Petition getLastOne() {
         return petitionDao.findFirstByOrderByIdDesc();
+    }
+
+    @Cacheable
+    public List< Petition > searchAnyParameter(Petition petition) {
+        List< Petition > petitions = new ArrayList<>();
+
+        return petitions;
     }
 }

@@ -2,6 +2,7 @@ package lk.imms.management_system.asset.commonAsset.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UiController {
@@ -25,4 +26,8 @@ public class UiController {
         return "fragments/unicodeSinhala";
     }
 
+ /*   @RequestMapping( "favicon.ico" )
+    String favicon() {
+        return "myfavicon.png";
+    }*/
 }

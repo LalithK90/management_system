@@ -21,6 +21,9 @@
     <!--Petition Priority-->
     <attr sel="#petitionPriority" th:text="${petition.petitionPriority.petitionPriority}"/>
 
+    <!--petition State-->
+    <attr sel="#petitionState" th:each="petitionState, iStat : ${petition.petitionStates}" th:if="${iStat.last}" th:text="${petitionState.petitionStateType.petitionStateType}"/>
+
     <!--Petition Working Place-->
     <attr sel="#workingPlace" th:text="${petition.workingPlace.name}"/>
 

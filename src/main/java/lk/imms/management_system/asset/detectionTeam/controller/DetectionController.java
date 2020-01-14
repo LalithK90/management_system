@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.detectionTeam.controller;
 
+import lk.imms.management_system.asset.commonAsset.entity.Message;
 import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamMember;
@@ -7,13 +8,15 @@ import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamNote;
 import lk.imms.management_system.asset.detectionTeam.entity.Enum.DetectionTeamMemberRole;
 import lk.imms.management_system.asset.detectionTeam.entity.Enum.DetectionTeamStatus;
 import lk.imms.management_system.asset.detectionTeam.entity.Enum.TeamAcceptation;
-import lk.imms.management_system.asset.detectionTeam.service.DetectionTeamMemberService;
 import lk.imms.management_system.asset.detectionTeam.service.DetectionTeamService;
-import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
+import lk.imms.management_system.asset.petition.entity.PetitionState;
 import lk.imms.management_system.asset.petition.service.PetitionService;
+import lk.imms.management_system.asset.petition.service.PetitionStateService;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
+import lk.imms.management_system.util.service.EmailService;
 import lk.imms.management_system.util.service.MakeAutoGenerateNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,29 +34,28 @@ import java.util.stream.Collectors;
 @RequestMapping( "/detection" )
 public class DetectionController {
     private final DetectionTeamService detectionTeamService;
-    private final DetectionTeamMemberService detectionTeamMemberService;
-    private final MinutePetitionService minutePetitionService;
     private final PetitionService petitionService;
     private final UserService userService;
     private final CommonCodeService commonCodeService;
     private final DateTimeAgeService dateTimeAgeService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
+    private final PetitionStateService petitionStateService;
+    private final EmailService emailService;
 
     @Autowired
-    public DetectionController(DetectionTeamService detectionTeamService,
-                               DetectionTeamMemberService detectionTeamMemberService,
-                               MinutePetitionService minutePetitionService, PetitionService petitionService,
+    public DetectionController(DetectionTeamService detectionTeamService, PetitionService petitionService,
                                UserService userService, CommonCodeService commonCodeService,
                                DateTimeAgeService dateTimeAgeService,
-                               MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+                               MakeAutoGenerateNumberService makeAutoGenerateNumberService,
+                               PetitionStateService petitionStateService, EmailService emailService) {
         this.detectionTeamService = detectionTeamService;
-        this.detectionTeamMemberService = detectionTeamMemberService;
-        this.minutePetitionService = minutePetitionService;
         this.petitionService = petitionService;
         this.userService = userService;
         this.commonCodeService = commonCodeService;
         this.dateTimeAgeService = dateTimeAgeService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+        this.petitionStateService = petitionStateService;
+        this.emailService = emailService;
     }
 
 
@@ -78,6 +80,7 @@ public class DetectionController {
         model.addAttribute("teamAcceptations", TeamAcceptation.values());
         model.addAttribute("detectionTeamStatuses", DetectionTeamStatus.values());
         model.addAttribute("detectionTeam", detectionTeam);
+        model.addAttribute("petitionNumber", detectionTeam.getPetition().getPetitionNumber());
     }
 
 
@@ -133,7 +136,7 @@ public class DetectionController {
                     break;
                 }
             }
-            if (!inChargeInOrExit ){
+            if ( !inChargeInOrExit ) {
                 commonCode(model, detectionTeam);
                 return "detectionTeam/addDetectionTeam";
             }
@@ -173,6 +176,14 @@ public class DetectionController {
         }
 
         detectionTeam.setDetectionTeamMembers(detectionTeamMemberList);
+//petition state change to detect
+        if ( detectionTeam.getId() != null ) {
+            PetitionState petitionState = new PetitionState();
+            petitionState.setPetition(detectionTeam.getPetition());
+            petitionState.setPetitionStateType(PetitionStateType.TODETECT);
+            petitionStateService.persist(petitionState);
+        }
+
         DetectionTeam persistDetectionTeam = detectionTeamService.persist(detectionTeam);
 //if detection team status success need to add an offender for relevant petition hence
 
@@ -192,6 +203,31 @@ public class DetectionController {
         }
 //todo -> while on saving all team member should be informed using email
 
+    }
+
+    //to send message from to frontend
+    @GetMapping( "/message/{id}" )
+    public String messageFrom(@PathVariable Long id, Model model) {
+        DetectionTeam detectionTeam = detectionTeamService.findById(id);
+        model.addAttribute("detectionTeam", detectionTeam);
+        Message message = new Message();
+        message.setId(detectionTeam.getId());
+        model.addAttribute("message", message);
+        model.addAttribute("detectionTeamMembers", detectionTeam.getDetectionTeamMembers());
+        return "detectionTeam/sendMessageDetectionTeam";
+    }
+
+    //send message to team members
+    @PostMapping( "message" )
+    public String sendMessage(@ModelAttribute Message message) {
+        DetectionTeam detectionTeam = detectionTeamService.findById(message.getId());
+        String email = "";
+        for ( DetectionTeamMember detectionTeamMember : detectionTeam.getDetectionTeamMembers() ) {
+            email += "," + detectionTeamMember.getEmployee().getOfficeEmail();
+        }
+        String subject = "Petition Number - " + detectionTeam.getPetition().getPetitionNumber() + "Detection Team ";
+        emailService.sendEmail(email, subject, message.getMessage());
+        return "redirect:/detection";
     }
 
     @GetMapping( "/remove/{id}" )

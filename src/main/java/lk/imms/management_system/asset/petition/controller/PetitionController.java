@@ -1,7 +1,9 @@
 package lk.imms.management_system.asset.petition.controller;
 
 
+import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
+import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.minutePetition.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
@@ -19,6 +21,9 @@ import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.asset.petitioner.service.PetitionerService;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.UserService;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.District;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.WorkingPlaceType;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.service.MakeAutoGenerateNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,13 +57,14 @@ public class PetitionController {
     private final UserService userService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
     private final CommonCodeService commonCodeService;
+    private final ContraveneService contraveneService;
 
     @Autowired
     public PetitionController(PetitionService petitionService, MinutePetitionFilesService minutePetitionFilesService,
                               PetitionStateService petitionStateService, MinutePetitionService minutePetitionService,
                               PetitionerService petitionerService, UserService userService,
                               MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                              CommonCodeService commonCodeService) {
+                              CommonCodeService commonCodeService, ContraveneService contraveneService) {
         this.petitionService = petitionService;
         this.minutePetitionFilesService = minutePetitionFilesService;
         this.petitionStateService = petitionStateService;
@@ -67,6 +73,7 @@ public class PetitionController {
         this.userService = userService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
         this.commonCodeService = commonCodeService;
+        this.contraveneService = contraveneService;
     }
 
     // Common things for petition add and update
@@ -107,6 +114,14 @@ public class PetitionController {
                                    })
                                    .collect(Collectors.toList()));*/
         model.addAttribute("petitions", petitions);
+       /* PetitionState petitionState = null;
+        for ( Petition petition : petitions ) {
+            petitionState = petition.getPetitionStates().get(petition.getPetitionStates().size() - 1);
+        }
+
+        if ( petitionState != null ) {
+            model.addAttribute("petitionState",petitionState.getPetitionStateType().getPetitionStateType() );
+        }*/
         return "petition/petition";
     }
 
@@ -231,6 +246,11 @@ public class PetitionController {
         model.addAttribute("petition", petition);
         model.addAttribute("petitionTypes", PetitionType.values());
         model.addAttribute("petitionPriorities", PetitionPriority.values());
+        model.addAttribute("workingPlaceTypes", WorkingPlaceType.values());
+        model.addAttribute("provinces", Province.values());
+        model.addAttribute("districts", District.values());
+        model.addAttribute("civilStatus", CivilStatus.values());
+        model.addAttribute("contravenes", contraveneService.findAll());
         return "petition/petitionSearch";
     }
 
@@ -247,6 +267,7 @@ public class PetitionController {
             result.addError(objectError);
             return commonCodeForSearch(model, petition);
         }
-        return commonCodeFromPetitionList(model, petitionService.search(petition));
+
+        return commonCodeFromPetitionList(model, petitionService.searchAnyParameter(petition));
     }
 }

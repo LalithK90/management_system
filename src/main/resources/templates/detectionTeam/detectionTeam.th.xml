@@ -9,8 +9,11 @@
     <attr sel="#number" th:text="${detectionTeam.number}"/>
     <attr sel="#name" th:text="${detectionTeam.name}"/>
     <attr sel="#createdDate" th:text="${#temporals.format(detectionTeam.createdAt, 'dd-MM-yyyy HH:mm')}"/>
-
+    <!--team view-->
     <attr sel="#detectionTeamView" th:href="${'/detection/' + detectionTeam.id}"/>
+    <!--Team Message-->
+    <attr sel="#detectionTeamMessage" th:href="${'/detection/message/' + detectionTeam.id}"/>
+    <!--team edit-->
     <attr sel="#detectionTeamEdit" th:href="${'/detection/edit/' + detectionTeam.id}"/>
     <!--Petition Create minute-->
     <attr sel="#petitionMinute" th:href="${'/minutePetition/' + detectionTeam.petition.id}"/>

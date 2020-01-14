@@ -4,8 +4,11 @@ import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.offender.controller.OffenderRestController;
 import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.offender.service.OffenderService;
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.Petition;
+import lk.imms.management_system.asset.petition.entity.PetitionState;
 import lk.imms.management_system.asset.petition.service.PetitionService;
+import lk.imms.management_system.asset.petition.service.PetitionStateService;
 import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
 import lk.imms.management_system.asset.petitionAddOffender.service.PetitionOffenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +30,17 @@ public class PetitionOffenderController {
     private final PetitionService petitionService;
     private final ContraveneService contraveneService;
     private final OffenderService offenderService;
+    private final PetitionStateService petitionStateService;
 
     @Autowired
     public PetitionOffenderController(PetitionOffenderService petitionOffenderService,
                                       PetitionService petitionService, ContraveneService contraveneService,
-                                      OffenderService offenderService) {
+                                      OffenderService offenderService, PetitionStateService petitionStateService) {
         this.petitionOffenderService = petitionOffenderService;
         this.petitionService = petitionService;
         this.contraveneService = contraveneService;
         this.offenderService = offenderService;
+        this.petitionStateService = petitionStateService;
     }
 
     //a common thing to add an offender to petition
@@ -116,6 +121,13 @@ public class PetitionOffenderController {
                 newId++;
             }
         }
+//change petition state to detected
+        if ( petitionOffender.getId() != null ) {
+            PetitionState petitionState = new PetitionState();
+            petitionState.setPetition(petitionOffender.getPetition());
+            petitionState.setPetitionStateType(PetitionStateType.DETECTED);
+            petitionStateService.persist(petitionState);
+        }
         return "redirect:/petitionOffender/contraveneAdd/" + petitionOffender.getPetition().getId();
     }
 
@@ -134,19 +146,19 @@ public class PetitionOffenderController {
     public String saveContraveneForOffender(@ModelAttribute( "petition" ) Petition petition,
                                             BindingResult result, Model model) {
 
-        System.out.println("petition offender "+petition.toString());
-        petition.getPetitionOffenders().forEach(System.out::println);
         boolean notContravene = false;
         Petition beforePersistPetition = new Petition();
 
-        List<PetitionOffender> petitionOffenders = new ArrayList<>();
+        List< PetitionOffender > petitionOffenders = new ArrayList<>();
 
-        PetitionOffender beforePersistPetitionOffender ;
+        PetitionOffender beforePersistPetitionOffender;
 
-        for ( PetitionOffender petitionOffender : petition.getPetitionOffenders()) {
+        for ( PetitionOffender petitionOffender : petition.getPetitionOffenders() ) {
             notContravene = petitionOffender.getContravenes().isEmpty();
             petition = petitionOffender.getPetition();
-            beforePersistPetitionOffender = petitionOffenderService.findByPetitionAndOffender(petitionOffender.getPetition(), petitionOffender.getOffender());
+            beforePersistPetitionOffender =
+                    petitionOffenderService.findByPetitionAndOffender(petitionOffender.getPetition(),
+                                                                      petitionOffender.getOffender());
             beforePersistPetitionOffender.setContravenes(petitionOffender.getContravenes());
             petitionOffenders.add(beforePersistPetitionOffender);
 
