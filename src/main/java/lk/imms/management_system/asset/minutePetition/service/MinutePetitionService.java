@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.util.ArrayList;
@@ -22,13 +23,10 @@ import java.util.stream.Collectors;
 @CacheConfig( cacheNames = {"minutePetition"} ) // tells Spring where to store cache for this class
 public class MinutePetitionService implements AbstractService< MinutePetition, Long > {
     private final MinutePetitionDao minutePetitionDao;
-    private final MinutePetitionFilesService minutePetitionFilesService;
 
     @Autowired
-    public MinutePetitionService(MinutePetitionDao minutePetitionDao,
-                                 MinutePetitionFilesService minutePetitionFilesService) {
+    public MinutePetitionService(MinutePetitionDao minutePetitionDao) {
         this.minutePetitionDao = minutePetitionDao;
-        this.minutePetitionFilesService = minutePetitionFilesService;
     }
 
     @Override
@@ -70,25 +68,6 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
 
     @Cacheable
     public List< MinutePetition > findByPetition(Petition petition) {
-        List< MinutePetition > minutePetitions = new ArrayList<>();
-        //taken all minute petition according to the petition and
-        // taken minute petition files belong to minute petition
-        for ( MinutePetition minutePetition : minutePetitionDao.findByPetition(petition) ) {
-            List< FileInfo > fileInfos = minutePetitionFilesService.findByMinutePetition(minutePetition)
-                    .stream()
-                    .map(PetitionFiles -> {
-                        String filename = PetitionFiles.getName();
-                        String url = MvcUriComponentsBuilder
-                                .fromMethodName(PetitionController.class, "downloadFile", PetitionFiles.getNewId())
-                                .build()
-                                .toString();
-                        return new FileInfo(filename, PetitionFiles.getCreatedAt(), url);
-                    })
-                    .collect(Collectors.toList());
-            minutePetition.setFileInfos(fileInfos);
-            minutePetitions.add(minutePetition);
-        }
-
-        return minutePetitions;
+        return minutePetitionDao.findByPetition(petition);
     }
 }

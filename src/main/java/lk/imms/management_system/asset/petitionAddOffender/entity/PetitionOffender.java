@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
-@ToString
 public class PetitionOffender extends AuditEntity {
 
     @ManyToOne

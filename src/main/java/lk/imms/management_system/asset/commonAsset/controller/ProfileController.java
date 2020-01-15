@@ -10,9 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -28,20 +26,20 @@ public class ProfileController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @GetMapping(value = "/profile")
     public String userProfile(Model model, Principal principal) {
         model.addAttribute("addStatus", true);
         model.addAttribute("employeeDetail", userService.findByUserName(principal.getName()).getEmployee());
         return "employee/employee-detail";
     }
 
-    @RequestMapping(value = "/passwordChange", method = RequestMethod.GET)
+    @GetMapping(value = "/passwordChange")
     public String passwordChangeForm(Model model) {
         model.addAttribute("pswChange", new PasswordChange());
         return "login/passwordChange";
     }
 
-    @RequestMapping(value = "/passwordChange", method = RequestMethod.POST)
+    @PostMapping(value = "/passwordChange")
     public String passwordChange(@Valid @ModelAttribute PasswordChange passwordChange, Model model, BindingResult result) {
         User user = userService.findById(userService.findByUserIdByUserName(SecurityContextHolder.getContext().getAuthentication().getName()));
         System.out.println(passwordChange.toString());

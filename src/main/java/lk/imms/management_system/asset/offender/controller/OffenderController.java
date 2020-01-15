@@ -73,7 +73,7 @@ public class OffenderController {
     }
 
     //Send on offender details
-    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/{id}")
     public String offenderView(@PathVariable( "id" ) Long id, Model model) {
         Offender offender = offenderService.findById(id);
         model.addAttribute("offender", offender);
@@ -83,7 +83,7 @@ public class OffenderController {
     }
 
     //Send offender data edit
-    @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/edit/{id}" )
     public String editOffenderFrom(@PathVariable( "id" ) Long id, Model model) {
         Offender offender = offenderService.findById(id);
         model.addAttribute("offender", offender);
@@ -95,7 +95,7 @@ public class OffenderController {
     }
 
     //Send an offender add from
-    @RequestMapping( value = {"/add"}, method = RequestMethod.GET )
+    @GetMapping( value = {"/add"})
     public String offenderAddFrom(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("offender", new Offender());
@@ -105,7 +105,7 @@ public class OffenderController {
     }
 
     //Offender add and update
-    @RequestMapping( value = {"/add", "/update"}, method = RequestMethod.POST )
+    @PostMapping( value = {"/add", "/update"})
     public String addOffender(@Valid @ModelAttribute( "offender" ) Offender offender, BindingResult result,
                               Model model) {
         //get current login user
@@ -164,6 +164,9 @@ public class OffenderController {
 
         // System.out.println("after set guardian and calling name " + offender.toString());
         try {
+            offender.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(offender.getMobileOne()));
+            offender.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(offender.getMobileTwo()));
+            offender.setLand(commonCodeService.commonMobileNumberLengthValidator(offender.getLand()));
             //after file save offender and
             Offender offender1 = offenderService.persist(offender);
             //offender file is not
@@ -207,7 +210,7 @@ public class OffenderController {
     }
 
     //If need to offender {but not applicable for this }
-    @RequestMapping( value = "/remove/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/remove/{id}" )
     public String removeOffender(@PathVariable Long id) {
        // offenderService.delete(id);
         return "redirect:/offender";
@@ -224,7 +227,7 @@ public class OffenderController {
     }
 
     //To search offender any giving offender parameter
-    @RequestMapping( value = "/search", method = RequestMethod.POST )
+    @PostMapping( value = "/search" )
     public String search(@ModelAttribute( "offender" ) Offender offender, Model model) {
 
         //final stage before send data to frontend

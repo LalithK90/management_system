@@ -22,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
 @JsonFilter("WorkingPlace")
+@ToString
 public class WorkingPlace extends AuditEntity {
 
     @NotNull( message = "Name is required" )
@@ -42,7 +43,7 @@ public class WorkingPlace extends AuditEntity {
     @Column( nullable = false )
     private String address;
 
-    @Size( max = 10, min = 9, message = "Land number length should be contained 10 or 9 \n At least one phone number " +
+    @Size( max = 10, message = "Land number length should be contained 10 or 9 \n At least one phone number " +
             "should be in on working place" )
     private String landOne;
 

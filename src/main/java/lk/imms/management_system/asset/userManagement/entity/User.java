@@ -19,7 +19,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @JsonIgnoreProperties(value = "createdDate", allowGetters = true)
 public class User {
     @Id

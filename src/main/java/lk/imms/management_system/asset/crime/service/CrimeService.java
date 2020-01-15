@@ -2,6 +2,7 @@ package lk.imms.management_system.asset.crime.service;
 
 import lk.imms.management_system.asset.crime.dao.CrimeDao;
 import lk.imms.management_system.asset.crime.entity.Crime;
+import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = "crime")
+@CacheConfig( cacheNames = "crime" )
 public class CrimeService implements AbstractService< Crime, Long > {
     private final CrimeDao crimeDao;
 
@@ -36,14 +37,13 @@ public class CrimeService implements AbstractService< Crime, Long > {
     @Override
     @Caching( evict = {@CacheEvict( value = "crime", allEntries = true )},
             put = {@CachePut( value = "crime", key = "#crime.id" )} )
-    public Crime persist(Crime crime)
-    {
+    public Crime persist(Crime crime) {
         //todo -> find fact before save
         return crimeDao.save(crime);
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+    @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
         //todo -> find fact what are the criteria before the delete
         crimeDao.deleteById(id);
@@ -59,5 +59,10 @@ public class CrimeService implements AbstractService< Crime, Long > {
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
         Example< Crime > crimeExample = Example.of(crime, matcher);
         return crimeDao.findAll(crimeExample);
+    }
+
+    @Cacheable
+    public List< Crime > findByDetectionTeam(DetectionTeam detectionTeam) {
+        return crimeDao.findByDetectionTeam(detectionTeam);
     }
 }

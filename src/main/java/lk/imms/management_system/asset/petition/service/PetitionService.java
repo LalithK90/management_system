@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.petition.service;
 
+import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
 import lk.imms.management_system.asset.petition.dao.PetitionDao;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.interfaces.AbstractService;
@@ -31,6 +32,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     @Override
     @Cacheable( "petition" )
     public Petition findById(Long id) {
+
         return petitionDao.getOne(id);
     }
 
@@ -66,8 +68,12 @@ public class PetitionService implements AbstractService< Petition, Long > {
 
     @Cacheable
     public List< Petition > searchAnyParameter(Petition petition) {
-        List< Petition > petitions = new ArrayList<>();
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example< Petition > petitionExample = Example.of(petition, matcher);
 
-        return petitions;
+        return petitionDao.findAll(petitionExample);
     }
 }

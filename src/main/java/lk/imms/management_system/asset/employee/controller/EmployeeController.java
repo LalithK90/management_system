@@ -71,22 +71,6 @@ public class EmployeeController {
         return "employee/addEmployee";
     }
 
-    //To get files form the database
-    private void employeeFiles(Employee employee, Model model) {
-        List< FileInfo > fileInfos = employeeFilesService.findByEmployee(employee)
-                .stream()
-                .map(EmployeeFiles -> {
-                    String filename = EmployeeFiles.getName();
-                    String url = MvcUriComponentsBuilder
-                            .fromMethodName(EmployeeController.class, "downloadFile", EmployeeFiles.getNewId())
-                            .build()
-                            .toString();
-                    return new FileInfo(filename, EmployeeFiles.getCreatedAt(), url);
-                })
-                .collect(Collectors.toList());
-        model.addAttribute("files", fileInfos);
-    }
-
     //When scr called file will send to
     @GetMapping( "/file/{filename}" )
     public ResponseEntity< byte[] > downloadFile(@PathVariable( "filename" ) String filename) {
@@ -104,28 +88,28 @@ public class EmployeeController {
     }
 
     //Send on employee details
-    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/{id}")
     public String employeeView(@PathVariable( "id" ) Long id, Model model) {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employeeDetail", employee);
         model.addAttribute("addStatus", false);
-        employeeFiles(employee, model);
+        model.addAttribute("files", employeeFilesService.employeeFileDownloadLinks(employee));
         return "employee/employee-detail";
     }
 
     //Send employee data edit
-    @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/edit/{id}" )
     public String editEmployeeForm(@PathVariable( "id" ) Long id, Model model) {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
         model.addAttribute("newEmployee", employee.getPayRoleNumber());
         model.addAttribute("addStatus", false);
-        employeeFiles(employee, model);
+        model.addAttribute("files", employeeFilesService.employeeFileDownloadLinks(employee));
         return commonThings(model);
     }
 
     //Send an employee add form
-    @RequestMapping( value = {"/add"}, method = RequestMethod.GET )
+    @GetMapping( value = {"/add"} )
     public String employeeAddForm(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("employee", new Employee());
@@ -133,7 +117,7 @@ public class EmployeeController {
     }
 
     //Employee add and update
-    @RequestMapping( value = {"/add", "/update"}, method = RequestMethod.POST )
+    @PostMapping( value = {"/add", "/update"} )
     public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result, Model model,
                               RedirectAttributes redirectAttributes) {
 
@@ -172,6 +156,9 @@ public class EmployeeController {
 
             // Save all Files to database
             employeeFilesService.persist(storedFile);
+            employee.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(employee.getMobileOne()));
+            employee.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(employee.getMobileTwo()));
+            employee.setLand(commonCodeService.commonMobileNumberLengthValidator(employee.getLand()));
             //after save employee files and save employee
             employeeService.persist(employee);
             return "redirect:/employee";
@@ -187,14 +174,14 @@ public class EmployeeController {
     }
 
     //If need to employee {but not applicable for this }
-    @RequestMapping( value = "/remove/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/remove/{id}")
     public String removeEmployee(@PathVariable Long id) {
         employeeService.delete(id);
         return "redirect:/employee";
     }
 
     //To search employee any giving employee parameter
-    @RequestMapping( value = "/search", method = RequestMethod.GET )
+    @GetMapping( value = "/search" )
     public String search(Model model, Employee employee) {
         model.addAttribute("employeeDetail", employeeService.search(employee));
         return "employee/employee-detail";
@@ -205,7 +192,7 @@ public class EmployeeController {
 //----> EmployeeWorkingPlace - details management - start <----//
 
     //Send form to add working place before find employee
-    @RequestMapping( value = "/workingPlace", method = RequestMethod.GET )
+    @GetMapping( value = "/workingPlace")
     public String addEmployeeWorkingPlaceForm(Model model) {
         model.addAttribute("employee", new Employee());
         model.addAttribute("employeeDetailShow", false);
@@ -213,7 +200,7 @@ public class EmployeeController {
     }
 
     //Send a searched employee to add working place
-    @RequestMapping( value = "/workingPlace", method = RequestMethod.POST )
+    @PostMapping( value = "/workingPlace")
     public String addWorkingPlaceEmployeeDetails(@ModelAttribute( "employee" ) Employee employee, Model model) {
 
         List< Employee > employees = employeeService.search(employee);
@@ -221,7 +208,7 @@ public class EmployeeController {
             model.addAttribute("employeeDetailShow", true);
             model.addAttribute("employeeNotFoundShow", false);
             model.addAttribute("employeeDetail", employees.get(0));
-            employeeFiles(employees.get(0), model);
+            model.addAttribute("files", employeeFilesService.employeeFileDownloadLinks(employee).get(0));
             model.addAttribute("employeeWorkingPlaceHistoryObject", new EmployeeWorkingPlaceHistory());
             model.addAttribute("workingPlaceChangeReason", WorkingPlaceChangeReason.values());
             model.addAttribute("province", Province.values());
@@ -244,7 +231,7 @@ public class EmployeeController {
         return "employeeWorkingPlace/addEmployeeWorkingPlace";
     }
 
-    @RequestMapping( value = "/workingPlace/add", method = RequestMethod.POST )
+    @PostMapping( value = "/workingPlace/add")
     public String addWorkingPlaceEmployee(@ModelAttribute( "employeeWorkingPlaceHistory" ) EmployeeWorkingPlaceHistory employeeWorkingPlaceHistory, Model model) {
         System.out.println(employeeWorkingPlaceHistory.toString());
         // -> need to write validation before the save working place

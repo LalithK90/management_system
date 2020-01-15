@@ -25,7 +25,7 @@ public class MimeTypeFileHandelController {
         this.context = context;
     }
 
-    @RequestMapping(value = "/getFile/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(value = "/getFile/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
     public void fileDownload(@PathVariable("id") int id, HttpServletResponse response, HttpServletRequest request) {
 
 

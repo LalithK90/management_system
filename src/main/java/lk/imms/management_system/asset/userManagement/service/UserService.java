@@ -11,6 +11,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class UserService implements AbstractService< User, Long > {
 
     @Caching( evict = {@CacheEvict( value = "user", allEntries = true )},
             put = {@CachePut( value = "user", key = "#user.id" )} )
+    @Transactional
     public User persist(User user) {
         user.setUsername(user.getUsername().toLowerCase());
         if ( user.getPassword() != null ) {

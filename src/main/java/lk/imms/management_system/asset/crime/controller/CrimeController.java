@@ -7,9 +7,8 @@ import lk.imms.management_system.asset.detectionTeam.service.DetectionTeamServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,19 +29,36 @@ public class CrimeController {
 
     @GetMapping
     public List< Crime > findAll(Model model) {
-        model.addAttribute("crimes",crimeService.findAll());
+        model.addAttribute("crimes", crimeService.findAll());
         return crimeService.findAll();
 
+    }
+
+    //crime add edit form common
+    private String commonCode(Model model, Crime crime,Boolean state) {
+        model.addAttribute("addStatus", state);
+        model.addAttribute("courts", courtService.findAll());
+        model.addAttribute("crime", crime);
+        return "crime/addCrime";
     }
 
     @GetMapping( "/{id}" )
     public String addForm(Model model, @PathVariable Long id) {
         Crime crime = new Crime();
         crime.setDetectionTeam(detectionTeamService.findById(id));
-        model.addAttribute("courts", courtService.findAll());
-        model.addAttribute("crime", crime);
-        return "crime/addCrime";
+        return commonCode(model, crime,true);
     }
-
+    @GetMapping( "/edit/{id}" )
+    public String editCrime(Model model, @PathVariable Long id) {
+        return commonCode(model, crimeService.findById(id),false);
+    }
+    @PostMapping( "/add" )
+    public String saveCrime(@ModelAttribute Crime crime, BindingResult result, Model model) {
+        if ( result.hasErrors() ) {
+            return commonCode(model, crime,true);
+        }
+        crimeService.persist(crime);
+        return "redirect:/detection";
+    }
 
 }

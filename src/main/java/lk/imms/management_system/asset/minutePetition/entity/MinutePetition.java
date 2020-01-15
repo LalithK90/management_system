@@ -45,4 +45,5 @@ public class MinutePetition extends AuditEntity {
     @Transient
     private PetitionStateType petitionStateType;
 
+
 }

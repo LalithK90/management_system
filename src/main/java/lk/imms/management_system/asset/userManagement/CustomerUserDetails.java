@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.stream.Collectors;     
@@ -18,6 +19,7 @@ public class CustomerUserDetails implements UserDetails {
 
 
     @Override
+    @Transactional(readOnly = true)
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         return user.getRoles()

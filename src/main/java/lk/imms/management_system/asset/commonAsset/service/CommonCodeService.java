@@ -10,10 +10,12 @@ import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 @Service
+@Transactional
 public class CommonCodeService {
     //common things to employee and offender - start
     public void commonUrlBuilder(Model model) {

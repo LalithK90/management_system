@@ -1,15 +1,22 @@
 package lk.imms.management_system.asset.minutePetition.service;
 
+import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
+import lk.imms.management_system.asset.minutePetition.controller.MinutePetitionController;
 import lk.imms.management_system.asset.minutePetition.dao.MinutePetitionFilesDao;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
+import lk.imms.management_system.asset.offender.controller.OffenderController;
+import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.offender.entity.OffenderFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @CacheConfig( cacheNames = "minutePetitionFiles" )
@@ -64,5 +71,20 @@ public class MinutePetitionFilesService {
 
     public void save(MinutePetitionFiles minutePetitionFile) {
         minutePetitionFilesDao.save(minutePetitionFile);
+    }
+
+    @Cacheable
+    public List< FileInfo > minutePetitionFileDownloadLinks(MinutePetition minutePetition) {
+        return minutePetitionFilesDao.findByMinutePetitionOrderByIdDesc(minutePetition)
+                .stream()
+                .map(MinutePetitionFiles -> {
+                    String filename = MinutePetitionFiles.getName();
+                    String url = MvcUriComponentsBuilder
+                            .fromMethodName(MinutePetitionController.class, "downloadFile", MinutePetitionFiles.getNewId())
+                            .build()
+                            .toString();
+                    return new FileInfo(filename, MinutePetitionFiles.getCreatedAt(), url);
+                })
+                .collect(Collectors.toList());
     }
 }

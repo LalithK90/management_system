@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,12 +18,11 @@ import java.util.List;
 @CacheConfig( cacheNames = {"petitioner"} ) // tells Spring where to store cache for this class
 public class PetitionerService implements AbstractService< Petitioner, Long > {
     private final PetitionerDao petitionerDao;
-    private final CommonCodeService commonCodeService;
+
 
     @Autowired
-    public PetitionerService(PetitionerDao petitionerDao, CommonCodeService commonCodeService) {
+    public PetitionerService(PetitionerDao petitionerDao) {
         this.petitionerDao = petitionerDao;
-        this.commonCodeService = commonCodeService;
     }
 
     @Override
@@ -41,10 +41,7 @@ public class PetitionerService implements AbstractService< Petitioner, Long > {
     @Caching( evict = {@CacheEvict( value = "petitioner", allEntries = true )},
             put = {@CachePut( value = "petitioner", key = "#petitioner.id" )} )
     public Petitioner persist(Petitioner petitioner) {
-        petitioner.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(petitioner.getMobileOne()));
-        petitioner.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(petitioner.getMobileTwo()));
-        petitioner.setLand(commonCodeService.commonMobileNumberLengthValidator(petitioner.getLand()));
-        return petitionerDao.save(petitioner);
+          return petitionerDao.save(petitioner);
     }
 
     @Override

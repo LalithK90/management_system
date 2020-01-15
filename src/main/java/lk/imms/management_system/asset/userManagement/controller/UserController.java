@@ -15,10 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -48,13 +45,13 @@ public class UserController {
         return "user/user";
     }
 
-    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/{id}")
     public String userView(@PathVariable( "id" ) Long id, Model model) {
         model.addAttribute("userDetail", userService.findById(id));
         return "user/user-detail";
     }
 
-    @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/edit/{id}" )
     public String editUserFrom(@PathVariable( "id" ) Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         model.addAttribute("addStatus", false);
@@ -73,7 +70,7 @@ public class UserController {
         return "user/addUser";
     }
 
-    @RequestMapping( value = "/add", method = RequestMethod.GET )
+    @GetMapping( value = "/add" )
     public String userAddFrom(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("employeeDetailShow", false);
@@ -82,7 +79,7 @@ public class UserController {
     }
 
     //Send a searched employee to add working place
-    @RequestMapping( value = "/workingPlace", method = RequestMethod.POST )
+    @PostMapping( value = "/workingPlace" )
     public String addUserEmployeeDetails(@ModelAttribute( "employee" ) Employee employee, Model model) {
 
         List< Employee > employees = employeeService.search(employee);
@@ -118,7 +115,7 @@ public class UserController {
     // Above method support to send data to front end - All List, update, edit
     //Bellow method support to do back end function save, delete, update, search
 
-    @RequestMapping( value = {"/add", "/update"}, method = RequestMethod.POST )
+    @PostMapping( value = {"/add", "/update"} )
     public String addUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
 
 //todo -> configu more tings
@@ -181,13 +178,13 @@ public class UserController {
     }
 
 
-    @RequestMapping( value = "/remove/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/remove/{id}" )
     public String removeUser(@PathVariable Long id) {
         userService.delete(id);
         return "redirect:/user";
     }
 
-    @RequestMapping( value = "/search", method = RequestMethod.GET )
+    @GetMapping( value = "/search" )
     public String search(Model model, User user) {
         model.addAttribute("userDetail", userService.search(user));
         return "user/user-detail";

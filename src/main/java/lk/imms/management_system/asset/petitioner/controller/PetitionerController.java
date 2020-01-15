@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.petitioner.controller;
 
+import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.asset.petitioner.service.PetitionerService;
@@ -16,10 +17,12 @@ import javax.validation.Valid;
 @RequestMapping( "/petitioner" )
 public class PetitionerController {
     private final PetitionerService petitionerService;
+    private final CommonCodeService commonCodeService;
 
     @Autowired
-    public PetitionerController(PetitionerService petitionerService) {
+    public PetitionerController(PetitionerService petitionerService, CommonCodeService commonCodeService) {
         this.petitionerService = petitionerService;
+        this.commonCodeService = commonCodeService;
     }
 
     //All petitioner list send to frontend
@@ -39,13 +42,13 @@ public class PetitionerController {
     }
 
     //Send on petitioner details
-    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/{id}" )
     public String petitionerView(@PathVariable( "id" ) Long id, Model model) {
         model.addAttribute("petitionerDetail", petitionerService.findById(id));
         return "petitioner/petitioner-detail";
     }
     //Send employee data edit
-    @RequestMapping( value = "/edit/{id}", method = RequestMethod.GET )
+    @GetMapping( value = "/edit/{id}")
     public String editPetitionerFrom(@PathVariable( "id" ) Long id, Model model) {
         model.addAttribute("addStatus", false);
         model.addAttribute("petitionerTypes", PetitionerType.values());
@@ -68,13 +71,17 @@ public class PetitionerController {
             model.addAttribute("petitioner", petitioner);
             return "petitioner/addPetitioner";
         }
+        petitioner.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(petitioner.getMobileOne()));
+        petitioner.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(petitioner.getMobileTwo()));
+        petitioner.setLand(commonCodeService.commonMobileNumberLengthValidator(petitioner.getLand()));
+
         petitionerService.persist(petitioner);
         return "redirect:/petitioner";
     }
 //Delete is not applicable for this project
 
     //to search employee any giving employee parameter
-    @RequestMapping( value = "/search", method = RequestMethod.GET )
+    @GetMapping( value = "/search" )
     public String search(Model model, Petitioner petitioner) {
         model.addAttribute("petitioners", petitionerService.search(petitioner));
         return "petitioner/petitioner";

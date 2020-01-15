@@ -4,11 +4,19 @@ package lk.imms.management_system.asset.petition.controller;
 import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
+import lk.imms.management_system.asset.crime.service.CrimeService;
+import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
+import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamMember;
+import lk.imms.management_system.asset.detectionTeam.service.DetectionTeamService;
+import lk.imms.management_system.asset.employee.entity.Employee;
+import lk.imms.management_system.asset.employee.service.EmployeeFilesService;
 import lk.imms.management_system.asset.minutePetition.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionFilesService;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
+import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.offender.service.OffenderFilesService;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
@@ -16,6 +24,8 @@ import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.asset.petition.entity.PetitionState;
 import lk.imms.management_system.asset.petition.service.PetitionService;
 import lk.imms.management_system.asset.petition.service.PetitionStateService;
+import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
+import lk.imms.management_system.asset.petitionAddOffender.service.PetitionOffenderService;
 import lk.imms.management_system.asset.petitioner.controller.PetitionerRestController;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.asset.petitioner.service.PetitionerService;
@@ -37,10 +47,12 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.thymeleaf.model.IModel;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,13 +70,22 @@ public class PetitionController {
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
     private final CommonCodeService commonCodeService;
     private final ContraveneService contraveneService;
+    private final DetectionTeamService detectionTeamService;
+    private final PetitionOffenderService petitionOffenderService;
+    private final EmployeeFilesService employeeFilesService;
+    private final CrimeService crimeService;
+    private final OffenderFilesService offenderFilesService;
 
     @Autowired
     public PetitionController(PetitionService petitionService, MinutePetitionFilesService minutePetitionFilesService,
                               PetitionStateService petitionStateService, MinutePetitionService minutePetitionService,
                               PetitionerService petitionerService, UserService userService,
                               MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                              CommonCodeService commonCodeService, ContraveneService contraveneService) {
+                              CommonCodeService commonCodeService, ContraveneService contraveneService,
+                              DetectionTeamService detectionTeamService,
+                              PetitionOffenderService petitionOffenderService,
+                              EmployeeFilesService employeeFilesService, CrimeService crimeService,
+                              OffenderFilesService offenderFilesService) {
         this.petitionService = petitionService;
         this.minutePetitionFilesService = minutePetitionFilesService;
         this.petitionStateService = petitionStateService;
@@ -74,6 +95,11 @@ public class PetitionController {
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
         this.commonCodeService = commonCodeService;
         this.contraveneService = contraveneService;
+        this.detectionTeamService = detectionTeamService;
+        this.petitionOffenderService = petitionOffenderService;
+        this.employeeFilesService = employeeFilesService;
+        this.crimeService = crimeService;
+        this.offenderFilesService = offenderFilesService;
     }
 
     // Common things for petition add and update
@@ -134,8 +160,48 @@ public class PetitionController {
 
     //petition details
     @GetMapping( "/view/{id}" )
-    public String viewPetition(@PathVariable Long id) {
-        //TODO-> need to view petition details
+    public String viewPetition(@PathVariable Long id,Model model) {
+        Petition petition = petitionService.findById(id);
+        //set petition state
+        petition.setPetitionStates(petitionStateService.findByPetition(petition));
+        //set minute petition state
+        List< MinutePetition > minutePetitions = new ArrayList<>();
+        for ( MinutePetition minutePetition : minutePetitionService.findByPetition(petition) ) {
+            minutePetition.setFileInfos(minutePetitionFilesService.minutePetitionFileDownloadLinks(minutePetition));
+            minutePetitions.add(minutePetition);
+        }
+        petition.setMinutePetitions(minutePetitions);
+        //detection team
+        List< DetectionTeam > detectionTeams = new ArrayList<>();
+        for ( DetectionTeam detectionTeam : detectionTeamService.findByPetition(petition) ) {
+            //detection team member
+            for ( DetectionTeamMember detectionTeamMember : detectionTeam.getDetectionTeamMembers() ) {
+                //employee
+                Employee employee = detectionTeamMember.getEmployee();
+                employee.setFileInfos(employeeFilesService.employeeFileDownloadLinks(employee));
+                detectionTeamMember.setEmployee(employee);
+                //detection team member role
+                detectionTeamMember.setDetectionTeamMemberRole(detectionTeamMember.getDetectionTeamMemberRole());
+            }
+            //detection team note
+            detectionTeam.setDetectionTeamNotes(detectionTeam.getDetectionTeamNotes());
+            // crime
+            detectionTeam.setCrimes(crimeService.findByDetectionTeam(detectionTeam));
+            detectionTeams.add(detectionTeam);
+        }
+        petition.setDetectionTeams(detectionTeams);
+        //petition offender
+        List< PetitionOffender > petitionOffenders = new ArrayList<>();
+        for ( PetitionOffender petitionOffender : petitionOffenderService.findByPetition(petition) ) {
+            Offender offender = petitionOffender.getOffender();
+            offender.setFileInfos(offenderFilesService.offenderFileDownloadLinks(offender));
+            petitionOffender.setOffender(offender);
+            petitionOffender.setPetition(petition);
+            petitionOffender.setContravenes(petitionOffenderService.findByPetitionAndOffender(petition, offender).getContravenes());
+            petitionOffenders.add(petitionOffender);
+        }
+        petition.setPetitionOffenders(petitionOffenders);
+        model.addAttribute("petition", petition);
         return "petition/petition-detail";
     }
 
@@ -267,7 +333,7 @@ public class PetitionController {
             result.addError(objectError);
             return commonCodeForSearch(model, petition);
         }
-
+//todo -> need to conform validation for this method
         return commonCodeFromPetitionList(model, petitionService.searchAnyParameter(petition));
     }
 }

@@ -7,11 +7,14 @@ import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionFilesService;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
+import lk.imms.management_system.asset.offender.entity.OffenderFiles;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.PetitionState;
 import lk.imms.management_system.asset.petition.service.PetitionService;
 import lk.imms.management_system.asset.petition.service.PetitionStateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,7 +48,13 @@ public class MinutePetitionController {
         this.petitionStateService = petitionStateService;
         this.commonCodeService = commonCodeService;
     }
-
+    @GetMapping( "/file/{filename}" )
+    public ResponseEntity< byte[] > downloadFile(@PathVariable( "filename" ) String filename) {
+        MinutePetitionFiles file = minutePetitionFilesService.findByNewID(filename);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
+                .body(file.getPic());
+    }
     private String commonCode(Model model) {
         model.addAttribute("minuteStates", MinuteState.values());
         model.addAttribute("petitionStateTypes", PetitionStateType.values());
@@ -61,7 +70,7 @@ public class MinutePetitionController {
         return commonCode(model);
     }
 
-    @RequestMapping( value = {"/add", "/update"}, method = RequestMethod.POST )
+    @PostMapping( value = {"/add", "/update"} )
     public String persist(@Valid @ModelAttribute( "minutePetition" ) MinutePetition minutePetition, Model model,
                           BindingResult result) throws IOException {
         if ( result.hasErrors() ) {
@@ -71,7 +80,8 @@ public class MinutePetitionController {
         MinutePetition minutePetition1 = minutePetitionService.persist(minutePetition);
 
         //petition state change
-        PetitionState petitionState = petitionStateService.findByPetition(minutePetition1.getPetition());
+        PetitionState petitionState = new PetitionState();
+        petitionState.setPetition(minutePetition.getPetition());
         petitionState.setPetitionStateType(minutePetition.getPetitionStateType());
         petitionStateService.persist(petitionState);
 

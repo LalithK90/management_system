@@ -2,6 +2,7 @@ package lk.imms.management_system.asset.detectionTeam.service;
 
 import lk.imms.management_system.asset.detectionTeam.dao.DetectionTeamDao;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
+import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
@@ -59,5 +60,10 @@ public class DetectionTeamService implements AbstractService< DetectionTeam, Lon
     @Cacheable
     public DetectionTeam getLastTeam() {
         return detectionTeamDao.findFirstByOrderByIdDesc();
+    }
+
+    @Cacheable
+    public List< DetectionTeam > findByPetition(Petition petition) {
+    return detectionTeamDao.findByPetition(petition);
     }
 }

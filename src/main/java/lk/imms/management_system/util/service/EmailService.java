@@ -1,10 +1,8 @@
 package lk.imms.management_system.util.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.MailException;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -26,7 +24,7 @@ public class EmailService {
     private Environment environment;
 
 
-    public boolean sendEmail(String receiverEmail, String subject, String message) throws
+    public void sendEmail(String receiverEmail, String subject, String message) throws
             MailException {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 
@@ -39,9 +37,8 @@ public class EmailService {
 
             javaMailSender.send(mailMessage);
         } catch ( Exception e ) {
-            return false;
+            System.out.println("Email Exception " + e.toString());
         }
-        return true;
     }
 
     public boolean sendMailWithImage(String receiverEmail, String subject, String fileName) {

@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,11 +64,8 @@ public class OffenderService implements AbstractService< Offender, Long > {
     @Override
     @Caching( evict = {@CacheEvict( value = "offender", allEntries = true )},
             put = {@CachePut( value = "offender", key = "#offender.id" )} )
+    @Transactional
     public Offender persist(Offender offender) {
-        offender.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(offender.getMobileOne()));
-        offender.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(offender.getMobileTwo()));
-        offender.setLand(commonCodeService.commonMobileNumberLengthValidator(offender.getLand()));
-
         return offenderDao.save(offender);
     }
 
@@ -82,6 +80,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
 
     @Override
     @Cacheable
+    @Transactional
     public List< Offender > search(Offender offender) {
         //all offenders which all provided search, collect to this list
         List< Offender > offenders = new ArrayList<>();

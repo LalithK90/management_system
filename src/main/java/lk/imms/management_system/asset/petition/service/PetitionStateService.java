@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @CacheConfig( cacheNames = {"petitionState"} ) // tells Spring where to store cache for this class
 public class PetitionStateService {
@@ -23,8 +25,8 @@ public class PetitionStateService {
         return petitionStatusDao.save(petitionState);
     }
 
-@Cacheable
-    public PetitionState findByPetition(Petition petition) {
+    @Cacheable
+    public List<PetitionState> findByPetition(Petition petition) {
         return petitionStatusDao.findByPetition(petition);
     }
 }

@@ -24,7 +24,7 @@ public class note {
     @Autowired
     private ICityService cityService;
 
-    @RequestMapping(value = "/pdfreport", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(value = "/pdfreport", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> citiesReport() {
 
         City cities = (List<City>) cityService.findAll();
@@ -110,7 +110,6 @@ public class GeneratePdfReport {
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 class City {
     int id, population;
     String name;

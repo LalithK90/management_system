@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
-@ToString
 public class Court extends AuditEntity {
 
     @Column(columnDefinition = "VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_bin NULL"  )

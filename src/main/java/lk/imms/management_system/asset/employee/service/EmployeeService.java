@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,12 +20,10 @@ import java.util.List;
 public class EmployeeService implements AbstractService< Employee, Long > {
 
     private final EmployeeDao employeeDao;
-    private final CommonCodeService commonCodeService;
 
     @Autowired
-    public EmployeeService(EmployeeDao employeeDao, CommonCodeService commonCodeService) {
+    public EmployeeService(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
-        this.commonCodeService = commonCodeService;
     }
 
     @Cacheable
@@ -39,11 +38,8 @@ public class EmployeeService implements AbstractService< Employee, Long > {
 
     @Caching( evict = {@CacheEvict( value = "employee", allEntries = true )},
             put = {@CachePut( value = "employee", key = "#employee.id" )} )
+    @Transactional
     public Employee persist(Employee employee) {
-        employee.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(employee.getMobileOne()));
-        employee.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(employee.getMobileTwo()));
-        employee.setLand(commonCodeService.commonMobileNumberLengthValidator(employee.getLand()));
-
         return employeeDao.save(employee);
     }
 
