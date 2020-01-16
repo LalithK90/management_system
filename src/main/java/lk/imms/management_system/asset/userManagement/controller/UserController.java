@@ -2,6 +2,7 @@ package lk.imms.management_system.asset.userManagement.controller;
 
 
 import lk.imms.management_system.asset.employee.entity.Employee;
+import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
 import lk.imms.management_system.asset.employee.service.EmployeeService;
 import lk.imms.management_system.asset.userManagement.entity.User;
@@ -9,6 +10,7 @@ import lk.imms.management_system.asset.userManagement.service.RoleService;
 import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
+import lk.imms.management_system.asset.workingPlace.service.WorkingPlaceService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,14 +31,17 @@ public class UserController {
     private final RoleService roleService;
     private final EmployeeService employeeService;
     private final DateTimeAgeService dateTimeAgeService;
+    private final WorkingPlaceService workingPlaceService;
 
     @Autowired
     public UserController(UserService userService, EmployeeService employeeService,
-                          DateTimeAgeService dateTimeAgeService, RoleService roleService) {
+                          DateTimeAgeService dateTimeAgeService, RoleService roleService,
+                          WorkingPlaceService workingPlaceService) {
         this.userService = userService;
         this.employeeService = employeeService;
         this.dateTimeAgeService = dateTimeAgeService;
         this.roleService = roleService;
+        this.workingPlaceService = workingPlaceService;
     }
 
     @RequestMapping
@@ -45,16 +50,13 @@ public class UserController {
         return "user/user";
     }
 
-    @GetMapping( value = "/{id}")
+    @GetMapping( value = "/{id}" )
     public String userView(@PathVariable( "id" ) Long id, Model model) {
         model.addAttribute("userDetail", userService.findById(id));
         return "user/user-detail";
     }
 
-    @GetMapping( value = "/edit/{id}" )
-    public String editUserFrom(@PathVariable( "id" ) Long id, Model model) {
-        model.addAttribute("user", userService.findById(id));
-        model.addAttribute("addStatus", false);
+    private String commonCode(Model model) {
         model.addAttribute("employeeDetailShow", true);
         model.addAttribute("employeeNotFoundShow", false);
         model.addAttribute("roleList", roleService.findAll());
@@ -68,6 +70,13 @@ public class UserController {
                 .build()
                 .toString());
         return "user/addUser";
+    }
+
+    @GetMapping( value = "/edit/{id}" )
+    public String editUserFrom(@PathVariable( "id" ) Long id, Model model) {
+        model.addAttribute("user", userService.findById(id));
+        model.addAttribute("addStatus", false);
+        return commonCode(model);
     }
 
     @GetMapping( value = "/add" )
@@ -88,19 +97,7 @@ public class UserController {
             model.addAttribute("user", new User());
             model.addAttribute("employee", employees.get(0));
             model.addAttribute("addStatus", true);
-            model.addAttribute("employeeDetailShow", true);
-            model.addAttribute("employeeNotFoundShow", false);
-            model.addAttribute("roleList", roleService.findAll());
-            model.addAttribute("province", Province.values());
-            model.addAttribute("districtUrl", MvcUriComponentsBuilder
-                    .fromMethodName(WorkingPlaceRestController.class, "getDistrict", "")
-                    .build()
-                    .toString());
-            model.addAttribute("stationUrl", MvcUriComponentsBuilder
-                    .fromMethodName(WorkingPlaceRestController.class, "getStation", "")
-                    .build()
-                    .toString());
-            return "user/addUser";
+            return commonCode(model);
         }
         model.addAttribute("addStatus", true);
         model.addAttribute("employee", new Employee());
@@ -118,12 +115,11 @@ public class UserController {
     @PostMapping( value = {"/add", "/update"} )
     public String addUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
 
-//todo -> configu more tings
         if ( userService.findUserByEmployee(user.getEmployee()) != null ) {
             ObjectError error = new ObjectError("employee", "This employee already defined as a user");
             result.addError(error);
         }
-        if ( user.getId() != null ){
+        if ( user.getId() != null ) {
             User dbUser = userService.findById(user.getId());
             dbUser.setEnabled(true);
             dbUser.setPassword(user.getPassword());
@@ -133,33 +129,24 @@ public class UserController {
             userService.persist(dbUser);
             return "redirect:/user";
         }
-        System.out.println("before error");
         if ( result.hasErrors() ) {
-            System.out.println("result to string    "+result.toString());
+            System.out.println("result to string    " + result.toString());
             model.addAttribute("addStatus", false);
-            model.addAttribute("employeeDetailShow", true);
-            model.addAttribute("employeeNotFoundShow", false);
-            model.addAttribute("roleList", roleService.findAll());
-            model.addAttribute("province", Province.values());
-            model.addAttribute("districtUrl", MvcUriComponentsBuilder
-                    .fromMethodName(WorkingPlaceRestController.class, "getDistrict", "")
-                    .build()
-                    .toString());
-            model.addAttribute("stationUrl", MvcUriComponentsBuilder
-                    .fromMethodName(WorkingPlaceRestController.class, "getStation", "")
-                    .build()
-                    .toString());
             model.addAttribute("user", user);
-            return "user/addUser";
+            return commonCode(model);
         }
-        System.out.println("affter error");
         //todo-> user is super senior office need to provide all working palace to check
 
         Employee employee = employeeService.findById(user.getEmployee().getId());
         if ( user.isEnabled() ) {
             user.setCreatedDate(dateTimeAgeService.getCurrentDate());
         }
-        System.out.println(" imh ");
+        // if user desigantion is belongs to supper senior category all workstations are able to check
+        if ( employee.getDesignation().equals(Designation.CGE) || employee.getDesignation().equals(Designation.ACGE) || employee.getDesignation().equals(Designation.CE) ||
+                employee.getDesignation().equals(Designation.DCEL) || employee.getDesignation().equals(Designation.DCELE) ) {
+            user.setWorkingPlaces(workingPlaceService.findAll());
+
+        }
         // userService.persist(user);
         if ( employee != null ) {
             if ( employee.getEmployeeStatus().equals(EmployeeStatus.WORKING) ) {
@@ -171,9 +158,7 @@ public class UserController {
             user.setEnabled(true);
             //User user1 = userService.persist(user);
         }
-        System.out.println(" new plae");
-        User user1 = userService.persist(user);
-        System.out.println("User " + user1.toString());
+        userService.persist(user);
         return "redirect:/user";
     }
 

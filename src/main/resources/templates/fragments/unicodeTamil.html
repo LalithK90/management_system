@@ -9,10 +9,10 @@
 
 
 <div class="container-fluid" onload="javascript:txtBox.box1.focus();" id="unicodeTranslator">
- <!--   &lt;!&ndash; modal tamil button &ndash;&gt;
+    <!-- modal tamil button -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bd-example-modal-xl"><i
             class="fas fa-language"></i> &nbsp;Tamilish to Tamil
-    </button>-->
+    </button>
 
     <!--Translator content-->
     <div class="modal fade  " id="bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
@@ -31,7 +31,7 @@
                     <!--Translator content-->
                     <div class="container-fluid form-row">
                         <div class="bg-dark formBorder form-group">
-                            <form name="txtBox" class="form ">
+                            <form name="txtBoxTamilish" class="form ">
                                 <div class="form-row text-center">
                                     <label class="TableText " for="tamilishWrite">
                                         Arial (ஏரியல்)
@@ -39,7 +39,7 @@
                                     <textarea id="tamilishWrite" onKeyUp="startText();"
                                               style="font-size: 14pt; width: 400px;
                                                            font-family: Times, serif;"
-                                              onClick="startText();" name="box1"
+                                              onClick="startText();" name="box3"
                                               rows="7"
                                               onSelect="startText();">
                                                 </textarea>
@@ -54,7 +54,7 @@
                                     <textarea id="tamilCode"
                                               style="font-size: 14pt; width: 400px;
                                                            font-family: Times, serif;"
-                                              name="box2" rows="7">
+                                              name="box4" rows="7">
                                     </textarea>
                                 </div>
                             </form>
@@ -199,7 +199,7 @@
         var text;
 
         function startText() {
-            text = document.txtBox.box1.value;
+            text = document.txtBoxTamilish.box3.value;
 
             text = text.replace(/njau/g, "ஞௌ");
             text = text.replace(/njai/g, "ஞை");
@@ -847,7 +847,7 @@
             text = text.replace(/O/g, "ஓ");
             text = text.replace(/x/g, "௯");
             text = text.replace(/q/g, "ஃ");
-            document.txtBox.box2.value = text;
+            document.txtBoxTamilish.box4.value = text;
         }
 
 

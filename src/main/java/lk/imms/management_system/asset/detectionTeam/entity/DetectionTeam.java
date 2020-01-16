@@ -9,6 +9,7 @@ import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,12 +19,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
-@JsonIgnoreProperties( "teamAcceptedDateTime" )
 public class DetectionTeam extends AuditEntity {
 
     private String number;
 
     private String name;
+
 
     @Enumerated( EnumType.STRING )
     private TeamAcceptation teamAcceptation;
@@ -44,6 +45,5 @@ public class DetectionTeam extends AuditEntity {
 
     @OneToMany( mappedBy = "detectionTeam" )
     private List< Crime > crimes;
-
 
 }

@@ -1,0 +1,44 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <!--form header-->
+    <attr sel="#formHeader" th:text="${'Crime Details According to Petition Number '}+${petitionNumber}"/>
+
+    <!--Detection Team name number-->
+    <attr sel="#crimeDetectionTeamNameAndNumber" th:text="${crime.detectionTeam.name}+${' - '}+${crime.detectionTeam.number}"/>
+
+    <!--Crime number-->
+    <attr sel="#crimeNumber" th:text="${crime.crimeNumber}"/>
+    <!--Court case number-->
+    <attr sel="#courtCaseNumber" th:text="${crime.courtCaseNumber}"/>
+    <!--Compounded Charge Sheet Number-->
+    <attr sel="#compoundedChargeSheetNumber" th:text="${crime.compoundedChargeSheetNumber}"/>
+    <!--Result -->
+    <attr sel="#result" th:utext="${crime.result}"/>
+    <!--Reward Sheet Number -->
+    <attr sel="#rewardSheetNumber" th:text="${crime.rewardSheetNumber}"/>
+    <!--Remark-->
+    <attr sel="#remark" th:utext="${crime.remark}"/>
+    <!--Place Of Offence-->
+    <attr sel="#placeOfOffence" th:text="${crime.placeOfOffence}"/>
+    <!--Court status-->
+    <attr sel="#court" th:text="${crime.court.name}"/>
+    <!--Date Of Detection-->
+    <attr sel="#dateOfDetection" th:text="${{crime.dateOfDetection}}"/>
+    <!--Compounded Charge Sheet Date-->
+    <attr sel="#compoundedChargeSheetDate" th:text="${{crime.compoundedChargeSheetDate}}"/>
+    <!--Date Of Order Of Persecution-->
+    <attr sel="#dateOfOrderOfPersecution" th:text="${{crime.dateOfOrderOfPersecution}}"/>
+    <!--Date Of Filling Plaint-->
+    <attr sel="#dateOfFillingPlaint" th:text="${{crime.dateOfFillingPlaint}}"/>
+    <!--Date Of Judgement-->
+    <attr sel="#dateOfJudgement" th:text="${{crime.dateOfJudgement}}"/>
+
+    <!--Created at update at-->
+    <attr sel="#createdBy" th:text="${crime.createdBy}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(crime.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

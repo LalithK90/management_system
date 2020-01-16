@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode( callSuper = true )
 public class PetitionState extends AuditEntity {
 
     @Enumerated( EnumType.STRING )

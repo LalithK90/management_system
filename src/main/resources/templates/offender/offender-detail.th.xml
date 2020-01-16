@@ -42,21 +42,23 @@
     <attr sel="#email" th:text="${offender.email}"/>
     <!--18. Created at update at-->
     <attr sel="#createdBy" th:text="${offender.createdBy}"/>
-    th:text="${#temporals.format(offender.createdAt, 'dd-MM-yyyy HH:mm')}"
+    <attr sel="#createdAt" th:text="${#temporals.format(offender.createdAt, 'dd-MM-yyyy HH:mm')}"/>
     <attr sel="#updatedBy" th:text="${offender.updatedBy}"/>
-    <attr sel="#updatedAt" th:text="${{offender.updatedAt}}"/>
+    <attr sel="#updatedAt" th:text="${#temporals.format(offender.updatedAt, 'dd-MM-yyyy HH:mm')}"/>
     <!--19. Calling Names-->
     <attr sel="#callingNameDisplay" th:each="offenderCallingName, status : ${offender.offenderCallingNames}"/>
     <attr sel="#callingNamesDisplay" th:text="${offender.offenderCallingNames[__${status.index}__].callingName}"/>
     <attr sel="#callingNamesCretedByDisplay" th:text="${offender.offenderCallingNames[__${status.index}__].createdBy}"/>
-    <attr sel="#callingNamesCreatedAtDisplay" th:text="${{offender.offenderCallingNames[__${status.index}__].createdAt}}"/>
-    <attr sel="#callingNamesUpdatedByDisplay" th:text="${offender.offenderCallingNames[__${status.index}__].updatedBy}"/>
+    <attr sel="#callingNamesCreatedAtDisplay"
+          th:text="${{offender.offenderCallingNames[__${status.index}__].createdAt}}"/>
+    <attr sel="#callingNamesUpdatedByDisplay"
+          th:text="${offender.offenderCallingNames[__${status.index}__].updatedBy}"/>
 
     <!--20. Description-->
     <attr sel="#description" th:utext="${offender.description}"/>
 
     <!--21. Photos -->
-    <attr sel="#filesList" th:each="file, rowStat: ${files}"/>
+    <attr sel="#filesList" th:each="file, rowStat: ${offender.fileInfos}"/>
     <attr sel="#img" th:src="${file.url}"/>
     <attr sel="#imgName" th:text="${file.filename}"/>
     <attr sel="#imgCreateAt" th:text="${{file.createAt}}"/>

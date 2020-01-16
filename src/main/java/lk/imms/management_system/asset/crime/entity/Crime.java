@@ -1,6 +1,7 @@
 package lk.imms.management_system.asset.crime.entity;
 
 import lk.imms.management_system.asset.court.entity.Court;
+import lk.imms.management_system.asset.crime.entity.entity.CrimeStatus;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
@@ -29,7 +30,11 @@ public class Crime extends AuditEntity {
 
     private String rewardSheetNumber;
 
+    @Column( columnDefinition = "VARCHAR(10000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String remark;
+
+    @Enumerated( EnumType.STRING )
+    private CrimeStatus crimeStatus;
 
     @Column( columnDefinition = "VARCHAR(10000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String placeOfOffence;

@@ -30,7 +30,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode( callSuper = true )
 @JsonFilter("Employee")
 public class Employee extends AuditEntity {
 

@@ -13,13 +13,13 @@ public class PasswordChange {
 
     private String username;
 
-    @Size(min = 4, message = "password should include four characters or symbols")
+    @Size( min = 4, message = "password should include four characters or symbols" )
     private String oldPassword;
 
-    @Size(min = 4, message = "password should include four characters or symbols")
+    @Size( min = 4, message = "password should include four characters or symbols" )
     private String newPassword;
 
-    @Size(min = 4, message = "password should include four characters or symbols")
+    @Size( min = 4, message = "password should include four characters or symbols" )
     private String newPasswordConform;
 
 }

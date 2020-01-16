@@ -32,20 +32,10 @@ $(document).ready(function () {
         $("#gender").val(calculateGender(nic));
     });
     /* Patient and employee Nic Validation - end*/
-
-
-    /*
-    //prevent checkbox==null before submit -start
-        $(function () {
-            $('#btnSubmit').on("click", function (e) {
-                let checked = $(':checkbox:checked').length;
-                if (checked === 0) {
-                    swal("Oops", "At least One Lab Test Should Be Selected!", "error");
-                    e.preventDefault();
-                }
-            });
-        });
-    */
+    //input type date can not be selected future date
+    $('[type="date"]').prop('max', function(){
+        return new Date().toJSON().split('T')[0];
+    });
 
 });
 

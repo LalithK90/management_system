@@ -1,6 +1,5 @@
 package lk.imms.management_system.asset.employee.service;
 
-import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.employee.dao.EmployeeDao;
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;

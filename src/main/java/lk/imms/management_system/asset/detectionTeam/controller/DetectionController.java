@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.detectionTeam.controller;
 
 import lk.imms.management_system.asset.commonAsset.entity.Message;
-import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
+import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamMember;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamNote;
@@ -36,7 +36,7 @@ public class DetectionController {
     private final DetectionTeamService detectionTeamService;
     private final PetitionService petitionService;
     private final UserService userService;
-    private final CommonCodeService commonCodeService;
+    private final CommonService commonService;
     private final DateTimeAgeService dateTimeAgeService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
     private final PetitionStateService petitionStateService;
@@ -44,14 +44,14 @@ public class DetectionController {
 
     @Autowired
     public DetectionController(DetectionTeamService detectionTeamService, PetitionService petitionService,
-                               UserService userService, CommonCodeService commonCodeService,
+                               UserService userService, CommonService commonService,
                                DateTimeAgeService dateTimeAgeService,
                                MakeAutoGenerateNumberService makeAutoGenerateNumberService,
                                PetitionStateService petitionStateService, EmailService emailService) {
         this.detectionTeamService = detectionTeamService;
         this.petitionService = petitionService;
         this.userService = userService;
-        this.commonCodeService = commonCodeService;
+        this.commonService = commonService;
         this.dateTimeAgeService = dateTimeAgeService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
         this.petitionStateService = petitionStateService;
@@ -75,7 +75,7 @@ public class DetectionController {
 
     private void commonCode(Model model, DetectionTeam detectionTeam) {
         //url to find employee
-        commonCodeService.commonUrlBuilder(model);
+        commonService.commonUrlBuilder(model);
         model.addAttribute("teamMemberRoles", DetectionTeamMemberRole.values());
         model.addAttribute("teamAcceptations", TeamAcceptation.values());
         model.addAttribute("detectionTeamStatuses", DetectionTeamStatus.values());

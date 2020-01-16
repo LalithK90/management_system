@@ -3,7 +3,7 @@ package lk.imms.management_system.asset.offender.controller;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
 import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
-import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
+import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.offender.entity.OffenderCallingName;
@@ -40,20 +40,20 @@ public class OffenderController {
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
     private final ContraveneService contraveneService;
     private final GuardianService guardianService;
-    private final CommonCodeService commonCodeService;
+    private final CommonService commonService;
 
     @Autowired
     public OffenderController(OffenderService offenderService, OffenderFilesService offenderFilesService,
                               UserService userService, MakeAutoGenerateNumberService makeAutoGenerateNumberService,
                               ContraveneService contraveneService, GuardianService guardianService,
-                              CommonCodeService commonCodeService) {
+                              CommonService commonService) {
         this.offenderService = offenderService;
         this.offenderFilesService = offenderFilesService;
         this.userService = userService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
         this.contraveneService = contraveneService;
         this.guardianService = guardianService;
-        this.commonCodeService = commonCodeService;
+        this.commonService = commonService;
     }
 
     //When called file will send to offender image
@@ -76,9 +76,11 @@ public class OffenderController {
     @GetMapping( value = "/{id}")
     public String offenderView(@PathVariable( "id" ) Long id, Model model) {
         Offender offender = offenderService.findById(id);
+        offender.setFileInfos(offenderFilesService.offenderFileDownloadLinks(offender));
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
-        model.addAttribute("files", offenderFilesService.offenderFileDownloadLinks(offender));
+        //model.addAttribute("files", );
+
         return "offender/offender-detail";
     }
 
@@ -89,7 +91,8 @@ public class OffenderController {
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
         model.addAttribute("files", offenderFilesService.offenderFileDownloadLinks(offender));
-        commonCodeService.commonEmployeeAndOffender(model);
+        commonService.commonEmployeeAndOffender(model);
+
         model.addAttribute("guardianTypes", GuardianType.values());
         return "offender/addOffender";
     }
@@ -99,7 +102,7 @@ public class OffenderController {
     public String offenderAddFrom(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("offender", new Offender());
-        commonCodeService.commonEmployeeAndOffender(model);
+        commonService.commonEmployeeAndOffender(model);
         model.addAttribute("guardianTypes", GuardianType.values());
         return "offender/addOffender";
     }
@@ -129,7 +132,7 @@ public class OffenderController {
 
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
-            commonCodeService.commonEmployeeAndOffender(model);
+            commonService.commonEmployeeAndOffender(model);
             model.addAttribute("guardianTypes", GuardianType.values());
             model.addAttribute("offender", offender);
             return "offender/addOffender";
@@ -164,9 +167,9 @@ public class OffenderController {
 
         // System.out.println("after set guardian and calling name " + offender.toString());
         try {
-            offender.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(offender.getMobileOne()));
-            offender.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(offender.getMobileTwo()));
-            offender.setLand(commonCodeService.commonMobileNumberLengthValidator(offender.getLand()));
+            offender.setMobileOne(commonService.commonMobileNumberLengthValidator(offender.getMobileOne()));
+            offender.setMobileTwo(commonService.commonMobileNumberLengthValidator(offender.getMobileTwo()));
+            offender.setLand(commonService.commonMobileNumberLengthValidator(offender.getLand()));
             //after file save offender and
             Offender offender1 = offenderService.persist(offender);
             //offender file is not
@@ -202,7 +205,7 @@ public class OffenderController {
             } else {
                 model.addAttribute("addStatus", false);
             }
-            commonCodeService.commonEmployeeAndOffender(model);
+            commonService.commonEmployeeAndOffender(model);
             model.addAttribute("guardianTypes", GuardianType.values());
             model.addAttribute("offender", offender);
             return "offender/addOffender";
@@ -220,7 +223,7 @@ public class OffenderController {
     @GetMapping( "/search" )
     public String searchForm(Model model) {
         model.addAttribute("offender", new Offender());
-        commonCodeService.commonEmployeeAndOffender(model);
+        commonService.commonEmployeeAndOffender(model);
         model.addAttribute("guardianTypes", GuardianType.values());
         model.addAttribute("contravenes", contraveneService.findAll());
         return "offender/offenderSearch";

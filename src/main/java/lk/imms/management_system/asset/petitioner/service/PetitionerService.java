@@ -1,6 +1,5 @@
 package lk.imms.management_system.asset.petitioner.service;
 
-import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
 import lk.imms.management_system.asset.petitioner.dao.PetitionerDao;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
@@ -10,7 +9,6 @@ import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

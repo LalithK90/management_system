@@ -130,7 +130,7 @@
                 <div class="form-row">
                     <label class="control-label col-md-4" for="password">Password :</label>
                     <div class="col-md-8">
-                        <input class="form-control" id="password"
+                        <input class="form-control validate" id="password"
                                placeholder="Enter Password Here" required type="password"
                         />
                     </div>
@@ -167,6 +167,12 @@
                     <div class="col-md-8">
                         <select id="station" class="form-control" multiple required>
                         </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row alert alert-danger text-center"><strong>Attention !</strong>
+                        <br/>If Employee is belong to supper senior category.
+                        <strong>Please select one or two work station </strong>.
                     </div>
                 </div>
             </div>
@@ -226,5 +232,6 @@
 <script id="script"></script>
 <script id="stationFindJS"></script>
 <script id="customJS"></script>
+<script id="passwordValidate"></script>
 </body>
 </html>

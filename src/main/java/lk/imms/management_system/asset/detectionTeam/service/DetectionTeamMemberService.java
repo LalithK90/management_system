@@ -1,7 +1,9 @@
 package lk.imms.management_system.asset.detectionTeam.service;
 
 import lk.imms.management_system.asset.detectionTeam.dao.DetectionTeamMemberDao;
+import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamMember;
+import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
@@ -9,19 +11,21 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = "detectionTeamMember")
+@CacheConfig( cacheNames = "detectionTeamMember" )
 public class DetectionTeamMemberService implements AbstractService< DetectionTeamMember, Long > {
     private final DetectionTeamMemberDao detectionTeamMemberDao;
-@Autowired
+
+    @Autowired
     public DetectionTeamMemberService(DetectionTeamMemberDao detectionTeamMemberDao) {
         this.detectionTeamMemberDao = detectionTeamMemberDao;
     }
 
     @Override
-   @Cacheable
+    @Cacheable
     public List< DetectionTeamMember > findAll() {
         return detectionTeamMemberDao.findAll();
     }
@@ -36,14 +40,15 @@ public class DetectionTeamMemberService implements AbstractService< DetectionTea
     @Caching( evict = {@CacheEvict( value = "detectionTeamMember", allEntries = true )},
             put = {@CachePut( value = "detectionTeamMember", key = "#detectionTeamMember.id" )} )
     public DetectionTeamMember persist(DetectionTeamMember detectionTeamMember) {
-   return detectionTeamMemberDao.save(detectionTeamMember);
+
+        return detectionTeamMemberDao.save(detectionTeamMember);
     }
 
     @Override
-    @CacheEvict(allEntries = true)
+    @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
-   detectionTeamMemberDao.deleteById(id);
-    return true;
+        detectionTeamMemberDao.deleteById(id);
+        return true;
     }
 
     @Override
@@ -55,5 +60,11 @@ public class DetectionTeamMemberService implements AbstractService< DetectionTea
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
         Example< DetectionTeamMember > detectionTeamMemberExample = Example.of(detectionTeamMember, matcher);
         return detectionTeamMemberDao.findAll(detectionTeamMemberExample);
+    }
+
+    @Cacheable
+    public List< DetectionTeam > findByEmployeeAndCreatedAtBetween(Employee employee, LocalDateTime from,
+                                                                   LocalDateTime to) {
+        return detectionTeamMemberDao.findByEmployeeAndCreatedAtBetween(employee, from, to);
     }
 }

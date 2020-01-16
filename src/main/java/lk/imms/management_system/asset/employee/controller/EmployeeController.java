@@ -1,8 +1,7 @@
 package lk.imms.management_system.asset.employee.controller;
 
 
-import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
-import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
+import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.employee.entity.EmployeeFiles;
 import lk.imms.management_system.asset.employee.entity.EmployeeWorkingPlaceHistory;
@@ -28,14 +27,11 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RequestMapping( "/employee" )
 @Controller
@@ -45,28 +41,28 @@ public class EmployeeController {
     private final EmployeeFilesService employeeFilesService;
     private final DateTimeAgeService dateTimeAgeService;
     private final WorkingPlaceService workingPlaceService;
-    private final CommonCodeService commonCodeService;
+    private final CommonService commonService;
     private final UserService userService;
 
     @Autowired
     public EmployeeController(EmployeeService employeeService,
                               EmployeeWorkingPlaceHistoryService employeeWorkingPlaceHistoryService,
                               EmployeeFilesService employeeFilesService, DateTimeAgeService dateTimeAgeService,
-                              WorkingPlaceService workingPlaceService, CommonCodeService commonCodeService,
+                              WorkingPlaceService workingPlaceService, CommonService commonService,
                               UserService userService) {
         this.employeeService = employeeService;
         this.employeeWorkingPlaceHistoryService = employeeWorkingPlaceHistoryService;
         this.employeeFilesService = employeeFilesService;
         this.dateTimeAgeService = dateTimeAgeService;
         this.workingPlaceService = workingPlaceService;
-        this.commonCodeService = commonCodeService;
+        this.commonService = commonService;
         this.userService = userService;
     }
 //----> Employee details management - start <----//
 
     // Common things for an employee add and update
     private String commonThings(Model model) {
-       commonCodeService.commonEmployeeAndOffender(model);
+       commonService.commonEmployeeAndOffender(model);
         model.addAttribute("workingPlaces", workingPlaceService.findAll());
         return "employee/addEmployee";
     }
@@ -118,15 +114,21 @@ public class EmployeeController {
 
     //Employee add and update
     @PostMapping( value = {"/add", "/update"} )
-    public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result, Model model,
-                              RedirectAttributes redirectAttributes) {
+    public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result, Model model
+                             ) {
 
         if ( result.hasErrors() ) {
             model.addAttribute("addStatus", true);
-            redirectAttributes.addFlashAttribute("employee", employee);
+            model.addAttribute("employee", employee);
             return commonThings(model);
         }
         try {
+            employee.setMobileOne(commonService.commonMobileNumberLengthValidator(employee.getMobileOne()));
+            employee.setMobileTwo(commonService.commonMobileNumberLengthValidator(employee.getMobileTwo()));
+            employee.setLand(commonService.commonMobileNumberLengthValidator(employee.getLand()));
+            //after save employee files and save employee
+            employeeService.persist(employee);
+
             //if employee state is not working he or she cannot access to the system
             if  (!employee.getEmployeeStatus().equals(EmployeeStatus.WORKING)){
                 User user = userService.findUserByEmployee(employeeService.findByNic(employee.getNic()));
@@ -137,7 +139,6 @@ public class EmployeeController {
                 }
             }
             //save employee images file
-            List< EmployeeFiles > storedFile = new ArrayList<>();
             for ( MultipartFile file : employee.getFiles() ) {
                 EmployeeFiles employeeFiles = employeeFilesService.findByName(file.getOriginalFilename());
                 if ( employeeFiles != null ) {
@@ -151,16 +152,10 @@ public class EmployeeController {
                                                       UUID.randomUUID().toString().concat("employee"));
                 }
                 employeeFiles.setEmployee(employee);
-                storedFile.add(employeeFiles);
+                // Save all  to database
+                employeeFilesService.persist(employeeFiles);
             }
 
-            // Save all Files to database
-            employeeFilesService.persist(storedFile);
-            employee.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(employee.getMobileOne()));
-            employee.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(employee.getMobileTwo()));
-            employee.setLand(commonCodeService.commonMobileNumberLengthValidator(employee.getLand()));
-            //after save employee files and save employee
-            employeeService.persist(employee);
             return "redirect:/employee";
 
         } catch ( Exception e ) {
@@ -168,7 +163,7 @@ public class EmployeeController {
                                                 "There is already in the system. <br>System message -->" + e.toString());
             result.addError(error);
             model.addAttribute("addStatus", true);
-            redirectAttributes.addFlashAttribute("employee", employee);
+            model.addAttribute("employee", employee);
             return commonThings(model);
         }
     }

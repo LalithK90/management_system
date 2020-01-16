@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.petition.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
@@ -8,10 +9,14 @@ import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffend
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.audit.AuditEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +25,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode( callSuper = true )
 public class Petition extends AuditEntity {
 
     private String petitionNumber;
@@ -46,16 +50,16 @@ public class Petition extends AuditEntity {
     @ManyToOne
     private WorkingPlace workingPlace;
 
-    @OneToMany( mappedBy = "petition")
+    @OneToMany( mappedBy = "petition" )
     private List< PetitionState > petitionStates;
 
-    @OneToMany( mappedBy = "petition")
+    @OneToMany( mappedBy = "petition" )
     private List< MinutePetition > minutePetitions;
 
     @OneToMany( mappedBy = "petition" )
     private List< DetectionTeam > detectionTeams;
 
-    @OneToMany(mappedBy ="petition" )
+    @OneToMany( mappedBy = "petition" )
     private List< PetitionOffender > petitionOffenders;
 
     @Transient

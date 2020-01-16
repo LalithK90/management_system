@@ -1,6 +1,6 @@
 package lk.imms.management_system.asset.workingPlace.controller;
 
-import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
+import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.District;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.WorkingPlaceType;
@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -21,12 +20,12 @@ import javax.validation.Valid;
 public class WorkingPlaceController {
 
     private final WorkingPlaceService workingPlaceService;
-    private final CommonCodeService commonCodeService;
+    private final CommonService commonService;
 
     @Autowired
-    public WorkingPlaceController(WorkingPlaceService workingPlaceService, CommonCodeService commonCodeService) {
+    public WorkingPlaceController(WorkingPlaceService workingPlaceService, CommonService commonService) {
         this.workingPlaceService = workingPlaceService;
-        this.commonCodeService = commonCodeService;
+        this.commonService = commonService;
     }
 
     // common font-end attribute for workingPlace
@@ -84,7 +83,7 @@ public class WorkingPlaceController {
     public String addWorkingPlace(@Valid @ModelAttribute WorkingPlace workingPlace, BindingResult result, Model model
           ) {
         System.out.println("working place " + workingPlace.toString());
-        if ( result.hasErrors() ) {
+        if ( result.hasErrors() && workingPlace.getLandOne() == null) {
             ObjectError error = new ObjectError("workingPlace", "This working place is already added to the system. ");
             result.addError(error);
             model.addAttribute("addStatus", true);
@@ -93,11 +92,11 @@ public class WorkingPlaceController {
             return "workingPlace/addWorkingPlace";
         }
         workingPlace.setCode(workingPlace.getCode().toUpperCase());
-        workingPlace.setLandOne(commonCodeService.commonMobileNumberLengthValidator(workingPlace.getEmailOne()));
-        workingPlace.setLandTwo(commonCodeService.commonMobileNumberLengthValidator(workingPlace.getEmailTwo()));
-        workingPlace.setLandThree(commonCodeService.commonMobileNumberLengthValidator(workingPlace.getLandThree()));
-        workingPlace.setLandFour(commonCodeService.commonMobileNumberLengthValidator(workingPlace.getLandFour()));
-        workingPlace.setFaxNumber(commonCodeService.commonMobileNumberLengthValidator(workingPlace.getFaxNumber()));
+        workingPlace.setLandOne(commonService.commonMobileNumberLengthValidator(workingPlace.getEmailOne()));
+        workingPlace.setLandTwo(commonService.commonMobileNumberLengthValidator(workingPlace.getEmailTwo()));
+        workingPlace.setLandThree(commonService.commonMobileNumberLengthValidator(workingPlace.getLandThree()));
+        workingPlace.setLandFour(commonService.commonMobileNumberLengthValidator(workingPlace.getLandFour()));
+        workingPlace.setFaxNumber(commonService.commonMobileNumberLengthValidator(workingPlace.getFaxNumber()));
         workingPlaceService.persist(workingPlace);
         return "redirect:/workingPlace";
     }

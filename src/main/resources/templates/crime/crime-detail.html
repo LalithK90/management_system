@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col-2">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col-8">
+            <h4 class="text-light text-center">
+                <strong>
+                    <p id="formHeader"></p>
+                </strong>
+            </h4>
+        </div>
+        <div class="col-2">
+            <a href="/crime" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+<!--Form Content - start -->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <div class="row">
+            <!--Left Side-->
+            <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                <!--Crime detection team name and number-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="crimeDetectionTeamNameAndNumber">Detection Team Name And
+                                                                                           Number :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="crimeDetectionTeamNameAndNumber" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Crime Number-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="crimeNumber">Crime No :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="crimeNumber" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Court Case Number-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="courtCaseNumber">Court Case Number :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="courtCaseNumber" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Compounded Charge Sheet Number -->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="compoundedChargeSheetNumber">Compounded Charge Sheet
+                                                                                       Number :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="compoundedChargeSheetNumber" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Result-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="result">Result :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p class="display_detail" id="result"></p>
+
+                    </div>
+                </div>
+                <!--Reward Sheet Number-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="rewardSheetNumber">Reward Sheet Number :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="rewardSheetNumber" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Remark-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="remark">Remark :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="remark" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Place of offence-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="placeOfOffence">Place of Offence :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="placeOfOffence" class="display_detail"></p>
+                    </div>
+                </div>
+            </div>
+            <!--Right Side-->
+            <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                <!--Court-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="court">Court :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="court" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Date of detection-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="dateOfDetection">Date of Detection :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="dateOfDetection" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--compounded Charge Sheet Date-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="compoundedChargeSheetDate">Compounded Charge Sheet Date
+                                                                                     :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="compoundedChargeSheetDate" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--date Of Order Of Persecution-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="dateOfOrderOfPersecution">Date Of Order Of Persecution
+                                                                                    :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="dateOfOrderOfPersecution" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--dateOfFillingPlaint-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="dateOfFillingPlaint">Date Of Filling Plaint
+                                                                               :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="dateOfFillingPlaint" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--dateOfJudgement-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="dateOfJudgement">Date Of Judgement
+                                                                           :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="dateOfJudgement" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Created by and created at-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="createdBy">Created By :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="createdBy" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="createdAt">Created At :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="createdAt" class="display_detail"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+            <a href="/crime">
+                <button class="btn btn-success" type="button">
+                    <i class="fa fa-backward " style="font-size: 20px"></i>&nbsp; &nbsp;Back
+                </button>
+            </a>
+        </div>
+    </div>
+    <br/>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+</body>
+</html>

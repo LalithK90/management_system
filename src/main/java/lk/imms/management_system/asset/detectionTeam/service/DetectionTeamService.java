@@ -9,6 +9,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -36,6 +37,7 @@ public class DetectionTeamService implements AbstractService< DetectionTeam, Lon
     @Caching( evict = {@CacheEvict( value = "detectionTeam", allEntries = true )},
             put = {@CachePut( value = "detectionTeam", key = "#detectionTeam.id" )} )
     public DetectionTeam persist(DetectionTeam detectionTeam) {
+
         return detectionTeamDao.save(detectionTeam);
     }
 

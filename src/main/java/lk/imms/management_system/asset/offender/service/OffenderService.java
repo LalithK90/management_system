@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.offender.service;
 
 import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
-import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
+import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.offender.dao.OffenderDao;
@@ -15,6 +15,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,19 +30,19 @@ public class OffenderService implements AbstractService< Offender, Long > {
     private final OffenderCallingNameService offenderCallingNameService;
     private final OffenderFilesService offenderFilesService;
     private final GuardianService guardianService;
-    private final CommonCodeService commonCodeService;
+    private final CommonService commonService;
 
     @Autowired
     public OffenderService(OffenderDao offenderDao, ContraveneService contraveneService,
                            OffenderCallingNameService offenderCallingNameService,
                            OffenderFilesService offenderFilesService, GuardianService guardianService,
-                           CommonCodeService commonCodeService) {
+                           CommonService commonService) {
         this.offenderDao = offenderDao;
         this.contraveneService = contraveneService;
         this.offenderCallingNameService = offenderCallingNameService;
         this.offenderFilesService = offenderFilesService;
         this.guardianService = guardianService;
-        this.commonCodeService = commonCodeService;
+        this.commonService = commonService;
     }
 
     @Override
@@ -66,6 +67,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
             put = {@CachePut( value = "offender", key = "#offender.id" )} )
     @Transactional
     public Offender persist(Offender offender) {
+
         return offenderDao.save(offender);
     }
 
@@ -224,7 +226,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
         List< Offender > offenders = new ArrayList<>();
         //mobile one
         if ( offender.getMobileOne() != null ) {
-            final String mobileFinal = commonCodeService.commonMobileNumberLengthValidator(offender.getMobileOne());
+            final String mobileFinal = commonService.commonMobileNumberLengthValidator(offender.getMobileOne());
             offenders.addAll(offenderDao.findByMobileOne(mobileFinal));
             offenders.addAll(offenderDao.findByMobileTwo(mobileFinal));
             offenders.addAll(offenderDao.findByLand(mobileFinal));
@@ -234,7 +236,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
         }
         //mobile two
         if ( offender.getMobileTwo() != null ) {
-            final String mobileFinal = commonCodeService.commonMobileNumberLengthValidator(offender.getMobileTwo());
+            final String mobileFinal = commonService.commonMobileNumberLengthValidator(offender.getMobileTwo());
             offenders.addAll(offenderDao.findByMobileOne(mobileFinal));
             offenders.addAll(offenderDao.findByMobileTwo(mobileFinal));
             offenders.addAll(offenderDao.findByLand(mobileFinal));
@@ -244,7 +246,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
         }
         //mobile land
         if ( offender.getLand() != null ) {
-            final String landFinal = commonCodeService.commonMobileNumberLengthValidator(offender.getLand());
+            final String landFinal = commonService.commonMobileNumberLengthValidator(offender.getLand());
             offenders.addAll(offenderDao.findByMobileOne(landFinal));
             offenders.addAll(offenderDao.findByMobileTwo(landFinal));
             offenders.addAll(offenderDao.findByLand(landFinal));

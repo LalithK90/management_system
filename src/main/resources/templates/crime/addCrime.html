@@ -1,4 +1,4 @@
-<!doctype html>
+    <!doctype html>
 <html lang="en">
 <!--header Include-->
 <head id="header">
@@ -7,6 +7,29 @@
 <body>
 <!--nav Bar include-->
 <nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col-2">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col-8">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col-2">
+            <a href="/crime" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+
 <!--Form Content - start -->
 <div class="container-fluid bg-dark formBorder">
     <div class="col-sm-12 flex-column ">
@@ -81,7 +104,7 @@
                             <label class="control-label" for="remark">Remark :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="remark" class="form-control" tabindex="6" type="text"/>
+                            <textarea id="remark" class="form-control" tabindex="6" ></textarea>
                             <span class="error" id="remarkError">Error Remark</span>
                         </div>
                     </div>
@@ -130,7 +153,7 @@
                         <div class="col-md-8">
                             <input id="compoundedChargeSheetDate" class="form-control"
                                    placeholder="Ex: 1990 - 01 - 20"
-                                   required type="date"/>
+                                   type="date"/>
                         </div>
                     </div>
                     <!--date Of Order Of Persecution-->
@@ -142,7 +165,7 @@
                         <div class="col-md-8">
                             <input id="dateOfOrderOfPersecution" class="form-control"
                                    placeholder="Ex: 1990 - 01 - 20"
-                                   required type="date"/>
+                                  type="date"/>
                         </div>
                     </div>
                     <!--dateOfFillingPlaint-->
@@ -154,7 +177,7 @@
                         <div class="col-md-8">
                             <input id="dateOfFillingPlaint" class="form-control"
                                    placeholder="Ex: 1990 - 01 - 20"
-                                   required type="date"/>
+                                    type="date"/>
                         </div>
                     </div>
                     <!--dateOfJudgement-->
@@ -166,7 +189,7 @@
                         <div class="col-md-8">
                             <input id="dateOfJudgement" class="form-control"
                                    placeholder="Ex: 1990 - 01 - 20"
-                                   required type="date"/>
+                                   type="date"/>
                         </div>
                     </div>
                     <!--Created by and created at-->
@@ -188,6 +211,24 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <!--Translator Sinhala-->
+                <div class="container-fluid col-sm-6 text-center">
+                    <!--Sinhala modal button -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target=".bd-example-modal-xl"><i
+                            class="fas fa-language"></i> &nbsp;Singlish to Sinhala
+                    </button>
+                </div>
+                <!--Translator Tamil-->
+                <div class="container-fluid col-sm-6 text-center">
+                    <!-- modal tamil button -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#bd-example-modal-xl"><i
+                            class="fas fa-language"></i> &nbsp;Tamilish to Tamil
+                    </button>
                 </div>
             </div>
             <!--Button-->
@@ -212,5 +253,8 @@
 <footer id="footer" class="page-footer"></footer>
 <!--script include-->
 <script id="script"></script>
+<!--Translator-->
+<span id="translatorSinhala"></span>
+<span id="translatorTamil"></span>
 </body>
 </html>

@@ -10,6 +10,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -81,5 +83,10 @@ public class GuardianService implements AbstractService< Guardian, Long > {
     @Cacheable
     public Guardian findByNic(String nic) {
         return guardianDao.findByNic(nic);
+    }
+
+    @Cacheable
+    public List< Guardian > findByGuardianAndCreateBetween(LocalDateTime from, LocalDateTime to) {
+        return guardianDao.findByCreatedAtBetween(from, to);
     }
 }

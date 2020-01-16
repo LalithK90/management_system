@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.detectionTeam.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lk.imms.management_system.asset.detectionTeam.entity.Enum.DetectionTeamMemberRole;
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.util.audit.AuditEntity;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -26,6 +28,5 @@ public class DetectionTeamMember extends AuditEntity {
 
     @Enumerated( EnumType.STRING )
     private DetectionTeamMemberRole detectionTeamMemberRole;
-
 
 }

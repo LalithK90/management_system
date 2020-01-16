@@ -1,6 +1,6 @@
 package lk.imms.management_system.asset.petitioner.controller;
 
-import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
+import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.asset.petitioner.service.PetitionerService;
@@ -17,12 +17,12 @@ import javax.validation.Valid;
 @RequestMapping( "/petitioner" )
 public class PetitionerController {
     private final PetitionerService petitionerService;
-    private final CommonCodeService commonCodeService;
+    private final CommonService commonService;
 
     @Autowired
-    public PetitionerController(PetitionerService petitionerService, CommonCodeService commonCodeService) {
+    public PetitionerController(PetitionerService petitionerService, CommonService commonService) {
         this.petitionerService = petitionerService;
-        this.commonCodeService = commonCodeService;
+        this.commonService = commonService;
     }
 
     //All petitioner list send to frontend
@@ -71,9 +71,9 @@ public class PetitionerController {
             model.addAttribute("petitioner", petitioner);
             return "petitioner/addPetitioner";
         }
-        petitioner.setMobileOne(commonCodeService.commonMobileNumberLengthValidator(petitioner.getMobileOne()));
-        petitioner.setMobileTwo(commonCodeService.commonMobileNumberLengthValidator(petitioner.getMobileTwo()));
-        petitioner.setLand(commonCodeService.commonMobileNumberLengthValidator(petitioner.getLand()));
+        petitioner.setMobileOne(commonService.commonMobileNumberLengthValidator(petitioner.getMobileOne()));
+        petitioner.setMobileTwo(commonService.commonMobileNumberLengthValidator(petitioner.getMobileTwo()));
+        petitioner.setLand(commonService.commonMobileNumberLengthValidator(petitioner.getLand()));
 
         petitionerService.persist(petitioner);
         return "redirect:/petitioner";

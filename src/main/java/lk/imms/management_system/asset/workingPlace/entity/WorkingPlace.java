@@ -8,6 +8,7 @@ import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.WorkingPlaceType;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -21,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
-@JsonFilter("WorkingPlace")
+@JsonFilter( "WorkingPlace" )
 @ToString
 public class WorkingPlace extends AuditEntity {
 
@@ -43,20 +44,14 @@ public class WorkingPlace extends AuditEntity {
     @Column( nullable = false )
     private String address;
 
-    @Size( max = 10, message = "Land number length should be contained 10 or 9 \n At least one phone number " +
-            "should be in on working place" )
     private String landOne;
 
-    @Size( max = 10, message = "Land number length should be contained 10 or 9" )
     private String landTwo;
 
-    @Size( max = 10, message = "Land number length should be contained 10 or 9" )
     private String landThree;
 
-    @Size( max = 10, message = "Land number length should be contained 10 or 9" )
     private String landFour;
 
-    @Size( max = 10, message = "Fax number length should be contained 10 or 9" )
     private String faxNumber;
 
     @Email( message = "Provide valid email" )
@@ -64,7 +59,7 @@ public class WorkingPlace extends AuditEntity {
     private String emailOne;
 
     @Email( message = "Provide valid email" )
-    @Column( unique = true)
+    @Column( unique = true )
     private String emailTwo;
 
     @OneToMany( mappedBy = "workingPlace", fetch = FetchType.EAGER )

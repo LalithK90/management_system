@@ -1,5 +1,7 @@
 package lk.imms.management_system.asset.OffednerGuardian.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
 import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.util.audit.AuditEntity;
@@ -9,6 +11,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -23,6 +26,7 @@ public class Guardian extends AuditEntity {
     private GuardianType guardianType;
 
     private String name;
+
 
     @Size( max = 12, min = 10, message = "NIC number is contained numbers between 9 and X/V or 12 " )
     @Column(unique = true)

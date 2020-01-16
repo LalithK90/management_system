@@ -17,7 +17,7 @@
       <!--court-->
     <attr sel="#court" th:text="${crime.court.name}"/>
     <!--Crime view-->
-    <attr sel="#crimeView" th:href="${'/crime/' + crime.id}"/>
+    <attr sel="#crimeView" th:href="${'/crime/view' + crime.id}"/>
     <!--Crime Edit-->
     <attr sel="#crimeEdit" th:href="${'/crime/edit/' + crime.id}"/>
     <!--Crime Delete-->

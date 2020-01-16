@@ -1,13 +1,12 @@
 package lk.imms.management_system.asset.minutePetition.controller;
 
 
-import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
+import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.minutePetition.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionFilesService;
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
-import lk.imms.management_system.asset.offender.entity.OffenderFiles;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.PetitionState;
 import lk.imms.management_system.asset.petition.service.PetitionService;
@@ -35,18 +34,18 @@ public class MinutePetitionController {
     private final MinutePetitionFilesService minutePetitionFilesService;
     private final PetitionService petitionService;
     private final PetitionStateService petitionStateService;
-    private final CommonCodeService commonCodeService;
+    private final CommonService commonService;
 
     @Autowired
     public MinutePetitionController(MinutePetitionService minutePetitionService,
                                     MinutePetitionFilesService minutePetitionFilesService,
                                     PetitionService petitionService, PetitionStateService petitionStateService,
-                                    CommonCodeService commonCodeService) {
+                                    CommonService commonService) {
         this.minutePetitionService = minutePetitionService;
         this.minutePetitionFilesService = minutePetitionFilesService;
         this.petitionService = petitionService;
         this.petitionStateService = petitionStateService;
-        this.commonCodeService = commonCodeService;
+        this.commonService = commonService;
     }
     @GetMapping( "/file/{filename}" )
     public ResponseEntity< byte[] > downloadFile(@PathVariable( "filename" ) String filename) {
@@ -58,7 +57,7 @@ public class MinutePetitionController {
     private String commonCode(Model model) {
         model.addAttribute("minuteStates", MinuteState.values());
         model.addAttribute("petitionStateTypes", PetitionStateType.values());
-        commonCodeService.commonUrlBuilder(model);
+        commonService.commonUrlBuilder(model);
         return "minutePetition/addMinutePetition";
     }
 

@@ -62,5 +62,6 @@
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
     <attr sel="#stationFindJS" th:src="@{/js/stationFindUsingProvince.js}"/>
+    <attr sel="#passwordValidate" th:src="@{/js/passwordValidator.js}"/>
 
 </thlogic>

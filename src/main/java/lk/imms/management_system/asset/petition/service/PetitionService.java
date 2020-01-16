@@ -1,8 +1,9 @@
 package lk.imms.management_system.asset.petition.service;
 
-import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
+
 import lk.imms.management_system.asset.petition.dao.PetitionDao;
 import lk.imms.management_system.asset.petition.entity.Petition;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
@@ -10,7 +11,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -40,6 +41,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     @Caching( evict = {@CacheEvict( value = "petition", allEntries = true )},
             put = {@CachePut( value = "petition", key = "#petition.id" )} )
     public Petition persist(Petition petition) {
+
         return petitionDao.save(petition);
     }
 
@@ -75,5 +77,10 @@ public class PetitionService implements AbstractService< Petition, Long > {
         Example< Petition > petitionExample = Example.of(petition, matcher);
 
         return petitionDao.findAll(petitionExample);
+    }
+
+    @Cacheable
+    public Long countByWorkingPlaceAndCreatedAtBetween(WorkingPlace workingPlace, LocalDateTime from, LocalDateTime to) {
+        return petitionDao.countByWorkingPlaceAndCreatedAtBetween(workingPlace, from, to);
     }
 }

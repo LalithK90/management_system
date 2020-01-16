@@ -6,9 +6,6 @@
     "Iskoola Pota";
     --error-color: #fa370d;
 }
-/*those are used to jquery-ui theme */
-#resizable { width: 150px; height: 150px; padding: 0.5em; }
-#resizable h3 { text-align: center; margin: 0; }
 
 #loginBack {
     background-image: url('../img/loginBackground.jpg');
@@ -60,7 +57,7 @@ body {
 
 /* for login form - start*/
 #loginPage {
-    margin-top: 390px;
+    margin-top: 315px;
     color: white;
 
 }

@@ -1,6 +1,6 @@
 package lk.imms.management_system.asset.report;
 
-import lk.imms.management_system.asset.commonAsset.service.CommonCodeService;
+import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.court.service.CourtService;
 import lk.imms.management_system.asset.crime.service.CrimeService;
@@ -37,7 +37,7 @@ public class ReportController {
     private final MinutePetitionFilesService minutePetitionFilesService;
     private final PetitionStateService petitionStateService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
-    private final CommonCodeService commonCodeService;
+    private final CommonService commonService;
     private final PetitionOffenderService petitionOffenderService;
 
     @Autowired
@@ -46,7 +46,7 @@ public class ReportController {
                             MinutePetitionService minutePetitionService, OffenderService offenderService,
                             PetitionerService petitionerService, UserService userService, RoleService roleService,
                             PetitionService petitionService, MinutePetitionFilesService minutePetitionFilesService,
-                            PetitionStateService petitionStateService, MakeAutoGenerateNumberService makeAutoGenerateNumberService, CommonCodeService commonCodeService, PetitionOffenderService petitionOffenderService) {
+                            PetitionStateService petitionStateService, MakeAutoGenerateNumberService makeAutoGenerateNumberService, CommonService commonService, PetitionOffenderService petitionOffenderService) {
         this.contraveneService = contraveneService;
         this.courtService = courtService;
         this.crimeService = crimeService;
@@ -61,7 +61,7 @@ public class ReportController {
         this.minutePetitionFilesService = minutePetitionFilesService;
         this.petitionStateService = petitionStateService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
-        this.commonCodeService = commonCodeService;
+        this.commonService = commonService;
         this.petitionOffenderService = petitionOffenderService;
     }
 

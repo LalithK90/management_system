@@ -35,9 +35,13 @@ public class EmployeeFilesService {
         return employeeFilesDao.findByName(filename);
     }
 
-    public void persist(List< EmployeeFiles > storedFile) {
+    public void persistList(List< EmployeeFiles > storedFile) {
         employeeFilesDao.saveAll(storedFile);
     }
+    public void persist(EmployeeFiles  storedFile) {
+        employeeFilesDao.save(storedFile);
+    }
+
 
     public List< EmployeeFiles > search(EmployeeFiles employeeFiles) {
         ExampleMatcher matcher = ExampleMatcher
