@@ -1,5 +1,6 @@
 package lk.imms.management_system;
 
+import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.asset.userManagement.entity.Role;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.RoleService;
@@ -52,4 +53,11 @@ public class UserCreateRestController {
 
         return user;
     }
+    @GetMapping("/petitionerStart")
+    public Petitioner savePetitioner(){
+        Petitioner petitioner = new Petitioner();
+
+        return petitioner;
+    }
+
 }

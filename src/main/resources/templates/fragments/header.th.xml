@@ -12,5 +12,4 @@
     <attr sel="#imagesUploader" th:href="@{/css/image-uploader.min.css}"/>
     <attr sel="#floatingLabel" th:href="@{/css/floating-labels.css}"/>
     <attr sel="#mainPageTiles" th:href="@{/css/mainPageTiles.css}"/>
-    <attr sel="#navbar" th:href="@{/css/navbar.css}"/>
 </thlogic>

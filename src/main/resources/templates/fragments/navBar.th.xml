@@ -1,3 +1,42 @@
 <thlogic xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <attr sel="#navBar" th:fragment="navBarFragment"/>
+    <!--Home icon-->
+    <attr sel="#home" th:href="@{/home}"/>
+    <!--After user login below items will display -->
+    <attr sel="#navBarContent" sec:authorize="isAuthenticated()">
+        <!--Administrations -->
+        <attr sel="#contraveneManagement" th:href="@{/contravene}"/>
+        <attr sel="#courtManagement" th:href="@{/court}"/>
+        <attr sel="#crimeManagement" th:href="@{/crime}"/>
+        <attr sel="#detectionTeamManagement" th:href="@{/detection}"/>
+        <attr sel="#employeeManagement" th:href="@{/employee}"/>
+        <attr sel="#offenderManagement" th:href="@{/offender}"/>
+        <attr sel="#petitionManagement" th:href="@{/petition}"/>
+        <attr sel="#petitionerManagement" th:href="@{/petitioner}"/>
+        <attr sel="#roleManagement" th:href="@{/role}"/>
+        <attr sel="#userManagement" th:href="@{/user}"/>
+        <attr sel="#workingPlaceManagement" th:href="@{/workingPlace}"/>
+        <!--Transaction-->
+        <attr sel="#addContravene" th:href="@{/contravene/add}"/>
+        <attr sel="#addCourt" th:href="@{/court/add}"/>
+        <attr sel="#addEmployee" th:href="@{/employee/add}"/>
+        <attr sel="#addOffender" th:href="@{/offender/add}"/>
+        <attr sel="#searchOffender" th:href="@{/offender/search}"/>
+        <attr sel="#addPetition" th:href="@{/petition/add}"/>
+        <attr sel="#searchPetition" th:href="@{/petition/search}"/>
+        <attr sel="#addUser" th:href="@{/user/add}"/>
+        <attr sel="#addWorkingPlace" th:href="@{/workingPlace/add}"/>
+        <!--Report-->
+
+    </attr>
+    <!--Space maintainer-->
+    <attr sel="#spaceMaintainer" sec:authorize="!isAuthenticated()"/>
+
+    <!--User-->
+    <attr sel="#logedUser" sec:authorize="isAuthenticated()"/>
+    <attr sel="#logedUserName" th:text="${#authentication.name}"/>
+    <!--Login - out-->
+    <attr sel="#loged" sec:authorize="isAuthenticated()"/>
+    <attr sel="#logedNot" sec:authorize="!isAuthenticated()"/>
 </thlogic>
+

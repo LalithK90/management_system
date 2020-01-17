@@ -6,38 +6,68 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" id="navBarContent">
             <li class="nav-item ">
-                <a class="nav-link" href="#"><i class="fa fa-home fa-lg"></i>
+                <a class="nav-link" id="home"><i class="fa fa-home fa-2x"></i>
                     Home <span class="sr-only">(current)</span></a>
-            </li>
+            </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Administration
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item btn btn-group-sm" id="contraveneManagement">Contravene
+                                                                                        Management
+                    </a>
+                    <a class="dropdown-item btn btn-group-sm" id="courtManagement">Court Management
+                    </a>
+                    <a class="dropdown-item btn btn-group-sm" id="crimeManagement">Crime Management
+                    </a>
+                    <a class="dropdown-item btn btn-group-sm" id="detectionTeamManagement">Detection Team Management
+                    </a>
+                    <a class="dropdown-item btn btn-group-sm" id="employeeManagement">Employee Management
+                    </a>
+                    <a class="dropdown-item btn btn-group-sm" id="offenderManagement">Offender Management
+                    </a>
+                    <a class="dropdown-item btn btn-group-sm" id="petitionManagement">Petition Management
+                    </a>
+                    <a class="dropdown-item btn btn-group-sm" id="petitionerManagement">Petitioner Management
+                    </a>
+                    <a class="dropdown-item btn btn-group-sm" id="roleManagement">Role Management
+                    </a>
+                    <a class="dropdown-item btn btn-group-sm" id="userManagement">User Management
+                    </a>
+                    <a class="dropdown-item btn btn-group-sm" id="workingPlaceManagement">Working Place Management
+                    </a>
                 </div>
-            </li>
+            </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOne" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Transaction
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownOne">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item btn btn-group-sm" id="addContravene">Add Contravene</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item btn btn-group-sm" id="addCourt">Add Court</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item btn btn-group-sm" id="addEmployee">Add Employee</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item btn btn-group-sm" id="addOffender">Add Offender</a>
+                    <a class="dropdown-item btn btn-group-sm" id="searchOffender">Search Offender</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item btn btn-group-sm" id="addPetition">Add Petition</a>
+                    <a class="dropdown-item btn btn-group-sm" id="searchPetition">Search Petition</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item btn btn-group-sm" id="addUser">Add User</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item btn btn-group-sm" id="addWorkingPlace">Add Working Place</a>
                 </div>
-            </li>
+            </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTwo" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -49,36 +79,36 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
+            </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </ul>
+        <div class="col-10" id="spaceMaintainer"></div>
+        <ul class="navbar-nav mr-auto ">
+            <li class="nav-item dropdown" id="logedUser">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-tie fa-lg"></i>&nbsp;&nbsp;
+                    <span id="logedUserName"></span>
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                    <a class="dropdown-item dropdown-item btn btn-group-sm" href="/profile">
+                        <i class="fas fa-user-cog fa-lg"></i> &nbsp;Profile
+                    </a>
+                    <a class="dropdown-item dropdown-item btn btn-group-sm" href="/passwordChange">
+                        <i class="fas fa-key fa-lg"></i>&nbsp;Change Password</a>
+                </div>
+            </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="nav-item dropdown " id="loged">
+                <a href="/logout" class="nav-link"> <i class="fas fa-sign-out-alt fa-2x"></i>&nbsp;&nbsp; Log
+                                                                                             out</a>
+            </li>
+            <li class="nav-item dropdown " id="logedNot">
+                <a href="/login" class="nav-link"><i class="fas fa-sign-in-alt fa-2x"></i>&nbsp;&nbsp;Login</a>
             </li>
         </ul>
-        <div class="text-right">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-tie fa-lg"></i>&nbsp;&nbsp;
-                        <span th:text="${#authentication.name}"></span>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="/profile">
-                            <i class="fas fa-user-cog fa-lg"></i> &nbsp;Profile
-                        </a>
-                        <a class="dropdown-item" href="/passwordChange">
-                            <i class="fas fa-key fa-lg"></i>&nbsp;Change Password</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                    <a href="/logout" class="nav-link"> <i class="fas fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp; Log
-                                                                                                 out</a>
-                </li>
-                <li class="nav-item dropdown" sec:authorize="!isAuthenticated()">
-                    <a href="/login" class="nav-link"><i class="fas fa-sign-in-alt fa-lg"></i>&nbsp;&nbsp;Login</a>
-                </li>
-            </ul>
-        </div>
     </div>
 </nav>
 </body>
 </html>
+

@@ -33,6 +33,7 @@ public class UserService implements AbstractService< User, Long > {
     }
 
     @Cacheable
+    @Transactional
     public User findById(Long id) {
         return userDao.getOne(id);
     }

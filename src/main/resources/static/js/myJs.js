@@ -4,7 +4,7 @@ $(document).ready(function () {
     document.getElementById("currentYear").innerHTML = new Date().getFullYear();
 
     /*//Nav bar properties - start//*/
-    $('ul.nav li.dropdown').hover(function () {
+    $('ul.navbar-nav li.dropdown').hover(function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(10);
     }, function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(10);
@@ -543,16 +543,6 @@ $(function () {
 //$( "#dateOfBirth" ).datepicker;
 //$( document ).tooltip();
 
-//password show hide
-$(".toggle-password").click(function () {
-    $(this).toggleClass("fa-eye fa-eye-slash");
-    let input = $($(this).attr("toggle"));
-    if (input.attr("type") == "password") {
-        input.attr("type", "text");
-    } else {
-        input.attr("type", "password");
-    }
-});
 
 //password validator user add
 $('#password').keyup(function () {
@@ -574,8 +564,7 @@ $('#nrepsw, #npsw').keyup(function () {
     let newPassword = $('#npsw').val();
     let newPasswordReEnter = $('#nrepsw').val();
     let matchPassword = $('#passwordMatch');
-    console.log(" before if new password " + newPassword + "  re enter " + newPasswordReEnter);
-    if (newPassword === newPasswordReEnter && newPassword.length !== 0 && newPasswordReEnter.length !== 0) {
+   if (newPassword === newPasswordReEnter && newPassword.length !== 0 && newPasswordReEnter.length !== 0) {
         matchPassword.removeClass();
         matchPassword.addClass('badge badge-pill badge-success');
         matchPassword.html('Congratulations .! &nbsp;&nbsp;&nbsp; your passwords are matched');
@@ -619,3 +608,15 @@ let checkStrength = function (password, filedId) {
         return ` Strong , Password length : ${password.length}`;
     }
 };
+
+//password show hide button
+
+$(".reveal").on('click', function () {
+    let $pwd = $(".pwd");
+    if ($pwd.attr('type') === 'password') {
+        $pwd.attr('type', 'text');
+
+    } else {
+        $pwd.attr('type', 'password');
+    }
+});

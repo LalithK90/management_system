@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String[] ALL_PERMIT_URL = {"/static/favicon.ico", "/img/**", "/css/**", "/js/**", "/webjars/**",
-            "/actuator/**", "/login", "/select/**"};
+            "/actuator/**", "/login", "/select/**", "/", "/index"};
 
     @Bean
     public UserDetailsServiceImpl userDetailsService() {
@@ -72,31 +72,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin(
                         formLogin ->
                                 formLogin
-                                        .loginPage("/login")
+                                        .loginPage("/")
+                                        .loginProcessingUrl("/login")
                                         //Username and password for validation
                                         .usernameParameter("username")
                                         .passwordParameter("password")
-                                        .defaultSuccessUrl("/mainWindow"))
+                                        .defaultSuccessUrl("/mainWindow", true))
                 //session management
                 .sessionManagement(
                         sessionManagement ->
                                 sessionManagement
-                                        .maximumSessions(1)
-                                        .maxSessionsPreventsLogin(true)
-                                        .expiredUrl("/login"))
+                                        .sessionConcurrency(sessionConcurrency ->
+                                                                    sessionConcurrency
+                                                                            .maximumSessions(1)
+                                                                            .expiredUrl("/index"))
+                                  )
                 //Logout controlling
                 .logout(
                         logout ->
                                 logout
-                                        .invalidateHttpSession(true)
+                                        .deleteCookies("remove")
+                                        .invalidateHttpSession(false)
                                         .clearAuthentication(true)
-                                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                        .logoutSuccessUrl("/login"))
-                //Port mapper
-          /*      .portMapper(portMapper ->
-                                    portMapper
-                                            .http(9090).mapsTo(8080))*/
-                //Cross site disable
+                                        .logoutUrl("/logout")
+                                        .logoutSuccessUrl("/index"))
+
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling();
 

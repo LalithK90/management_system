@@ -135,7 +135,7 @@ public class UserController {
             model.addAttribute("user", user);
             return commonCode(model);
         }
-        //todo-> user is super senior office need to provide all working palace to check
+        //user is super senior office need to provide all working palace to check
 
         Employee employee = employeeService.findById(user.getEmployee().getId());
         if ( user.isEnabled() ) {
@@ -143,21 +143,18 @@ public class UserController {
         }
         // if user desigantion is belongs to supper senior category all workstations are able to check
         if ( employee.getDesignation().equals(Designation.CGE) || employee.getDesignation().equals(Designation.ACGE) || employee.getDesignation().equals(Designation.CE) ||
-                employee.getDesignation().equals(Designation.DCEL) || employee.getDesignation().equals(Designation.DCELE) ) {
+                employee.getDesignation().equals(Designation.DCL) || employee.getDesignation().equals(Designation.DCLE) ) {
             user.setWorkingPlaces(workingPlaceService.findAll());
 
         }
         // userService.persist(user);
-        if ( employee != null ) {
-            if ( employee.getEmployeeStatus().equals(EmployeeStatus.WORKING) ) {
-                user.setEnabled(true);
-            } else {
-                user.setEnabled(false);
-            }
-            user.setCreatedDate(dateTimeAgeService.getCurrentDate());
+        if ( employee.getEmployeeStatus().equals(EmployeeStatus.WORKING) ) {
             user.setEnabled(true);
-            //User user1 = userService.persist(user);
+        } else {
+            user.setEnabled(false);
         }
+        user.setCreatedDate(dateTimeAgeService.getCurrentDate());
+        user.setEnabled(true);
         userService.persist(user);
         return "redirect:/user";
     }
@@ -165,7 +162,8 @@ public class UserController {
 
     @GetMapping( value = "/remove/{id}" )
     public String removeUser(@PathVariable Long id) {
-        userService.delete(id);
+       // user can not be deleted
+        //userService.delete(id);
         return "redirect:/user";
     }
 
