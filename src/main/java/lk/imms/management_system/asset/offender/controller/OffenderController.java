@@ -175,6 +175,9 @@ public class OffenderController {
             //offender file is not
             if ( offender.getFiles() != null ) {
                 for ( MultipartFile file : offender.getFiles() ) {
+                    if ( file.getOriginalFilename() == null && file.getContentType().equals("application/octet-stream") ) {
+                        continue;
+                    }
                     if ( file.getOriginalFilename() != null ) {
                         OffenderFiles offenderFiles = offenderFilesService.findByNameAndOffender(file.getOriginalFilename(),offender1);
                         if ( offenderFiles != null ) {

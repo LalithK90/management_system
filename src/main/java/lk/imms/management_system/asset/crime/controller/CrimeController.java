@@ -2,11 +2,15 @@ package lk.imms.management_system.asset.crime.controller;
 
 import lk.imms.management_system.asset.court.service.CourtService;
 import lk.imms.management_system.asset.crime.entity.Crime;
+import lk.imms.management_system.asset.crime.entity.entity.CrimeStatus;
 import lk.imms.management_system.asset.crime.service.CrimeService;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.detectionTeam.service.DetectionTeamService;
 import lk.imms.management_system.asset.petition.service.PetitionService;
+import lk.imms.management_system.asset.userManagement.entity.Role;
+import lk.imms.management_system.asset.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,14 +23,17 @@ public class CrimeController {
     private final CourtService courtService;
     private final DetectionTeamService detectionTeamService;
     private final PetitionService petitionService;
+    private final UserService userService;
 
     @Autowired
     public CrimeController(CrimeService crimeService, CourtService courtService,
-                           DetectionTeamService detectionTeamService, PetitionService petitionService) {
+                           DetectionTeamService detectionTeamService, PetitionService petitionService,
+                           UserService userService) {
         this.crimeService = crimeService;
         this.courtService = courtService;
         this.detectionTeamService = detectionTeamService;
         this.petitionService = petitionService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -41,6 +48,7 @@ public class CrimeController {
         model.addAttribute("addStatus", state);
         model.addAttribute("courts", courtService.findAll());
         model.addAttribute("crime", crime);
+        model.addAttribute("crimeStatuses", CrimeStatus.values());
         return "crime/addCrime";
     }
 
@@ -52,6 +60,7 @@ public class CrimeController {
         model.addAttribute("petitionNumber",
                            petitionService.findById(detectionTeam.getPetition().getId()).getPetitionNumber());
         model.addAttribute("crime", crime);
+        model.addAttribute("crimeStatus", CrimeStatus.values());
         return "crime/crime-detail";
     }
 
@@ -69,8 +78,30 @@ public class CrimeController {
 
     @PostMapping( value = {"/add", "/update"} )
     public String saveCrime(@ModelAttribute Crime crime, BindingResult result, Model model) {
+
+        boolean authorityRole = false;
+        for ( Role role :
+                userService.findById(userService.findByUserIdByUserName(SecurityContextHolder.getContext().getAuthentication().getName())).getRoles() ) {
+            if ( role.getRoleName().equals("CGE") || role.getRoleName().equals("ACGE") || role.getRoleName().equals(
+                    "CE") || role.getRoleName().equals("DCL") || role.getRoleName().equals("DCLE") || role.getRoleName().equals("ACE") || role.getRoleName().equals("SE") || role.getRoleName().equals("OIC") ) {
+                authorityRole = true;
+                break;
+            }
+        }
+
         if ( result.hasErrors() ) {
             return commonCode(model, crime, true);
+        }
+        if ( authorityRole ) {
+            if ( crime.getCrimeStatus() == null && crime.getDetectionTeam() != null ) {
+                crime.setCrimeStatus(CrimeStatus.NO);
+                if ( crime.getCompoundedChargeSheetDate() != null && crime.getDateOfOrderOfPersecution() != null && crime.getCrimeStatus().equals(CrimeStatus.NO) ) {
+                    crime.setCrimeStatus(CrimeStatus.PARTIAL);
+                    if ( crime.getDateOfFillingPlaint() != null && crime.getDateOfJudgement() != null && crime.getCrimeStatus().equals(CrimeStatus.PARTIAL) ) {
+                        crime.setCrimeStatus(CrimeStatus.COMPLETED);
+                    }
+                }
+            }
         }
 
         crimeService.persist(crime);

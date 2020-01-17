@@ -10,7 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -26,34 +29,38 @@ public class ProfileController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping(value = "/profile")
+    @GetMapping( value = "/profile" )
     public String userProfile(Model model, Principal principal) {
         model.addAttribute("addStatus", true);
         model.addAttribute("employeeDetail", userService.findByUserName(principal.getName()).getEmployee());
         return "employee/employee-detail";
     }
 
-    @GetMapping(value = "/passwordChange")
+    @GetMapping( value = "/passwordChange" )
     public String passwordChangeForm(Model model) {
         model.addAttribute("pswChange", new PasswordChange());
         return "login/passwordChange";
     }
 
-    @PostMapping(value = "/passwordChange")
-    public String passwordChange(@Valid @ModelAttribute PasswordChange passwordChange, Model model, BindingResult result) {
-        User user = userService.findById(userService.findByUserIdByUserName(SecurityContextHolder.getContext().getAuthentication().getName()));
-        System.out.println(passwordChange.toString());
-        if (passwordEncoder.matches(passwordChange.getOldPassword(), user.getPassword()))
-            if (!result.hasErrors()) {
-                if (passwordChange.getNewPassword().equals(passwordChange.getNewPasswordConform())) {
-                    user.setPassword(passwordChange.getNewPassword());
-                    userService.persist(user);
-                    System.out.println("user password update");
-                    model.addAttribute("message", "Successfully Change Your Password");
-                    model.addAttribute("alert", true);
-                    return "fragments/alert";
-                }
-            }
+    @PostMapping( value = "/passwordChange" )
+    public String passwordChange(@Valid @ModelAttribute PasswordChange passwordChange,
+                                 BindingResult result, RedirectAttributes redirectAttributes) {
+        User user =
+                userService.findById(userService.findByUserIdByUserName(SecurityContextHolder.getContext().getAuthentication().getName()));
+
+        if ( passwordEncoder.matches(passwordChange.getOldPassword(), user.getPassword()) && !result.hasErrors() && passwordChange.getNewPassword().equals(passwordChange.getNewPasswordConform()) ) {
+
+            user.setPassword(passwordChange.getNewPassword());
+            userService.persist(user);
+
+            redirectAttributes.addFlashAttribute("message", "Congratulations .!! Success password is changed");
+            redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+            return "redirect:/home";
+
+        }
+        redirectAttributes.addFlashAttribute("message", "Failed");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
         return "redirect:/passwordChange";
+
     }
 }

@@ -89,6 +89,9 @@ public class MinutePetitionController {
         //if there is nothing to save files
         if ( !minutePetition.getFiles().isEmpty() && minutePetition.getFiles().size() != 0 && minutePetition.getFiles().get(0).getOriginalFilename() != null ) {
             for ( MultipartFile file : minutePetition.getFiles() ) {
+                if ( file.getOriginalFilename() == null && file.getContentType() == "application/octet-stream" ) {
+                    continue;
+                }
                 MinutePetitionFiles minutePetitionFile =
                         minutePetitionFilesService.findByName(file.getOriginalFilename());
                 if ( minutePetitionFile != null ) {

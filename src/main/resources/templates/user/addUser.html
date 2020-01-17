@@ -133,6 +133,10 @@
                         <input class="form-control validate" id="password"
                                placeholder="Enter Password Here" required type="password"
                         />
+                        <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        <div class="text-right">
+                            <span id="result"></span>
+                        </div>
                     </div>
                 </div>
                 <!--Working Place Find-->
@@ -170,8 +174,9 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-row alert alert-danger text-center"><strong>Attention !</strong>
-                        <br/>If Employee is belong to supper senior category.
+                    <div class="form-row alert alert-danger text-center">
+                        <strong>Attention !</strong>
+                        If Employee is belong to supper senior category.
                         <strong>Please select one or two work station </strong>.
                     </div>
                 </div>
@@ -232,6 +237,6 @@
 <script id="script"></script>
 <script id="stationFindJS"></script>
 <script id="customJS"></script>
-<script id="passwordValidate"></script>
+
 </body>
 </html>

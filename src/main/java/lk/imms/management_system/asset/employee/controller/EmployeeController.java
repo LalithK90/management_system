@@ -62,7 +62,7 @@ public class EmployeeController {
 
     // Common things for an employee add and update
     private String commonThings(Model model) {
-       commonService.commonEmployeeAndOffender(model);
+        commonService.commonEmployeeAndOffender(model);
         model.addAttribute("workingPlaces", workingPlaceService.findAll());
         return "employee/addEmployee";
     }
@@ -84,7 +84,7 @@ public class EmployeeController {
     }
 
     //Send on employee details
-    @GetMapping( value = "/{id}")
+    @GetMapping( value = "/{id}" )
     public String employeeView(@PathVariable( "id" ) Long id, Model model) {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employeeDetail", employee);
@@ -130,7 +130,7 @@ public class EmployeeController {
             employeeService.persist(employee);
 
             //if employee state is not working he or she cannot access to the system
-            if  (!employee.getEmployeeStatus().equals(EmployeeStatus.WORKING)){
+            if ( !employee.getEmployeeStatus().equals(EmployeeStatus.WORKING) ) {
                 User user = userService.findUserByEmployee(employeeService.findByNic(employee.getNic()));
                 //if employee not a user
                 if ( user != null ) {
@@ -140,6 +140,9 @@ public class EmployeeController {
             }
             //save employee images file
             for ( MultipartFile file : employee.getFiles() ) {
+                if ( file.getOriginalFilename() == null && file.getContentType().equals("application/octet-stream") ) {
+                  continue;
+                }
                 EmployeeFiles employeeFiles = employeeFilesService.findByName(file.getOriginalFilename());
                 if ( employeeFiles != null ) {
                     // update new contents
@@ -169,7 +172,7 @@ public class EmployeeController {
     }
 
     //If need to employee {but not applicable for this }
-    @GetMapping( value = "/remove/{id}")
+    @GetMapping( value = "/remove/{id}" )
     public String removeEmployee(@PathVariable Long id) {
         employeeService.delete(id);
         return "redirect:/employee";
@@ -187,7 +190,7 @@ public class EmployeeController {
 //----> EmployeeWorkingPlace - details management - start <----//
 
     //Send form to add working place before find employee
-    @GetMapping( value = "/workingPlace")
+    @GetMapping( value = "/workingPlace" )
     public String addEmployeeWorkingPlaceForm(Model model) {
         model.addAttribute("employee", new Employee());
         model.addAttribute("employeeDetailShow", false);
@@ -195,7 +198,7 @@ public class EmployeeController {
     }
 
     //Send a searched employee to add working place
-    @PostMapping( value = "/workingPlace")
+    @PostMapping( value = "/workingPlace" )
     public String addWorkingPlaceEmployeeDetails(@ModelAttribute( "employee" ) Employee employee, Model model) {
 
         List< Employee > employees = employeeService.search(employee);
@@ -226,7 +229,7 @@ public class EmployeeController {
         return "employeeWorkingPlace/addEmployeeWorkingPlace";
     }
 
-    @PostMapping( value = "/workingPlace/add")
+    @PostMapping( value = "/workingPlace/add" )
     public String addWorkingPlaceEmployee(@ModelAttribute( "employeeWorkingPlaceHistory" ) EmployeeWorkingPlaceHistory employeeWorkingPlaceHistory, Model model) {
         System.out.println(employeeWorkingPlaceHistory.toString());
         // -> need to write validation before the save working place

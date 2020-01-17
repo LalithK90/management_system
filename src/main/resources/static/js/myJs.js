@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
     /* Patient and employee Nic Validation - end*/
     //input type date can not be selected future date
-    $('[type="date"]').prop('max', function(){
+    $('[type="date"]').prop('max', function () {
         return new Date().toJSON().split('T')[0];
     });
 
@@ -531,14 +531,91 @@ let deleteAllTableRow = function (tableName) {
 /*jquery - ui function*/
 //$( "input" ).checkboxradio;
 
-$( function() {
-    $( "#" ).resizable({
+$(function () {
+    $("#").resizable({
         autoHide: true,
         aspectRatio: true,
-        ghost:true,
+        ghost: true,
     });
-} );
+});
 
 //$( ".login" ).draggable();
 //$( "#dateOfBirth" ).datepicker;
 //$( document ).tooltip();
+
+//password show hide
+$(".toggle-password").click(function () {
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    let input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+        input.attr("type", "text");
+    } else {
+        input.attr("type", "password");
+    }
+});
+
+//password validator user add
+$('#password').keyup(function () {
+    $(this).attr('min', 6);
+    $('#result').html(checkStrength($(this).val(), $('#result')));
+});
+//new password validator
+$('#npsw').keyup(function () {
+    $(this).attr('min', 6);
+    $('#resultOne').html(checkStrength($(this).val(), $('#resultOne')));
+});
+//new re enter password validator
+$('#nrepsw').keyup(function () {
+    $(this).attr('min', 6);
+    $('#resultTwo').html(checkStrength($(this).val(), $('#resultTwo')));
+});
+//password match
+$('#nrepsw, #npsw').keyup(function () {
+    let newPassword = $('#npsw').val();
+    let newPasswordReEnter = $('#nrepsw').val();
+    let matchPassword = $('#passwordMatch');
+    console.log(" before if new password " + newPassword + "  re enter " + newPasswordReEnter);
+    if (newPassword === newPasswordReEnter && newPassword.length !== 0 && newPasswordReEnter.length !== 0) {
+        matchPassword.removeClass();
+        matchPassword.addClass('badge badge-pill badge-success');
+        matchPassword.html('Congratulations .! &nbsp;&nbsp;&nbsp; your passwords are matched');
+    } else {
+        matchPassword.removeClass();
+        matchPassword.addClass('badge badge-pill badge-info');
+        matchPassword.html('Password is not match value');
+    }
+});
+
+//filed validator
+let checkStrength = function (password, filedId) {
+    let strength = 0;
+    if (password.length < 6) {
+        filedId.removeClass();
+        filedId.addClass('badge badge-pill badge-dark ');
+        return `Too short  , Password length : ${password.length}`;
+    }
+    if (password.length > 7) strength += 1
+// If password contains both lower and uppercase characters, increase strength value.
+    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
+// If it has numbers and characters, increase strength value.
+    if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
+// If it has one special character, increase strength value.
+    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+// If it has two special characters, increase strength value.
+    if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+// Calculated strength value, we can return messages
+// If value is less than 2
+    if (strength < 2) {
+        filedId.removeClass();
+        filedId.addClass('badge badge-pill badge-warning');
+        return ` Weak , Password length : ${password.length}`;
+    } else if (strength === 2) {
+        filedId.removeClass();
+        filedId.addClass('badge badge-pill badge-primary');
+        return ` Good , Password length : ${password.length}`;
+    } else {
+        filedId.removeClass();
+        filedId.addClass('badge badge-pill badge-success');
+        return ` Strong , Password length : ${password.length}`;
+    }
+};

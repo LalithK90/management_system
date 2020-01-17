@@ -10,8 +10,8 @@ public enum Designation {
     CGE("Commissioner General Of Excise"),
     ACGE("Additional Commissioner General Of Excise"),
     CE("Commissioner Of Excise"),
-    DCEL("Deputy Commissioner Of Excise( Legal )"),
-    DCELE("Deputy Commissioner Excise(Law Enforcement)"),
+    DCL("Deputy Commissioner Of Excise( Legal )"),
+    DCLE("Deputy Commissioner Excise(Law Enforcement)"),
     //Normal every thing belong to his - able to check more than one work station
     ACE("Assistant Commissioner Of Excise"),
     //Below guy has check station belong to him

@@ -36,6 +36,12 @@
     <attr sel="#remark" th:field="*{remark}"/>
     <attr sel="#remarkError" th:errors="*{remark}"
           th:if="${#fields.hasErrors('remark')}"/>
+    <!--Crime status-->
+    <attr sel="#crimeStatus" th:field="*{crimeStatus}"/>
+    <attr sel="#crimeStatusList" th:each="crimeStatus : ${crimeStatuses}"
+          th:text="${crimeStatus.crimeStatus}"
+          th:value="${crimeStatus}"
+          th:selected="${crimeStatus==crime.crimeStatus?'selected':'unselected'}"/>
     <!--Place Of Offence-->
     <attr sel="#placeOfOffence" th:field="*{placeOfOffence}"/>
     <attr sel="#placeOfOffenceError" th:errors="*{placeOfOffence}"
