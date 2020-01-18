@@ -347,6 +347,13 @@ public class PetitionController {
             return commonCodeForSearch(model, petition);
         }
 //todo -> need to conform validation for this method
+        if ( !petition.getContravenes().isEmpty() ) {
+            List< PetitionOffender > petitionOffenders = new ArrayList<>();
+            petition.getContravenes().forEach(x ->
+                                                      petitionOffenders.addAll(petitionOffenderService
+                                                                                       .findByContravenes(x)));
+            petition.setPetitionOffenders(petitionOffenders);
+        }
         return commonCodeFromPetitionList(model, petitionService.searchAnyParameter(petition));
     }
 }

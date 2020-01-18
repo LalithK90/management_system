@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.petitionAddOffender.service;
 
+import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.asset.petitionAddOffender.dao.PetitionOffenderDao;
@@ -10,9 +11,10 @@ import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -89,7 +91,16 @@ public class PetitionOffenderService implements AbstractService< PetitionOffende
     }
 
     @Cacheable
-    public List< PetitionOffender > countByOffenderAndCreatedAtBetween(Offender offender, LocalDateTime from, LocalDateTime to) {
+    public List< PetitionOffender > countByOffenderAndCreatedAtBetween(Offender offender, LocalDateTime from,
+                                                                       LocalDateTime to) {
         return petitionOffenderDao.countByOffenderAndCreatedAtBetween(offender, from, to);
+    }
+
+    @Cacheable
+    @Transactional
+    public List< PetitionOffender > findByContravenes(Contravene contravene) {
+        /*List<PetitionOffender> contravenes1 = new ArrayList<>();
+        return contravenes1;*/
+       return petitionOffenderDao.findByContravenes(contravene);
     }
 }

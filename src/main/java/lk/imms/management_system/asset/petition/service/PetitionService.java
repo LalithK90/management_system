@@ -49,7 +49,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     @Override
     @CacheEvict( allEntries = true )
     public boolean delete(Long id) {
-        petitionDao.deleteById(id);
+       // petitionDao.deleteById(id);
         return true;
     }
 
@@ -70,6 +70,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     }
 
     @Cacheable
+    @Transactional
     public List< Petition > searchAnyParameter(Petition petition) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()

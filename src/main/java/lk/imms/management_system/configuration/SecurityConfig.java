@@ -86,6 +86,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         .invalidateHttpSession(false)
                                         .clearAuthentication(true)
                                         .logoutSuccessUrl("/login"))
+                //session management
+                .sessionManagement(
+                        sessionManagement ->
+                                sessionManagement
+                                        .maximumSessions(1)
+                                        .maxSessionsPreventsLogin(true)
+                                        .expiredUrl("/login"))
                 //Cross site disable
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling();

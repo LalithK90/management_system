@@ -1,6 +1,7 @@
 package lk.imms.management_system.asset.petition.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
@@ -67,6 +68,9 @@ public class Petition extends AuditEntity {
 
     @Transient
     private List< String > removeImages = new ArrayList<>();
+
+    @Transient
+    private List< Contravene > contravenes;
 
 
 }

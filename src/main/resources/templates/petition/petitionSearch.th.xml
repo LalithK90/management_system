@@ -29,9 +29,9 @@
     <!--Working place-->
     <!--name-->
     <attr sel="#name" th:field="*{workingPlace.name}"/>
-     <!--code-->
+    <!--code-->
     <attr sel="#code" th:field="*{workingPlace.code}"/>
-     <!--province-->
+    <!--province-->
     <attr sel="#province" th:field="*{workingPlace.province}"/>
     <attr sel="#provinceSelect" th:each="provinces : ${provinces}"
           th:text="${provinces.province}"
@@ -48,6 +48,7 @@
           th:value="${workingPlaceTypes}"/>
     <!--land number-->
     <attr sel="#landOne" th:field="*{workingPlace.landOne}"/>
+
 
     <!--Offender details-->
     <!--Offender Registration number-->
@@ -93,14 +94,16 @@
     <!--Mobile two-->
     <attr sel="#mobileTwo" th:field="*{petitioner.mobileTwo}"/>
 
+
     <!--Contravene-->
     <attr sel="#contraveneStatus"
           th:each="contravene, lineCount : ${contravenes}">
-        <attr sel="#contraveneValue" th:id="${'DTS'}+${lineCount.count}" th:value="${contravene.id}"  th:name="${'petitionOffenders[0].contravenes'}"
+        <attr sel="#contraveneValue" th:id="${'DTS'}+${lineCount.count}" th:value="${contravene.id}"  th:field="*{contravenes}"
         />
         <attr sel="#contraveneLabel" th:for="${'DTS'}+${lineCount.count}" th:class="${'DTS'}+${lineCount.count} + ${'  text-primary'}"
               th:text="${contravene.code}+${'-'}+${contravene.detail}"/>
     </attr>
+
 
     <!--Button-->
     <attr sel="#submit" th:text="${'Search'}"/>
