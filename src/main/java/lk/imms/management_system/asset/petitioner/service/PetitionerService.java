@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class PetitionerService implements AbstractService< Petitioner, Long > {
     @Override
     @Caching( evict = {@CacheEvict( value = "petitioner", allEntries = true )},
             put = {@CachePut( value = "petitioner", key = "#petitioner.id" )} )
+    @Transactional
     public Petitioner persist(Petitioner petitioner) {
           return petitionerDao.save(petitioner);
     }

@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -46,10 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
- /*       http.csrf().disable();
-        http.authorizeRequests().antMatchers("/").permitAll();
-*/
-        // For developing easy to give permission all link
+     /*       http.csrf().disable();
+            http.authorizeRequests().antMatchers("/").permitAll();
+    */
+        // For developing easy to give permission all lin
+
         http
                 .authorizeRequests(
                         authorizeRequests ->
@@ -60,52 +60,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         //this is used the normal admin to give access every url mapping
                                         .antMatchers("/").hasRole("/ADMIN")
                                         //Need to login for access those are
-                                        /*.antMatchers("/employee/**").hasRole("ADMIN")
+                                        .antMatchers("/employee/**").hasRole("ADMIN")
                                         .antMatchers("/employee1/**").hasRole("MANAGER")
                                         .antMatchers("/user/**").hasRole("ADMIN")
                                         .antMatchers("/petition/**").hasRole("ADMIN")
                                         .antMatchers("/minutePetition/**").hasRole("MANAGER")
                                         .antMatchers("/invoiceProcess/add").hasRole("CASHIER")
-                                      */.anyRequest()
+                                        .anyRequest()
                                         .authenticated())
                 // Login form
                 .formLogin(
                         formLogin ->
                                 formLogin
-                                        .loginPage("/")
-                                        .loginProcessingUrl("/login")
+                                        .loginPage("/login")
                                         //Username and password for validation
                                         .usernameParameter("username")
                                         .passwordParameter("password")
-                                        .defaultSuccessUrl("/mainWindow", true))
-                //session management
-                .sessionManagement(
-                        sessionManagement ->
-                                sessionManagement
-                                        .sessionConcurrency(sessionConcurrency ->
-                                                                    sessionConcurrency
-                                                                            .maximumSessions(1)
-                                                                            .expiredUrl("/index"))
-                                  )
+                                        .defaultSuccessUrl("/mainWindow"))
                 //Logout controlling
                 .logout(
                         logout ->
                                 logout
-                                        .deleteCookies("remove")
+                                        .logoutUrl("/logout")
+                                        .deleteCookies("JSESSIONID")
                                         .invalidateHttpSession(false)
                                         .clearAuthentication(true)
-                                        .logoutUrl("/logout")
-                                        .logoutSuccessUrl("/index"))
-
+                                        .logoutSuccessUrl("/login"))
+                //Cross site disable
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling();
-
-        /* //Header used to Enable HTTP Strict Transport Security (HSTS)
-                .headers()
-                .httpStrictTransportSecurity()
-                .includeSubdomains(true)
-                .maxAgeSeconds(31536000);
-                */
     }
 
 }

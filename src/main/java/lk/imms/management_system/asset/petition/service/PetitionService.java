@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -40,8 +41,8 @@ public class PetitionService implements AbstractService< Petition, Long > {
     @Override
     @Caching( evict = {@CacheEvict( value = "petition", allEntries = true )},
             put = {@CachePut( value = "petition", key = "#petition.id" )} )
+    @Transactional
     public Petition persist(Petition petition) {
-
         return petitionDao.save(petition);
     }
 
@@ -80,7 +81,8 @@ public class PetitionService implements AbstractService< Petition, Long > {
     }
 
     @Cacheable
-    public Long countByWorkingPlaceAndCreatedAtBetween(WorkingPlace workingPlace, LocalDateTime from, LocalDateTime to) {
+    public Long countByWorkingPlaceAndCreatedAtBetween(WorkingPlace workingPlace, LocalDateTime from,
+                                                       LocalDateTime to) {
         return petitionDao.countByWorkingPlaceAndCreatedAtBetween(workingPlace, from, to);
     }
 }

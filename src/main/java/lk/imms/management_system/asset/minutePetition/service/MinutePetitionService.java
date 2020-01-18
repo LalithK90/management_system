@@ -1,10 +1,8 @@
 package lk.imms.management_system.asset.minutePetition.service;
 
 
-import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
 import lk.imms.management_system.asset.minutePetition.dao.MinutePetitionDao;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
-import lk.imms.management_system.asset.petition.controller.PetitionController;
 import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +11,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @CacheConfig( cacheNames = {"minutePetition"} ) // tells Spring where to store cache for this class
@@ -44,6 +39,7 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
     @Override
     @Caching( evict = {@CacheEvict( value = "minutePetition", allEntries = true )},
             put = {@CachePut( value = "minutePetition", key = "#minutePetition.id" )} )
+    @Transactional
     public MinutePetition persist(MinutePetition minutePetition) {
         return minutePetitionDao.save(minutePetition);
     }
