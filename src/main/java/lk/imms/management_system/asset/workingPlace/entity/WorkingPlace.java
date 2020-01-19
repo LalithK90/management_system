@@ -23,7 +23,6 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode( callSuper = true )
 @JsonFilter( "WorkingPlace" )
-@ToString
 public class WorkingPlace extends AuditEntity {
 
     @NotNull( message = "Name is required" )
@@ -65,7 +64,8 @@ public class WorkingPlace extends AuditEntity {
     @OneToMany( mappedBy = "workingPlace", fetch = FetchType.EAGER )
     private List< EmployeeWorkingPlaceHistory > employeeWorkingHistories;
 
-    @ManyToMany( mappedBy = "workingPlaces" )
+    @ManyToMany( mappedBy = "workingPlaces", fetch = FetchType.EAGER)
+    @OrderColumn(name = "username")
     private List< User > users;
 
 }

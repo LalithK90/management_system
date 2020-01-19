@@ -85,7 +85,7 @@ public class Offender extends AuditEntity {
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfBirth;
 
-    @OneToMany( mappedBy = "offender", cascade = CascadeType.ALL )
+    @OneToMany( mappedBy = "offender", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List< OffenderCallingName > offenderCallingNames;
 
     @OneToMany(mappedBy = "offender" )

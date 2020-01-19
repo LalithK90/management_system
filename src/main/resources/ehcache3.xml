@@ -47,23 +47,23 @@
     <!--employee-->
     <cache alias="employee">
         <expiry>
-            <ttl unit="seconds">600</ttl>
+            <ttl unit="seconds">6000</ttl>
         </expiry>
-        <heap unit="entries">400</heap>
+        <heap unit="entries">4000</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
     <!--employeeWorkingPlaceHistory-->
     <cache alias="employeeWorkingPlaceHistory">
         <expiry>
-            <ttl unit="seconds">600</ttl>
+            <ttl unit="seconds">6000</ttl>
         </expiry>
-        <heap unit="entries">200</heap>
+        <heap unit="entries">4000</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
     <!--minutePetitionFiles-->
     <cache alias="minutePetitionFiles">
         <expiry>
-            <ttl unit="seconds">600</ttl>
+            <ttl unit="seconds">6000</ttl>
         </expiry>
         <heap unit="entries">1000</heap>
         <jsr107:mbeans enable-statistics="true"/>
@@ -129,7 +129,7 @@
         <expiry>
             <ttl unit="seconds">600</ttl>
         </expiry>
-        <heap unit="entries">200</heap>
+        <heap unit="entries">1200</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
     <!--Role cache-->

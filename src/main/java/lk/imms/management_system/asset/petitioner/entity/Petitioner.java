@@ -30,15 +30,13 @@ public class Petitioner extends AuditEntity {
     private String nameEnglish;
 
     @Column( columnDefinition = "VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+
     private String address;
 
-    @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
     private String mobileOne;
 
-    @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
     private String mobileTwo;
 
-    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
     private String land;
 
     @Email( message = "Provide valid email" )

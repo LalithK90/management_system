@@ -21,7 +21,7 @@
 
     <!--Petitioner details-->
     <!--Id-->
-    <attr sel="#petitionerId" th:text="${petition.petitioner.id}"/>
+    <attr sel="#petitionerId" th:text="${petition.petitioner.id}">
     <!--Name in sinhala-->
     <attr sel="#nameSinhala" th:text="${petition.petitioner.nameSinhala}"/>
     <!--Name in tamil-->
@@ -43,7 +43,7 @@
     <!--Created by and created at-->
     <attr sel="#createdBy" th:text="${petition.petitioner.createdBy}"/>
     <attr sel="#createdAt" th:text="${#temporals.format(petition.petitioner.createdAt, 'dd-MM-yyyy HH:mm')}"/>
-
+    </attr>
     <!--Petition State Details-->
     <attr sel="#petitionStates" th:each="petitionState, index : ${petition.PetitionStates}">
         <attr sel="#petitionStateIndex" th:text="${index.count}"/>
@@ -53,18 +53,26 @@
               th:text="${#temporals.format(petitionState.createdAt, 'dd-MM-yyyy HH:mm')}"/>
     </attr>
     <!--Minute Petition Area-->
-        <attr sel="#minutePetitionDetails" th:each="minutePetition : ${minutePetitions}">
-            <attr sel="#minuteStateDetail" th:utext="${minutePetition.detail}"/>
-            <attr sel="#minuteState" th:text="${minutePetition.minuteState.minuteState}"/>
-            <attr sel="#minuteStateEmployee" th:if="${minutePetition.employee != null}" th:text="${minutePetition.employee.name}"/>
-            <attr sel="#minuteStateWorkingPlace" th:if="${minutePetition.workingPlace != null}" th:text="${minutePetition.workingPlace.name}"/>
-            <attr sel="#imageDiv" th:each="fileInfo : ${minutePetition.fileInfos}">
-                <attr sel="#imageMinutePetition" th:src="${fileInfo.url}"/>
-                <attr sel="#imageDetails" th:text="${#temporals.format(fileInfo.createAt, 'dd-MM-yyyy HH:mm')}"/>
-            </attr>
+    <attr sel="#minutePetitionDetails" th:each="minutePetition : ${minutePetitions}">
+        <attr sel="#minuteStateDetail" th:utext="${minutePetition.detail}"/>
+        <attr sel="#minuteState" th:text="${minutePetition.minuteState.minuteState}"/>
+        <attr sel="#minuteStateEmployee" th:if="${minutePetition.employee != null}"
+              th:text="${minutePetition.employee.name}"/>
+        <attr sel="#minuteStateWorkingPlace" th:if="${minutePetition.workingPlace != null}"
+              th:text="${minutePetition.workingPlace.name}"/>
+        <attr sel="#imageDiv" th:each="fileInfo : ${minutePetition.fileInfos}">
+            <attr sel="#imageMinutePetition" th:src="${fileInfo.url}"/>
+            <attr sel="#imageDetails" th:text="${#temporals.format(fileInfo.createAt, 'dd-MM-yyyy HH:mm')}"/>
         </attr>
+    </attr>
     <!--Detection Team-->
-    <attr sel="#detectionTeamDetail" th:each="detectionTeam : ${detectionTeams}">
+    <attr sel=".buttonDetectionTeamList" th:each="detectionTeam : ${detectionTeams}" th:id="${detectionTeam.id}"
+          th:attr="data-target='#detectionTeamCollapseExample'+${detectionTeam.id}">
+        <attr sel="#detectionTeamButton" th:text="${detectionTeam.name}+${' - '} +${detectionTeam.name}"/>
+    </attr>
+    <!--detection team details-->
+    <attr sel="#detectionTeamDetail" th:each="detectionTeam : ${detectionTeams}"
+          th:id="'detectionTeamCollapseExample'+${detectionTeam.id}">
         <attr sel="#detectionTeamId" th:text="${detectionTeam.id}"/>
         <attr sel="#detectionTeamName" th:text="${detectionTeam.name}"/>
         <attr sel="#detectionTeamTeamStatusValue" th:text="${detectionTeam.detectionTeamStatus.detectionTeamStatus}"/>
@@ -72,24 +80,158 @@
         <attr sel="#teamAcceptedDateTime"
               th:text="${#temporals.format(detectionTeam.teamAcceptedDateTime, 'dd-MM-yyyy HH:mm')}"/>
         <attr sel="#detectionTeamNumber" th:text="${detectionTeam.number}"/>
+        <!--detection team members-->
         <attr sel="#detectionTeamMemberList" th:each="teamMember , index : ${detectionTeam.detectionTeamMembers}">
             <attr sel="#index" th:text="${index.count}"/>
             <attr sel="#detectionTeamMemberNumber" th:text="${teamMember.employee.payRoleNumber}"/>
             <attr sel="#detectionTeamMemberName" th:text="${teamMember.employee.name}"/>
-            <attr sel="#detectionTeamMemberRole" th:text="${teamMember.detectionTeamMemberRole.detectionTeamMemberRole}"/>
+            <attr sel="#detectionTeamMemberRole"
+                  th:text="${teamMember.detectionTeamMemberRole.detectionTeamMemberRole}"/>
         </attr>
-        <attr sel="#detectionTeamNoteList" th:each="teamNote, count : ${detectionTeam.detectionTeamNotes}">
-            <attr sel="#detectionTeamIndex" th:text="${count.count}"/>
+        <!--detection team note-->
+        <attr sel="#detectionTeamNoteList" th:if="${not #lists.isEmpty(detectionTeam.detectionTeamNotes)}"
+              th:each="teamNote, count : ${detectionTeam.detectionTeamNotes}">
+            <attr sel="#detectionTeamIndex" th:text="${count.count}+${'.  '}"/>
             <attr sel="#detectionTeamNote" th:text="${teamNote.note}"/>
             <attr sel="#detectionTeamNoteCreatedBy" th:text="${teamNote.createdBy}"/>
             <attr sel="#detectionTeamNoteCreatedAt"
                   th:text="${#temporals.format(teamNote.createdAt, 'dd-MM-yyyy HH:mm')}"/>
         </attr>
+        <!--crime button list-->
+        <attr sel=".buttonCrimeList" th:each="crime : ${detectionTeam.crimes}" th:id="${crime.id}"
+              th:attr="data-target='#crimeCollapseExample'+${crime.crimeNumber}">
+            <attr sel="#crimeNumberButton" th:text="${crime.crimeNumber}"/>
+        </attr>
+        <!--petition offender Details show      -->
+        <attr sel="#crimeCollapseExample" th:if="${not #lists.isEmpty(detectionTeam.crimes)}"
+              th:each="crime : ${detectionTeam.crimes}" th:id="'crimeCollapseExample'+${crime.crimeNumber}">
+            <!--detection team -->
+            <attr sel="#crimeDetectionTeamName" th:text="${crime.detectionTeam.name}"/>
+            <!--Crime number-->
+            <attr sel="#crimeNumber" th:text="${crime.crimeNumber}"/>
+            <!--Court case number-->
+            <attr sel="#courtCaseNumber" th:text="${crime.courtCaseNumber}"/>
+            <!--Compounded Charge Sheet Number-->
+            <attr sel="#compoundedChargeSheetNumber" th:text="${crime.compoundedChargeSheetNumber}"/>
+            <!--Result -->
+            <attr sel="#result" th:utext="${crime.result}"/>
+            <!--Reward Sheet Number -->
+            <attr sel="#rewardSheetNumber" th:text="${crime.rewardSheetNumber}"/>
+            <!--Remark-->
+            <attr sel="#remark" th:utext="${crime.remark}"/>
+            <!--Place Of Offence-->
+            <attr sel="#placeOfOffence" th:text="${crime.placeOfOffence}"/>
+            <!--Court status-->
+            <attr sel="#court" th:text="${crime.court.name}"/>
+            <!--Date Of Detection-->
+            <attr sel="#dateOfDetection" th:text="${{crime.dateOfDetection}}"/>
+            <!--Compounded Charge Sheet Date-->
+            <attr sel="#compoundedChargeSheetDate" th:text="${{crime.compoundedChargeSheetDate}}"/>
+            <!--Date Of Order Of Persecution-->
+            <attr sel="#dateOfOrderOfPersecution" th:text="${{crime.dateOfOrderOfPersecution}}"/>
+            <!--Date Of Filling Plaint-->
+            <attr sel="#dateOfFillingPlaint" th:text="${{crime.dateOfFillingPlaint}}"/>
+            <!--Date Of Judgement-->
+            <attr sel="#dateOfJudgement" th:text="${{crime.dateOfJudgement}}"/>
+
+            <!--Created at update at-->
+            <attr sel="#crimeCreatedBy" th:text="${crime.createdBy}"/>
+            <attr sel="#crimeCreatedAt" th:text="${#temporals.format(crime.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
+        </attr>
     </attr>
 
     <!--Petition Offender details-->
+    <!--Button list-->
+    <attr sel=".buttonList" th:each="petitionOffender : ${petitionOffenders}" th:id="${petitionOffender.id}"
+          th:attr="data-target='#collapseExample'+${petitionOffender.id }">
+        <attr sel="#offenderRegiNumber" th:text="${petitionOffender.offender.offenderRegisterNumber}"/>
+    </attr>
+    <!--petition offender Details show      -->
+    <attr sel="#collapseExample" th:if="${not #lists.isEmpty(petitionOffenders)}"
+          th:each="petitionOffender : ${petitionOffenders}" th:id="'collapseExample'+${petitionOffender.id}">
+        <!--2. Offender Registration number-->
+        <attr sel="#offenderRegisterNumber" th:text="${petitionOffender.offender.offenderRegisterNumber}"/>
+        <!--3. Name in Sinhala-->
+        <attr sel="#offenderNameSinhala" th:text="${petitionOffender.offender.nameSinhala}"/>
+        <!--4. Name in Tamil-->
+        <attr sel="#offenderNameTamil" th:text="${petitionOffender.offender.nameTamil}"/>
+        <!--5. Name in English-->
+        <attr sel="#offenderNameEnglish" th:text="${petitionOffender.offender.nameEnglish}"/>
+        <!--6. NIC-->
+        <attr sel="#nic" th:text="${petitionOffender.offender.nic}"/>
+        <!--7. Passport Number-->
+        <attr sel="#passportNumber" th:text="${petitionOffender.offender.passportNumber}"/>
+        <!--8. Driving Licence Number-->
+        <attr sel="#drivingLicenceNumber" th:text="${petitionOffender.offender.drivingLicenceNumber}"/>
+        <!--9. Gender-->
+        <attr sel="#gender" th:text="${petitionOffender.offender.gender.gender}"/>
+        <!--10. Date of birth-->
+        <attr sel="#dateOfBirth" th:text="${{petitionOffender.offender.dateOfBirth}}"/>
+        <!--11. Blood group-->
+        <attr sel="#bloodGroup" th:text="${petitionOffender.offender.bloodGroup.bloodGroup}"/>
+        <!--12. Civil status-->
+        <attr sel="#civilStatus" th:text="${petitionOffender.offender.civilStatus.civilStatus}"/>
+        <!--13. Address-->
+        <attr sel="#offenderAddress" th:utext="${petitionOffender.offender.address}"/>
+        <!--14. Mobile one-->
+        <attr sel="#offenderMobileOne" th:text="${petitionOffender.offender.mobileOne}"/>
+        <!--15. Mobile two-->
+        <attr sel="#offenderMobileTwo" th:text="${petitionOffender.offender.mobileTwo}"/>
+        <!--16. Land-->
+        <attr sel="#offenderLand" th:text="${petitionOffender.offender.land}"/>
+        <!--17. Email-->
+        <attr sel="#offenderEmail" th:text="${petitionOffender.offender.email}"/>
+        <!--18. Created at update at-->
+        <attr sel="#offenderCreatedBy" th:text="${petitionOffender.offender.createdBy}"/>
+        <attr sel="#offenderCreatedAt"
+              th:text="${#temporals.format(petitionOffender.offender.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+        <attr sel="#offenderUpdatedBy" th:text="${petitionOffender.offender.updatedBy}"/>
+        <attr sel="#offenderUpdatedAt"
+              th:text="${#temporals.format(petitionOffender.offender.updatedAt, 'dd-MM-yyyy HH:mm')}"/>
+        <!--19. Calling Names-->
+        <attr sel="#callingNameDisplay" th:if="${not #lists.isEmpty(petitionOffender.offender.offenderCallingNames)}"
+              th:each="offenderCallingName, status : ${petitionOffender.offender.offenderCallingNames}">
+            <attr sel="#callingNamesDisplay"
+                  th:text="${offenderCallingName.callingName}"/>
+            <attr sel="#callingNamesCretedByDisplay"
+                  th:text="${offenderCallingName.createdBy}"/>
+            <attr sel="#callingNamesCreatedAtDisplay"
+                  th:text="${{petitionOffender.offender.offenderCallingNames[__${status.index}__].createdAt}}"/>
+            <attr sel="#callingNamesUpdatedByDisplay"
+                  th:text="${petitionOffender.offender.offenderCallingNames[__${status.index}__].updatedBy}"/>
+        </attr>
 
+        <!--20. Description-->
+        <attr sel="#description" th:utext="${petitionOffender.offender.description}"/>
 
+        <!--21. Photos -->
+        <attr sel="#filesList" th:if="${not #lists.isEmpty(petitionOffender.offender.fileInfos)}"
+              th:each="file, rowStat: ${petitionOffender.offender.fileInfos}">
+            <attr sel="#img" th:src="${file.url}"/>
+            <attr sel="#imgName" th:text="${file.filename}"/>
+            <attr sel="#imgCreateAt" th:text="${{file.createAt}}"/>
+        </attr>
+
+        <!--21. Guardian Details-->
+        <attr sel="#guardianDetails" if="${not #lists.isEmpty(petitionOffender.offender.guardians)}"
+              th:each="guardian : ${petitionOffender.offender.guardians}">
+            <attr sel="#guardianType" th:text="${guardian.guardianType.guardianType}"/>
+            <attr sel="#guardianNic" th:text="${guardian.nic}"/>
+            <attr sel="#guardianName" th:text="${guardian.name}"/>
+            <attr sel="#guardianRemark" th:utext="${guardian.remark}"/>
+            <attr sel="#guardianCreatedBy" th:text="${guardian.createdBy}"/>
+            <attr sel="#guardianCreatedAt" th:text="${{guardian.createdAt}}"/>
+            <attr sel="#guardianUpdatedBy" th:text="${guardian.updatedBy}"/>
+            <attr sel="#guardianUpdatedAt" th:text="${{guardian.updatedAt}}"/>
+        </attr>
+
+        <!--22. Contravane-->
+        <attr sel="#contraveneDetails" if="${not #lists.isEmpty(petitionOffender.contravenes)}"
+              th:each="contravene, count : ${petitionOffender.contravenes}">
+            <attr sel="#contravene" th:text="${count.count} +${'.  '}+${contravene.detail}"/>
+        </attr>
+    </attr>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>

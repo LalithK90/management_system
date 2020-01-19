@@ -48,7 +48,7 @@ public class EmployeeRestController {
 
         FilterProvider filters = new SimpleFilterProvider()
                 .addFilter("Employee", simpleBeanPropertyFilter);
-        //Employee :- need to annotate relevant class with JosonFilter  {@JsonFilter("Employee") }
+        //Employee :- need to annotate relevant class with JsonFilter  {@JsonFilter("Employee") }
         mappingJacksonValue.setFilters(filters);
 
         return mappingJacksonValue;

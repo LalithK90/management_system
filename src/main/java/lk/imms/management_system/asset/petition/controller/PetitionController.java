@@ -199,7 +199,7 @@ public class PetitionController {
             }
             //detection team note
             detectionTeam.setDetectionTeamNotes(detectionTeam.getDetectionTeamNotes());
-            // crime
+            // crime details
             detectionTeam.setCrimes(crimeService.findByDetectionTeam(detectionTeam));
             detectionTeams.add(detectionTeam);
         }
@@ -208,8 +208,8 @@ public class PetitionController {
         List< PetitionOffender > petitionOffenders = new ArrayList<>();
         for ( PetitionOffender petitionOffender : petitionOffenderService.findByPetition(petition) ) {
             Offender offender = petitionOffender.getOffender();
+
             offender.setFileInfos(offenderFilesService.offenderFileDownloadLinks(offender));
-            petitionOffender.setOffender(offender);
             petitionOffender.setPetition(petition);
             petitionOffender.setContravenes(petitionOffenderService.findByPetitionAndOffender(petition, offender).getContravenes());
             petitionOffenders.add(petitionOffender);
@@ -237,25 +237,24 @@ public class PetitionController {
         }
 
         WorkingPlace workingPlace = currentUser.getWorkingPlaces().get(0);
-        if ( petition.getId() == null ) {
-            String petitionNumber;
-            String indexNumber;
-            if ( petitionService.getLastOne() == null ) {
-                petitionNumber =
-                        makeAutoGenerateNumberService.numberAutoGen(null).toString();
-                indexNumber =
-                        makeAutoGenerateNumberService.numberAutoGen(null).toString();
+        String petitionNumber;
+        String indexNumber;
+        if ( petition.getId() != null ) {
+            petitionNumber =
+                    makeAutoGenerateNumberService.numberAutoGen(null).toString();
+            indexNumber =
+                    makeAutoGenerateNumberService.numberAutoGen(null).toString();
 
-            } else {
-                petitionNumber =
-                        makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()).toString();
-                indexNumber =
-                        makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()).toString();
+        } else {
+            petitionNumber =
+                    makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()).toString();
+            indexNumber =
+                    makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()).toString();
 
-            }
-            petition.setPetitionNumber(petitionNumber + "/" + workingPlace.getWorkingPlaceType() + "/" + workingPlace.getCode());
-            petition.setIndexNumber(indexNumber);
         }
+        petition.setPetitionNumber(petitionNumber + "/" + workingPlace.getWorkingPlaceType() + "/" + workingPlace.getCode());
+        petition.setIndexNumber(indexNumber);
+
 
         Petition savedPetition = new Petition();
         savedPetition.setPetitionNumber(petition.getPetitionNumber());
@@ -314,7 +313,6 @@ public class PetitionController {
                     minutePetitionFilesService.save(minutePetitionFile);
                 }
             }
-
         }
         return "redirect:/petition/add";
     }

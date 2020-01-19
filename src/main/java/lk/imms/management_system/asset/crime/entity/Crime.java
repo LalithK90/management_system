@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode( callSuper = true )
 public class Crime extends AuditEntity {
 
     @Column( unique = true )

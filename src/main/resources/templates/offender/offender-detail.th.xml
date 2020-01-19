@@ -64,7 +64,7 @@
     <attr sel="#imgCreateAt" th:text="${{file.createAt}}"/>
 
     <!--21. Guardian Details-->
-    <attr sel="#guardianDetails" th:each="guardian, status : ${offender.guardians}"/>
+    <attr sel="#guardianDetails" th:if="${not #lists.isEmpty(offender.guardians)}" th:each="guardian, status : ${offender.guardians}"/>
     <attr sel="#guardianType" th:text="${offender.guardians[__${status.index}__].guardianType.guardianType}"/>
     <attr sel="#guardianNic" th:text="${offender.guardians[__${status.index}__].nic}"/>
     <attr sel="#guardianName" th:text="${offender.guardians[__${status.index}__].name}"/>

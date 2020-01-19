@@ -94,7 +94,7 @@ public class Employee extends AuditEntity {
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfAssignment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private WorkingPlace workingPlace;
 
     @OneToMany( mappedBy = "employee", fetch = FetchType.EAGER )

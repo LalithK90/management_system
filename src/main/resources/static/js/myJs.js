@@ -11,12 +11,7 @@ $(document).ready(function () {
     });
     /*//Nav bar properties - end//*/
 
-    /* selected field colour and add selected lab test table - start*/
-    $('#myTable tbody tr').bind('click', function (e) {
-        $(e.currentTarget).children('th').css('background-color', '#00FFFF');
-        checkLabTestInArrayOrNot($(e.currentTarget).children('th'));
-    });
-    /* selected field colour and add selected lab test table - end*/
+
     /*//--------------- data table short using - data table plugin ------- start //*/
     $("#myTable").DataTable({
         "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],

@@ -11,9 +11,11 @@ import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.PetitionState;
 import lk.imms.management_system.asset.petition.service.PetitionService;
 import lk.imms.management_system.asset.petition.service.PetitionStateService;
+import lk.imms.management_system.asset.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,18 +37,21 @@ public class MinutePetitionController {
     private final PetitionService petitionService;
     private final PetitionStateService petitionStateService;
     private final CommonService commonService;
+    private final UserService userService;
 
     @Autowired
     public MinutePetitionController(MinutePetitionService minutePetitionService,
                                     MinutePetitionFilesService minutePetitionFilesService,
                                     PetitionService petitionService, PetitionStateService petitionStateService,
-                                    CommonService commonService) {
+                                    CommonService commonService, UserService userService) {
         this.minutePetitionService = minutePetitionService;
         this.minutePetitionFilesService = minutePetitionFilesService;
         this.petitionService = petitionService;
         this.petitionStateService = petitionStateService;
         this.commonService = commonService;
+        this.userService = userService;
     }
+
     @GetMapping( "/file/{filename}" )
     public ResponseEntity< byte[] > downloadFile(@PathVariable( "filename" ) String filename) {
         MinutePetitionFiles file = minutePetitionFilesService.findByNewID(filename);
@@ -54,6 +59,7 @@ public class MinutePetitionController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
                 .body(file.getPic());
     }
+
     private String commonCode(Model model) {
         model.addAttribute("minuteStates", MinuteState.values());
         model.addAttribute("petitionStateTypes", PetitionStateType.values());
@@ -75,6 +81,13 @@ public class MinutePetitionController {
         if ( result.hasErrors() ) {
             model.addAttribute("minutePetition", minutePetition);
             return commonCode(model);
+        }
+        //cannot be working place null on minute petition so recieved minute petition is null current login user
+        // working place set as working place
+        if ( minutePetition.getEmployee().getId() == null ) {
+            minutePetition.setWorkingPlace(
+                    userService.findById(userService.findByUserIdByUserName(SecurityContextHolder.getContext().getAuthentication().getName()))
+                            .getEmployee().getWorkingPlace()  );
         }
         MinutePetition minutePetition1 = minutePetitionService.persist(minutePetition);
 

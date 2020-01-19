@@ -155,11 +155,11 @@ $(document).ready(function () {
             $("#employeeShow").show();
 
             Promise.resolve(getData(`${finalUrl}`)).then(function (val) {
-                //delete existing table data
+//delete existing table data
                 deleteAllTableRow(document.getElementById("myTableData"));
 
                 for (let i = 0; i < val.length; i++) {
-                    addRow(val[i], ++i);
+                    addRow(val[i], i);
                 }
             });
         }
@@ -173,7 +173,7 @@ let addRow = function (data, id) {
 
     let row = table.insertRow(rowCount);
 
-    row.insertCell(0).innerHTML = id;
+    row.insertCell(0).innerHTML = ++id;
     row.insertCell(1).innerHTML = data.id;
     row.insertCell(2).innerHTML = data.name;
     row.insertCell(3).innerHTML = data.payRoleNumber;
