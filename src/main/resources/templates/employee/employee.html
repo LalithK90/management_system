@@ -1,69 +1,87 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-
-    <style th:replace="fragments/style"></style>
+<html lang="en">
+<head id="header">
 </head>
 <body>
-<nav class="navbar navbar-default" th:replace="fragments/header :: header"></nav>
-<div class="container-fluid" style="margin-top: 60px">
-    <div class="panel panel-primary">
-        <div class="panel panel-heading text-center">
-            <h4><b>Employee Management</b></h4>
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" href="/employee/add"><i class="fa fa-user-plus"></i>
+                &nbsp; New Employee</a>
         </div>
-        <div class="panel panel-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <a class="btn btn-success" th:href="${'/employee/add'}"><i class="fa fa-user-plus"></i>
-                                &nbsp; New Employee</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="container" style="margin-top: 5px;">
-                <div class="table-responsive">
-                    <table class="table table-striped table-condensed text-center" id="myTable">
-                        <thead>
-                        <tr>
-                            <th>Index</th>
-                            <th>Number</th>
-                            <th> Name</th>
-                            <th> Mobile</th>
-                            <th> Land Number</th>
-                            <th> Designation</th>
-                            <th> Status</th>
-                            <th> Work with</th>
-                            <th class="text-center">Modify</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="employee, rowCount : ${employees}">
-                            <th th:text="${rowCount.count}"></th>
-                            <th th:text="${employee.number}"></th>
-                            <th th:text="${employee.callingName}"></th>
-                            <th th:text="${employee.mobile}"></th>
-                            <th th:text="${employee.land}"></th>
-                            <th th:text="${employee.designation.designation}"></th>
-                            <th th:text="${employee.employeeStatus.employeeStatus}"></th>
-                            <th th:text="${employee.dateOfAssignment}"></th>
-                            <th><a class="btn btn-success" th:href="${'/employee/' + employee.id}"><i
-                                    class="fa fa-folder-open"></i>&nbsp;View</a>
-                                <a class="btn btn-primary" th:href="${'/employee/edit/' + employee.id}"><i
-                                        class="fa fa-edit"></i>&nbsp;Edit</a>
-                                <a class="btn btn-danger" th:href="${'/employee/remove/' + employee.id}"><i
-                                        aria-hidden="true" class="fa fa-trash-o"></i>
-                                    Delete</a></th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="col">
+            <h4 class="text-info text-center">
+                <strong>
+                    Employee Management
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/employee/workingPlace" id="searchShow" class="btn btn-primary">
+                <i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;
+                <i class="fas fa-store-alt" style="font-size: 20px"></i>
+                &nbsp;
+            </a>
         </div>
     </div>
 </div>
-<footer class="page-footer" th:replace="fragments/footer"></footer>
-<script th:replace="fragments/script"></script>
+<div class="container-fluid bg-dark formBorder text-center">
+    <div class="col">
+        <div class="col" id="employeeListPresent">
+            <table class="table table-hover table-striped" id="myTable">
+                <thead>
+                <tr>
+                    <th> Index</th>
+                    <th> Pay Role Number</th>
+                    <th> Name</th>
+                    <th> Mobile</th>
+                    <th> Designation</th>
+                    <th> Status</th>
+                    <th> Modify</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="employeeList">
+                    <th id="index"></th>
+                    <th id="payRoleNumber"></th>
+                    <th id="callingName"></th>
+                    <th id="mobileOne"></th>
+                    <th id="designation"></th>
+                    <th id="employeeStatus"></th>
+                    <th>
+                        <a id="employeeView" class="btn btn-success btn-sm"><i
+                                class="fa fa-folder-open"></i>&nbsp;View</a>
+                        <a id="employeeEdit" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                        <a id="employeeRemove" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+                            Delete</a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" id="employeeListNotPresent">
+        <div class="col-sm-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="text-center text-danger">
+                    <strong>There is no employee upto now please add employee to the system
+                            using add user button.
+                    </strong>
+                </h3>
+            </div>
+        </div>
+        <script>
+            /*active boostrap alert - start*/
+            $(".alert").alert();
+            /*active boostrap alert - end*/
+        </script>
+    </div>
+</div>
+<footer id="footer"></footer>
+<script id="script"></script>
 </body>
 </html>

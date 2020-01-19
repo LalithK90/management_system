@@ -1,0 +1,8 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#error" th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}"/>
+    <attr sel="#errorCode" th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|"/>
+    <attr sel="#errorMessage" th:text="${errorMessage}"/>
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

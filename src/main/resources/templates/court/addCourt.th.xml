@@ -1,0 +1,38 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <!--Form header-->
+    <attr sel="#formHeader" th:text="${addStatus==true?'New Court Add':'Update Court Details'}"/>
+    <!--Form action-->
+    <attr sel="#form" th:action="${addStatus==true?'/court/add':'/court/update'}"
+          th:object="${court}"/>
+
+    <!--Name-->
+    <attr sel="#court" th:field="*{name}"/>
+    <attr sel="#courtError" th:errors="*{name}"
+          th:if="${#fields.hasErrors('name')}"/>
+
+    <!--Place-->
+    <attr sel="#courtPlace" th:field="*{place}"/>
+    <attr sel="#courtPlaceError" th:errors="*{place}"
+          th:if="${#fields.hasErrors('place')}"/>
+
+
+    <!--Id-->
+    <attr sel="#idStatus" th:if="${addStatus==false}"/>
+    <attr sel="#id" th:field="*{id}"/>
+
+    <!--Created at update at-->
+    <attr sel="#updateStatus" th:if="${addStatus==false}"/>
+    <attr sel="#createdBy" th:field="*{createdBy}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
+    <!--Button-->
+    <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
+
+
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

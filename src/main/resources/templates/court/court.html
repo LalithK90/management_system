@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" id="newCourt">
+                <i class="fa fa-user-plus" style="font-size: 18px;"></i> &nbsp; Add Court </a>
+        </div>
+        <div class="col">
+            <h4 class="text-info text-center">
+                <strong>
+                    Court Management
+                </strong>
+            </h4>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <div class="row" id="userListTable">
+            <div class="col-sm-12">
+                <table class="table table-hover table-striped" id="myTable">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>Index</th>
+                        <th>Court Name</th>
+                        <th>Place</th>
+                        <th>Modify</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="userList" scope="row">
+                        <th id="index"></th>
+                        <th id="court"></th>
+                        <th id="place"></th>
+                        <th><a class="btn btn-success btn-sm" id="courtView"><i
+                                class="fa fa-folder-open"></i>&nbsp;View</a>
+                            <a class="btn btn-primary btn-sm" id="courtEdit"><i
+                                    class="fa fa-edit"></i>&nbsp;Edit</a>
+                            <a class="btn btn-danger btn-sm" id="courtRemove"
+                            ><i
+                                    aria-hidden="true" class="fa fa-trash-o"></i>
+                                Delete</a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" id="courtNotList">
+            <div class="col-sm-12">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="text-center text-danger">
+                        <strong>There is no court upto know please add user to the system
+                                using add user button.
+                        </strong>
+                    </h3>
+                </div>
+            </div>
+            <script>
+                /*active boostrap alert - start*/
+                $(".alert").alert();
+                /*active boostrap alert - end*/
+            </script>
+        </div>
+    </div>
+</div>
+
+
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+</body>
+</html>

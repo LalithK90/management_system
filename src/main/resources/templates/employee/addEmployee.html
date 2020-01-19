@@ -1,229 +1,349 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-
-    <style th:replace="fragments/style"></style>
+<html lang="en">
+<head id="header">
 </head>
 <body>
-<nav th:replace="fragments/header :: header"></nav>
-<div class="container-fluid" style="margin-top: 50px">
-    <div class="panel panel-primary">
-        <div class="panel panel-heading text-center">
-            <h4><b><span th:text="${addStatus==true?'New Employee Add':'Update Employee'}"></span></b></h4>
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-4 ">
-                    <a class="btn btn-primary" href="/home"> Return Home</a>
-                </div>
-                <div class="col-sm-4" style="text-align: center;">
-                    <h4 class="text-info"></h4>
-                </div>
-                <div class="col-sm-4 text-right">
-                    <a href="/employee">
-                        <button class="btn btn-sm btn-primary"><span
-                                class="glyphicon glyphicon-list">&nbsp; View List </span></button>
-                    </a>
-                </div>
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="container-fluid">
-                    <form class="form-horizontal" th:action="${addStatus==true?'/employee/add':'/employee/update'}"
-                          th:method="POST" th:object="${employee}">
-                        <label th:if="${#fields.hasErrors('*')}" th:text="'Errors: '">Errors: </label>
-                        <ul>
-                            <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
-                        </ul>
-                        <div class="col-sm-6 text-left">
-                            <div class="form-group" th:if="${addStatus==false}">
-                                <label class="control-label col-md-4" for="txtId">ID :</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="txtId" name="id" placeholder="Enter ID Here"
-                                           th:field="*{id}" type="text"/>
-                                    <span class="error" th:errors="*{id}" th:if="${#fields.hasErrors('id')}">Error Number</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="txtNumber">Number <span
-                                        class="text-danger">*</span></label>
-                                <div class="col-md-3">
-                                    <input class="form-control" id="txtNumber" name="number" placeholder="Enter Number"
-                                           required th:value="${newEmployee}" type="text"/>
-                                    <span class="error" th:errors="*{number}" th:if="${#fields.hasErrors('number')}">Error Number</span>
-                                </div>
-                                <div class="col-sm-5 text-warning" th:if="${addStatus==true}">
-                                    <label class="control-label ">Previous Number: <span
-                                            th:text="${lastEmployee}"></span></label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="title">Title</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" id="title" th:field="*{title}">
-                                        <option th:each="titles : ${title}"
-                                                th:text="${titles.title}"
-                                                th:value="${titles}"></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="txtFullName">Full Name<span
-                                        class="text-danger">*</span></label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="txtFullName" name="name"
-                                           placeholder="Enter Full Here" required th:field="*{name}" type="text"/>
-                                    <span class="error" th:errors="*{name}" th:if="${#fields.hasErrors('name')}">Error Full Name</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="txtCallingName">Calling Name<span
-                                        class="text-danger">*</span></label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="txtCallingName" placeholder="Enter Calling Here"
-                                           required th:field="*{callingName}" type="text"/>
-                                    <span class="error" th:errors="*{callingName}"
-                                          th:if="${#fields.hasErrors('callingName')}">Error Calling Name</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="nic">NIC<span
-                                        class="text-danger">*</span></label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="nic" name="nic" placeholder="Enter NIC Here"
-                                           required th:field="*{nic}" type="text"/>
-                                    <span class="error" th:errors="*{nic}"
-                                          th:if="${#fields.hasErrors('nic')}">Error NIC</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="address">Address</label>
-                                <div class="col-md-8">
-                                    <textarea class="form-control" id="address" name="address"
-                                              th:field="*{address}"></textarea>
-                                    <span class="error" th:errors="*{address}" th:if="${#fields.hasErrors('address')}">Error Address</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="dateOfBirth">Birth Date<span
-                                        class="text-danger">*</span></label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="dateOfBirth" name="dateOfBirth"
-                                           placeholder="Ex: 1990 - 01 - 20"
-                                           required th:field="*{dateOfBirth}" type="date"/>
-                                    <span class="error" th:errors="*{dateOfBirth}"
-                                          th:if="${#fields.hasErrors('dateOfBirth')}">Error Birthday</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" th:for="gender">Gender</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" id="gender" th:field="*{gender}">
-                                        <option th:each="genders : ${gender}"
-                                                th:text="${genders.gender}"
-                                                th:value="${genders}"></option>
-                                    </select>
-                                    <span class="error" th:errors="*{gender}" th:if="${#fields.hasErrors('gender')}">Error Gender</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-sm-6 -->
-                        <div class="col-sm-6 text-left">
-                            <div class="form-group">
-                                <label class="control-label col-md-4" th:for="bloodGroup">Blood Group</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" id="bloodGroup" th:field="*{bloodGroup}">
-                                        <option th:each="bloodGroups : ${bloodGroup}"
-                                                th:text="${bloodGroups.bloodGroup}"
-                                                th:value="${bloodGroups}"></option>
-                                    </select>
-                                    <span class="error" th:errors="*{gender}" th:if="${#fields.hasErrors('gender')}">Error Gender</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="civilStatus">Civil Status</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" id="civilStatus" th:field="*{civilStatus}">
-                                        <option th:each="civilStatuss : ${civilStatus}"
-                                                th:text="${civilStatuss.civilStatus}"
-                                                th:value="${civilStatuss}"></option>
-                                    </select>
-                                </div>
-                                <span class="error" th:errors="*{civilStatus}"
-                                      th:if="${#fields.hasErrors('civilStatus')}">Error Civil Status</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="email">Email</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="email" name="email" placeholder="Enter email Here"
-                                           th:field="*{email}" type="text"/>
-                                    <span class="error" th:errors="*{email}" th:if="${#fields.hasErrors('email')}">Error Email</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="mobile">Mobile <span
-                                        class="text-danger">*</span></label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="mobile" name="mobile"
-                                           placeholder="Enter Mobile Here"
-                                           required th:field="*{mobile}" type="text"/>
-                                    <span class="error" th:errors="*{mobile}" th:if="${#fields.hasErrors('mobile')}">Error Mobile Number</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="land">Land Number</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="land" name="land" placeholder="Enter Land Here"
-                                           th:field="*{land}" type="text"/>
-                                    <span class="error" th:errors="*{land}" th:if="${#fields.hasErrors('land')}">Error Land Number</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="designation">Designation</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" id="designation" th:field="*{designation}">
-                                        <option th:each="designations : ${designation}"
-                                                th:text="${designations.designation}"
-                                                th:value="${designations}"></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="dateOfAssignment">Assignment Date <span
-                                        class="text-danger">*</span></label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="dateOfAssignment" name="dateOfAssignment"
-                                           placeholder="Ex: 1990 - 01 - 20" required th:field="*{dateOfAssignment}"
-                                           type="date"/>
-                                    <span class="error" th:errors="*{dateOfAssignment}"
-                                          th:if="${#fields.hasErrors('dateOfAssignment')}">Error Date of Assignment</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="employeeStatus">Employee Status</label>
-                                <div class="col-md-4">
-                                    <!-- /.col-md-8 -->
-                                    <select *{employeeStatus} class="form-control" id="employeeStatus">
-                                    <option th:each="employeeStatus : ${employeeStatus}"
-                                            th:text="${employeeStatus.employeeStatus}"
-                                            th:value="${employeeStatus}"></option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center row">
-                            <button class="btn btn-success" type="submit"><span
-                                    class="glyphicon glyphicon-thumbs-up"></span>&nbsp; &nbsp;<span
-                                    th:text="${addStatus==true?'Save': 'Update'}"></span></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/employee" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
         </div>
     </div>
 </div>
-<footer class="page-footer" th:replace="fragments/footer"></footer>
-<script th:replace="fragments/script"></script>
+<!--Form Content - start -->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <!--Left Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <!--Id-->
+                    <div id="idStatus" class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="id">ID :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="id" class="form-control" type="text" readonly/>
+                        </div>
+                    </div>
+                    <!--Pay role Number-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="payRoleNumber">Pay Role No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="payRoleNumber" class="form-control" tabindex="1" type="text" required/>
+                            <span id="payRoleNumberError" class="error">Error Pay Role Number</span>
+                        </div>
+                    </div>
+                    <!--Department id-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="departmentIdNumber">Depart Id No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="departmentIdNumber" class="form-control" tabindex="2" type="text"/>
+                            <span id="departmentIdNumberError" class="error">Error Department Number</span></div>
+                    </div>
+                    <!--Tittle -->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="title">Title :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="title" class="form-control" tabindex="3" required>
+                                <option value="">Please select</option>
+                                <option id="titleContent"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Name-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="name">Name :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="name" class="form-control" tabindex="4" type="text" required/>
+                            <span id="nameError" class="error">Error Name</span>
+                        </div>
+                    </div>
+                    <!--Calling Name-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="callingName">Calling Name :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="callingName" class="form-control" tabindex="5" type="text" minlength="5"/>
+                            <span class="error" id="callingNameError">Error                                                                                                      Calling                                                                                                                        Name</span>
+                        </div>
+                    </div>
+                    <!--Nic-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="nic">NIC No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="nic" class="form-control" tabindex="6" type="text" maxlength="12"
+                                   minlength="10" required/>
+                            <span class="error" id="nicError">Error                                                                                                     NIC Number</span>
+                        </div>
+                    </div>
+                    <!--Gender-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="gender">Gender :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="gender" class="form-control" tabindex="7" required>
+                                <option value="">Please select</option>
+                                <option id="genderList"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Date of birth-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="dateOfBirth">Birth date :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="dateOfBirth" class="form-control" tabindex="8"
+                                   placeholder="Ex: 1990 - 01 - 20"
+                                   required type="date"/>
+                            <span id="dateOfBirthError" class="error">Error Birthday</span>
+                        </div>
+                    </div>
+                    <!--Blood group-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="bloodGroup">Blood Group :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="bloodGroup" class="form-control" tabindex="9" required>
+                                <option value="">Please select</option>
+                                <option id="bloodGroupList">Please select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Designation-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="designation">Designation :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="designation" class="form-control" tabindex="10" required>
+                                <option value="">Please select</option>
+                                <option id="designationList"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--Right Side-->
+                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <!--Civil status-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="civilStatus">Civil State :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="civilStatus" class="form-control" tabindex="11" required>
+                                <option value="">Please select</option>
+                                <option id="civilStatusList"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Address-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="address">Address :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <textarea id="address" class="form-control" tabindex="12" required></textarea>
+                            <span class="error" id="addressError">Error Address</span>
+                        </div>
+                    </div>
+                    <!--Mobile Number One-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="mobileOne">Mobile One No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="mobileOne" class="form-control mobile" tabindex="13" type="text"
+                                   maxlength="10" min="9"
+                                   required/>
+                            <span class="error" id="mobileOneError">Error Mobile Number</span>
+                        </div>
+                    </div>
+                    <!--Mobile Number Two-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="mobileTwo">Mobile Two No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="mobileTwo" class="form-control mobile" tabindex="14" type="text"
+                                   maxlength="10" min="9"/>
+                            <span class="error" id="mobileTwoError">Error Mobile  Number</span>
+                        </div>
+                    </div>
+                    <!--Land Number-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="land">Land No :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="land" class="form-control land" type="text" tabindex="15" maxlength="10" min="9"/>
+                            <span class="error" id="landError">Error Land Number</span>
+                        </div>
+                    </div>
+                    <!--Email-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="email">Email :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="email" class="form-control" tabindex="16" type="email"/>
+                            <span class="error" id="emailError">Error Email</span>
+                        </div>
+                    </div>
+                    <!--Office email-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="officeEmail">Office Email :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="officeEmail" class="form-control" tabindex="17" type="email"/>
+                            <span class="error" id="officeEmailError">Error Office Email</span>
+                        </div>
+                    </div>
+                    <!--Date of assignment-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="dateOfAssignment">Date Of Assignment :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="dateOfAssignment" type="date" class="form-control" tabindex="18"
+                                   placeholder="Ex: 1990 - 01 - 20" required/>
+                            <span class="error" id="dateOfAssignmentError">Error Date Of Assignment</span>
+                        </div>
+                    </div>
+                    <!--Employee status-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="employeeStatus">Employee Status :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="employeeStatus" class="form-control" tabindex="19" required>
+                                <option value="">Please select</option>
+                                <option id="employeeStatusList"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Current Working Place-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="workingPlace">Employee Working Place :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="workingPlace" class="form-control" tabindex="20" required>
+                                <option value="">Please select</option>
+                                <option id="workingPlaceList"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Created by and created at-->
+                    <div id="updateStatus">
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="createdBy">Created By :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="createdBy" class="form-control" type="text" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="createdAt">Created At :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="createdAt" class="form-control" type="text" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
+                    <div class="input-field">
+                        <label class="active ">Photos :</label>
+                        <label >Please remove numbers where included in image number </label>
+                        <div class="input-images" style="padding-top: .5rem;"></div>
+                    </div>
+                    <div class="col" id="photoDetails">
+                        <div>
+                            <label class="control-label ">Photo Details : </label>
+                        </div>
+                        <div class="row">
+                            <div class="col" id="filesList">
+                                <div class="col">
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <button id="alertClose" type="button" class="close" data-dismiss="alert"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="card text-center">
+                                            <div class="card-header" hidden>
+                                                <input id="removeImages" type="text" name="removeImages"></div>
+                                            <div class="card-body">
+                                                <img id="img" class="rounded"
+                                                     style="height: 150px; width: 150px; border-radius: 10px"/>
+                                            </div>
+                                            <div class="card-footer bg-secondary text-light text-center">
+                                                <p id="imgName"></p>
+                                                <p> Uploaded Date :   <span id="imgCreateAt"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    $(".alert").alert();
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Button-->
+                    <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                        <button class="btn btn-success" type="submit" tabindex="21">
+                            <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label id="errorLabel">Errors: </label>
+                    <ul>
+                        <li id="error" class="error"></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<footer id="footer"></footer>
+<script id="script"></script>
+<script>
+    $('.input-images').imageUploader();
+</script>
 </body>
 </html>

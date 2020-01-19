@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" href="/petition/add"><i class="fa fa-file"></i>
+                &nbsp; New Petition</a>
+        </div>
+        <div class="col">
+            <h4 class="text-info text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/petition" id="searchShow" class="btn btn-primary">
+                <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;List&nbsp;
+            </a>
+        </div>
+    </div>
+</div>
+
+<form id="form" class="form" method="POST">
+    <!--db offenders display-->
+    <div class="col-sm-12 bg-dark formBorder">
+        <div class="form-row" id="formRow">
+            <div class="col-2 col-sm-2">
+                <div class="form-row">
+                    <label class="control-label">Petition Number</label>
+                </div>
+                <div class="form-row">
+                    <input type="hidden" id="petitionOffenderId">
+                    <input type="hidden" id="petitionId">
+                    <input class="form-control" type="text" id="petitionNumber" readonly>
+                </div>
+            </div>
+            <div class="col-4 col-sm-4">
+                <div class="form-row">
+                    <label class="control-label">Offender Name</label>
+                </div>
+                <div class="form-row">
+                    <input type="hidden" id="offenderId">
+                    <input class="form-control" type="text" id="offenderName" readonly>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6">
+                <div class="form-row">
+                    <label class="control-label" for="contravene">Select Contravene</label>
+                </div>
+                <div class="form-row">
+                    <select class="form-control" id="contravene" multiple>
+                        <option id="contraveneList"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+            <button class="btn btn-success" type="submit">
+                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
+            </button>
+            <br>
+            <br>
+        </div>
+    </div>
+    <p id="test"></p>
+</form>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+</body>
+</html>

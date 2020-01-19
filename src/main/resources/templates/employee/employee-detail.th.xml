@@ -1,0 +1,77 @@
+
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <attr sel="#formHeader" th:text="${employeeDetail.title.title} +${' '} +${employeeDetail.name}"/>
+
+
+    <attr sel="#employeeDetails" th:fragment="employeeDetailsFragment"/>
+
+    <attr sel="#id" th:text="${employeeDetail.id}"/>
+    <attr sel="#payRoleNumber" th:text="${employeeDetail.payRoleNumber}"/>
+    <attr sel="#departmentIdNumber" th:text="${employeeDetail.departmentIdNumber}"/>
+    <attr sel="#name" th:text="${employeeDetail.title.title} +${' '} +${employeeDetail.name}"/>
+    <attr sel="#callingName" th:text="${employeeDetail.callingName}"/>
+    <attr sel="#nic" th:text="${employeeDetail.nic}"/>
+    <attr sel="#gender" th:text="${employeeDetail.gender.gender}"/>
+    <attr sel="#dateOfBirth" th:text="${employeeDetail.dateOfBirth}"/>
+    <attr sel="#bloodGroup" th:text="${employeeDetail.bloodGroup.bloodGroup}"/>
+    <attr sel="#designation" th:text="${employeeDetail.designation.designation}"/>
+    <attr sel="#civilStatus" th:text="${employeeDetail.civilStatus.civilStatus}"/>
+    <attr sel="#address" th:utext="${employeeDetail.address}"/>
+    <attr sel="#mobileOne" th:text="${employeeDetail.mobileOne}"/>
+    <attr sel="#mobileTwo" th:text="${employeeDetail.mobileTwo}"/>
+    <attr sel="#land" th:text="${employeeDetail.land}"/>
+    <attr sel="#email" th:text="${employeeDetail.email}"/>
+    <attr sel="#officeEmail" th:text="${employeeDetail.officeEmail}"/>
+    <attr sel="#dateOfAssignment" th:text="${{employeeDetail.dateOfAssignment}}"/>
+    <attr sel="#employeeStatus" th:text="${employeeDetail.employeeStatus.employeeStatus}"/>
+    <attr sel="#createdBy" th:text="${employeeDetail.createdBy}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(employeeDetail.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+    <attr sel="#updatedBy" th:text="${employeeDetail.updatedBy}"/>
+    <attr sel="#updatedAt" th:text="${{employeeDetail.updatedAt}}"/>
+
+    <!--Current working place detail -->
+    <attr sel="#employeeWorkingPlaceName" th:text="${employeeDetail.workingPlace.name}"/>
+    <attr sel="#employeeWorkingPlaceCode" th:text="${employeeDetail.workingPlace.code}"/>
+    <attr sel="#employeeWorkingPlaceProvince" th:text="${employeeDetail.workingPlace.province.province}"/>
+    <attr sel="#employeeWorkingPlaceWorkingPlaceType" th:text="${employeeDetail.workingPlace.workingPlaceType.workingPlaceType}"/>
+    <attr sel="#employeeWorkingPlaceEmailOne" th:text="${employeeDetail.workingPlace.emailOne}"/>
+    <attr sel="#employeeWorkingPlaceEmailTwo" th:text="${employeeDetail.workingPlace.emailTwo}"/>
+    <attr sel="#employeeWorkingPlaceAddress" th:utext="${employeeDetail.workingPlace.address}"/>
+    <attr sel="#employeeWorkingPlaceLandOne" th:text="${employeeDetail.workingPlace.landOne}"/>
+    <attr sel="#employeeWorkingPlaceLandTwo" th:text="${employeeDetail.workingPlace.landTwo}"/>
+    <attr sel="#employeeWorkingPlaceLandThree" th:text="${employeeDetail.workingPlace.landThree}"/>
+    <attr sel="#employeeWorkingPlaceLandFour" th:text="${employeeDetail.workingPlace.landFour}"/>
+    <attr sel="#employeeWorkingPlaceFaxNumber" th:text="${employeeDetail.workingPlace.faxNumber}"/>
+    <attr sel="#employeeWorkingPlaceCreatedBy" th:text="${employeeDetail.workingPlace.createdBy}"/>
+    <attr sel="#employeeWorkingPlaceCreatedAt" th:text="${#temporals.format(employeeDetail.workingPlace.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
+
+    <attr sel="#filesList" th:each="file, rowStat: ${files}"/>
+    <attr sel="#img" th:src="${file.url}"/>
+    <!--//todo - > need to reconsider how to remove image from the system -->
+    <attr sel="#removeImages" th:value="${file.filename}"/>
+    <attr sel="#imgName" th:text="${file.filename}"/>
+    <attr sel="#imgCreateAt" th:text="${{file.createAt}}"/>
+
+    <!--Employee Working History Details-->
+    <attr sel="#workingPlaceHistoryDetails" th:if="${not #lists.isEmpty(employeeDetail.employeeWorkingHistories)}">
+        <attr sel="#captionEmployeeName" th:text="${employeeDetail.title.title} +${' '} +${employeeDetail.name}"/>
+        <attr sel="#workingPlaceList" th:each="workingPlaceHistory : ${employeeDetail.employeeWorkingHistories}">
+            <attr sel="#workingPlaceName" th:text="${workingPlaceHistory.workingPlace.name}"/>
+            <attr sel="#from" th:text="${workingPlaceHistory.from_place}"/>
+            <attr sel="#to" th:text="${workingPlaceHistory.to_place}"/>
+            <attr sel="#duration" th:text="${workingPlaceHistory.workingDuration}"/>
+            <attr sel="#workingPlaceChangeReason" th:text="${workingPlaceHistory.workingPlaceChangeReason.workingPlaceChangeReason}"/>
+            <attr sel="#remarks" th:text="${workingPlaceHistory.remark}"/>
+        </attr>
+    </attr>
+
+    <!--    <attr sel="#submit" th:text="${employeeDetail.addStatus==true?'Save': 'Update'}"/>-->
+
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

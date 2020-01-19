@@ -1,0 +1,21 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <attr sel="#petitionerListPresent" th:if="${not #lists.isEmpty(petitioners)}"/>
+    <attr sel="#petitionerList" th:each="petitioner, rowCount : ${petitioners}"/>
+    <attr sel="#index" th:text="${rowCount.count}"/>
+    <attr sel="#nameSinhala" th:text="${petitioner.nameSinhala}"/>
+    <attr sel="#nameTamil" th:text="${petitioner.nameTamil}"/>
+    <attr sel="#nameEnglish" th:text="${petitioner.nameEnglish}"/>
+    <attr sel="#mobileOne" th:text="${petitioner.mobileOne}"/>
+    <attr sel="#petitionerView" th:href="${'/petitioner/' + petitioner.id}"/>
+    <attr sel="#petitionerEdit" th:href="${'/petitioner/edit/' + petitioner.id}"/>
+
+
+    <attr sel="#petitionerListNotPresent" th:if="${ #lists.isEmpty(petitioners)}"/>
+
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

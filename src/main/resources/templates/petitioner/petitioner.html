@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" href="/petitioner/add"><i class="fa fa-user-plus"></i>
+                &nbsp; New Petitioner</a>
+        </div>
+        <div class="col">
+            <h4 class="text-info text-center">
+                <strong>
+                    Petitioner Management
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/petitioner/search" id="searchShow" class="btn btn-primary">
+                <i class="fa fa-user " style="font-size: 20px"></i>&nbsp; Search
+                <i class="fas fa-search" style="font-size: 20px"></i>
+                                                                   &nbsp;
+            </a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-dark formBorder text-center">
+    <div class="col">
+        <div class="col" id="petitionerListPresent">
+            <table class="table table-hover table-striped" id="myTable">
+                <thead>
+                <tr>
+                    <th> Index</th>
+                    <th> Name (Sinhala)</th>
+                    <th> Name (Tamil)</th>
+                    <th> Name (English)</th>
+                    <th> Mobile One</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="petitionerList">
+                    <th id="index"></th>
+                    <th id="nameSinhala"></th>
+                    <th id="nameTamil"></th>
+                    <th id="nameEnglish"></th>
+                    <th id="mobileOne"></th>
+                    <th>
+                        <a id="petitionerView" class="btn btn-success btn-sm"><i
+                                class="fa fa-folder-open"></i>&nbsp;View</a>
+                        <a id="petitionerEdit" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" id="petitionerListNotPresent">
+        <div class="col-sm-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="text-center text-danger">
+                    <strong>There is no petitioner upto now please add petitioner to the system
+                            using add user button.
+                    </strong>
+                </h3>
+            </div>
+        </div>
+        <script>
+            /*active boostrap alert - start*/
+            $(".alert").alert();
+            /*active boostrap alert - end*/
+        </script>
+    </div>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+</body>
+</html>

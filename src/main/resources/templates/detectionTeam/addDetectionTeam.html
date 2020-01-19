@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/detection" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+<!--Form Content - start -->
+<div class="container-fluid bg-dark formBorder">
+    <!--todo - > need to display petition details-->
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="form-horizontal" method="POST">
+            <div class="row">
+                <!--Left Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <!--Id-->
+                    <div id="idStatus" class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="id">ID :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="id" class="form-control" type="text" readonly/>
+                        </div>
+                    </div>
+                    <!--Name-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="name">Name :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="name" class="form-control" tabindex="" type="text" required/>
+                            <input id="petition" type="hidden"/>
+                        </div>
+                    </div>
+                </div>
+                <!--Right Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <!--Number-->
+                    <div id="numberStatus" class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="number">Number :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="number" class="form-control" type="text" readonly/>
+                        </div>
+                    </div>
+                    <!--Team Accept -->
+                    <div class="form-row text-right" id="teamAcceptationDiv">
+                        <div class="col-md-4">
+                            <label class="control-label" for="teamAcceptation">Team Accept :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="text-left" id="teamAccept">
+                                <input type="radio" id="teamAcceptation"/>
+                                <label class="display_detail" id="radioLabel"> Male</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Detection team status-->
+                <div class="form-group col-12 col-md-12 col-sm-12 formBorder" id="teamStatusShow">
+                    <div class="col-md-4">
+                        <label class="control-label" for="teamStatusValue">Team Status :</label>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-row text-left">
+                            <div class="col-4" id="teamStatus">
+                                <input type="radio" id="teamStatusValue"/>
+                                <label class="display_detail" id="teamStatusValueLabel"> Male</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--employee find to add-->
+                <div class="form-group col-12 col-md-12 col-sm-12 formBorder" id="teamFindShow">
+                    <div class="row col-12 col-md-12 col-sm-12 text-left">
+                        <h3 class="text-md-left "><strong>Add Employee :- </strong></h3>
+                    </div>
+                    <!--Working Place to select Employee -->
+                    <div class="form-group col-12 col-md-12 col-sm-12 formBorder" id="employeeFind">
+                        <div class="form-row">
+                            <!--province-->
+                            <div class="col-md-3 col-sm-3 text-left ">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="provinces">Province</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <select class="form-control" tabindex="" id="provinces">
+                                        <option value="">Please select</option>
+                                        <option id="provinceSelectList"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--District-->
+                            <div class="districtShow col-md-3 col-sm-3 text-left ">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="districts">District</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <select class="form-control" name="district" id="districts" tabindex="">
+                                        <option value="">Please select</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--Station-->
+                            <div class="stationShow col-md-3 col-sm-3 text-left ">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="stations">Stations</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <select id="stations" class="form-control" tabindex="">
+                                        <option value="">Please select</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--designation-->
+                            <div class="col-md-3 col-sm-3 text-left ">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="designations">Designation</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <select id="designations" class="form-control" tabindex="">
+                                        <option value="">Please select</option>
+                                        <option id="designationList" value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Employee show-->
+                <div class="form-group col-12 col-sm-12 col-md-12 formBorder" id="employeeShow">
+                    <div class="form-group col-12 col-sm-12 col-md-12 formBorder">
+                        <div class="form-row">
+                            <!--Left side-->
+                            <div class="col-sm-6 col-md-6 text-left flex-column">
+                                <div class="bg-secondary col-12 col-sm-12 col-md-12 text-center">
+                                    <p class="text-white ">
+                                        <strong> Please Select Employee</strong></p>
+                                </div>
+                                <table class="table table-responsive table-hover" id="myTableData">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Id</th>
+                                        <th>Employee Name</th>
+                                        <th>Pay Role Number</th>
+                                        <th>Designation</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--Right side-->
+                            <div class="col-sm-6 col-md-6 text-left flex-column" id="selectEmployeeShow">
+                                <!--Selected Employee Show-->
+                                <div class="bg-white col-12 col-sm-12 col-md-12 text-center">
+                                    <p class="text-primary ">
+                                        <strong>Selected Employee List</strong>
+                                    </p>
+                                </div>
+                                <table class="table table-hover bg-transparent"
+                                       id="selectedEmployee">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Id</th>
+                                        <th></th>
+                                        <th>Employee Name</th>
+                                        <th>Team Role</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr th:if="${ #lists.isEmpty(detectionTeamMembers)}"
+                                        th:each="detectionTeamMember, status : ${detectionTeam.detectionTeamMembers}"                                    >
+                                        <th th:text="${status.count}">No</th>
+                                        <th th:text="${detectionTeamMember.employee.id}"></th>
+                                        <th><input type="hidden"
+                                                   th:field="*{detectionTeamMembers[__${status.index}__].id}"/>
+                                            <input type="hidden"
+                                                   th:field="*{detectionTeamMembers[__${status.index}__].employee}"/>
+                                        </th>
+                                        <th th:text="${detectionTeamMember.employee.name}"></th>
+                                        <th>
+                                            <div th:each="teamMemberRole, count :${teamMemberRoles}">
+                                                <input type="radio" th:id="${'TMR'}+${count.count}"
+                                                       th:value="${teamMemberRole}"
+                                                       th:field="*{detectionTeamMembers[__${status.index}__].detectionTeamMemberRole}"/>
+                                                <label th:for="${'TMR'}+${count.count}"
+                                                       th:text="${teamMemberRole.detectionTeamMemberRole}"></label>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <button type="button" class="btn btn-danger btn-sm "
+                                                    onclick="deletedSelect(this)"> Remove &nbsp;<i
+                                                    class="fa fa-trash"></i></button>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Detection team note -->
+                <div class="form-group col-12 col-sm-12 col-md-12 formBorder" id="teamNote">
+                    <div class="col-md-4">
+                        <label class="control-label" for="detectionTeamNote">Remarks :</label>
+                    </div>
+                    <div class="col-md-12" id="teamNoteList">
+                        <div class="col-md-12">
+                            <span id="note"> hhxcvxvxcvxchh </span>
+                            Created By :&nbsp;
+                            <span id="createdBy"></span>.
+                            &nbsp;
+                            Created At :
+                            <span id="createdAt"></span>.
+                            <input type="hidden" id="detectionTeamNoteHide" class="detectionTeamNoteHide">
+                        </div>
+                    </div>
+                    <div class="form-row col-md-12">
+                        <textarea id="detectionTeamNote" class="form-control"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <!--Translator Sinhala-->
+                        <div class="container-fluid col-sm-6 text-center">
+                            <span id="translatorSinhala"></span>
+                        </div>
+                        <!--Translator Tamil-->
+                        <div class="container-fluid col-sm-6 text-center">
+                            <span id="translatorTamil"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--Button-->
+                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                    <button class="btn btn-success" type="submit" tabindex="">
+                        <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit"></span>
+                    </button>
+                </div>
+            </div>
+            <!--Hide content from visual-->
+            <div class="form-row">
+                <input type="hidden" id="districtUrl" class="hide"/>
+                <input type="hidden" id="stationUrl" class="hide"/>
+                <input type="hidden" id="employeeUrl" class="hide"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script id="customScript"></script>
+</body>
+</html>

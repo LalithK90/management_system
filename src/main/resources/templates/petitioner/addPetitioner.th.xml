@@ -1,0 +1,64 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+    <!--form header-->
+    <attr sel="#formHeader" th:text="${addStatus==true?'Add New Petitioner ':'Update A Petitioner Details'}"/>
+    <!--Form -->
+    <attr sel="#form" th:action="${addStatus==true?'/petitioner/add':'/petitioner/update'}"
+          th:object="${petitioner}"/>
+    <attr sel="#petitionerAddFormFragment" th:fragment="petitionerAddFromFragment"/>
+    <!--Id-->
+    <attr sel="#idStatus" th:if="${addStatus==false}"/>
+    <attr sel="#id" th:field="*{id}"/>
+    <!--Name in sinhala-->
+    <attr sel="#nameSinhala" th:field="*{nameSinhala}"/>
+    <attr sel="#nameSinhalaError" th:errors="*{nameSinhala}"
+          th:if="${#fields.hasErrors('nameSinhala')}"/>
+    <!--Name in tamil-->
+    <attr sel="#nameTamil" th:field="*{nameTamil}"/>
+    <attr sel="#nameTamilError" th:errors="*{nameTamil}"
+          th:if="${#fields.hasErrors('nameTamil')}"/>
+    <!--Name in English-->
+    <attr sel="#nameEnglish" th:field="*{nameEnglish}"/>
+    <attr sel="#nameEnglishError" th:errors="*{nameEnglish}"
+          th:if="${#fields.hasErrors('nameEnglish')}"/>
+    <!--Email-->
+    <attr sel="#email" th:field="*{email}"/>
+    <attr sel="#emailError" th:errors="*{email}"
+          th:if="${#fields.hasErrors('email')}"/>
+    <!--Petitioner Type-->
+    <attr sel="#petitionerType" th:field="*{petitionerType}"/>
+    <attr sel="#petitionerTypeList" th:each="petitionerType : ${petitionerTypes}"
+          th:text="${petitionerType.petitionerType}"
+          th:value="${petitionerType}"
+          th:field="*{petitionerType}"/>
+    <!--Address-->
+    <attr sel="#address" th:field="*{address}"/>
+    <attr sel="#addressError" th:errors="*{address}"
+          th:if="${#fields.hasErrors('address')}"/>
+    <!--Mobile One-->
+    <attr sel="#mobileOne" th:field="*{mobileOne}"/>
+    <attr sel="#mobileOneError" th:errors="*{mobileOne}"
+          th:if="${#fields.hasErrors('mobileOne')}"/>
+    <!--Mobile two-->
+    <attr sel="#mobileTwo" th:field="*{mobileTwo}"/>
+    <attr sel="#mobileTwoError" th:errors="*{mobileTwo}"
+          th:if="${#fields.hasErrors('mobileTwo')}"/>
+    <!--Land-->
+    <attr sel="#land" th:field="*{land}"/>
+    <attr sel="#landError" th:errors="*{land}"
+          th:if="${#fields.hasErrors('land')}"/>
+    <!--Created by and created at-->
+    <attr sel="#updateStatus" th:if="${addStatus==false}"/>
+    <attr sel="#createdBy" th:field="*{createdBy}"/>
+    <attr sel="#createdAt" th:text=th:text="${#temporals.format(createdAt, 'dd-MM-yyyy HH:mm')}"/>
+    <!--Button-->
+    <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
+    <!--Errors Display-->
+    <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
+    <attr sel="#error" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>
+
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

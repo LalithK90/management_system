@@ -1,0 +1,96 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <attr sel="#formHeader" th:text="${petition.petitionNumber}+ ${'  Details'}"/>
+    <!--id-->
+    <attr sel="#id" th:text="${petition.id}"/>
+    <!--Village-->
+    <attr sel="#village" th:text="${petition.village}"/>
+    <!--Division-->
+    <attr sel="#agaDivision" th:text="${petition.agaDivision}"/>
+    <!--petition State-->
+    <attr sel="#petitionState" th:each="petitionState, iStat : ${petition.petitionStates}" th:if="${iStat.last}"
+          th:text="${petitionState.petitionStateType.petitionStateType}"/>
+    <!--Petition Number-->
+    <attr sel="#petitionNumber" th:text="${petition.petitionNumber}"/>
+    <!--Petition Subject-->
+    <attr sel="#subject" th:utext="${petition.subject}"/>
+    <!--Petition Priority-->
+    <attr sel="#petitionPriority" th:text="${petition.petitionPriority.petitionPriority}"/>
+
+    <!--Petitioner details-->
+    <!--Id-->
+    <attr sel="#petitionerId" th:text="${petition.petitioner.id}"/>
+    <!--Name in sinhala-->
+    <attr sel="#nameSinhala" th:text="${petition.petitioner.nameSinhala}"/>
+    <!--Name in tamil-->
+    <attr sel="#nameTamil" th:text="${petition.petitioner.nameTamil}"/>
+    <!--Name in English-->
+    <attr sel="#nameEnglish" th:text="${petition.petitioner.nameEnglish}"/>
+    <!--Email-->
+    <attr sel="#email" th:text="${petition.petitioner.email}"/>
+    <!--Petitoner Type-->
+    <attr sel="#petitionerType" th:text="${petition.petitioner.petitionerType.petitionerType}"/>
+    <!--Address-->
+    <attr sel="#address" th:text="${petition.petitioner.address}"/>
+    <!--Mobile One-->
+    <attr sel="#mobileOne" th:text="${petition.petitioner.mobileOne}"/>
+    <!--Mobile two-->
+    <attr sel="#mobileTwo" th:text="${petition.petitioner.mobileTwo}"/>
+    <!--Land-->
+    <attr sel="#land" th:text="${petition.petitioner.land}"/>
+    <!--Created by and created at-->
+    <attr sel="#createdBy" th:text="${petition.petitioner.createdBy}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(petition.petitioner.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
+    <!--Petition State Details-->
+    <attr sel="#petitionStates" th:each="petitionState, index : ${petition.PetitionStates}">
+        <attr sel="#petitionStateIndex" th:text="${index.count}"/>
+        <attr sel="#petitionStatesName" th:text="${petitionState.petitionStateType.petitionStateType}"/>
+        <attr sel="#petitionStatesCreatedBy" th:text="${petitionState.createdBy}"/>
+        <attr sel="#petitionStatesCreatedAt"
+              th:text="${#temporals.format(petitionState.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+    </attr>
+    <!--Minute Petition Area-->
+        <attr sel="#minutePetitionDetails" th:each="minutePetition : ${minutePetitions}">
+            <attr sel="#minuteStateDetail" th:utext="${minutePetition.detail}"/>
+            <attr sel="#minuteState" th:text="${minutePetition.minuteState.minuteState}"/>
+            <attr sel="#minuteStateEmployee" th:if="${minutePetition.employee != null}" th:text="${minutePetition.employee.name}"/>
+            <attr sel="#minuteStateWorkingPlace" th:if="${minutePetition.workingPlace != null}" th:text="${minutePetition.workingPlace.name}"/>
+            <attr sel="#imageDiv" th:each="fileInfo : ${minutePetition.fileInfos}">
+                <attr sel="#imageMinutePetition" th:src="${fileInfo.url}"/>
+                <attr sel="#imageDetails" th:text="${#temporals.format(fileInfo.createAt, 'dd-MM-yyyy HH:mm')}"/>
+            </attr>
+        </attr>
+    <!--Detection Team-->
+    <attr sel="#detectionTeamDetail" th:each="detectionTeam : ${detectionTeams}">
+        <attr sel="#detectionTeamId" th:text="${detectionTeam.id}"/>
+        <attr sel="#detectionTeamName" th:text="${detectionTeam.name}"/>
+        <attr sel="#detectionTeamTeamStatusValue" th:text="${detectionTeam.detectionTeamStatus.detectionTeamStatus}"/>
+        <attr sel="#detectionTeamTeamAcceptation" th:text="${detectionTeam.teamAcceptation.teamAcceptation}"/>
+        <attr sel="#teamAcceptedDateTime"
+              th:text="${#temporals.format(detectionTeam.teamAcceptedDateTime, 'dd-MM-yyyy HH:mm')}"/>
+        <attr sel="#detectionTeamNumber" th:text="${detectionTeam.number}"/>
+        <attr sel="#detectionTeamMemberList" th:each="teamMember , index : ${detectionTeam.detectionTeamMembers}">
+            <attr sel="#index" th:text="${index.count}"/>
+            <attr sel="#detectionTeamMemberNumber" th:text="${teamMember.employee.payRoleNumber}"/>
+            <attr sel="#detectionTeamMemberName" th:text="${teamMember.employee.name}"/>
+            <attr sel="#detectionTeamMemberRole" th:text="${teamMember.detectionTeamMemberRole.detectionTeamMemberRole}"/>
+        </attr>
+        <attr sel="#detectionTeamNoteList" th:each="teamNote, count : ${detectionTeam.detectionTeamNotes}">
+            <attr sel="#detectionTeamIndex" th:text="${count.count}"/>
+            <attr sel="#detectionTeamNote" th:text="${teamNote.note}"/>
+            <attr sel="#detectionTeamNoteCreatedBy" th:text="${teamNote.createdBy}"/>
+            <attr sel="#detectionTeamNoteCreatedAt"
+                  th:text="${#temporals.format(teamNote.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+        </attr>
+    </attr>
+
+    <!--Petition Offender details-->
+
+
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

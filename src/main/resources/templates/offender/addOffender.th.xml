@@ -1,0 +1,143 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <!--Form header-->
+    <attr sel="#formHeader" th:text="${addStatus==true?'New Offender Add':'Update Offender Details'}"/>
+    <!--Form action-->
+    <attr sel="#form" th:action="${addStatus==true?'/offender/add':'/offender/update'}"
+          th:object="${offender}"/>
+    <!--Id status-->
+    <attr sel="#idStatus" th:if="${addStatus==false}"/>
+    <!--1. Id-->
+    <attr sel="#id" th:field="*{id}"/>
+    <!--2. Offender Registration number-->
+    <attr sel="#offenderRegisterNumber" th:field="*{offenderRegisterNumber}"/>
+    <!--3. Name in Sinhala-->
+    <attr sel="#nameSinhala" th:field="*{nameSinhala}"/>
+    <attr sel="#nameSinhalaError" th:errors="*{nameSinhala}"
+          th:if="${#fields.hasErrors('nameSinhala')}"/>
+    <!--4. Name in Tamil-->
+    <attr sel="#nameTamil" th:field="*{nameTamil}"/>
+    <attr sel="#nameTamilError" th:errors="*{nameTamil}"
+          th:if="${#fields.hasErrors('nameTamil')}"/>
+    <!--5. Name in English-->
+    <attr sel="#nameEnglish" th:field="*{nameEnglish}"/>
+    <attr sel="#nameEnglishError" th:errors="*{nameEnglish}"
+          th:if="${#fields.hasErrors('nameEnglish')}"/>
+    <!--6. NIC-->
+    <attr sel="#nic" th:field="*{nic}"/>
+    <attr sel="#nicError" th:errors="*{nic}"
+          th:if="${#fields.hasErrors('nic')}"/>
+    <!--7. Passport Number-->
+    <attr sel="#passportNumber" th:field="*{passportNumber}"/>
+    <attr sel="#passportNumberError" th:errors="*{passportNumber}"
+          th:if="${#fields.hasErrors('passportNumber')}"/>
+    <!--8. Driving Licence Number-->
+    <attr sel="#drivingLicenceNumber" th:field="*{drivingLicenceNumber}"/>
+    <attr sel="#drivingLicenceNumberError" th:errors="*{drivingLicenceNumber}"
+          th:if="${#fields.hasErrors('drivingLicenceNumber')}"/>
+    <!--9. Gender-->
+    <attr sel="#gender" th:field="*{gender}"/>
+    <attr sel="#genderList" th:each="genders : ${gender}"
+          th:text="${genders.gender}"
+          th:value="${genders}"
+          th:selected="${genders==offender.gender?'selected':'unselected'}"/>
+    <!--10. Date of birth-->
+    <attr sel="#dateOfBirth" th:field="*{dateOfBirth}"/>
+    <attr sel="#dateOfBirthError" th:errors="*{dateOfBirth}"
+          th:if="${#fields.hasErrors('dateOfBirth')}"/>
+    <!--11. Blood group-->
+    <attr sel="#bloodGroup" th:field="*{bloodGroup}"/>
+    <attr sel="#bloodGroupList" th:each="bloodGroups : ${bloodGroup}"
+          th:text="${bloodGroups.bloodGroup}"
+          th:value="${bloodGroups}"
+          th:selected="${bloodGroups==offender.bloodGroup?'selected':'unselected'}"/>
+    <!--12. Civil status-->
+    <attr sel="#civilStatus" th:field="*{civilStatus}"/>
+    <attr sel="#civilStatusList" th:each="civilStatu : ${civilStatus}"
+          th:text="${civilStatu.CivilStatus}"
+          th:value="${civilStatu}"
+          th:selected="${civilStatu==offender.civilStatus?'selected':'unselected'}"/>
+    <!--13. Address-->
+    <attr sel="#address" th:field="*{address}"/>
+    <attr sel="#addressError" th:errors="*{address}"
+          th:if="${#fields.hasErrors('address')}"/>
+    <!--14. Mobile one-->
+    <attr sel="#mobileOne" th:field="*{mobileOne}"/>
+    <attr sel="#mobileOneError" th:errors="*{mobileOne}"
+          th:if="${#fields.hasErrors('mobileOne')}"/>
+    <!--15. Mobile two-->
+    <attr sel="#mobileTwo" th:field="*{mobileTwo}"/>
+    <attr sel="#mobileTwoError" th:errors="*{mobileTwo}"
+          th:if="${#fields.hasErrors('mobileTwo')}"/>
+    <!--16. Land-->
+    <attr sel="#land" th:field="*{land}"/>
+    <attr sel="#landError" th:errors="*{land}"
+          th:if="${#fields.hasErrors('land')}"/>
+    <!--17. Email-->
+    <attr sel="#email" th:field="*{email}"/>
+    <attr sel="#emailError" th:errors="*{email}"
+          th:if="${#fields.hasErrors('email')}"/>
+    <!--18. Created at update at-->
+    <attr sel="#updateStatus" th:if="${addStatus==false}"/>
+    <attr sel="#createdBy" th:field="*{createdBy}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
+    <!--19. Calling Names-->
+    <attr sel="#callingNameListDisplay" th:if="${addStatus==false}"/>
+    <attr sel="#callingNameDisplay" th:each="offenderCallingName, status : ${offender.offenderCallingNames}"/>
+    <attr sel="#callingNameIdDisplay" th:field="*{offenderCallingNames[__${status.index}__].id}"/>
+    <attr sel="#callingNamesDisplay" th:field="*{offenderCallingNames[__${status.index}__].callingName}"/>
+
+    <!--20. Description-->
+    <attr sel="#description" th:field="*{description}"/>
+    <attr sel="#descriptionError" th:errors="*{description}"
+          th:if="${#fields.hasErrors('description')}"/>
+
+    <!--Singlish to sinhala Translator-->
+    <attr sel="#translatorSinhala" th:replace="~{fragments/unicodeSinhala :: unicodeSinhalaFragment}"/>
+    <!--Tamish to Tamil Translator-->
+    <attr sel="#translatorTamil" th:replace="~{fragments/unicodeTamil :: unicodeTamilFragment}"/>
+
+
+    <!--20. Photos -->
+    <attr sel="#photoDetails" th:if="${addStatus==false}"/>
+    <attr sel="#filesList" th:each="file, rowStat: ${files}"/>
+    <attr sel="#img" th:src="${file.url}"/>
+
+    <!--new guardian add -->
+    <attr sel="#guardianDetailNew" th:if="${ #lists.isEmpty(offender.guardians)}"/>
+
+    <!--21. Guardian Details-->
+    <attr sel="#guardianTypesList" th:each="guardianType : ${guardianTypes}"
+          th:text="${guardianType.guardianType}"
+          th:value="${guardianType}"/>
+    <attr sel="#guardianDetails" th:each="guardian, status : ${offender.guardians}"/>
+    <attr sel="#guardianId" th:field="*{guardians[__${status.index}__].id}"/>
+    <attr sel="#guardianType" th:field="*{guardians[__${status.index}__].guardianType}"/>
+    <attr sel="#guardianTypeList" th:each="guardianType : ${guardianTypes}"
+          th:text="${guardianType.guardianType}"
+          th:value="${guardianType}"
+          th:field="*{guardians[__${status.index}__].guardianType}"/>
+    <attr sel="#guardianNic" th:field="*{guardians[__${status.index}__].nic}"/>
+    <attr sel="#guardianName" th:field="*{guardians[__${status.index}__].name}"/>
+    <attr sel="#guardianRemark" th:field="*{guardians[__${status.index}__].remark}"/>
+    <attr sel="#guardianCreatedBy" th:field="*{guardians[__${status.index}__].createdBy}"/>
+    <attr sel="#guardianCreatedAt" th:field="*{guardians[__${status.index}__].createdAt}"/>
+
+    <!--//todo - > need to reconsider how to remove image from the system -->
+    <!--22. Remove images-->
+    <attr sel="#removeImages" th:value="${file.filename}"/>
+    <attr sel="#imgName" th:text="${file.filename}"/>
+    <attr sel="#imgCreateAt" th:text="${{file.createAt}}"/>
+    <!--Button-->
+    <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
+    <!--Error-->
+    <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
+    <attr sel="#error" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+    <attr sel="#offenderJs" th:src="@{/js/offenderJs.js}"/>
+</thlogic>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col-2">
+            <a class="btn btn-success" href="/petition">
+                <i class="fa fa-users" style="font-size: 18px;"></i> &nbsp; Add Team </a>
+        </div>
+        <div class="col-8">
+            <h4 class="text-info text-center">
+                <strong>
+                    Detection Team Send Message To Team Members
+                </strong>
+            </h4>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-success" href="/detection">
+                <i class="fa fa-list" style="font-size: 18px;"></i> &nbsp; List Team </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <div class="form-row">
+            <div class="col-6">
+                <h3><strong>Petition Number: <span id="petitionNumber"></span></strong></h3>
+            </div>
+            <div class="col-6">
+                <h3><strong>Detection Team Number: <span id="detectionTeamNumber"></span></strong></h3>
+            </div>
+        </div>
+        <div class="form-row">
+            <h4><strong>Petition Subject: </strong> <span id="petitionSubject"></span></h4>
+        </div>
+        <div class="form-row">
+            <div class="row col-12 col-sm-12 col-md-12 col-lg-12">
+                <legend class="col-md-3 col-form-label pt-0"><strong>Team Members</strong></legend>
+                <ul class="list-group" id="teamMemberList">
+                    <li class="list-group-item" id="teamMember"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-dark formBorder">
+    <form id="form" method="POST" enctype="multipart/form-data">
+        <div class="col-sm-12 flex-column ">
+            <div class="form-row">
+                <input type="hidden" id="detectionTeamId">
+                <label class="control-label" for="message">Message:</label>
+                <div class="container-fluid">
+                    <div>
+                            <textarea class="form-control" id="message"
+                                      placeholder="Enter Description"></textarea>
+                        <div id="the-count">
+                            <span id="current">0</span>
+                            <span id="maximum">/ 160</span>
+                            <span id="messageNotice"></span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <!--Translator Sinhala-->
+                <div class="container-fluid col-sm-6 text-center">
+                    <!--Sinhala modal button -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target=".bd-example-modal-xl"><i
+                            class="fas fa-language"></i> &nbsp;Singlish to Sinhala
+                    </button>
+                </div>
+                <!--Translator Tamil-->
+                <div class="container-fluid col-sm-6 text-center">
+                    <!-- modal tamil button -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#bd-example-modal-xl"><i
+                            class="fas fa-language"></i> &nbsp;Tamilish to Tamil
+                    </button>
+                </div>
+            </div>
+            <!--button-->
+            <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                <div class="input-field">
+                    <button class="btn btn-success" type="submit" tabindex="10">
+                        <i class="fas fa-paper-plane" style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                            id="submit"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br/>
+    </form>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<!--Translator-->
+<span id="translatorSinhala"></span>
+<span id="translatorTamil"></span>
+<script>
+    $('#message').keyup(function () {
+
+        let characterCount = $(this).val().length,
+            current = $('#current'),
+            maximum = $('#maximum'),
+            theCount = $('#the-count');
+
+        current.text(characterCount);
+
+
+        /*This isn't entirely necessary, just playing around*/
+        if (characterCount < 20) {
+            current.css('color', '#666');
+        }
+        if (characterCount > 40 && characterCount < 60) {
+            current.css('color', '#6d5555');
+        }
+        if (characterCount > 60 && characterCount < 80) {
+            current.css('color', '#793535');
+        }
+        if (characterCount > 80 && characterCount < 100) {
+            current.css('color', '#841c1c');
+        }
+        if (characterCount > 100 && characterCount < 119) {
+            current.css('color', '#8f0001');
+        }
+
+        if (characterCount >= 120) {
+            maximum.css('color', '#8f0001');
+            current.css('color', '#8f0001');
+            theCount.css('font-weight', 'bold');
+        } else {
+            maximum.css('color', '#666');
+            theCount.css('font-weight', 'normal');
+        }
+        if (characterCount > 120) {
+            $('#messageNotice').html('Your text content is longer than one message hence, Only send email ');
+        }
+
+    });
+
+</script>
+</body>
+</html>

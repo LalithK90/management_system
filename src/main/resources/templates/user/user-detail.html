@@ -1,78 +1,131 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <style th:replace="fragments/style"></style>
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
 </head>
 <body>
-<nav class="navbar navbar-default" th:replace="fragments/header :: header"></nav>
-<div class="container-fluid" style="margin-top: 60px">
-    <div class="panel panel-primary" th:object="${userDetail}">
-        <div class="panel panel-heading  text-center">
-            <h4 th:text="${userDetail.username}"></h4>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+
+<!--Page header -->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
         </div>
-        <div class="panel-body">
-            <div class="col-sm-offset-3 col-sm-6">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="container-fluid">
-                            <h3>Id :
-                                <span th:text="${userDetail.id}"></span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container-fluid">
-                            <h3>User Name :
-                                <span th:text="${userDetail.username}"></span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container-fluid">
-                            <h3>
-                                Employee Name :
-                                <span th:text="${employee.title.title}"></span> &nbsp; <span
-                                    th:text="${employee.name}"></span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container-fluid">
-                            <h3>Role :
-                                <span th:text="${employee.designation.designation}"></span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container-fluid">
-                            <h3>Created Date :
-                                <span th:text="${userDetail.createdDate}"></span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="text-left col-sm-6">
-                            <a href="/user">
-                                <button class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span>&nbsp;
-                                    Back
-                                </button>
-                            </a>
-                        </div>
-                        <div class="text-right col-sm-6">
-                            <a href="/home">
-                                <button class="btn btn-success"><span class="glyphicon glyphicon-home"></span>&nbsp;
-                                    Home
-                                </button>
-                            </a>
-                        </div>
-                    </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/user" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-dark formBorder">
+    <div class="row">
+        <!--Left Side-->
+        <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+            <div class="form-row">
+                <!--id-->
+                <div class="col-md-4">
+                    <label class="control-label">ID :</label>
+                </div>
+                <div class="col-md-8">
+                    <strong><span id="id"></span></strong>
+                </div>
+            </div>
+            <!--User Name-->
+            <div class="form-row">
+                <div class="col-md-4">
+                    <label class="control-label">User Name :</label>
+                </div>
+                <div class="col-md-8">
+                    <strong><span id="userName"></span></strong>
+                </div>
+            </div>
+            <!--Working Place-->
+            <div class="form-row">
+                <div class="col-md-2">
+                    <label class="control-label">Able to Check :</label>
+                </div>
+                <div class="col-md-10">
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Province</th>
+                            <th>District</th>
+                            <th>Station</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr id="workingStation">
+                            <th id="index"></th>
+                            <th id="province"></th>
+                            <th id="district"></th>
+                            <th id="station"></th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--Right Side-->
+        <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+            <!--Employee Details-->
+            <div class="form-row">
+                <div class="col-md-4">
+                    <label class="control-label">Employee :</label>
+                </div>
+                <div class="col-md-8">
+                    <strong><span id="employeeName"></span></strong>
+                </div>
+            </div>
+            <!--Created date-->
+            <div class="form-row">
+                <div class="col-md-4">
+                    <label class="control-label">Created Date :</label>
+                </div>
+                <div class="col-md-8">
+                    <strong><span id="createDate"></span></strong>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-2">
+                    <label class="control-label">Roles :</label>
+                </div>
+                <div class="col-md-10">
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr id="roles">
+                            <th id="count"></th>
+                            <th id="name"></th>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<footer class="page-footer" th:replace="fragments/footer"></footer>
-<script th:replace="fragments/script"></script>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
 </body>
 </html>

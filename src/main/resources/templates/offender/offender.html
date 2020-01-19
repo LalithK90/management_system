@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" href="/offender/add"><i class="fa fa-user-plus"></i>
+                &nbsp; New Offender</a>
+        </div>
+        <div class="col">
+            <h4 class="text-info text-center">
+                <strong>
+                    Offender Management
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+             <a href="/offender/search" class="btn btn-primary">
+                 <i class="fa fa-users " ></i>&nbsp; Offender &nbsp; <i class="fa fa-search"></i>
+             </a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-dark formBorder text-center">
+    <div class="col">
+        <div class="col" id="offenderListPresent">
+            <table class="table table-hover table-striped" id="myTable">
+                <thead>
+                <tr>
+                    <th> Index</th>
+                    <th> Name</th>
+                    <th> Mobile</th>
+                    <th> Land Number</th>
+                    <th> Image </th>
+                    <th> Modify</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="offenderList">
+                    <th id="index"></th>
+                    <th id="nameEnglish"></th>
+                    <th id="mobileOne"></th>
+                    <th id="land"></th>
+                    <th>
+                        <img id="img" class="rounded" src=""
+                             style="height: 150px; width: 150px; border-radius: 10px"/>
+                    </th>
+                    <th>
+                        <a id="offenderView" class="btn btn-success btn-sm"><i
+                                class="fa fa-folder-open"></i>&nbsp;View</a>
+                        <a id="offenderEdit" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                        <!--<a id="offenderRemove" class="btn btn-danger"><i class="fa fa-trash-o"></i>
+                                                    Delete</a>-->
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" id="offenderListNotPresent">
+        <div class="col-sm-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="text-center text-danger">
+                    <strong>There is no offender upto know please add offender to the system
+                            using add offender button.
+                    </strong>
+                </h3>
+            </div>
+        </div>
+        <script>
+            /*Active bootstraps alert - start*/
+            $(".alert").alert();
+            /*Active bootstraps alert - end*/
+        </script>
+    </div>
+</div>
+
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+</body>
+</html>

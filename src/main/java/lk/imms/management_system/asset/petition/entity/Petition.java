@@ -1,13 +1,23 @@
 package lk.imms.management_system.asset.petition.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
+import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
-import lk.imms.management_system.general.security.entity.User;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
+import lk.imms.management_system.asset.petitioner.entity.Petitioner;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
+import lk.imms.management_system.util.audit.AuditEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,40 +25,48 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@JsonIgnoreProperties( value = {"createdAt", "updatedAt"}, allowGetters = true )
-public class Petition {
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
-    @Column( unique = true )
-    private Long id;
+public class Petition extends AuditEntity {
 
-
-    // -->Auto Generate Year/Month/OfficeType/StationCode/PetitionNumberFromDB
     private String petitionNumber;
 
     private String indexNumber;
 
+    private String village;
+
+    private String agaDivision;
+
+    @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    private String subject;
+
     @Enumerated( EnumType.STRING )
     private PetitionType petitionType;
+
+    @Enumerated( EnumType.STRING )
+    private PetitionPriority petitionPriority;
+
+    @ManyToOne
+    private Petitioner petitioner;
+
+    @ManyToOne
+    private WorkingPlace workingPlace;
 
     @OneToMany( mappedBy = "petition" )
     private List< PetitionState > petitionStates;
 
-    @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL )
-    private PetitionerDetail petitionerDetail;
+    @OneToMany( mappedBy = "petition" )
+    private List< MinutePetition > minutePetitions;
 
-    @ManyToOne
-    private User createdUser;
+    @OneToMany( mappedBy = "petition" )
+    private List< DetectionTeam > detectionTeams;
 
-    @ManyToOne
-    private User updatedUser;
+    @OneToMany( mappedBy = "petition" )
+    private List< PetitionOffender > petitionOffenders;
 
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate createdAt;
+    @Transient
+    private List< MultipartFile > files = new ArrayList<>();
 
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate updatedAt;
+    @Transient
+    private List< String > removeImages = new ArrayList<>();
 
 
 }

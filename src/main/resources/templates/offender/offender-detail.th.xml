@@ -1,0 +1,83 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <!--Form header-->
+    <attr sel="#formHeader" th:text="${offender.nameEnglish}"/>
+    <!--Offender Details Fragment -->
+    <attr sel="#offenderDetail" th:fragment="offenderDetailFragment"/>
+    <!--1. Id-->
+    <attr sel="#id" th:text="${offender.id}"/>
+    <!--2. Offender Registration number-->
+    <attr sel="#offenderRegisterNumber" th:text="${offender.offenderRegisterNumber}"/>
+    <!--3. Name in Sinhala-->
+    <attr sel="#nameSinhala" th:text="${offender.nameSinhala}"/>
+    <!--4. Name in Tamil-->
+    <attr sel="#nameTamil" th:text="${offender.nameTamil}"/>
+    <!--5. Name in English-->
+    <attr sel="#nameEnglish" th:text="${offender.nameEnglish}"/>
+    <!--6. NIC-->
+    <attr sel="#nic" th:text="${offender.nic}"/>
+    <!--7. Passport Number-->
+    <attr sel="#passportNumber" th:text="${offender.passportNumber}"/>
+    <!--8. Driving Licence Number-->
+    <attr sel="#drivingLicenceNumber" th:text="${offender.drivingLicenceNumber}"/>
+    <!--9. Gender-->
+    <attr sel="#gender" th:text="${offender.gender.gender}"/>
+    <!--10. Date of birth-->
+    <attr sel="#dateOfBirth" th:text="${{offender.dateOfBirth}}"/>
+    <!--11. Blood group-->
+    <attr sel="#bloodGroup" th:text="${offender.bloodGroup.bloodGroup}"/>
+    <!--12. Civil status-->
+    <attr sel="#civilStatus" th:text="${offender.civilStatus.civilStatus}"/>
+    <!--13. Address-->
+    <attr sel="#address" th:utext="${offender.address}"/>
+    <!--14. Mobile one-->
+    <attr sel="#mobileOne" th:text="${offender.mobileOne}"/>
+    <!--15. Mobile two-->
+    <attr sel="#mobileTwo" th:text="${offender.mobileTwo}"/>
+    <!--16. Land-->
+    <attr sel="#land" th:text="${offender.land}"/>
+    <!--17. Email-->
+    <attr sel="#email" th:text="${offender.email}"/>
+    <!--18. Created at update at-->
+    <attr sel="#createdBy" th:text="${offender.createdBy}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(offender.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+    <attr sel="#updatedBy" th:text="${offender.updatedBy}"/>
+    <attr sel="#updatedAt" th:text="${#temporals.format(offender.updatedAt, 'dd-MM-yyyy HH:mm')}"/>
+    <!--19. Calling Names-->
+    <attr sel="#callingNameDisplay" th:each="offenderCallingName, status : ${offender.offenderCallingNames}"/>
+    <attr sel="#callingNamesDisplay" th:text="${offender.offenderCallingNames[__${status.index}__].callingName}"/>
+    <attr sel="#callingNamesCretedByDisplay" th:text="${offender.offenderCallingNames[__${status.index}__].createdBy}"/>
+    <attr sel="#callingNamesCreatedAtDisplay"
+          th:text="${{offender.offenderCallingNames[__${status.index}__].createdAt}}"/>
+    <attr sel="#callingNamesUpdatedByDisplay"
+          th:text="${offender.offenderCallingNames[__${status.index}__].updatedBy}"/>
+
+    <!--20. Description-->
+    <attr sel="#description" th:utext="${offender.description}"/>
+
+    <!--21. Photos -->
+    <attr sel="#filesList" th:each="file, rowStat: ${offender.fileInfos}"/>
+    <attr sel="#img" th:src="${file.url}"/>
+    <attr sel="#imgName" th:text="${file.filename}"/>
+    <attr sel="#imgCreateAt" th:text="${{file.createAt}}"/>
+
+    <!--21. Guardian Details-->
+    <attr sel="#guardianDetails" th:each="guardian, status : ${offender.guardians}"/>
+    <attr sel="#guardianType" th:text="${offender.guardians[__${status.index}__].guardianType.guardianType}"/>
+    <attr sel="#guardianNic" th:text="${offender.guardians[__${status.index}__].nic}"/>
+    <attr sel="#guardianName" th:text="${offender.guardians[__${status.index}__].name}"/>
+    <attr sel="#guardianRemark" th:utext="${offender.guardians[__${status.index}__].remark}"/>
+    <attr sel="#guardianCreatedBy" th:text="${offender.guardians[__${status.index}__].createdBy}"/>
+    <attr sel="#guardianCreatedAt" th:text="${{offender.guardians[__${status.index}__].createdAt}}"/>
+    <attr sel="#guardianUpdatedBy" th:text="${offender.guardians[__${status.index}__].updatedBy}"/>
+    <attr sel="#guardianUpdatedAt" th:text="${{offender.guardians[__${status.index}__].updatedAt}}"/>
+    <!--Todo -> following things -->
+    <!--Contravenes-->
+
+    <!--Crimes-->
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

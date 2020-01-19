@@ -1,14 +1,14 @@
- $(document).ready(function () {
+$(document).ready(function () {
 
     // set current year to the footer
     document.getElementById("currentYear").innerHTML = new Date().getFullYear();
 
     /*//Nav bar properties - start//*/
-    $('ul.nav li.dropdown').hover(function () {
+/*    $('ul.navbar-nav li.dropdown').hover(function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(10);
     }, function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(10);
-    });
+    });*/
     /*//Nav bar properties - end//*/
 
     /* selected field colour and add selected lab test table - start*/
@@ -32,46 +32,32 @@
         $("#gender").val(calculateGender(nic));
     });
     /* Patient and employee Nic Validation - end*/
-
-//prevent checkbox==null before submit -start
-    $(function () {
-        $('#btnSubmit').on("click", function (e) {
-            let checked = $(':checkbox:checked').length;
-            if (checked === 0) {
-                swal("Oops", "At least One Lab Test Should Be Selected!", "error");
-                e.preventDefault();
-            }
-        });
+    //input type date can not be selected future date
+    $('[type="date"]').prop('max', function () {
+        return new Date().toJSON().split('T')[0];
     });
-//prevent checkbox==null before submit - end
-
-    //WYSIWYG add to text area
-    //let textarea =document.getElementById("description");
-    // sceditor.create(textarea);
-    //     , {
-    //     format: 'bbcode',
-    //         icons: 'monocons',
-    //         style: '../minified/themes/content/default.min.css'
-    // });
 
 });
+
+
 // regex
 let nicRegex = /^([0-9]{9}[vV|xX])|^([0-9]{12})$/;
 let mobileRegex = /^([0][7][\d]{8}$)|^([7][\d]{8})$/;
-let nameRegex = /^[a-zA-Z]{5}[ a-zA-Z]+$/;
+let landRegex = /^0((11)|(2(1|[3-7]))|(3[1-8])|(4(1|5|7))|(5(1|2|4|5|7))|(6(3|[5-7]))|([8-9]1))([2-4]|5|7|9)[0-9]{6}$/;
+let nameRegex = /^[a-zA-Z .-]{5}[ a-zA-Z.-]+$/;
 let numberRegex = /^([eE][hH][sS][\d]+)$/;
 let invoiceNumberRegex = /^[0-9]{10}$/;
 
 
-/*//Nic - data of birth - start//*/
-function dateLengthValidate(day) {
+//Nic - data of birth - start
+let dateLengthValidate = function (day) {
     if (day.toLocaleString().length === 1) {
         return day = '0' + day;
     }
     return day;
-}
-function calculateDateOfBirth(nic) {
+};
 
+let calculateDateOfBirth = function (nic) {
     let dateOfBirth = null;
     let day = null;
     let month;
@@ -202,60 +188,100 @@ function calculateDateOfBirth(nic) {
         }
     }
     return dateOfBirth;
-}
+};
 
-/*//Nic - data of birth - end//*/
+//Nic - data of birth - end
 
-/*//Nic - gender - start//*/
-function calculateGender(nic) {
-    let gender = null;
+//Nic - gender - start
+let calculateGender = function (nic) {
+    let genders = null;
     if (nic.length === 10 && nic[9] === "V" || nic[9] === "v" || nic[9] === "x" || nic[9] === "X") {
         if (nic[9] === "v" || nic[9] === "x") {
-            alert(` Please change "v" or "x" to "V" or "X" `);
+            let message = `Please change "v" or "x" to "V" or "X" `;
+            swal({
+                title: "Could you please check NIC",
+                icon: "warning",
+                text: message,
+            });
         }
-        if (+nic.substr(2, 3) < 500) gender = 'MALE';
-        else gender = 'FEMALE';
+        if (+nic.substr(2, 3) < 500) genders = 'MALE';
+        else genders = 'FEMALE';
 
     } else if (nic.length === 12) {
-        if (+nic.substr(4, 3) < 500) gender = 'MALE';
-        else gender = 'FEMALE';
+        if (+nic.substr(4, 3) < 500) genders = 'MALE';
+        else genders = 'FEMALE';
     }
-    return gender;
-}
+    return genders;
+};
 
-/*//Nic - gender - end//*/
+//Nic - gender - end
 
 //mobile number and land number validation
-$("#mobile").bind("keyup", function () {
-    let mobile = $(this).val();
+$(".mobile").bind("keyup", function () {
+    mobileValidate($(this));
+});
+
+$(".land").bind("keyup", function () {
+    landValidate($(this));
+});
+
+$(".fax").bind("keyup", function () {
+    landValidate($(this));
+});
+
+let mobileValidate = function (val) {
+    let mobile = $(val).val();
     if (mobileRegex.test(mobile)) {
-        backgroundColourChangeGood($(this));
+        backgroundColourChangeGood(val);
+    } else if (mobile.length === 0) {
+        backgroundColourChangeNothingToChange(val);
     } else {
-        backgroundColourChangeBad($(this));
+        backgroundColourChangeBad(val);
     }
-});
-$("#land").bind("keyup", function () {
-    let land = $(this).val();
-    if (mobileRegex.test(land)) {
-        backgroundColourChangeGood($(this));
+};
+
+let landValidate = function (val) {
+    let land = $(val).val();
+    if (landRegex.test(land)) {
+        backgroundColourChangeGood(val);
+    } else if (land.length === 0) {
+        backgroundColourChangeNothingToChange(val);
     } else {
-        backgroundColourChangeBad($(this));
+        backgroundColourChangeBad(val);
     }
-});
+};
+
 //NIC colour change
 $("#nic").bind("keyup", function () {
     let nic = $(this).val();
     if (nicRegex.test(nic)) {
         backgroundColourChangeGood($(this));
+    } else if (nic.length === 0) {
+        backgroundColourChangeNothingToChange($(this));
     } else {
         backgroundColourChangeBad($(this));
     }
 });
+
+
 //Name validation
-$("#patientName").bind("keyup", function () {
+$("#name").bind("keyup", function () {
     let name = $(this).val();
     if (nameRegex.test(name)) {
         backgroundColourChangeGood($(this));
+    } else if (name.length === 0) {
+        backgroundColourChangeNothingToChange($(this));
+    } else {
+        backgroundColourChangeBad($(this));
+    }
+});
+//calling Name validation
+$("#callingName").bind("keyup", function () {
+    let name = $(this).val();
+    if (nameRegex.test(name)) {
+        backgroundColourChangeGood($(this));
+    } else if (name.length === 0) {
+        backgroundColourChangeNothingToChange($(this));
     } else {
         backgroundColourChangeBad($(this));
     }
@@ -269,23 +295,26 @@ $("#invoiceNumber").bind("keyup", function () {
         backgroundColourChangeBad($(this));
     }
 });
+
 //colour change function --start
-function backgroundColourChangeGood(id) {
+let backgroundColourChangeGood = function (id) {
     $(id).css('background-color', '#00FFFF');
-}
-function backgroundColourChangeBad(id) {
+};
+
+let backgroundColourChangeBad = function (id) {
     $(id).css('background-color', '#FF00AA');
-}
-function backgroundColourChangeNothingToChange(id) {
+};
+
+let backgroundColourChangeNothingToChange = function (id) {
     $(id).css('background-color', '#ffffff');
-}
+};
 
 //colour change function -- end
 
 /* some content need to print use this method */
 
 // el (id of content)is variable that need to give when function call
-function printContent(el) {
+let printContent = function (el) {
     // restorepage = current document
     let restorepage = document.body.innerHTML;
     // printcontent = need to print area that area must enclosed with div
@@ -294,7 +323,7 @@ function printContent(el) {
     window.print();
     //after print set current web page
     document.body.innerHTML = restorepage;
-}
+};
 
 //AJAX FUNCTION CALL
 async function getData(url) {
@@ -309,23 +338,22 @@ async function getData(url) {
 }
 
 // conformation message and to login page
-function conformationAndLoginWindow() {
-    let r = confirm("There is no way to access to the system without re re-login \n Please click \'Ok\' to login");
-    if (r === true) {
-        let loginUrl = window.location.protocol + "/login";
-        window.open(loginUrl, '_self');
-    }
-}
-
-// content show table show and hide - start
-function contentShow(contentName) {
-    contentName.removeAttribute("class");
-}
-function contentHide(contentName) {
-    contentName.setAttribute("class", "display");
-}
-
-// content show table show and hide - end
+let conformationAndLoginWindow = function () {
+    let message = "Please give me a movement to refresh.";
+    swal({
+        title: "Attention !",
+        icon: "warning",
+        text: message,
+        buttons: {
+            cancel: true,
+            confirm: true,
+        },
+    }).then(value => {
+        if (value) {
+            location.reload();
+        }
+    });
+};
 
 //custom invoice search page validation - start
 $("#invoiceFindBy").bind("change", function () {
@@ -334,6 +362,7 @@ $("#invoiceFindBy").bind("change", function () {
     document.getElementById("invoiceFindValue").style.setProperty('background-color', '#ffffff', 'important');
     $("#invoiceFindValue").val("");
 });
+
 $("#invoiceFindValue").bind("keyup", function () {
     let selectedInvoiceSearch = document.getElementById("invoiceFindBy").value;
     let enterValue = $(this).val();
@@ -382,9 +411,11 @@ $("#invoiceFindValue").bind("keyup", function () {
 //custom invoice search page validation - end
 
 //search form date validation - start
+const milliSecondToDay = Date.parse(new Date());
+
 $("#startDate").bind("input", function () {
     let startDate = document.getElementById("startDate").value;
-    let milliSecondToDay = Date.parse(new Date());
+
 //only start date has value
     if (startDate.length !== 0) {
         let milliSecondStartDate = Date.parse(startDate);
@@ -397,9 +428,10 @@ $("#startDate").bind("input", function () {
         backgroundColourChangeNothingToChange($(this));
     }
 });
+
 $("#endDate").bind("input", function () {
     let endDate = document.getElementById("endDate").value;
-    let milliSecondToDay = Date.parse(new Date());
+
 //only start date has value
     if (endDate.length !== 0) {
         let milliSecondStartDate = Date.parse(endDate);
@@ -415,7 +447,7 @@ $("#endDate").bind("input", function () {
 $("#btnSummaryFind").bind("mouseover", function () {
     let endDate = document.getElementById("endDate").value;
     let startDate = document.getElementById("startDate").value;
-    let milliSecondToDay = Date.parse(new Date());
+
     //if both date filed has some thing
     if (endDate.length !== 0 && startDate.length !== 0) {
 
@@ -423,7 +455,6 @@ $("#btnSummaryFind").bind("mouseover", function () {
         let milliSecondEndDate = Date.parse(endDate);
 
         if (milliSecondToDay < milliSecondStartDate || milliSecondToDay < milliSecondEndDate) {
-
             swal({
                 title: "Date range is not valid",
                 icon: "warning",
@@ -436,4 +467,156 @@ $("#btnSummaryFind").bind("mouseover", function () {
         });
     }
 });
-//search form date validation - end
+//Search form date validation — end
+
+//Customer employee Search filed - start any way in project
+
+/*Employee working place - */
+$("#selectParameter").bind("change", function () {
+    btnSearchEmployeeShow();
+    $("#selectParameter").css('background', '');
+    //set what is the parameter will search
+    $("#valueEmployee").attr('name', $(this).val());
+    $("#valueEmployee").val('');
+    backgroundColourChangeNothingToChange($("#valueEmployee"));
+});
+
+/*Employee Find */
+$("#valueEmployee").bind("keyup", function () {
+    let selectedValue = $("#valueEmployee").attr('name');
+    if ($("#valueEmployee").val() !== '' && $("#selectParameter").val() === '') {
+        $("#selectParameter").css('background', '#dc3545');
+        swal({
+            title: "Please enter select parameter value before type here",
+            icon: "warning",
+        });
+    }
+    if (selectedValue === "nic") {
+        let nic = $("#valueEmployee");
+        if (nicRegex.test($("#valueEmployee").val())) {
+            backgroundColourChangeGood(nic);
+        } else if (nic.length === 0) {
+            backgroundColourChangeNothingToChange(nic);
+        } else {
+            backgroundColourChangeBad(nic);
+        }
+    }
+    btnSearchEmployeeShow();
+
+});
+
+let btnSearchEmployeeShow = function () {
+    if ($("#selectParameter").val() !== '' && $("#valueEmployee").val() !== '') {
+        $("#btnSearchEmployee").css('display', '');
+    } else {
+        $("#btnSearchEmployee").css('display', 'none');
+    }
+};
+//Customer employee Search filed - end any way in project
+
+//If there is any need to clean filled data in table to clean plz use this mwthod
+
+//delete all row before show objects in table
+let deleteAllTableRow = function (tableName) {
+    console.log(" come to delete");
+    let table = tableName;
+    let rowCount = table.rows.length;
+    if (rowCount > 1) {
+        for (let x = rowCount - 1; x > 0; x--) {
+            table.deleteRow(x);
+        }
+    }
+};
+
+/*jquery - ui function*/
+//$( "input" ).checkboxradio;
+
+$(function () {
+    $("#").resizable({
+        autoHide: true,
+        aspectRatio: true,
+        ghost: true,
+    });
+});
+
+//$( ".login" ).draggable();
+//$( "#dateOfBirth" ).datepicker;
+//$( document ).tooltip();
+
+
+//password validator user add
+$('#password').keyup(function () {
+    $(this).attr('min', 6);
+    $('#result').html(checkStrength($(this).val(), $('#result')));
+});
+//new password validator
+$('#npsw').keyup(function () {
+    $(this).attr('min', 6);
+    $('#resultOne').html(checkStrength($(this).val(), $('#resultOne')));
+});
+//new re enter password validator
+$('#nrepsw').keyup(function () {
+    $(this).attr('min', 6);
+    $('#resultTwo').html(checkStrength($(this).val(), $('#resultTwo')));
+});
+//password match
+$('#nrepsw, #npsw').keyup(function () {
+    let newPassword = $('#npsw').val();
+    let newPasswordReEnter = $('#nrepsw').val();
+    let matchPassword = $('#passwordMatch');
+   if (newPassword === newPasswordReEnter && newPassword.length !== 0 && newPasswordReEnter.length !== 0) {
+        matchPassword.removeClass();
+        matchPassword.addClass('badge badge-pill badge-success');
+        matchPassword.html('Congratulations .! &nbsp;&nbsp;&nbsp; your passwords are matched');
+    } else {
+        matchPassword.removeClass();
+        matchPassword.addClass('badge badge-pill badge-info');
+        matchPassword.html('Password is not match value');
+    }
+});
+
+//filed validator
+let checkStrength = function (password, filedId) {
+    let strength = 0;
+    if (password.length < 6) {
+        filedId.removeClass();
+        filedId.addClass('badge badge-pill badge-dark ');
+        return `Too short  , Password length : ${password.length}`;
+    }
+    if (password.length > 7) strength += 1
+// If password contains both lower and uppercase characters, increase strength value.
+    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
+// If it has numbers and characters, increase strength value.
+    if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
+// If it has one special character, increase strength value.
+    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+// If it has two special characters, increase strength value.
+    if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+// Calculated strength value, we can return messages
+// If value is less than 2
+    if (strength < 2) {
+        filedId.removeClass();
+        filedId.addClass('badge badge-pill badge-warning');
+        return ` Weak , Password length : ${password.length}`;
+    } else if (strength === 2) {
+        filedId.removeClass();
+        filedId.addClass('badge badge-pill badge-primary');
+        return ` Good , Password length : ${password.length}`;
+    } else {
+        filedId.removeClass();
+        filedId.addClass('badge badge-pill badge-success');
+        return ` Strong , Password length : ${password.length}`;
+    }
+};
+
+//password show hide button
+
+$(".reveal").on('click', function () {
+    let $pwd = $(".pwd");
+    if ($pwd.attr('type') === 'password') {
+        $pwd.attr('type', 'text');
+
+    } else {
+        $pwd.attr('type', 'password');
+    }
+});

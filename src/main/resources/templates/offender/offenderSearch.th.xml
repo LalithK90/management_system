@@ -1,0 +1,51 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <!--Form header-->
+    <attr sel="#formHeader" th:text="${'Offender Search'}"/>
+    <!--Form action-->
+    <attr sel="#form" th:action="${'/offender/search'}"
+          th:object="${offender}"/>
+    <!--1. Id-->
+    <attr sel="#id" th:field="*{id}"/>
+    <!--2. Offender Registration number-->
+    <attr sel="#offenderRegisterNumber" th:field="*{offenderRegisterNumber}"/>
+    <!--3. Name in Sinhala-->
+    <attr sel="#nameSinhala" th:field="*{nameSinhala}"/>
+    <!--4. Name in Tamil-->
+    <attr sel="#nameTamil" th:field="*{nameTamil}"/>
+    <!--5. Name in English-->
+    <attr sel="#nameEnglish" th:field="*{nameEnglish}"/>
+    <!--6. NIC-->
+    <attr sel="#nic" th:field="*{nic}"/>
+    <!--7. Passport Number-->
+    <attr sel="#passportNumber" th:field="*{passportNumber}"/>
+    <!--8. Driving Licence Number-->
+    <attr sel="#drivingLicenceNumber" th:field="*{drivingLicenceNumber}"/>
+    <!--14. Mobile one-->
+    <attr sel="#mobileOne" th:field="*{mobileOne}"/>
+    <!--15. Mobile two-->
+    <attr sel="#mobileTwo" th:field="*{mobileTwo}"/>
+    <!--16. Land-->
+    <attr sel="#land" th:field="*{land}"/>
+    <!--17. Email-->
+    <attr sel="#email" th:field="*{email}"/>
+    <!--19. Description-->
+    <attr sel="#description" th:field="*{description}"/>
+    <!--Contravene-->
+    <attr sel="#contraveneStatus"
+          th:each="contravene, lineCount : ${contravenes}">
+        <attr sel="#contraveneValue" th:id="${'DTS'}+${lineCount.count}" th:value="${contravene.id}"
+              th:field="*{petitionOffenders.contravenes}"/>
+        <attr sel="#contraveneLabel" th:for="${'DTS'}+${lineCount.count}"
+              th:text="${contravene.code}+${' - '}+${contravene.detail}"/>
+    </attr>
+
+    <!--Button-->
+    <attr sel="#submit" th:text="${'Search'}"/>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+    <attr sel="#offenderJs" th:src="@{/js/offenderJs.js}"/>
+</thlogic>

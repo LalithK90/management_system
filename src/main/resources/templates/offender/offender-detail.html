@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <p id="formHeader"></p>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/offender" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+<!--Form Content - start -->
+<div class="container-fluid bg-dark formBorder" id="offenderDetail">
+    <div class="col-sm-12 flex-column ">
+        <div class="form-horizontal">
+            <div class="row">
+                <!--Left Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <!--Id-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="id">ID :</label>
+                        </div>
+                        <div class="col-md-8 text-left text-left">
+                            <p id="id" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Offender Registration Number-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="offenderRegisterNumber">Offender Reg No :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="offenderRegisterNumber" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Name Sinhala-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="nameSinhala">Name ( Sinhala ) :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="nameSinhala" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Name Tamil-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="nameTamil">Name ( Tamil ) :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="nameTamil" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Name English-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="nameEnglish">Name ( English ) :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="nameEnglish" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--NIC no-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="nic">NIC No :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="nic" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Passport Number -->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="passportNumber">Passport No :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="passportNumber" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Driving Licence Number -->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="drivingLicenceNumber">Driving Licence No :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="drivingLicenceNumber" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Gender-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="gender">Gender :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="gender" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Date of birth-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="dateOfBirth">Birth date :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="dateOfBirth" class="display_detail"></p>
+                        </div>
+                    </div>
+                </div>
+                <!--Right Side-->
+                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <!--Blood group-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="bloodGroup">Blood Group :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="bloodGroup" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Civil Status-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="civilStatus">Civil State :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="civilStatus" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Address-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="address">Address :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="address" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Mobile one-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="mobileOne">Mobile One No :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="mobileOne" class="display_detail mobile"></p>
+                        </div>
+                    </div>
+                    <!--Mobile two-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="mobileTwo">Mobile Two No :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="mobileTwo" class="display_detail mobile"></p>
+                        </div>
+                    </div>
+                    <!--Land-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="land">Land No :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="land" class="display_detail "></p>
+                        </div>
+                    </div>
+                    <!--Email-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="email">Email :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="email" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Created by and created at-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="createdBy">Created By :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="createdBy" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="createdAt">Created At :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="createdAt" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <!--Created by and created at-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="updatedBy">Updated By :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="updatedBy" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="updatedAt">Updated At :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="updatedAt" class="display_detail"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Calling Name-->
+            <div class="form-row">
+                <label class="control-label">
+                    <h3>
+                        <strong>
+                            Calling Names :
+                        </strong>
+                    </h3>
+                </label>
+            </div>
+            <div class="row col-md-12 col-sm-12 text-left" id="callingNameDisplay">
+                <!--Calling name display -->
+                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="callingNamesDisplay">Calling Name :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="callingNamesDisplay" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="callingNamesCretedByDisplay"> Created By:</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="callingNamesCretedByDisplay" class="display_detail"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="callingNamesUpdatedByDisplay">Updated By :</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="callingNamesUpdatedByDisplay" class="display_detail"></p>
+                        </div>
+                    </div>
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="callingNamesCreatedAtDisplay"> Created At:</label>
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p id="callingNamesCreatedAtDisplay" class="display_detail"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Description -->
+            <div class="form-group col-md-12 col-sm-12 text-left flex-column">
+                <label class="control-label" for="description">Description:</label>
+                <div class="p-field">
+                    <div>
+                        <p class="display_detail" id="description"></p>
+                    </div>
+                </div>
+            </div>
+            <!--Photos-->
+            <div class="form-group col-md-12 col-sm-12 text-left flex-column">
+                <div class="input-field">
+                    <label class="active ">Photos :</label>
+                    <div class="input-images" style="padding-top: .5rem;"></div>
+                </div>
+                <div class="col" id="photoDetails">
+                    <div>
+                        <label class="control-label ">Photo Details : </label>
+                    </div>
+                    <div class="row">
+                        <div class="col" id="filesList">
+                            <div class="col">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <img id="img" class="rounded"
+                                             style="height: 150px; width: 150px; border-radius: 10px"/>
+                                    </div>
+                                    <div class="card-footer bg-secondary text-light text-center">
+                                        <p id="imgName"></p>
+                                        <p> Uploaded Date :
+                                        <p id="imgCreateAt"></p>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Guardians Details-->
+        <div class="form-row col-sm-12 col-md-12 col-12">
+            <label class="control-label " for="description"><h3><strong>Guardians Details:</strong></h3></label>
+        </div>
+        <!--To display guardian-->
+        <div id="guardianDetails" class="row col-12 col-sm-12 col-md-12">
+            <!--Left Side-->
+            <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="guardianType">Guardian Relationship :</label>
+                    </div>
+                    <div class="col-md-8 text-left">
+                        <p id="guardianType" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Guardian NIC no-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="guardianNic">NIC No :</label>
+                    </div>
+                    <div class="col-md-8 text-left">
+                        <p id="guardianNic" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Guardian Created By-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="guardianCreatedBy">Created By :</label>
+                    </div>
+                    <div class="col-md-8 text-left">
+                        <p id="guardianCreatedBy" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Guardian Created At-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="guardianCreatedAt">Created At :</label>
+                    </div>
+                    <div class="col-md-8 text-left">
+                        <p id="guardianCreatedAt" class="display_detail"></p>
+                    </div>
+                </div>
+            </div>
+            <!--Right Side-->
+            <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                <!--Guardian Name-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="guardianName">Guardian Name :</label>
+                    </div>
+                    <div class="col-md-8 text-left">
+                        <p id="guardianName" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Address-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="guardianRemark">Remarks :</label>
+                    </div>
+                    <div class="col-md-8 text-left">
+                        <p id="guardianRemark" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Guardian Updated By-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="guardianUpdatedBy">Updated By :</label>
+                    </div>
+                    <div class="col-md-8 text-left">
+                        <p id="guardianUpdatedBy" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Guardian Created By-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="guardianUpdatedAt">Updated At :</label>
+                    </div>
+                    <div class="col-md-8 text-left">
+                        <p id="guardianUpdatedAt" class="display_detail"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+            <a href="/offender">
+                <button class="btn btn-info">
+                    <i class="fa fa-backward " style="font-size: 20px"></i>&nbsp; &nbsp;Back
+                </button>
+            </a>
+        </div>
+        <br/>
+    </div>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+</body>
+</html>

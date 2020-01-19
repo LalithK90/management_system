@@ -1,57 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <style th:replace="fragments/style"></style>
+<html lang="en">
+<head id="header">
 </head>
 <body>
-<nav class="navbar navbar-default" th:replace="fragments/header :: header"></nav>
-<div class="container-fluid" style="margin-top: 60px">
-    <div class="panel panel-primary">
-        <div class="panel panel-heading text-center">
-            <h4><b><i>Role Management</i></b></h4>
+<nav id="navBar"></nav>
+
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" href="/role/add">
+                <i class="fa fa-user-plus" style="font-size: 18px;"></i> &nbsp; New Role </a>
+
         </div>
-        <div class="panel panel-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <a class="btn btn-success" th:href="${'/role/add'}"><i class="fa fa-pied-piper-alt"></i>
-                                &nbsp; New Role</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="container">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-condensed text-center" id="table">
-                            <thead>
-                            <tr>
-                                <th>Index</th>
-                                <th>Name</th>
-                                <th class="text-center" colspan="2"
-                                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">Modify
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="role, rowCount : ${roles}">
-                                <th th:text="${rowCount.count}"></th>
-                                <th th:text="${role.roleName}"></th>
-                                <th th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"><a
-                                        class="btn btn-primary" th:href="${'/role/edit/' + role.id}">Edit</a></th>
-                                <th th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"><a
-                                        class="btn btn-danger" th:href="${'/role/remove/' + role.id}">Delete</a></th>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <div class="col ">
+            <h4 class="text-info text-center">
+                <strong>
+                    Role Management
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
         </div>
     </div>
 </div>
-<footer class="page-footer" th:replace="fragments/footer"></footer>
-<script th:replace="fragments/script"></script>
+<div class="container-fluid bg-dark formBorder">
+    <div class="offset-2 col-8 col-sm-8 col-md-8" id="roleListPresent">
+        <div class="table-responsive">
+            <table class="table table-striped table-condensed">
+                <thead>
+                <tr>
+                    <th> Index</th>
+                    <th> Name</th>
+                    <th id="authorizedPersonDisplay"> Modify</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="roleList">
+                    <th id="index"></th>
+                    <th id="name"></th>
+                    <th id="authorizedPerson">
+                        <a id="edit" class="btn btn-primary btn-sm">Edit</a> &nbsp;
+                        <a id="remove" class="btn btn-danger btn-sm">Delete</a></th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer id="footer"></footer>
+<script id="script"></script>
 </body>
 </html>

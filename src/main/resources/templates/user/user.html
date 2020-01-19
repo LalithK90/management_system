@@ -1,62 +1,82 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <style th:replace="fragments/style"></style>
+<html lang="en">
+<head id="header">
 </head>
 <body>
-<nav class="navbar navbar-default" th:replace="fragments/header :: header"></nav>
-<div class="container-fluid" style="margin-top: 60px">
-    <div class="panel panel-primary">
-        <div class="panel panel-heading text-center">
-            <h4><b>User Management</b></h4>
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" id="newUser">
+                <i class="fa fa-user-plus" style="font-size: 18px;"></i> &nbsp; Add User </a>
         </div>
-        <div class="panel panel-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <a class="btn btn-success" th:href="${'/user/add'}"><i class="fa fa-user-plus"></i> &nbsp;
-                                Add User </a>
-                        </div>
-                    </form>
+        <div class="col">
+            <h4 class="text-info text-center">
+                <strong>
+                    User Management
+                </strong>
+            </h4>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <div class="row" id="userListTable">
+            <div class="col-sm-12">
+                <table class="table table-hover table-striped" id="myTable">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>Index</th>
+                        <th>User Name</th>
+                        <th>User Status</th>
+                        <th>Created Date</th>
+                        <th>Modify</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="userList" scope="row">
+                        <th id="index"></th>
+                        <th id="username"></th>
+                        <th id="userStatus"></th>
+                        <th id="createdDate"></th>
+                        <th><a class="btn btn-success btn-sm" id="userView"><i
+                                class="fa fa-folder-open"></i>&nbsp;View</a>
+                            <a class="btn btn-primary btn-sm" id="userEdit"><i
+                                    class="fa fa-edit"></i>&nbsp;Edit</a>
+                            <a class="btn btn-danger btn-sm" id="userRemove"
+                            ><i
+                                    aria-hidden="true" class="fa fa-trash"></i>
+                                Delete</a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" id="userNotList">
+            <div class="col-sm-12">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="text-center text-danger">
+                        <strong>There is no user upto know please add user to the system
+                                using add user button.
+                        </strong>
+                    </h3>
                 </div>
             </div>
-            <div class="container" style="margin-top: 5px;">
-                <div class="table-responsive">
-                    <table class="table table-striped table-condensed text-center" id="myTable">
-                        <thead>
-                        <tr>
-                            <th>Index</th>
-                            <th>User Name</th>
-                            <th> User Status</th>
-                            <th> Created Date</th>
-                            <th>Modify</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="user, rowCount : ${users}">
-                            <th th:text="${rowCount.count}"></th>
-                            <th th:text="${user.username}"></th>
-                            <th th:text="${user.enabled==true?'Active':'Blocked'}"></th>
-                            <th th:text="${user.createdDate}"></th>
-                            <th><a class="btn btn-success" th:href="${'/user/' + user.id}"><i
-                                    class="fa fa-folder-open"></i>&nbsp;View</a>
-                                <a class="btn btn-primary" th:href="${'/user/edit/' + user.id}"><i
-                                        class="fa fa-edit"></i>&nbsp;Edit</a>
-                                <a class="btn btn-danger"
-                                   th:href="${'/user/remove/' + user.id}" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"><i
-                                        aria-hidden="true" class="fa fa-trash-o"></i>
-                                    Delete</a>
-                            </th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <script>
+                /*active boostrap alert - start*/
+                $(".alert").alert();
+                /*active boostrap alert - end*/
+            </script>
         </div>
     </div>
 </div>
-<footer class="page-footer" th:replace="fragments/footer"></footer>
-<script th:replace="fragments/script"></script>
+
+<footer id="footer"></footer>
+<script id="script"></script>
 </body>
 </html>

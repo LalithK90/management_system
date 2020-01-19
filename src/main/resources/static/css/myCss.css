@@ -1,10 +1,16 @@
 * {
-    font-family: "Times New Roman", Times, serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Comic Sans", "Courier New",
+    georgia, helvetica, impact, "times new roman", "trebuchet ms", verdana,
+    "Iskoola Pota";
+    --error-color: #fa370d;
 }
 
-#loginBack{
+#loginBack {
     background-image: url('../img/loginBackground.jpg');
 }
+
 
 /*html Background - start*/
 body {
@@ -39,53 +45,27 @@ body {
     font-size: 16px;
 }
 
-#loginLog {
-    height: 120px;
-    border-radius: 5%;
-    background-color: #ffffff;
-    width: 120px;
-    margin-bottom: 10px;
-}
-
 .page-footer {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 5px;
 }
 
-div #login1 {
-    vertical-align: center;
-    text-align: center;
-    box-shadow: 2px 4px 2px 4px #000;
-    margin-top: 50px;
-    padding-top: 10px;
-    padding-bottom: 25px;
-    border-radius: 15px;
-}
-
 .btn {
     box-shadow: 1px 2px 5px #000000;
 }
 
-#loginh2 {
-    font-size: 30px;
-    border-style: outset;
-    margin-top: 5px;
-    text-shadow: 1px 3px 3px #36F;
-}
+/* for login form - start*/
+#loginPage {
+    margin-top: 315px;
+    color: white;
 
-.loginp {
-    font-size: 20px;
-    border-style: outset;
-    margin-top: 10px;
-    text-shadow: 1px 2px 2px #36F;
-    text-align: center;
 }
 
 /* for login form - end*/
 /* for summary form - start*/
 .casChqCdt {
-    color: red;
+    color: var(--error-color);
 }
 
 /* for summary form - end*/
@@ -95,7 +75,7 @@ div #login1 {
 }
 
 #tableTestBill tr td p {
-    color: red;
+    color: var(--error-color);
     text-align: center;
     font-weight: bold;
     font-style: italic;
@@ -104,10 +84,10 @@ div #login1 {
 /* for sbilling test show - end*/
 /*main window  - start*/
 .mainWindowText {
-    font-size: 18px;
-    text-shadow: 0 1px 0 #17E,
-    0 2px 0 #c9c9c9,
-    0 3px 0 #bbb,
+    font-size: 1.5rem;
+    text-shadow: 0 1px 0 #EEE428,
+    0 2px 0 #adc945,
+    0 3px 0 #ACA7C9,
     0 4px 0 #b9b9b9,
     0 5px 0 #aaa,
     0 6px 1px rgba(0, 0, 1, .1),
@@ -124,7 +104,7 @@ div #login1 {
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
     -o-transform: scale(1.1);
-    text-shadow: 2px 2px 0 #29A1D5;
+    text-shadow: 5px 5px 2px #EEE428;
 }
 
 .mainWindImg:hover {
@@ -137,7 +117,7 @@ div #login1 {
 
 .logoProperty:hover {
     padding: 10px;
-    border: 1px solid red;
+    border: 1px solid var(--error-color);
     background-color: #f5f5f5;
     box-shadow: 3px -5px 1px #f5f5f5;
 }
@@ -188,79 +168,57 @@ nav {
 
 /*footer - properties end */
 /*error pages - properties start */
-#error {
-    color: #39bbdb;
-    padding-bottom: 0;
-    min-height: 100%;
-    font-family: 'Open Sans', 'Segoe UI';
-    font-size: 13px;
-}
-
-.error-header {
-    background: #fff;
-    height: 180px;
-}
-
-.error-container {
-    background: rgba(0, 0, 0, .05);
-    text-align: center;
-}
-
-.error-container h1 {
-    color: #39bbdb;
-}
-
-.error-container h1 {
-    font-size: 110px;
-    font-weight: 300;
-    margin: -103px 0 0 0;
-    text-align: center;
-}
-
-.error-divider {
-    margin-top: -27px;
-    padding: 30px 0;
-}
-
-.error-container h2 {
-    font-size: 58px;
-    font-weight: 300;
-    margin: 0;
-    text-transform: uppercase;
-}
-
-.error-container p.description {
-    color: #39bbdb;
-    font-size: 50px;
-    margin: 0;
-}
-
-.return-btn, .return-btn:hover {
-    border: 1px solid rgba(255, 255, 255, .3);
-    padding: 10px 15px;
-    margin-top: 100px;
-    margin-bottom: 30px;
-    display: inline-block;
-    -webkit-border-radius: 5px;
-    -webkit-background-clip: padding-box;
-    -moz-border-radius: 5px;
-    -moz-background-clip: padding;
-    border-radius: 5px;
-    background-clip: padding-box;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 300;
-}
-
-a:hover {
-    text-decoration: none;
-}
 
 /*error pages - properties end */
 /*Error Message Colour - star*/
 .error {
     font-family: 'Open Sans', 'Segoe UI';
-    color: #fa0901;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--error-color);
+}
+
+#error {
+    text-align: center;
+}
+
+#errorCode {
+    margin-top: 10%;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-style: oblique;
+    font-size: 40px;
+    color: #3299ff;
+    background-color: #ffddca;
+    border-radius: 10px;
+}
+
+#icon {
+    height: 250px;
+    width: 250px;
+    box-shadow: 8px 8px 8px 8px white;
+
+    border-radius: 50%;
+    background: linear-gradient(215deg, #5ca155, #a080c5, #56a4b6, #04c2ec, #f2e053);
+    background-size: 1000% 1000%;
+
+    -webkit-animation: AnimationName 10s ease infinite;
+    -moz-animation: AnimationName 10s ease infinite;
+    -o-animation: AnimationName 10s ease infinite;
+    animation: AnimationName 10s ease infinite;
+}
+
+#iconIn {
+    font-size: 250px;
+    text-align: center;
+}
+
+#errorMessage {
+    color: var(--error-color);
+    font-size: 20px;
+    font-style: italic;
+    background-color: white;
+    border-radius: 5px 20px 0px 15px;
 }
 
 /*Error Message Colour - star*/
@@ -294,28 +252,121 @@ button .btn {
     color: #f0ad4e;
     font-weight: lighter;
 }
-.addLabTest{
+
+.addLabTest {
     color: #000000;
     background-color: #00FFFF;
 }
+
 /*remove lab test from selected table - end*/
 
-/*all lable fonts size increase - start*/
-label{
+/*form  - start*/
+label {
+   font-size: 18px !important;
+    font-max-size: 22px;
+    font-min-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+input {
+    font-size: 18px !important;
+}
+
+.display_detail {
     font-size: 18px !important;
     font-max-size: 20px;
     font-min-size: 12px;
+    font-weight: bold;
+    color: black;
+    text-align: left;
 }
-/*all lable fonts size increase - end*/
+
+.form-row {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.formManagement {
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 2px;
+}
+
+.formBorder {
+    border-radius: 15px;
+    background: linear-gradient(215deg, #5ca155, #a080c5, #56a4b6, #04c2ec, #f2e053);
+    background-size: 1000% 1000%;
+
+    -webkit-animation: AnimationName 31s ease infinite;
+    -moz-animation: AnimationName 31s ease infinite;
+    -o-animation: AnimationName 31s ease infinite;
+    animation: AnimationName 31s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 88% 0%
+    }
+    50% {
+        background-position: 13% 100%
+    }
+    100% {
+        background-position: 88% 0%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 88% 0%
+    }
+    50% {
+        background-position: 13% 100%
+    }
+    100% {
+        background-position: 88% 0%
+    }
+}
+
+@-o-keyframes AnimationName {
+    0% {
+        background-position: 88% 0%
+    }
+    50% {
+        background-position: 13% 100%
+    }
+    100% {
+        background-position: 88% 0%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 88% 0%
+    }
+    50% {
+        background-position: 13% 100%
+    }
+    100% {
+        background-position: 88% 0%
+    }
+}
+
+.form-Border {
+    border-radius: 15px;
+}
+
+/*form - end*/
 
 /*Table show and hide - start*/
-.display{
+.display {
     display: none;
 }
+
 /*Table show and hide - end*/
 /*medical Package show area - start*/
-#medicalPackage{
-    border: 2px solid blue ;
+#medicalPackage {
+    border: 2px solid blue;
     border-radius: 5px;
 }
 
@@ -323,23 +374,61 @@ label{
     margin-top: 3px;
 }
 
-#medicalPackageDetails{
+#medicalPackageDetails {
     margin-top: 5px;
 }
-#btnRegisteredPatient{
+
+#btnRegisteredPatient {
     margin-bottom: 5px;
 }
+
 /*medical Package show area - end*/
 /* enter filed validation - start*/
-.valid{
+.valid {
     background-color: #7ae899;
 }
-.invalid{
+
+.invalid {
     background-color: #ff88b3;
 }
-/* enter filed validation - end*/
 
-input{
-    font-size: 18px !important;
+/*html 5 filed validation - start */
+input:required:invalid, input:focus:invalid {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAeVJREFUeNqkU01oE1EQ/mazSTdRmqSxLVSJVKU9RYoHD8WfHr16kh5EFA8eSy6hXrwUPBSKZ6E9V1CU4tGf0DZWDEQrGkhprRDbCvlpavan3ezu+LLSUnADLZnHwHvzmJlvvpkhZkY7IqFNaTuAfPhhP/8Uo87SGSaDsP27hgYM/lUpy6lHdqsAtM+BPfvqKp3ufYKwcgmWCug6oKmrrG3PoaqngWjdd/922hOBs5C/jJA6x7AiUt8VYVUAVQXXShfIqCYRMZO8/N1N+B8H1sOUwivpSUSVCJ2MAjtVwBAIdv+AQkHQqbOgc+fBvorjyQENDcch16/BtkQdAlC4E6jrYHGgGU18Io3gmhzJuwub6/fQJYNi/YBpCifhbDaAPXFvCBVxXbvfbNGFeN8DkjogWAd8DljV3KRutcEAeHMN/HXZ4p9bhncJHCyhNx52R0Kv/XNuQvYBnM+CP7xddXL5KaJw0TMAF8qjnMvegeK/SLHubhpKDKIrJDlvXoMX3y9xcSMZyBQ+tpyk5hzsa2Ns7LGdfWdbL6fZvHn92d7dgROH/730YBLtiZmEdGPkFnhX4kxmjVe2xgPfCtrRd6GHRtEh9zsL8xVe+pwSzj+OtwvletZZ/wLeKD71L+ZeHHWZ/gowABkp7AwwnEjFAAAAAElFTkSuQmCC);
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    -moz-box-shadow: none;
 }
 
+input:required:valid {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAepJREFUeNrEk79PFEEUx9/uDDd7v/AAQQnEQokmJCRGwc7/QeM/YGVxsZJQYI/EhCChICYmUJigNBSGzobQaI5SaYRw6imne0d2D/bYmZ3dGd+YQKEHYiyc5GUyb3Y+77vfeWNpreFfhvXfAWAAJtbKi7dff1rWK9vPHx3mThP2Iaipk5EzTg8Qmru38H7izmkFHAF4WH1R52654PR0Oamzj2dKxYt/Bbg1OPZuY3d9aU82VGem/5LtnJscLxWzfzRxaWNqWJP0XUadIbSzu5DuvUJpzq7sfYBKsP1GJeLB+PWpt8cCXm4+2+zLXx4guKiLXWA2Nc5ChOuacMEPv20FkT+dIawyenVi5VcAbcigWzXLeNiDRCdwId0LFm5IUMBIBgrp8wOEsFlfeCGm23/zoBZWn9a4C314A1nCoM1OAVccuGyCkPs/P+pIdVIOkG9pIh6YlyqCrwhRKD3GygK9PUBImIQQxRi4b2O+JcCLg8+e8NZiLVEygwCrWpYF0jQJziYU/ho2TUuCPTn8hHcQNuZy1/94sAMOzQHDeqaij7Cd8Dt8CatGhX3iWxgtFW/m29pnUjR7TSQcRCIAVW1FSr6KAVYdi+5Pj8yunviYHq7f72po3Y9dbi7CxzDO1+duzCXH9cEPAQYAhJELY/AqBtwAAAAASUVORK5CYII=);
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+/*html 5 filed validation - end */
+
+/* enter filed validation - end*/
+
+/*Nav bar content -start*/
+.navbar-nav li:hover > ul.dropdown-menu {
+    display: block;
+}
+.dropdown-submenu {
+    position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+    top:0;
+    left:100%;
+    margin-top:-6px;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+}
+
+/*Nav bar content -end*/

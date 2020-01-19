@@ -1,0 +1,30 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <attr sel="#newTeam" th:href="${'/petition'}"/>
+    <attr sel="#detectionTeamListTable" th:if="${not #lists.isEmpty(detectionTeams)}"/>
+    <attr sel="#userList" th:each="detectionTeam, rowCount : ${detectionTeams}"/>
+    <attr sel="#index" th:text="${rowCount.count}"/>
+    <attr sel="#number" th:text="${detectionTeam.number}"/>
+    <attr sel="#name" th:text="${detectionTeam.name}"/>
+    <attr sel="#createdDate" th:text="${#temporals.format(detectionTeam.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+    <!--team view-->
+    <attr sel="#detectionTeamView" th:href="${'/detection/' + detectionTeam.id}"/>
+    <!--Team Message-->
+    <attr sel="#detectionTeamMessage" th:href="${'/detection/message/' + detectionTeam.id}"/>
+    <!--team edit-->
+    <attr sel="#detectionTeamEdit" th:href="${'/detection/edit/' + detectionTeam.id}"/>
+    <!--Petition Create minute-->
+    <attr sel="#petitionMinute" th:href="${'/minutePetition/' + detectionTeam.petition.id}"/>
+    <!--Add offender-->
+    <attr sel="#offenderAdd" th:href="${'/petitionOffender/add/' + detectionTeam.petition.id}"/>
+    <!--Add crime-->
+    <attr sel="#crimeAdd" th:href="${'/crime/' + detectionTeam.id}"/>
+    <attr sel="#userRemove" th:href="${'/detection/remove/' + detectionTeam.id}"
+          th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"/>
+    <attr sel="#detectionTeamNotList" th:if="${ #lists.isEmpty(detectionTeams)}"/>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

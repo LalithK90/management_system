@@ -1,0 +1,94 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <!--form header-->
+    <attr sel="#formHeader" th:text="${addStatus==true?'Add New Crime ':'Update A Crime Details'} +${' Detection Team '}+${crime.detectionTeam.name}"/>
+    <!--Form -->
+    <attr sel="#form" th:action="${addStatus==true?'/crime/add':'/crime/update'}"
+          th:object="${crime}"/>
+    <!--Id-->
+    <attr sel="#idStatus" th:if="${addStatus==false}"/>
+    <attr sel="#id" th:field="*{id}"/>
+    <!--Detection team-->
+    <attr sel="#detectionTeam" th:field="*{detectionTeam}"/>
+    <!--Crime number-->
+    <attr sel="#crimeNumber" th:field="*{crimeNumber}"/>
+    <attr sel="#crimeNumberError" th:errors="*{crimeNumber}"
+          th:if="${#fields.hasErrors('crimeNumber')}"/>
+    <!--Court case number-->
+    <attr sel="#courtCaseNumber" th:field="*{courtCaseNumber}"/>
+    <attr sel="#courtCaseNumberError" th:errors="*{courtCaseNumber}"
+          th:if="${#fields.hasErrors('courtCaseNumber')}"/>
+    <!--Compounded Charge Sheet Number-->
+    <attr sel="#compoundedChargeSheetNumber" th:field="*{compoundedChargeSheetNumber}"/>
+    <attr sel="#compoundedChargeSheetNumberError" th:errors="*{compoundedChargeSheetNumber}"
+          th:if="${#fields.hasErrors('compoundedChargeSheetNumber')}"/>
+    <!--Result -->
+    <attr sel="#result" th:field="*{result}"/>
+    <attr sel="#resultError" th:errors="*{result}"
+          th:if="${#fields.hasErrors('result')}"/>
+    <!--Reward Sheet Number -->
+    <attr sel="#rewardSheetNumber" th:field="*{rewardSheetNumber}"/>
+    <attr sel="#rewardSheetNumberError" th:errors="*{rewardSheetNumber}"
+          th:if="${#fields.hasErrors('rewardSheetNumber')}"/>
+    <!--Remark-->
+    <attr sel="#remark" th:field="*{remark}"/>
+    <attr sel="#remarkError" th:errors="*{remark}"
+          th:if="${#fields.hasErrors('remark')}"/>
+    <!--Crime status-->
+    <attr sel="#crimeStatus" th:field="*{crimeStatus}"/>
+    <attr sel="#crimeStatusList" th:each="crimeStatus : ${crimeStatuses}"
+          th:text="${crimeStatus.crimeStatus}"
+          th:value="${crimeStatus}"
+          th:selected="${crimeStatus==crime.crimeStatus?'selected':'unselected'}"/>
+    <!--Place Of Offence-->
+    <attr sel="#placeOfOffence" th:field="*{placeOfOffence}"/>
+    <attr sel="#placeOfOffenceError" th:errors="*{placeOfOffence}"
+          th:if="${#fields.hasErrors('placeOfOffence')}"/>
+    <!--Court status-->
+    <attr sel="#court" th:field="*{court}"/>
+    <attr sel="#courtList" th:each="court : ${courts}"
+          th:text="${court.name}"
+          th:value="${court.id}"
+          th:selected="${court==crime.court?'selected':'unselected'}"/>
+    <!--Date Of Detection-->
+    <attr sel="#dateOfDetection" th:field="*{{dateOfDetection}}"/>
+    <attr sel="#dateOfDetectionError" th:errors="*{dateOfDetection}"
+          th:if="${#fields.hasErrors('dateOfDetection')}"/>
+    <!--Compounded Charge Sheet Date-->
+    <attr sel="#compoundedChargeSheetDate" th:field="*{{compoundedChargeSheetDate}}"/>
+    <attr sel="#compoundedChargeSheetDateError" th:errors="*{compoundedChargeSheetDate}"
+          th:if="${#fields.hasErrors('compoundedChargeSheetDate')}"/>
+    <!--Date Of Order Of Persecution-->
+    <attr sel="#dateOfOrderOfPersecution" th:field="*{{dateOfOrderOfPersecution}}"/>
+    <attr sel="#dateOfOrderOfPersecutionError" th:errors="*{dateOfOrderOfPersecution}"
+          th:if="${#fields.hasErrors('dateOfOrderOfPersecution')}"/>
+    <!--Date Of Filling Plaint-->
+    <attr sel="#dateOfFillingPlaint" th:field="*{{dateOfFillingPlaint}}"/>
+    <attr sel="#dateOfFillingPlaintError" th:errors="*{dateOfFillingPlaint}"
+          th:if="${#fields.hasErrors('dateOfFillingPlaint')}"/>
+    <!--Date Of Judgement-->
+    <attr sel="#dateOfJudgement" th:field="*{{dateOfJudgement}}"/>
+    <attr sel="#dateOfJudgementError" th:errors="*{dateOfJudgement}"
+          th:if="${#fields.hasErrors('dateOfJudgement')}"/>
+
+    <!--Created at update at-->
+    <attr sel="#updateStatus" th:if="${addStatus==false}"/>
+    <attr sel="#createdBy" th:field="*{createdBy}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
+    <!--Singlish to sinhala Translator-->
+    <attr sel="#translatorSinhala" th:replace="~{fragments/unicodeSinhala :: unicodeSinhalaFragment}"/>
+    <!--Tamish to Tamil Translator-->
+    <attr sel="#translatorTamil" th:replace="~{fragments/unicodeTamil :: unicodeTamilFragment}"/>
+
+    <!--Button-->
+    <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
+    <!--Error-->
+    <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
+    <attr sel="#error" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<!--Container spaces-->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/petition" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-dark formBorder" id="petitionDetail">
+    <div class="col-sm-12 flex-column ">
+        <div class="row">
+            <!--Left Side-->
+            <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                <!--ID-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">ID :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="id" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Village-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">Village :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="village" class="display_detail"></p>
+                    </div>
+                </div>
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">Petition State :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="petitionState" class="display_detail"></p>
+                    </div>
+                </div>
+            </div>
+            <!--Right Side-->
+            <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                <!--Petition Number-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">Petition Number :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="petitionNumber" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--AGA Division-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">AGA Division :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="agaDivision" class="display_detail"></p>
+                    </div>
+                </div>
+                <!--Petition Priority-->
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">Petition Priority :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="petitionPriority" class="display_detail"></p>
+                    </div>
+                </div>
+            </div>
+            <!--Petition Subject -->
+            <div class="form-group col-md-12 col-sm-12 flex-column">
+                <div class="form-row text-right">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">Subject :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <p id="subject" class="display_detail text-lg-left"></p>
+                    </div>
+                </div>
+            </div>
+            <!--Button set to dispay details -->
+            <div class="form-group col-md-12 col-sm-12 flex-column">
+                <div class="btn-group">
+                    <!--Petition State Show Button -->
+                    <button type="button" class="btn btn-primary" data-toggle="collapse"
+                            data-target="#petitionStateDetail">
+                        Show State Detail &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                    <!--Petitioner Details Show Button-->
+                    <button type="button" class="btn btn-primary" data-toggle="collapse"
+                            data-target="#petitionerDetail">
+                        Show Petitioner Detail
+                    </button>
+                    <!--Minute Petition Show Button -->
+                    <button type="button" class="btn btn-primary" data-toggle="collapse"
+                            data-target="#minutePetitionDetail">
+                        Show Minute Detail &nbsp;&nbsp;
+                    </button>
+                    <!--Detection Team Details show button-->
+                    <button type="button" class="btn btn-primary" data-toggle="collapse"
+                            data-target="#detectionTeamDetails">
+                        Show Detection Team
+                    </button>
+
+                </div>
+            </div>
+
+            <!--PETITIONER AREA-->
+            <!--Petitioner Details-->
+            <div id="petitionerDetail" class="form-group col-md-12 col-sm-12 flex-column  collapse slow">
+                <div class="container-fluid"> <h3><strong>Petitioner Detail's</strong></h3></div>
+                <!--petitioner details-->
+                <div class="container-fluid bg-dark formBorder">
+                    <div class="col-sm-12 flex-column ">
+                        <div class="row" id="petitionerAddFormFragment">
+                            <!--Left Side-->
+                            <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                                <!--Id-->
+                                <div id="idStatus" class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="id">ID :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="petitionerId" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <!--Name Sinhala-->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="nameSinhala">Name(Sinhala) :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="nameSinhala" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <!--Name Tamil-->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="nameTamil">Name(Tamil) :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="nameTamil" class="display_detail"></p></div>
+                                </div>
+                                <!--Name English-->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="nameEnglish">Name(English) :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="nameEnglish" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <!--Email -->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="email">Email :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="email" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <!--Petitioner type-->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="petitionerType">Petitioner Type :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="petitionerType" class="display_detail"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Right Side-->
+                            <div class="form-group col-md-6 col-sm-6 text-right flex-column">
+                                <!--Address-->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="address">Address :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="address" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <!--Mobile one-->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="mobileOne">Mobile One No :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="mobileOne" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <!--Mobile Two-->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="mobileTwo">Mobile Two No :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="mobileTwo" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <!--Land-->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="land">Land No :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="land" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <!--Created by-->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="createdBy">Created By :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="createdBy" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <!--Created Date-->
+                                <div class="form-row text-right">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="createdAt">Created At :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="createdAt" class="display_detail"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--PETITION STATE AREA-->
+            <!--Petition State Detail -->
+            <div id="petitionStateDetail" class="form-group col-md-12 col-sm-12 flex-column collapse slow">
+                <div class="container-fluid bg-dark formBorder">
+                    <div class="col-sm-4 text-left" id="petitionStates">
+                        <fieldset>
+                            <legend class="text-lg-center bg-white"><h3><strong> Petition State :
+                                <span id="petitionStateIndex"></span></strong></h3>
+                            </legend>
+                            <div class="form-row text-right">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="id">Petition State :</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <p id="petitionStatesName" class="display_detail"></p>
+                                </div>
+                            </div>
+                            <div class="form-row text-right">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="id">Created By :</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <p id="petitionStatesCreatedBy" class="display_detail"></p>
+                                </div>
+                            </div>
+                            <div class="form-row text-right">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="id">Created At :</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <p id="petitionStatesCreatedAt" class="display_detail"></p>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+            <!--MINUTE PETITION AREA-->
+            <!--Minute Petition Detail -->
+            <div id="minutePetitionDetail" class="form-group col-md-12 col-sm-12 flex-column collapse slow">
+                <div class="container-fluid"> <h3><strong>Minute Detail's</strong></h3></div>
+                <div class="container-fluid bg-dark formBorder" id="minutePetition">
+                    <div id="minutePetitionDetails" class="form-group col-md-12 col-sm-12">
+                        <!--minute petition details-->
+                        <div class="form-row col-md-12 col-sm-12 text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="minuteStateDetail">Detail :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <p id="minuteStateDetail" class="display_detail"></p>
+                            </div>
+                        </div>
+                        <!-- minute petition details more-->
+                        <div class="form-row container-fluid">
+                            <div class="form-row col-md-12 col-sm-12 text-left">
+                                <div class="col-sm-4">
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="minuteState">Minute State :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="minuteState" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="col-md-7">
+                                        <label class="control-label" for="minuteStateEmployee">Directed Employee
+                                                                                               :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="minuteStateEmployee" class="display_detail"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="minuteStateWorkingPlace">Working Place
+                                                                                                   :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p id="minuteStateWorkingPlace" class="display_detail"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--minute petition files-->
+                        <div class="form-row container-fluid">
+                            <div id="imageDiv" class="draggableHelper" style="display:inline-block">
+                                <img class="image" id="imageMinutePetition"/>
+                                <p class="display_detail" id="imageDetails"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--DETECTION TEAM AREA-->
+            <!--Detection Team Details-->
+            <div class="form-group col-md-12 col-sm-12 flex-column collapse slow" id="detectionTeamDetails">
+                <div class="container-fluid"> <h3><strong>Detection Team Detail's</strong></h3></div>
+                <div class="row" id="detectionTeamDetail">
+                    <!--Left Side-->
+                    <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                        <!--Id-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="detectionTeamId">ID :</label>
+                            </div>
+                            <div class="col-md-8 text-left">
+                                <p id="detectionTeamId" class="display_detail"></p>
+                            </div>
+                        </div>
+                        <!--Name-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="detectionTeamName">Name :</label>
+                            </div>
+                            <div class="col-md-8 text-left">
+                                <p id="detectionTeamName" class="display_detail"></p>
+                            </div>
+                        </div>
+                        <!--Detection team status-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="detectionTeamTeamStatusValue">Team Status :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-row text-left">
+                                    <div class="col-4" id="teamStatus">
+                                        <p id="detectionTeamTeamStatusValue" class="display_detail"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Team Accept -->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="detectionTeamTeamAcceptation">Team Accept :</label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="text-left" id="teamAccept">
+                                    <span id="detectionTeamTeamAcceptation" class="display_detail"></span>
+                                    <span class="display_detail">At: </span>
+                                    <span id="teamAcceptedDateTime" class="display_detail"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Right Side-->
+                    <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                        <!--Number-->
+                        <div class="form-row text-right">
+                            <div class="col-md-4">
+                                <label class="control-label" for="detectionTeamNumber">Number :</label>
+                            </div>
+                            <div class="col-md-8 text-left">
+                                <p id="detectionTeamNumber" class="display_detail"></p>
+                            </div>
+                        </div>
+                        <!--Team Members-->
+                        <div class="form-row table-responsive">
+                            <table class="table table-hover bg-transparent">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Employee Number</th>
+                                    <th>Employee Name</th>
+                                    <th>Team Role</th>
+                                </tr>
+                                <tr id="detectionTeamMemberList">
+                                    <th id="index"></th>
+                                    <th id="detectionTeamMemberNumber"></th>
+                                    <th id="detectionTeamMemberName"></th>
+                                    <th id="detectionTeamMemberRole"></th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!--team note-->
+                    <div class="form-group col-md-12 col-sm-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="control-label" for="detectionTeamNote">Detection Team Note :</label>
+                            </div>
+                            <div class="col-md-8 text-left" id="detectionTeamNoteList">
+                                <div class="form-row">
+                                    <span id="detectionTeamCount" class="display_detail"></span>
+                                    <span class="display_detail">&nbsp; - &nbsp;</span>
+                                    <span id="detectionTeamNote" class="display_detail"></span>
+                                    <span class="display_detail">&nbsp; - &nbsp;</span>
+                                    <span id="detectionTeamNoteCreatedBy" class="display_detail"></span>
+                                    <span class="display_detail">&nbsp; - &nbsp;</span>
+                                    <span id="detectionTeamNoteCreatedAt" class="display_detail"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--OFFENDER AREA-->
+            <!--offender Detail show button-->
+            <div class="form-group col-md-12 col-sm-12 flex-column ">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#offenderDetail">
+                    Show Offender Detail
+                </button>
+            </div>
+            <!--Offender Detail-->
+            <div id="offenderDetail" class="form-group col-md-12 col-sm-12 flex-column collapse slow">
+                <div class="container-fluid"> <h3><strong>Offenders Detail's</strong></h3></div>
+            </div>
+
+            <!--CRIME AREA-->
+            <!--Crime Detail show button-->
+            <div class="form-group col-md-12 col-sm-12 flex-column ">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#crimeDetail">
+                    &nbsp; Show Crime Detail &nbsp;
+                </button>
+            </div>
+            <!--Offender Detail-->
+            <div id="crimeDetail" class="form-group col-md-12 col-sm-12 flex-column collapse slow">
+                <span id="crime"></span>
+            </div>
+
+            <!--button-->
+            <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                <div class="input-field">
+                    <a href="/petition">
+                        <button class="btn btn-success" type="button">
+                            <i class="fa fa-backward " style="font-size: 20px"></i>&nbsp;Back &nbsp;<span
+                                id="submit"></span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+<script>
+    $(function () {
+        $('.draggableHelper').draggable();
+        $('.image').resizable();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+    <!--Employee List is present-->
+    <attr sel="#employeeListPresent" th:if="${not #lists.isEmpty(employees)}"/>
+    <!--Employee list-->
+    <attr sel="#employeeList" th:each="employee, rowCount : ${employees}"/>
+    <!--Index-->
+    <attr sel="#index" th:text="${rowCount.count}"/>
+    <!--Pay role Number-->
+    <attr sel="#payRoleNumber" th:text="${employee.payRoleNumber}"/>
+    <!--Calling Name-->
+    <attr sel="#callingName" th:text="${employee.callingName}"/>
+    <!--Mobile One-->
+    <attr sel="#mobileOne" th:text="${employee.mobileOne}"/>
+    <!--Land-->
+    <!--
+        <attr sel="#land" th:text="${employee.land}"/>
+    -->
+    <!--Designation-->
+    <attr sel="#designation" th:text="${employee.designation.designation}"/>
+    <!--Employee Status-->
+    <attr sel="#employeeStatus" th:text="${employee.employeeStatus.employeeStatus}"/>
+    <!--Employee view-->
+    <attr sel="#employeeView" th:href="${'/employee/' + employee.id}"/>
+    <!--Employee Edit-->
+    <attr sel="#employeeEdit" th:href="${'/employee/edit/' + employee.id}"/>
+    <!--Employee Delete-->
+    <attr sel="#employeeRemove" th:href="${'/employee/remove/' + employee.id}"
+          th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"/>
+    <!--Employee List Not Present-->
+    <attr sel="#employeeListNotPresent" th:if="${ #lists.isEmpty(employees)}"/>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

@@ -1,101 +1,242 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <style th:replace="fragments/style"></style>
+<html lang="en">
+<head id="header">
 </head>
 <body>
-<nav th:replace="fragments/header :: header"></nav>
-<div class="container-fluid" style="margin-top: 50px">
-    <div class="panel panel-primary">
-        <div class="panel panel-heading text-center">
-            <h4><b><span th:text="${addStatus==true?'New User Add':'Update User'}"></span></b></h4>
+<nav id="navBar"></nav>
+<!--Page header -->
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-4 ">
-                    <a class="btn btn-primary" href="/home"> Return Home</a>
-                </div>
-                <div class="col-sm-4" style="text-align: center;">
-                    <h4 class="text-info"></h4>
-                </div>
-                <div class="col-sm-4 text-right">
-                    <a href="/user">
-                        <button class="btn btn-sm btn-primary"><span
-                                class="glyphicon glyphicon-list">&nbsp; View List </span></button>
-                    </a>
-                </div>
-            </div>
-            <!-- /.row -->
-            <div class="container-fluid">
-                <div class="col-sm-offset-2">
-                    <form class="form-horizontal" th:action="${addStatus==true?'/user/add':'/user/update'}"
-                          th:method="POST">
-                        <div class="col-sm-8 text-center">
-                            <div class="form-group" th:if="${addStatus==false}">
-                                <label class="control-label col-md-4" for="id">ID :</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="id" name="id" placeholder="Enter ID Here"
-                                           th:field="*{id}" type="text"/>
-                                    <span class="error" th:errors="*{id}" th:if="${#fields.hasErrors('id')}">Error Number</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" th:for="name">Employee Name</label>
-                                <div class="col-md-6">
-                                    <select class="form-control" id="name" name="employee">
-                                        <option th:each="employees : ${employee}"
-                                                th:text="${employees.name}+ ${' '} + ${employees.number}"
-                                                th:value="${employees.id}">
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="username">User Name</label>
-                                <div class="col-md-6">
-                                    <input class="form-control" id="username" name="username"
-                                           placeholder="Enter User Name Here" required type="text"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="password">Password</label>
-                                <div class="col-md-6">
-                                    <input class="form-control" id="password" name="password"
-                                           placeholder="Enter Password Here" required type="password"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4">Role</label>
-                                <div class="col-md-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <tr th:each="roles, rowCount : ${role}">
-                                                <th th:text="${rowCount.count}"></th>
-                                                <th th:text="${roles.roleName}"></th>
-                                                <th><input name="roles" th:value="${roles.id}" type="checkbox"></th>
-
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center row">
-                                <button class="btn btn-success" type="submit"><span
-                                        class="glyphicon glyphicon-thumbs-up"></span>&nbsp; &nbsp;<span
-                                        th:text="${addStatus==true?'Save': 'Update'}"></span></button>
-                            </div>
-                        </div>
-                        <ul>
-                            <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
-                        </ul>
-                    </form>
-                </div>
-            </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span id="formHeader"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a href="/user" class="btn btn-primary">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
         </div>
     </div>
 </div>
-<footer class="page-footer" th:replace="fragments/footer"></footer>
-<script th:replace="fragments/script"></script>
+<!--Employee find-->
+<div class="container-fluid bg-dark formBorder" id="employeeFindForm">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" method="POST" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="col-5 flex-column">
+                    <div class="form-group">
+                        <div class="col-4">
+                            <label class="control-label" for="selectParameter">Parameter :</label>
+                        </div>
+                        <div class="col-8">
+                            <select id="selectParameter" class="form-control" tabindex="1" required>
+                                <option value="">Please select</option>
+                                <option value="nic">NIC Number</option>
+                                <option value="payRoleNumber">Pay Role Number</option>
+                                <option value="departmentIdNumber">Department Id Number</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 flex-column">
+                    <div class="form-group">
+                        <div class="col-5">
+                            <label class="control-label" for="valueEmployee">Value :</label>
+                        </div>
+                        <div class="col-7">
+                            <input id="valueEmployee" tabindex="2" class="form-control" type="text" minlength="3"
+                                   required
+                                   autofocus/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 flex-column">
+                    <div class="form-group">
+                        <div class="">
+                            <div class="col-2">
+                                <label class="control-label"></label>
+                            </div>
+                            <div class="col-10 text-left" id="btnSearchEmployee">
+                                <button class="btn btn-success" tabindex="3" type="submit">
+                                    <i class="fa fa-search " style="font-size: 20px"></i>&nbsp; &nbsp;Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--Employee not fount message-->
+<div id="employeeNotFoundShow" class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong><span id="employeeNotFound"></span></strong>
+    <script>
+        $(".alert").alert();
+    </script>
+</div>
+
+<!--User add from-->
+<div class="container-fluid bg-dark formBorder" id="userFormShow">
+    <form id="formUser" class="form-horizontal" method="POST" autocomplete="false">
+        <div class="row">
+            <!--Left Side-->
+            <div class="form-group col-md-5 col-sm-7 text-left flex-column">
+                <div id="idHide" class="form-row">
+                    <div class="col-md-4">
+                        <label class="control-label" for="id">ID :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="form-control" id="id" type="text" readonly/>
+                    </div>
+                </div>
+                <!--Employee details Display-->
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label class="control-label" for="employee">Employee :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control" name="employee" id="employee" required>
+                            <option id="employeeList" value="">Please select</option>
+                        </select>
+                        <div id="employeeNameBox">
+                            <strong>
+                                <span id="employeeName"></span>
+                                <input type="hidden" id="employeeSelected">
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <!--User name-->
+                <div class="form-row">
+                    <label class="control-label col-md-4" for="username">User Name :</label>
+                    <div class="col-md-8">
+                        <input class="form-control" id="username"
+                               placeholder="Enter User Name Here" required type="text"/>
+                    </div>
+                </div>
+                <!--Password-->
+                <div class="form-row">
+                    <label class="control-label col-md-4" for="password">Password :</label>
+                    <div class="col-md-8">
+                        <input class="form-control validate" id="password"
+                               placeholder="Enter Password Here" required type="password"
+                        />
+                        <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        <div class="text-right">
+                            <span id="result"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--Working Place Find-->
+                <!--province-->
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label class="control-label" for="province">Province:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control province" id="province" name="province" required>
+                            <option value="">Please select</option>
+                            <option id="provinceSelectList"></option>
+                        </select>
+                    </div>
+                </div>
+                <!--District-->
+                <div class="form-row districtShow">
+                    <div class="col-md-4">
+                        <label class="control-label" for="district">District:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control district" name="district" id="district" required>
+                            <option value="">Please select</option>
+                        </select>
+                    </div>
+                </div>
+                <!--Station-->
+                <div class="stationShow form-row">
+                    <div class="col-md-4">
+                        <label class="control-label" for="station">Station:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select id="station" class="form-control" multiple required>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row alert alert-danger text-center">
+                        <strong>Attention !</strong>
+                        If Employee is belong to supper senior category.
+                        <strong>Please select one or two work station </strong>.
+                    </div>
+                </div>
+            </div>
+            <!--Right Side-->
+            <div class="form-group col-md-5 col-sm-7 text-left flex-column">
+                <!--Roles Display-->
+                <div class="form-row">
+                    <label class="control-label" for="roles">Roles :</label>
+                    <select id="roles" class="form-control" size="12" multiple required>
+                        <option id="roleList" value=""></option>
+                    </select>
+                </div>
+                <div class="form-row" id="alert">
+                    <div class="form-row alert alert-danger text-center"><strong>Attention !</strong>
+                        <br/>You have to select following
+                             working place also before update user
+                        <strong>ANY DETAILS BELONG THIS USER </strong>.
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row"><label class="control-label" for="roles">Working place to watch :</label>
+                        </div>
+                        <div class="form-row">
+                            <ol>
+                                <li id="stationList"></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Button-->
+            <div class="form-group col-md-12 col-sm-12 text-center flex-column">
+                <button class="btn btn-success" type="submit">
+                    <i class="fa fa-save" style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                        id="submit">                        </span>
+                </button>
+            </div>
+        </div>
+        <!--Error-->
+        <div class="form-row">
+            <label id="errorLabel">Errors: </label>
+            <ul>
+                <li id="errorDisplay" class="error"></li>
+            </ul>
+        </div>
+        <!--Hide content from visual-->
+        <div class="form-row">
+            <input type="hidden" id="districtUrl" class="hide"/>
+            <input type="hidden" id="stationUrl" class="hide"/>
+        </div>
+    </form>
+
+
+</div>
+
+<footer id="footer"></footer>
+<script id="script"></script>
+<script id="stationFindJS"></script>
+<script id="customJS"></script>
+
 </body>
 </html>

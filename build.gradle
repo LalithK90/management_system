@@ -1,26 +1,29 @@
 plugins {
-    id 'org.springframework.boot' version '2.1.6.RELEASE'
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
 }
 
-apply plugin: 'io.spring.dependency-management'
-
-group = 'lk.imms'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
 
 configurations {
     developmentOnly
     runtimeClasspath {
         extendsFrom developmentOnly
     }
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
 }
 
 repositories {
     mavenCentral()
+}
+
+springBoot {
+    buildInfo {
+        properties {
+            group = 'com.example'
+            version = '0.0.1-SNAPSHOT'
+            sourceCompatibility = '11'
+        }
+    }
 }
 
 dependencies {
@@ -29,22 +32,69 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+//twilio - to send SMS
+    implementation group: "com.twilio.sdk", name: "twilio", version: "7.42.0"
 
-    //================= Following jar is need to email =================// 
-    compile('org.springframework.boot:spring-boot-starter-mail')
+    //=========================Springboot cache=========//
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-cache
+    //compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.2.2.RELEASE'
+
     //================= Following jar is need to check url util - https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 =================// 
     compile group: 'org.apache.commons', name: 'commons-lang3'
     //================= Following jar is need to generate excel file - https://mvnrepository.com/artifact/org.apache.poi/poi=================//
     compile group: 'org.apache.poi', name: 'poi', version: '3.8'
+    /*pdf generate related*/
     //================= Following jar is need to generate pdf file -https://mvnrepository.com/artifact/com.itextpdf/itextpdf =================//
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.9'
     // ==== this is need to html content convert to pdf 
     compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.5.9'
-    
-    
+
+
+//====== use as three jars to set bootstrap and front awesome
+// https://mvnrepository.com/artifact/org.webjars/bootstrap
+    compile group: 'org.webjars', name: 'bootstrap', version: '4.4.1'
+// https://mvnrepository.com/artifact/org.webjars/popper.js
+    compile group: 'org.webjars', name: 'popper.js', version: '1.15.0'
+// https://mvnrepository.com/artifact/org.webjars/jquery
+    compile group: 'org.webjars', name: 'jquery', version: '3.4.1'
+// https://mvnrepository.com/artifact/org.webjars/jquery-ui
+    compile group: 'org.webjars', name: 'jquery-ui', version: '1.12.1'
+// https://mvnrepository.com/artifact/org.webjars/font-awesome
+    compile group: 'org.webjars', name: 'font-awesome', version: '5.11.2'
+
+// https://mvnrepository.com/artifact/org.webjars/pdf-js
+    compile group: 'org.webjars', name: 'pdf-js', version: '2.3.200'
+
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin -- from build jar file
+    compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.2.2.RELEASE', ext: 'pom'
+
+    //====== use as three jars use to enable eh caches
+// https://mvnrepository.com/artifact/org.ehcache/ehcache
+    compile group: 'org.ehcache', name: 'ehcache', version: '3.8.1'
+// https://mvnrepository.com/artifact/javax.cache/cache-api
+    compile group: 'javax.cache', name: 'cache-api', version: '1.1.1'
+
+
+
     compileOnly 'org.projectlombok:lombok'
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     runtimeOnly 'mysql:mysql-connector-java'
+
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootRun {
+    sourceResources sourceSets.main
 }

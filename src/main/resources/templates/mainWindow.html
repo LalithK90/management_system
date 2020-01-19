@@ -1,170 +1,131 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--header Include-->
+<head id="header">
 
-    <style th:replace="fragments/style"></style>
 </head>
 <body>
-<nav class="navbar navbar-default" th:replace="fragments/header :: header"></nav>
-<div class="container-fluid" style="margin-top: 60px">
-    <div class="row">
-
-        <div class="col-md-2 ">
-            <div class="home-card bg-info ">
-                <a href="student#"></a>
-                <span class="home-card-num text-danger">Student Management</span>
-                <span class="glyphicon glyphicon-user text-primary "></span>
-                <span class="bar "></span>
-            </div>
-        </div>
-
-        <div class="col-md-offset-0 col-md-2">
-            <div class="home-card bg-info">
-                <a href="register#"></a>
-                <span class="home-card-num text-danger">Registration Management</span>
-                <span class="glyphicon glyphicon-registration-mark text-primary"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-
-        <div class="col-md-2">
-            <div class="home-card  bg-info">
-                <a href="payment#"></a>
-                <span class="home-card-num text-primary">Payment Management</span>
-                <span class="glyphicon glyphicon-usd text-primary"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-
-        <div class="col-md-2" style="width: 200px; height: 100px;">
-            <div class="home-card bg-danger" style="height: 100px;">
-                <a href="trainingshedule#"></a>
-                <span class="home-card-num text-danger" style="font-size: 18px;">Training Schedule</span>
-                <span class="glyphicon glyphicon-book text-danger" style="padding-top: 10px"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-
-        <div class="col-md-2" style="width: 200px; height: 100px;">
-            <div class="home-card bg-danger" style="height: 100px;">
-                <a href="attend#"></a>
-                <span class="home-card-num text-danger" style="font-size: 18px;">Attendants</span>
-                <span class="glyphicon glyphicon-thumbs-up text-danger"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="padding-top: 10px; padding-left: 400px;">
-        <div class="col-md-2" style="width: 200px; height: 100px;">
-            <div class="home-card  bg-info" style="height: 100px;">
-                <a href="examination#"></a>
-                <span class="home-card-num text-danger" style="font-size: 18px;">Examination Management</span>
-                <span class="glyphicon glyphicon-pencil text-primary" style="padding-top: 10px"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-
-
-        <div class="col-md-offset-0 col-md-2" style="width: 200px; height: 100px;">
-            <div class="home-card  bg-success" style="height: 100px;">
-                <a href="vehicle#"></a>
-                <span class="home-card-num text-success" style="font-size: 18px;">Vehicle Management</span>
-                <span class="glyphicon glyphicon-bed text-success"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-        <div class="col-md-2" style="width: 200px; height: 100px;">
-            <div class="home-card  bg-success" style="height: 100px;">
-                <a href="maintanance#"></a>
-                <span class="home-card-num text-success" style="font-size: 18px;">Maintenance Management</span>
-                <span class="glyphicon glyphicon-usd text-success"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-
-
-    </div>
-
-    <div class="row" style="padding-top: 10px; padding-left: 750px;">
-
-        <div class="col-md-2" style="width: 200px; height: 100px;">
-            <div class="home-card  bg-success" style="height: 100px;">
-                <a href="vehicleclass#"></a>
-                <span class="home-card-num text-success" style="font-size: 18px;">Vehicle Class Management</span>
-                <span class="glyphicon glyphicon-book text-success" style="padding-top: 35px"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-
-        <!--<div class="col-md-2" style="width: 200px; height: 100px;">
-            <div class="home-card  bg-success" style="height: 100px;" >
-                <a href="#"></a>
-                <span class="home-card-num text-success" style="font-size: 18px;">Email</span>
-                <span class="glyphicon glyphicon-file text-success"></span>
-                <span class="bar"></span>
-            </div>
-        </div>-->
-
-    </div>
-
-    <div class="row" style="padding-top: 10px; padding-left: 750px;">
-
-
-        <div class="col-md-offset-0 col-md-2" style="width: 200px; height: 100px;">
-            <div class="home-card  bg-success" style="height: 100px;">
-                <a href="employee#"></a>
-                <span class="home-card-num text-success" style="font-size: 18px;">Employee</span>
-                <span class="glyphicon glyphicon-user text-success"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-        <div class="col-md-2" style="width: 200px; height: 100px;">
-            <div class="home-card bg-success" style="height: 100px;">
-                <a href="user#"></a>
-                <span class="home-card-num text-success" style="font-size: 18px;">User</span>
-                <span class="glyphicon glyphicon-user text-success"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row" style="padding-top: 10px; padding-left: 750px;">
-
-
-        <div class="col-md-2" style="width: 200px; height: 100px;">
-            <div class="home-card  bg-success" style="height: 100px;">
-                <a href="summary"></a>
-                <span class="home-card-num text-success" style="font-size: 18px;">Reports</span>
-                <span class="glyphicon glyphicon-file  text-success"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-
-    </div>
-
-
-</div>
-
-<div class="container-fluid">
-    <div class="row" style="margin-bottom: 0px;">
-        <div class="col-md-12">
-            <div class="carousel slide" data-interval="3000" data-ride="carousel" id="slidh">
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="../image/c/8%20.jpg" style="width: 100%; height: 600px;"/>
-                        <div class="carousel-caption">
-                            <h2 class="text-primary" style="text-align: left">Welcome</h2>
-                            <p class="text-primary" style="text-align: left">Karunadasa Learners</p>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<div class="container">
+    <div class="main-section"><p class="welcome-Notes">Welcome To Complaint Management System of Department of Excise</p>
+    <div class="row section">
+        <div class="col-lg-4">
+            <div class="tile wide invoice">
+                <div class="header">
+                    <div class="">
+                        <div class="count">
+                            <i class="fa fa-street-view" aria-hidden="true"></i>
                         </div>
+                        <div class="title">Employees</div>
                     </div>
+
                 </div>
+                <a class href="/employee">
+                    <div class="body">
+                        <div class="title">Manage Employees</div>
+                    </div>
+                </a>
             </div>
         </div>
+        <div class="col-lg-4">
+            <div class="tile wide resource">
+                <div class="header">
+                    <div class="">
+                        <div class="count"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </div>
+                        <div class="title">Petitions</div>
+                    </div>
+
+                </div>
+                <a href="/petition">
+                    <div class="body">
+                        <div class="title">Inspect Petitions</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="tile wide quote">
+                <div class="header">
+                    <div class="">
+                        <div class="count"><i class="fa fa-newspaper" aria-hidden="true"></i>
+                        </div>
+                        <div class="title">Crime</div>
+                    </div>
+
+                </div>
+                <a href="/crime">
+                    <div class="body">
+                        <div class="title">Observe Crimes</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="tile wide resource">
+                <div class="header">
+                    <div class="">
+                        <div class="count"><i class="fa fa-universal-access" aria-hidden="true"></i>
+                        </div>
+                        <div class="title">Offenders</div>
+                    </div>
+
+                </div>
+                <a class href="/offender">
+                    <div class="body">
+                        <div class="title">View Offenders</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="tile wide quote">
+                <div class="header">
+                    <div class="">
+                        <div class="count"><i class="fa fa-home" aria-hidden="true"></i>
+                        </div>
+                        <div class="title">Working Place</div>
+                    </div>
+
+                </div>
+                <a href="/workingPlace">
+                    <div class="body">
+                        <div class="title">Manage Working Places</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="tile wide invoice">
+                <div class="header">
+                    <div class="">
+                        <div class="count"><i class="fa fa-bug" aria-hidden="true"></i>
+                        </div>
+                        <div class="title">Contravene</div>
+                    </div>
+
+                </div>
+                <a href="/workingPlace">
+                    <div class="body">
+                        <div class="title">Edit Contravene</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
     </div>
+    <div class="row section">
+
+    </div>
+    </div>
+
 </div>
-</div>
-<footer class="page-footer" th:replace="fragments/footer"></footer>
+<!--<footer class="page-footer" th:replace="fragments/footer"></footer>-->
 <script th:replace="fragments/script"></script>
 </body>
 </html>
+

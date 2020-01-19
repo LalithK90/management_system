@@ -1,0 +1,33 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+    <!--form header -->
+    <attr sel="#formHeader" th:text="${petitionerDetail.nameEnglish}"/>
+
+    <!--Id-->
+    <attr sel="#id" th:text="${petitionerDetail.id}"/>
+    <!--Name in sinhala-->
+    <attr sel="#nameSinhala" th:text="${petitionerDetail.nameSinhala}"/>
+    <!--Name in tamil-->
+    <attr sel="#nameTamil" th:text="${petitionerDetail.nameTamil}"/>
+    <!--Name in English-->
+    <attr sel="#nameEnglish" th:text="${petitionerDetail.nameEnglish}"/>
+    <!--Email-->
+    <attr sel="#email" th:text="${petitionerDetail.email}"/>
+    <!--Petitoner Type-->
+    <attr sel="#petitionerType" th:text="${petitionerDetail.petitionerType.petitionerType}"/>
+    <!--Address-->
+    <attr sel="#address" th:text="${petitionerDetail.address}"/>
+    <!--Mobile One-->
+    <attr sel="#mobileOne" th:text="${petitionerDetail.mobileOne}"/>
+    <!--Mobile two-->
+    <attr sel="#mobileTwo" th:text="${petitionerDetail.mobileTwo}"/>
+    <!--Land-->
+    <attr sel="#land" th:text="${petitionerDetail.land}"/>
+    <!--Created by and created at-->
+    <attr sel="#createdBy" th:text="${petitionerDetail.createdBy}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(petitionerDetail.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

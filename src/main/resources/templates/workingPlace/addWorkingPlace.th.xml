@@ -1,0 +1,55 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <attr sel="#formHeader" th:text="${addStatus==true?'New Working Place ':'Update Working Place Details'}"/>
+    <attr sel="#form" th:action="${addStatus==true?'/workingPlace/add':'/workingPlace/update'}"
+          th:object="${workingPlace}"/>
+    <attr sel="#idHide" th:if="${addStatus==false}"/>
+    <attr sel="#id" th:field="*{id}"/>
+    <attr sel="#name" th:field="*{name}"/>
+    <attr sel="#nameError" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"/>
+    <attr sel="#code" th:field="*{code}"/>
+    <attr sel="#codeError" th:errors="*{code}" th:if="${#fields.hasErrors('code')}"/>
+    <attr sel="#province" th:field="*{province}"/>
+    <attr sel="#provinceSelect" th:each="provinces : ${province}"
+          th:text="${provinces.province}"
+          th:value="${provinces}"
+          th:selected="${provinces==workingPlace.province?'selected':'unselected'}"/>
+    <attr sel="#district" th:field="*{district}"/>
+    <attr sel="#districtSelect" th:each="districts : ${district}"
+          th:text="${districts.district}"
+          th:value="${districts}"
+          th:selected="${districts==workingPlace.district?'selected':'unselected'}"/>
+    <attr sel="#workingPlaceType" th:field="*{workingPlaceType}"/>
+    <attr sel="#workingPlaceTypeSelect" th:each="workingPlaceTypes : ${workingPlaceType}"
+          th:text="${workingPlaceTypes.workingPlaceType}"
+          th:value="${workingPlaceTypes}"
+          th:selected="${workingPlaceTypes==workingPlace.workingPlaceType?'selected':'unselected'}"/>
+    <attr sel="#emailOne" th:field="*{emailOne}"/>
+    <attr sel="#emailOneError" th:field="*{emailOne}" th:errors="*{emailOne}" th:if="${#fields.hasErrors('emailOne')}"/>
+    <attr sel="#emailTwo" th:field="*{emailTwo}"/>
+    <attr sel="#emailTwoError" th:field="*{emailTwo}" th:errors="*{emailTwo}" th:if="${#fields.hasErrors('emailTwo')}"/>
+    <attr sel="#landOne" th:field="*{landOne}"/>
+    <attr sel="#landOneError" th:errors="*{landOne}" th:if="${#fields.hasErrors('landOne')}"/>
+    <attr sel="#landTwo" th:field="*{landTwo}"/>
+    <attr sel="#landTwoError" th:errors="*{landTwo}" th:if="${#fields.hasErrors('landTwo')}"/>
+    <attr sel="#landThree" th:field="*{landThree}"/>
+    <attr sel="#landThreeError" th:errors="*{landThree}" th:if="${#fields.hasErrors('landThree')}"/>
+    <attr sel="#landFour" th:field="*{landFour}"/>
+    <attr sel="#landFourError" th:errors="*{landFour}" th:if="${#fields.hasErrors('landFour')}"/>
+    <attr sel="#faxNumber" th:field="*{faxNumber}"/>
+    <attr sel="#faxNumberError" th:errors="*{faxNumber}" th:if="${#fields.hasErrors('faxNumber')}"/>
+    <attr sel="#address" th:field="*{address}"/>
+    <attr sel="#addressError" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"/>
+    <attr sel="#createdByDiv" th:if="${addStatus==false}"/>
+    <attr sel="#createdBy" th:field="*{createdBy}"/>
+    <attr sel="#createdAtDiv" th:if="${addStatus==false}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(createdAt, 'dd-MM-yyyy HH:mm')}"/>
+    <attr sel="#submit" th:text="${addStatus==true?'Save': 'Update'}"/>
+    <attr sel="#errorLabel" th:if="${#fields.hasErrors('*')}" th:text="'Errors: '"/>
+    <attr sel="#errorDisplay" th:each="err: ${#fields.errors('*')}" th:text="${err}"/>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

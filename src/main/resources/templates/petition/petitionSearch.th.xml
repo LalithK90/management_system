@@ -1,0 +1,111 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <!--form header-->
+    <attr sel="#formHeader" th:text="${'Search Petitions Using Petition Relete Details '}"/>
+
+    <!--Form -->
+    <attr sel="#from" th:action="${'/petition/search'}" th:object="${petition}"/>
+
+    <!--Petition-->
+    <!--petition number-->
+    <attr sel="#indexNumber" th:field="*{indexNumber}"/>
+    <!--petition number-->
+    <attr sel="#petitionNumber" th:field="*{petitionNumber}"/>
+    <!--petition type-->
+    <attr sel="#petitionType" th:field="*{petitionType}"/>
+    <attr sel="#petitionTypeList" th:each="petitionType : ${petitionTypes}" th:value="${petitionType}"
+          th:text="${petitionType.petitionType}"/>
+    <!--Village-->
+    <attr sel="#village" th:field="*{village}"/>
+    <!--Division-->
+    <attr sel="#agaDivision" th:field="*{agaDivision}"/>
+    <!--petitionPriority-->
+    <attr sel="#petitionPriority" th:field="*{petitionPriority}"/>
+    <attr sel="#petitionPriorityList" th:each="petitionPriority : ${petitionPriorities}" th:value="${petitionPriority}"
+          th:text="${petitionPriority.petitionPriority}"/>
+
+    <!--Working place-->
+    <!--name-->
+    <attr sel="#name" th:field="*{workingPlace.name}"/>
+     <!--code-->
+    <attr sel="#code" th:field="*{workingPlace.code}"/>
+     <!--province-->
+    <attr sel="#province" th:field="*{workingPlace.province}"/>
+    <attr sel="#provinceSelect" th:each="provinces : ${provinces}"
+          th:text="${provinces.province}"
+          th:value="${provinces}"/>
+    <!--district-->
+    <attr sel="#district" th:field="*{workingPlace.district}"/>
+    <attr sel="#districtSelect" th:each="districts : ${districts}"
+          th:text="${districts.district}"
+          th:value="${districts}"/>
+    <!--working place type-->
+    <attr sel="#workingPlaceType" th:field="*{workingPlace.workingPlaceType}"/>
+    <attr sel="#workingPlaceTypeSelect" th:each="workingPlaceTypes : ${workingPlaceTypes}"
+          th:text="${workingPlaceTypes.workingPlaceType}"
+          th:value="${workingPlaceTypes}"/>
+    <!--land number-->
+    <attr sel="#landOne" th:field="*{workingPlace.landOne}"/>
+
+    <!--Offender details-->
+    <!--Offender Registration number-->
+    <attr sel="#offenderRegisterNumber" th:name="${'petitionOffenders[0].offender.offenderRegisterNumber'}"/>
+    <!--Name in English-->
+    <attr sel="#nameEnglish" th:name="${'petitionOffenders[0].offender.nameEnglish'}"/>
+    <!--NIC-->
+    <attr sel="#nic" th:name="${'petitionOffenders[0].offender.nic'}"/>
+    <!--Passport Number-->
+    <attr sel="#passportNumber" th:name="${'petitionOffenders[0].offender.passportNumber'}"/>
+    <!--Driving Licence Number-->
+    <attr sel="#drivingLicenceNumber" th:name="${'petitionOffenders[0].offender.drivingLicenceNumber'}"/>
+    <!--Civil status-->
+    <attr sel="#civilStatus" th:name="${'petitionOffenders[0].offender.civilStatus'}"/>
+    <attr sel="#civilStatusList" th:each="civilStatu : ${civilStatus}"
+          th:text="${civilStatu.CivilStatus}"
+          th:value="${civilStatu}"/>
+    <!--Mobile two-->
+    <attr sel="#mobileTwo" th:name="${'petitionOffenders[0].offender.mobileTwo'}"/>
+    <!--Land-->
+    <attr sel="#landOffender" th:name="${'petitionOffenders[0].offender.land'}"/>
+
+    <!--Calling Names-->
+    <attr sel="#callingNameOne" th:name="${'petitionOffenders[0].offender.callingNames'}"/>
+    <attr sel="#callingNameTwo" th:name="${'petitionOffenders[0].offender.callingNames'}"/>
+    <attr sel="#callingNameThree" th:name="${'petitionOffenders[0].offender.callingNames'}"/>
+    <attr sel="#callingNameFour" th:name="${'petitionOffenders[0].offender.callingNames'}"/>
+
+    <!-- Guardian Details-->
+    <!--NIC-->
+    <attr sel="#guardianNic" th:name="${'petitionOffenders[0].offender.guardians[0].nic'}"/>
+    <!--Land -->
+    <attr sel="#guardianName" th:name="${'petitionOffenders[0].offender.guardians[0].name'}"/>
+
+
+    <!--Petitioner Details-->
+    <!--Name in English-->
+    <attr sel="#nameSinhala" th:field="*{petitioner.nameEnglish}"/>
+    <!--Email-->
+    <attr sel="#email" th:field="*{petitioner.email}"/>
+    <!--Land-->
+    <attr sel="#land" th:field="*{petitioner.land}"/>
+    <!--Mobile two-->
+    <attr sel="#mobileTwo" th:field="*{petitioner.mobileTwo}"/>
+
+    <!--Contravene-->
+    <attr sel="#contraveneStatus"
+          th:each="contravene, lineCount : ${contravenes}">
+        <attr sel="#contraveneValue" th:id="${'DTS'}+${lineCount.count}" th:value="${contravene.id}"  th:name="${'petitionOffenders[0].contravenes'}"
+        />
+        <attr sel="#contraveneLabel" th:for="${'DTS'}+${lineCount.count}" th:class="${'DTS'}+${lineCount.count} + ${'  text-primary'}"
+              th:text="${contravene.code}+${'-'}+${contravene.detail}"/>
+    </attr>
+
+    <!--Button-->
+    <attr sel="#submit" th:text="${'Search'}"/>
+
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>
