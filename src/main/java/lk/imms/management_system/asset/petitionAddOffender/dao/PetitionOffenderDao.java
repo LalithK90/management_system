@@ -24,4 +24,6 @@ public interface PetitionOffenderDao extends JpaRepository< PetitionOffender, Lo
     List< PetitionOffender> countByOffenderAndCreatedAtBetween(Offender offender, LocalDateTime from, LocalDateTime to);
 
     List<PetitionOffender> findByContravenes(Contravene contravene);
+
+    List<PetitionOffender> findByOffenderAndContravenes(Offender offender, Contravene contravene);
 }

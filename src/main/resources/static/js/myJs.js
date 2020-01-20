@@ -1,14 +1,21 @@
-$(document).ready(function () {
+/*window.onunload = function(){ $.get("${request.contextPath}/logout"); }*/
 
+
+$(document).ready(function () {
+    $(window).unload(function(){
+        alert("Goodbye!");
+    });
     // set current year to the footer
     document.getElementById("currentYear").innerHTML = new Date().getFullYear();
 
     /*//Nav bar properties - start//*/
-    $('li.dropdown').hover(function () {
+    /*//Nav bar properties - start//*/
+    $('ul.navbar-nav li.dropdown').hover(function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(10);
     }, function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(10);
     });
+    /*//Nav bar properties - end//*/
     /*//Nav bar properties - end//*/
 
 

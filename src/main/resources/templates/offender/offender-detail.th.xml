@@ -58,25 +58,39 @@
     <attr sel="#description" th:utext="${offender.description}"/>
 
     <!--21. Photos -->
-    <attr sel="#filesList" th:each="file, rowStat: ${offender.fileInfos}"/>
-    <attr sel="#img" th:src="${file.url}"/>
-    <attr sel="#imgName" th:text="${file.filename}"/>
-    <attr sel="#imgCreateAt" th:text="${{file.createAt}}"/>
+    <attr sel="#filesList" th:each="file, rowStat: ${offender.fileInfos}">
+        <attr sel="#img" th:src="${file.url}"/>
+        <attr sel="#imgName" th:text="${file.filename}"/>
+        <attr sel="#imgCreateAt" th:text="${{file.createAt}}"/>
+    </attr>
 
     <!--21. Guardian Details-->
-    <attr sel="#guardianDetails" th:if="${not #lists.isEmpty(offender.guardians)}" th:each="guardian, status : ${offender.guardians}"/>
-    <attr sel="#guardianType" th:text="${offender.guardians[__${status.index}__].guardianType.guardianType}"/>
-    <attr sel="#guardianNic" th:text="${offender.guardians[__${status.index}__].nic}"/>
-    <attr sel="#guardianName" th:text="${offender.guardians[__${status.index}__].name}"/>
-    <attr sel="#guardianRemark" th:utext="${offender.guardians[__${status.index}__].remark}"/>
-    <attr sel="#guardianCreatedBy" th:text="${offender.guardians[__${status.index}__].createdBy}"/>
-    <attr sel="#guardianCreatedAt" th:text="${{offender.guardians[__${status.index}__].createdAt}}"/>
-    <attr sel="#guardianUpdatedBy" th:text="${offender.guardians[__${status.index}__].updatedBy}"/>
-    <attr sel="#guardianUpdatedAt" th:text="${{offender.guardians[__${status.index}__].updatedAt}}"/>
+    <attr sel="#guardianDetails" th:if="${not #lists.isEmpty(offender.guardians)}"
+          th:each="guardian, status : ${offender.guardians}">
+        <attr sel="#guardianType" th:text="${offender.guardians[__${status.index}__].guardianType.guardianType}"/>
+        <attr sel="#guardianNic" th:text="${offender.guardians[__${status.index}__].nic}"/>
+        <attr sel="#guardianName" th:text="${offender.guardians[__${status.index}__].name}"/>
+        <attr sel="#guardianRemark" th:utext="${offender.guardians[__${status.index}__].remark}"/>
+        <attr sel="#guardianCreatedBy" th:text="${offender.guardians[__${status.index}__].createdBy}"/>
+        <attr sel="#guardianCreatedAt" th:text="${{offender.guardians[__${status.index}__].createdAt}}"/>
+        <attr sel="#guardianUpdatedBy" th:text="${offender.guardians[__${status.index}__].updatedBy}"/>
+        <attr sel="#guardianUpdatedAt" th:text="${{offender.guardians[__${status.index}__].updatedAt}}"/>
+    </attr>
     <!--Todo -> following things -->
-    <!--Contravenes-->
-
-    <!--Crimes-->
+    <!--22. Contravenes-->
+    <attr sel="#contraveneList" th:if="${not #lists.isEmpty(contraveneCounts)}"
+          th:each="contraveneCount, status : ${contraveneCounts}">
+        <attr sel="#index" th:text="${status.count}"/>
+        <attr sel="#contravene" th:text="${contraveneCount.name}"/>
+        <attr sel="#times" th:text="${contraveneCount.count}"/>
+    </attr>
+    <!--23. petition list-->
+    <attr sel="#petition" th:if="${not #lists.isEmpty(petitionOffenders)}"
+          th:each="petitionOffender, status : ${petitionOffenders}">
+        <attr sel="#indexPetiton" th:text="${status.count}"/>
+        <attr sel="#numberPetition" th:text="${petitionOffender.petition.petitionNumber} +${' - '}+${{petitionOffender.petition.createdAt}}"/>
+        <attr sel="#petitionView" th:href="${'/petition/view/' + petitionOffender.petition.id}"/>
+    </attr>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>

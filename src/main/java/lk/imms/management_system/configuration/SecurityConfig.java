@@ -10,7 +10,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
@@ -37,6 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());
@@ -60,12 +67,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         //this is used the normal admin to give access every url mapping
                                         .antMatchers("/").hasRole("/ADMIN")
                                         //Need to login for access those are
-                                     /*   .antMatchers("/employee/**").hasRole("ADMIN")
-                                        .antMatchers("/employee1/**").hasRole("MANAGER")
-                                        .antMatchers("/user/**").hasRole("ADMIN")
-                                        .antMatchers("/petition/**").hasRole("ADMIN")
-                                        .antMatchers("/minutePetition/**").hasRole("MANAGER")
-                                        .antMatchers("/invoiceProcess/add").hasRole("CASHIER")*/
+                                        /*   .antMatchers("/employee/**").hasRole("ADMIN")
+                                           .antMatchers("/employee1/**").hasRole("MANAGER")
+                                           .antMatchers("/user/**").hasRole("ADMIN")
+                                           .antMatchers("/petition/**").hasRole("ADMIN")
+                                           .antMatchers("/minutePetition/**").hasRole("MANAGER")
+                                           .antMatchers("/invoiceProcess/add").hasRole("CASHIER")*/
                                         .anyRequest()
                                         .authenticated())
                 // Login form
@@ -77,22 +84,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         .usernameParameter("username")
                                         .passwordParameter("password")
                                         .defaultSuccessUrl("/mainWindow"))
+                //session management
+                .sessionManagement(
+                        sessionManagement ->
+                                sessionManagement
+                                        .sessionFixation()
+                                        .migrateSession()
+                                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                                        .invalidSessionUrl("/login")
+                                        .maximumSessions(1)
+                                        .expiredUrl("/index"))
                 //Logout controlling
                 .logout(
                         logout ->
                                 logout
                                         .logoutUrl("/logout")
+                                        .logoutSuccessUrl("/login")
                                         .deleteCookies("JSESSIONID")
-                                        .invalidateHttpSession(false)
-                                        .clearAuthentication(true)
-                                        .logoutSuccessUrl("/login"))
-                //session management
-                .sessionManagement(
-                        sessionManagement ->
-                                sessionManagement
-                                        .maximumSessions(1)
-                                        .maxSessionsPreventsLogin(true)
-                                        .expiredUrl("/login"))
+                                        .invalidateHttpSession(true)
+                                        .clearAuthentication(true))
                 //Cross site disable
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling();

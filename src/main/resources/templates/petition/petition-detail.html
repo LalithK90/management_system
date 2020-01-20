@@ -303,19 +303,19 @@
                 <div class="container-fluid"><h3><strong>Minute Detail's</strong></h3></div>
                 <div class="d-flex" id="wrapper">
                     <!-- Sidebar -->
-                    <div class="bg-dark formBorder border-right" id="sidebar-wrapper">
-                        <div class="container-fluid ">
-                            <div class="list-group ">
+                    <div class="bg-dark formBorder" id="sidebar-wrapper">
+                        <div class="list-group ">
+                            <div class="col-sm-12">
                                 <!--minute Show Button -->
-                                <button type="button" class="btn btn-sm btn-outline-primary bg-info text-white"
-                                        data-toggle="collapse"
-                                        data-target="#one1">
-                                    <i class="fa fa-envelope-open"></i> &nbsp;&nbsp;<span id="minuteCreatedDate">
-                                    dadadasdadas
-                                </span>
+                                <button type="button"
+                                        class="col-sm-12 btn btn-sm btn-outline-primary bg-info text-white minuteButtonList"
+                                        data-toggle="collapse">
+                                    <i class="fa fa-envelope-open"></i> &nbsp;&nbsp;<span
+                                        id="minuteCreatedDate">                                </span>
                                 </button>
                                 <!--to print all details regarding petition minute-->
-                                <button class="btn btn-success btn-sm" onclick="printContent('minutePetition')">
+                                <button class="col-sm-12 btn btn-success btn-sm"
+                                        onclick="printContent('minutePetition')">
                                     <i class="fa fa-print"></i>&nbsp;Print
                                 </button>
                             </div>
@@ -324,7 +324,7 @@
                     <!--Button set to display details -->
                     <div class="container-fluid">
                         <div class="container-fluid bg-dark formBorder" id="minutePetition">
-                            <div id="minutePetitionDetails" class="form-group col-md-12 col-sm-12">
+                            <div id="minutePetitionDetails" class="form-group col-md-12 col-sm-12 collapse slow">
                                 <!--minute petition details-->
                                 <div class="form-row col-md-12 col-sm-12 text-right">
                                     <div class="col-md-1">
@@ -338,28 +338,28 @@
                                 <div class="form-row container-fluid">
                                     <div class="form-row col-md-12 col-sm-12 text-left">
                                         <div class="col-sm-4">
-                                            <div class="col-md-6">
-                                                <label class="control-label" for="minuteState">Minute State :</label>
+                                            <div class="col-md-9">
+                                                <label class="control-label" for="minuteState">State :</label>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <p id="minuteState" class="display_detail"></p>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <div class="col-md-7">
+                                            <div class="col-md-9">
                                                 <label class="control-label" for="minuteStateEmployee">Directed Employee
                                                                                                        :</label>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <p id="minuteStateEmployee" class="display_detail"></p>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <div class="col-md-6">
+                                            <div class="col-md-9">
                                                 <label class="control-label" for="minuteStateWorkingPlace">Working Place
                                                                                                            :</label>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <p id="minuteStateWorkingPlace" class="display_detail"></p>
                                             </div>
                                         </div>
@@ -368,7 +368,7 @@
                                 <!--minute petition files-->
                                 <div class="form-row container-fluid">
                                     <div id="imageDiv" class="draggableHelper" style="display:inline-block">
-                                        <img class="image" id="imageMinutePetition" alt="" src=""/>
+                                        <img class="image embed-responsive" id="imageMinutePetition" alt="" src=""/>
                                         <p class="display_detail" id="imageDetails"></p>
                                     </div>
                                 </div>
@@ -386,7 +386,7 @@
                 <!--Detection team show buttons-->
                 <div class="btn-group">
                     <button class="btn btn-outline-warning buttonDetectionTeamList" type="button" data-toggle="collapse"
-                           aria-controls="collapseExample">
+                            aria-controls="collapseExample">
                         <i class="fas fa-id-card-alt"></i> &nbsp;&nbsp; <span id="detectionTeamButton"></span>
                     </button>
                 </div>
@@ -491,7 +491,7 @@
                     <!--crime show buttons-->
                     <div class="btn-group">
                         <button class="btn btn-outline-danger buttonCrimeList" type="button" data-toggle="collapse"
-                               aria-controls="collapseExample">
+                                aria-controls="collapseExample">
                             <i aria-hidden="true" class="fa fa-gavel"></i> &nbsp;&nbsp; <span
                                 id="crimeNumberButton"></span>
                         </button>
@@ -683,7 +683,8 @@
                 <div class="container-fluid"><h3><strong>Offenders Detail's</strong></h3></div>
                 <!--Offender show buttons-->
                 <div class="btn-group">
-                    <button class="btn btn-outline-warning buttonList" type="button" data-toggle="collapse" aria-controls="collapseExample">
+                    <button class="btn btn-outline-warning buttonList" type="button" data-toggle="collapse"
+                            aria-controls="collapseExample">
                         <i class="fas fa-id-card-alt"></i> &nbsp;&nbsp; <span id="offenderRegiNumber"></span>
                     </button>
                 </div>

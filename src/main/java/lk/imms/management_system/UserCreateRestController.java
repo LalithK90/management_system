@@ -26,7 +26,7 @@ public class UserCreateRestController {
     }
 
     //save roles
-    @GetMapping( "/role" )
+    @GetMapping( "/role1" )
     public List<Role> saveRole() {
         String[] roles = {"ADMIN", "CGE", "ACGE", "CE", "DCL", "DCLE", "ACE", "SE", "OIC", "IE", "ESM", "ES", "EC",
                 "EG", "ED"};
@@ -40,20 +40,20 @@ public class UserCreateRestController {
     }
 
     //working Place
-    @GetMapping( "/workingPlace" )
+    @GetMapping( "/workingPlace1" )
     public WorkingPlace saveWorkingPlace() {
         WorkingPlace workingPlace = new WorkingPlace();
 
         return workingPlace;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/user1")
     public User saveUser(){
         User user = new User();
 
         return user;
     }
-    @GetMapping("/petitionerStart")
+    @GetMapping("/petitionerStart1")
     public Petitioner savePetitioner(){
         Petitioner petitioner = new Petitioner();
 

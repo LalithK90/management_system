@@ -44,7 +44,7 @@ public class UserController {
         this.workingPlaceService = workingPlaceService;
     }
 
-    @RequestMapping
+    @GetMapping
     public String userPage(Model model) {
         model.addAttribute("users", userService.findAll());
         return "user/user";

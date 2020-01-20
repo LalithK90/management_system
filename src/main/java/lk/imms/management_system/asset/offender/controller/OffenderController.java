@@ -3,13 +3,17 @@ package lk.imms.management_system.asset.offender.controller;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
 import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
+import lk.imms.management_system.asset.commonAsset.entity.ContraveneCount;
 import lk.imms.management_system.asset.commonAsset.service.CommonService;
+import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.offender.entity.OffenderCallingName;
 import lk.imms.management_system.asset.offender.entity.OffenderFiles;
 import lk.imms.management_system.asset.offender.service.OffenderFilesService;
 import lk.imms.management_system.asset.offender.service.OffenderService;
+import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
+import lk.imms.management_system.asset.petitionAddOffender.service.PetitionOffenderService;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.util.service.MakeAutoGenerateNumberService;
@@ -41,12 +45,13 @@ public class OffenderController {
     private final ContraveneService contraveneService;
     private final GuardianService guardianService;
     private final CommonService commonService;
+    private final PetitionOffenderService petitionOffenderService;
 
     @Autowired
     public OffenderController(OffenderService offenderService, OffenderFilesService offenderFilesService,
                               UserService userService, MakeAutoGenerateNumberService makeAutoGenerateNumberService,
                               ContraveneService contraveneService, GuardianService guardianService,
-                              CommonService commonService) {
+                              CommonService commonService, PetitionOffenderService petitionOffenderService) {
         this.offenderService = offenderService;
         this.offenderFilesService = offenderFilesService;
         this.userService = userService;
@@ -54,6 +59,7 @@ public class OffenderController {
         this.contraveneService = contraveneService;
         this.guardianService = guardianService;
         this.commonService = commonService;
+        this.petitionOffenderService = petitionOffenderService;
     }
 
     //When called file will send to offender image
@@ -73,14 +79,36 @@ public class OffenderController {
     }
 
     //Send on offender details
-    @GetMapping( value = "/{id}")
+    @GetMapping( value = "/{id}" )
     public String offenderView(@PathVariable( "id" ) Long id, Model model) {
         Offender offender = offenderService.findById(id);
         offender.setFileInfos(offenderFilesService.offenderFileDownloadLinks(offender));
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
-        //model.addAttribute("files", );
+        //all contravene and acount
+        List< ContraveneCount > contraveneCounts = new ArrayList<>();
+//petition offender list according to particular offender
+        List< PetitionOffender > petitionOffenders = petitionOffenderService.findByOffender(offender);
 
+        //send petitionOffender list to frontend
+        model.addAttribute("petitionOffenders", petitionOffenders);
+
+        //all contravenes is belongs to that offender
+        List< Contravene > contraveneList = new ArrayList<>();
+
+        for ( PetitionOffender petitionOffender : petitionOffenders ) {
+            contraveneList.addAll(petitionOffender.getContravenes());
+
+        }
+        for ( Contravene contravene : contraveneList.stream().distinct().collect(Collectors.toList()) ) {
+            ContraveneCount contraveneCount = new ContraveneCount();
+            contraveneCount.setName(contravene.getDetail());
+            contraveneCount.setCount((long) (int) contraveneList.stream().filter(x -> x.equals(contravene)).count());
+            contraveneCounts.add(contraveneCount);
+        }
+
+        // System.out.println("contravene count " + contraveneCounts.size());
+        model.addAttribute("contraveneCounts", contraveneCounts);
         return "offender/offender-detail";
     }
 
@@ -98,7 +126,7 @@ public class OffenderController {
     }
 
     //Send an offender add from
-    @GetMapping( value = {"/add"})
+    @GetMapping( value = {"/add"} )
     public String offenderAddFrom(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("offender", new Offender());
@@ -108,7 +136,7 @@ public class OffenderController {
     }
 
     //Offender add and update
-    @PostMapping( value = {"/add", "/update"})
+    @PostMapping( value = {"/add", "/update"} )
     public String addOffender(@Valid @ModelAttribute( "offender" ) Offender offender, BindingResult result,
                               Model model) {
         //get current login user
@@ -175,11 +203,13 @@ public class OffenderController {
             //offender file is not
             if ( offender.getFiles() != null ) {
                 for ( MultipartFile file : offender.getFiles() ) {
-                    if ( file.getOriginalFilename() == null && file.getContentType().equals("application/octet-stream") ) {
+                    if ( file.getOriginalFilename() == null && file.getContentType().equals("application/octet-stream"
+                                                                                           ) ) {
                         continue;
                     }
                     if ( file.getOriginalFilename() != null ) {
-                        OffenderFiles offenderFiles = offenderFilesService.findByNameAndOffender(file.getOriginalFilename(),offender1);
+                        OffenderFiles offenderFiles =
+                                offenderFilesService.findByNameAndOffender(file.getOriginalFilename(), offender1);
                         if ( offenderFiles != null ) {
                             // update new contents
                             offenderFiles.setPic(file.getBytes());
@@ -218,7 +248,7 @@ public class OffenderController {
     //If need to offender {but not applicable for this }
     @GetMapping( value = "/remove/{id}" )
     public String removeOffender(@PathVariable Long id) {
-       // offenderService.delete(id);
+        // offenderService.delete(id);
         return "redirect:/offender";
     }
 

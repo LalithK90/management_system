@@ -211,7 +211,8 @@ public class PetitionController {
 
             offender.setFileInfos(offenderFilesService.offenderFileDownloadLinks(offender));
             petitionOffender.setPetition(petition);
-            petitionOffender.setContravenes(petitionOffenderService.findByPetitionAndOffender(petition, offender).getContravenes());
+            petitionOffender.setContravenes(
+                    petitionOffenderService.findByPetitionAndOffender(petition, offender).getContravenes());
             petitionOffenders.add(petitionOffender);
         }
         model.addAttribute("petitionOffenders", petitionOffenders);

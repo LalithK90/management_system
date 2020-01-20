@@ -39,8 +39,6 @@ dependencies {
 
     //=========================Springboot cache=========//
     implementation 'org.springframework.boot:spring-boot-starter-cache'
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-cache
-    //compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.2.2.RELEASE'
 
     //================= Following jar is need to check url util - https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 =================// 
     compile group: 'org.apache.commons', name: 'commons-lang3'
@@ -67,6 +65,10 @@ dependencies {
 
 // https://mvnrepository.com/artifact/org.webjars/pdf-js
     compile group: 'org.webjars', name: 'pdf-js', version: '2.3.200'
+
+// https://mvnrepository.com/artifact/org.webjars.npm/chart.js
+    compile group: 'org.webjars.npm', name: 'chart.js', version: '2.9.3'
+
 
 // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin -- from build jar file
     compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.2.2.RELEASE', ext: 'pom'
