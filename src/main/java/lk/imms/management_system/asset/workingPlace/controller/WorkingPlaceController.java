@@ -92,8 +92,8 @@ public class WorkingPlaceController {
             return "workingPlace/addWorkingPlace";
         }
         workingPlace.setCode(workingPlace.getCode().toUpperCase());
-        workingPlace.setLandOne(commonService.commonMobileNumberLengthValidator(workingPlace.getEmailOne()));
-        workingPlace.setLandTwo(commonService.commonMobileNumberLengthValidator(workingPlace.getEmailTwo()));
+        workingPlace.setLandOne(commonService.commonMobileNumberLengthValidator(workingPlace.getLandOne()));
+        workingPlace.setLandTwo(commonService.commonMobileNumberLengthValidator(workingPlace.getLandTwo()));
         workingPlace.setLandThree(commonService.commonMobileNumberLengthValidator(workingPlace.getLandThree()));
         workingPlace.setLandFour(commonService.commonMobileNumberLengthValidator(workingPlace.getLandFour()));
         workingPlace.setFaxNumber(commonService.commonMobileNumberLengthValidator(workingPlace.getFaxNumber()));

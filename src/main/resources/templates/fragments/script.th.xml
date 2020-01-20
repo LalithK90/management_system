@@ -9,5 +9,4 @@
     <attr sel="#fWJs" th:src="@{/webjars/font-awesome/5.11.2/js/all.min.js}"/>
     <attr sel="#mJJs" th:src="@{/js/myJs.js}"/>
     <attr sel="#imUpJs" th:src="@{/js/image-uploader.min.js}"/>
-    <attr sel="#WYE" th:src="@{/js/nicEdit-WYSIWYG_HTML.js}"/>
 </thlogic>

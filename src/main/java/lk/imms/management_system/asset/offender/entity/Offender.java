@@ -39,10 +39,10 @@ public class Offender extends AuditEntity {
     @Size( min = 5, message = "Name (English) cannot be accepted" )
     private String nameEnglish;
 
-    @Size( min = 5, message = "Name (Sinhala) cannot be accepted" )
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String nameSinhala;
 
-    @Size( min = 5, message = "Name (Tamil) cannot be accepted" )
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String nameTamil;
 
     @Column( unique = true )
@@ -54,16 +54,12 @@ public class Offender extends AuditEntity {
     @Column( unique = true )
     private String drivingLicenceNumber;
 
-    @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
     private String mobileOne;
 
-    @Size( max = 10, min = 9, message = "Mobile number length should be contained 10 and 9" )
     private String mobileTwo;
 
-    @Size( max = 10, min = 9, message = "Land number length should be contained 10 and 9" )
     private String land;
 
-    @Email( message = "Provide valid email" )
     @Column( unique = true )
     private String email;
 

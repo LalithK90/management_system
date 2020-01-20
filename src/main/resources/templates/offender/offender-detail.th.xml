@@ -78,11 +78,11 @@
     </attr>
     <!--Todo -> following things -->
     <!--22. Contravenes-->
-    <attr sel="#contraveneList" th:if="${not #lists.isEmpty(contraveneCounts)}"
-          th:each="contraveneCount, status : ${contraveneCounts}">
+    <attr sel="#contraveneList" th:if="${not #lists.isEmpty(nameCounts)}"
+          th:each="nameCount, status : ${nameCounts}">
         <attr sel="#index" th:text="${status.count}"/>
-        <attr sel="#contravene" th:text="${contraveneCount.name}"/>
-        <attr sel="#times" th:text="${contraveneCount.count}"/>
+        <attr sel="#contravene" th:text="${nameCount.name}"/>
+        <attr sel="#times" th:text="${nameCount.count}"/>
     </attr>
     <!--23. petition list-->
     <attr sel="#petition" th:if="${not #lists.isEmpty(petitionOffenders)}"

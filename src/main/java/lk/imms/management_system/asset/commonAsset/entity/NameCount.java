@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContraveneCount {
+public class NameCount {
     private String name;
     private Long count;
 }

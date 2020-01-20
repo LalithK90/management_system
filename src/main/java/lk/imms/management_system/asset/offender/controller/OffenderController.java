@@ -3,7 +3,7 @@ package lk.imms.management_system.asset.offender.controller;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
 import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
-import lk.imms.management_system.asset.commonAsset.entity.ContraveneCount;
+import lk.imms.management_system.asset.commonAsset.entity.NameCount;
 import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
@@ -86,7 +86,7 @@ public class OffenderController {
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
         //all contravene and acount
-        List< ContraveneCount > contraveneCounts = new ArrayList<>();
+        List< NameCount > nameCounts = new ArrayList<>();
 //petition offender list according to particular offender
         List< PetitionOffender > petitionOffenders = petitionOffenderService.findByOffender(offender);
 
@@ -101,14 +101,14 @@ public class OffenderController {
 
         }
         for ( Contravene contravene : contraveneList.stream().distinct().collect(Collectors.toList()) ) {
-            ContraveneCount contraveneCount = new ContraveneCount();
-            contraveneCount.setName(contravene.getDetail());
-            contraveneCount.setCount((long) (int) contraveneList.stream().filter(x -> x.equals(contravene)).count());
-            contraveneCounts.add(contraveneCount);
+            NameCount nameCount = new NameCount();
+            nameCount.setName(contravene.getDetail());
+            nameCount.setCount((long) (int) contraveneList.stream().filter(x -> x.equals(contravene)).count());
+            nameCounts.add(nameCount);
         }
 
         // System.out.println("contravene count " + contraveneCounts.size());
-        model.addAttribute("contraveneCounts", contraveneCounts);
+        model.addAttribute("contraveneCounts", nameCounts);
         return "offender/offender-detail";
     }
 

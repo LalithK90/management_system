@@ -1,8 +1,4 @@
 $(document).ready(function () {
-    //WYSIWYG add to text area
-    /*    bkLib.onDomLoaded(function () {
-            nicEditors.findEditor()
-        });*/
 
     $('.input-images').imageUploader();
 

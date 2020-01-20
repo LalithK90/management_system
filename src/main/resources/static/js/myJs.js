@@ -1,10 +1,4 @@
-/*window.onunload = function(){ $.get("${request.contextPath}/logout"); }*/
-
-
 $(document).ready(function () {
-    $(window).unload(function(){
-        alert("Goodbye!");
-    });
     // set current year to the footer
     document.getElementById("currentYear").innerHTML = new Date().getFullYear();
 

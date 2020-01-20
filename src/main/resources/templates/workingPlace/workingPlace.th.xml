@@ -6,6 +6,7 @@
     <attr sel="#workingPlaceList" th:each="workingPlace, rowCount : ${workingPlaces}"/>
     <attr sel="#count" th:text="${rowCount.count}"/>
     <attr sel="#name" th:text="${workingPlace.name}"/>
+    <attr sel="#code" th:text="${workingPlace.code}"/>
     <attr sel="#province" th:text="${workingPlace.province.province}"/>
     <attr sel="#workingPlaceType" th:text="${workingPlace.workingPlaceType.workingPlaceType}"/>
     <attr sel="#landOne" th:text="${workingPlace.landOne}"/>

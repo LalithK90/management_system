@@ -1,5 +1,6 @@
 package lk.imms.management_system;
 
+import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.asset.userManagement.entity.Role;
 import lk.imms.management_system.asset.userManagement.entity.User;
@@ -14,14 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class UserCreateRestController {
+public class ApplicationCreateRestController {
     private final RoleService roleService;
 
 
     List< WorkingPlace > workingPlaceList = new ArrayList<>();
 
     @Autowired
-    public UserCreateRestController(RoleService roleService) {
+    public ApplicationCreateRestController(RoleService roleService) {
         this.roleService = roleService;
     }
 
@@ -58,6 +59,10 @@ public class UserCreateRestController {
         Petitioner petitioner = new Petitioner();
 
         return petitioner;
+    }
+    @GetMapping("/contravene1")
+    public Contravene saveContravene(){
+        return new Contravene();
     }
 
 }

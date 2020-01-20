@@ -21,29 +21,29 @@
 
     <!--Petitioner details-->
     <!--Id-->
-    <attr sel="#petitionerId" th:text="${petition.petitioner.id}">
-        <!--Name in sinhala-->
-        <attr sel="#nameSinhala" th:text="${petition.petitioner.nameSinhala}"/>
-        <!--Name in tamil-->
-        <attr sel="#nameTamil" th:text="${petition.petitioner.nameTamil}"/>
-        <!--Name in English-->
-        <attr sel="#nameEnglish" th:text="${petition.petitioner.nameEnglish}"/>
-        <!--Email-->
-        <attr sel="#email" th:text="${petition.petitioner.email}"/>
-        <!--Petitoner Type-->
-        <attr sel="#petitionerType" th:text="${petition.petitioner.petitionerType.petitionerType}"/>
-        <!--Address-->
-        <attr sel="#address" th:text="${petition.petitioner.address}"/>
-        <!--Mobile One-->
-        <attr sel="#mobileOne" th:text="${petition.petitioner.mobileOne}"/>
-        <!--Mobile two-->
-        <attr sel="#mobileTwo" th:text="${petition.petitioner.mobileTwo}"/>
-        <!--Land-->
-        <attr sel="#land" th:text="${petition.petitioner.land}"/>
-        <!--Created by and created at-->
-        <attr sel="#createdBy" th:text="${petition.petitioner.createdBy}"/>
-        <attr sel="#createdAt" th:text="${#temporals.format(petition.petitioner.createdAt, 'dd-MM-yyyy HH:mm')}"/>
-    </attr>
+    <attr sel="#petitionerId" th:text="${petition.petitioner.id}"/>
+    <!--Name in sinhala-->
+    <attr sel="#nameSinhala" th:text="${petition.petitioner.nameSinhala}"/>
+    <!--Name in tamil-->
+    <attr sel="#nameTamil" th:text="${petition.petitioner.nameTamil}"/>
+    <!--Name in English-->
+    <attr sel="#nameEnglish" th:text="${petition.petitioner.nameEnglish}"/>
+    <!--Email-->
+    <attr sel="#email" th:text="${petition.petitioner.email}"/>
+    <!--Petitoner Type-->
+    <attr sel="#petitionerType" th:text="${petition.petitioner.petitionerType.petitionerType}"/>
+    <!--Address-->
+    <attr sel="#address" th:text="${petition.petitioner.address}"/>
+    <!--Mobile One-->
+    <attr sel="#mobileOne" th:text="${petition.petitioner.mobileOne}"/>
+    <!--Mobile two-->
+    <attr sel="#mobileTwo" th:text="${petition.petitioner.mobileTwo}"/>
+    <!--Land-->
+    <attr sel="#land" th:text="${petition.petitioner.land}"/>
+    <!--Created by and created at-->
+    <attr sel="#createdBy" th:text="${petition.petitioner.createdBy}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(petition.petitioner.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
     <!--Petition State Details-->
     <attr sel="#petitionStates" th:each="petitionState, index : ${petition.PetitionStates}">
         <attr sel="#petitionStateIndex" th:text="${index.count}"/>
@@ -59,8 +59,12 @@
           th:attr="data-target='#minutePetition'+${minutePetition.id}">
         <attr sel="#minuteCreatedDate" th:text="${{minutePetition.createdAt}}"/>
     </attr>
+    <!--Petition Create minute-->
+    <attr sel="#petitionMinute" th:href="${'/minutePetition/' + petition.id}"/>
 
-    <attr sel="#minutePetitionDetails" th:each="minutePetition : ${minutePetitions}" th:id="'minutePetition'+${minutePetition.id}">
+
+    <attr sel="#minutePetitionDetails" th:each="minutePetition : ${minutePetitions}"
+          th:id="'minutePetition'+${minutePetition.id}">
         <attr sel="#minuteStateDetail" th:utext="${minutePetition.detail}"/>
         <attr sel="#minuteState" th:text="${minutePetition.minuteState.minuteState}"/>
         <attr sel="#minuteStateEmployee" th:if="${minutePetition.employee != null}"
