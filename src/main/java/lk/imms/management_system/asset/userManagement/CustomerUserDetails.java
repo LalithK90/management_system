@@ -21,7 +21,6 @@ public class CustomerUserDetails implements UserDetails {
     @Override
     @Transactional(readOnly = true)
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
         return user.getRoles()
                 .stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName().toUpperCase()))

@@ -238,22 +238,11 @@ public class PetitionController {
         }
 
         WorkingPlace workingPlace = currentUser.getWorkingPlaces().get(0);
-        String petitionNumber;
-        String indexNumber;
-        if ( petition.getId() != null ) {
-            petitionNumber =
-                    makeAutoGenerateNumberService.numberAutoGen(null).toString();
-            indexNumber =
-                    makeAutoGenerateNumberService.numberAutoGen(null).toString();
-
-        } else {
-            petitionNumber =
-                    makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()).toString();
-            indexNumber =
-                    makeAutoGenerateNumberService.numberAutoGen(petitionService.getLastOne().getIndexNumber()).toString();
-
-        }
-        petition.setPetitionNumber(petitionNumber + "/" + workingPlace.getWorkingPlaceType() + "/" + workingPlace.getCode());
+        //get index number from db and used to it create petition index number and petition number
+        String indexNumberDb = petitionService.getLastOne().getIndexNumber();
+        String indexNumber =
+                makeAutoGenerateNumberService.numberAutoGen(indexNumberDb).toString();
+        petition.setPetitionNumber(indexNumber + "/" + workingPlace.getWorkingPlaceType() + "/" + workingPlace.getCode());
         petition.setIndexNumber(indexNumber);
 
 

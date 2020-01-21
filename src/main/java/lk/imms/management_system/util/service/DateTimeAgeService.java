@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.Period;
 
 @Service
@@ -47,6 +48,7 @@ public class DateTimeAgeService {
     public LocalDateTime dateTimeToLocalDateStartInDay(LocalDate localDate) {
         return localDate.atStartOfDay();
     }
+
     /* atTime(int hour, int minutes, int seconds, int nanoseconds)
      * hour - the hour-of-day, value range from 0 to 23.
      * minute - the minute-of-hour, value range from 0 to 59.
@@ -54,6 +56,14 @@ public class DateTimeAgeService {
      * nanoOfSecond - the nano-of-second, value range from 0 to 999,999,999
      */
     public LocalDateTime dateTimeToLocalDateEndInDay(LocalDate localDate) {
-        return localDate.atTime(21,59, 59, 999999999);
+        return localDate.atTime(21, 59, 59, 999999999);
+    }
+
+    public int getMonthDifference(LocalDate from, LocalDate to) {
+        return Period.between(from, to).getMonths();
+    }
+
+    public String getMonthName(int monthNumber) {
+        return Month.of(monthNumber).name().trim().toLowerCase().substring(0, 1).toUpperCase() + Month.of(monthNumber).name().trim().toLowerCase().substring(1);
     }
 }

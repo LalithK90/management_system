@@ -32,14 +32,8 @@ public class OffenderFilesService {
     }
 
     @Cacheable
-    public OffenderFiles findByNameAndOffender(String filename,Offender offender) {
-        return offenderFilesDao.findByNameAndOffender(filename,offender);
-    }
-
-    @Caching( evict = {@CacheEvict( value = "offenderFiles", allEntries = true )},
-            put = {@CachePut( value = "offenderFiles", key = "#offenderFiles.id" )} )
-    public void persist(List< OffenderFiles > storedFile) {
-        offenderFilesDao.saveAll(storedFile);
+    public OffenderFiles findByNameAndOffender(String filename, Offender offender) {
+        return offenderFilesDao.findByNameAndOffender(filename, offender);
     }
 
     public List< OffenderFiles > search(OffenderFiles offenderFiles) {
@@ -54,10 +48,6 @@ public class OffenderFilesService {
     @Cacheable
     public OffenderFiles findById(Long id) {
         return offenderFilesDao.getOne(id);
-    }
-
-    public OffenderFiles findByNewName(String filename) {
-        return offenderFilesDao.findByNewName(filename);
     }
 
     @Cacheable
@@ -81,6 +71,8 @@ public class OffenderFilesService {
                 .collect(Collectors.toList());
     }
 
+    @Caching( evict = {@CacheEvict( value = "offenderFiles", allEntries = true )},
+            put = {@CachePut( value = "offenderFiles", key = "#offenderFiles.id" )} )
     public void save(OffenderFiles offenderFiles) {
         offenderFilesDao.save(offenderFiles);
     }

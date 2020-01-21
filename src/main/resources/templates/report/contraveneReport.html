@@ -10,29 +10,29 @@
 
 
 <!--Container spaces-->
-<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#dateFilter">Click Here For Date Filters</button>
+<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#dateFilter">Click Here For Date
+                                                                                            Filters
+</button>
 <div id="dateFilter" class="collapse">
-    <div class="container-fluid"
-         th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}">
+    <div class="container-fluid">
+        <!--th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">-->
         <div class="row">
             <div class="container-fluid">
                 <div class="row">
                     <div class="container-fluid text-center">
                         <h4 class="text-info"><b> Custom Search</b></h4>
                         <form class="form-inline" th:object="${dateObject}"
-                              th:action="@{/report/search}" th:method="POST">
+                              th:action="@{/report/search}" method="POST">
                             <div class="form-group">
-                                <label for="startDate">FROM :</label>
-                                <input class="form-control" id="startDate" name="startDate"
-                                       th:field="*{startDate}" type="date"/>
+                                <label for="startDate">From :</label>
+                                <input class="form-control" id="startDate" th:field="*{startDate}" type="date"/>
                             </div>
                             <div class="form-group">
-                                <label for="endDate">TO :</label>
-                                <input class="form-control" id="endDate" name="endDate"
-                                       th:field="*{endDate}" type="date"/>
+                                <label for="endDate">To :</label>
+                                <input class="form-control" id="endDate" th:field="*{endDate}" type="date"/>
                             </div>
-                            <button class="btn btn-success" id="btnSummaryFind" type="submit"><span
-                                    class="glyphicon glyphicon-search"></span>&nbsp;Search
+                            <button class="btn btn-success" id="btnSummaryFind" type="submit">
+                                <i class="fa fa-search"></i> &nbsp;Search
                             </button>
                         </form>
                     </div>

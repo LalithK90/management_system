@@ -75,6 +75,10 @@
             <attr sel="#imageMinutePetition" th:src="${fileInfo.url}"/>
             <attr sel="#imageDetails" th:text="${#temporals.format(fileInfo.createAt, 'dd-MM-yyyy HH:mm')}"/>
         </attr>
+        <attr sel="#minutePetitionCreatedBy" th:text="${minutePetition.createdBy}"/>
+        <attr sel="#minutePetitionCreatedAt"
+              th:text="${#temporals.format(minutePetition.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+
     </attr>
 
     <!--Detection Team-->

@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CrimeDao extends JpaRepository< Crime, Long> {
-    List< Crime> findByDetectionTeam(DetectionTeam detectionTeam);
-    List< Crime> findAllByOrderByIdDesc();
+public interface CrimeDao extends JpaRepository< Crime, Long > {
+    List< Crime > findByDetectionTeam(DetectionTeam detectionTeam);
+
+    List< Crime > findAllByOrderByIdDesc();
 }

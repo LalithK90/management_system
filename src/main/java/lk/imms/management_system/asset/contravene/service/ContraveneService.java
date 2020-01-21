@@ -61,23 +61,4 @@ public class ContraveneService implements AbstractService< Contravene, Long > {
         Example< Contravene > contravenes = Example.of(contravene, matcher);
         return contraveneDao.findAll(contravenes);
     }
-
-    public List< Offender > findByOffendersUsingContravene(List< Contravene > contravenes) {
-        List< Offender > offenders = new ArrayList<>();
-        for ( Contravene contravene : contravenes ){
-            ExampleMatcher matcher = ExampleMatcher
-                    .matching()
-                    .withIgnoreCase()
-                    .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-            Example< Contravene > contraveneExample = Example.of(contravene, matcher);
-            /*for ( Contravene contravene1 : contraveneDao.findAll(contraveneExample) ){
-                if ( contravene1.getOffenders() !=null ){
-                    offenders.addAll(contravene1.getOffenders());
-                }
-            }*/
-        }
-        return offenders.stream()
-                .distinct()
-                .collect(Collectors.toList());
-    }
 }

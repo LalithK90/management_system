@@ -322,7 +322,7 @@
                                 <a id="petitionMinute" class="col-sm-12 btn btn-primary btn-sm"><i
                                         class="fa fa-file"></i>
                                     &nbsp;
-                                                                                                                 Minute</a>
+                                    Minute</a>
                             </div>
                         </div>
                     </div>
@@ -330,6 +330,7 @@
                     <div class="container-fluid">
                         <div class="container-fluid bg-dark formBorder" id="minutePetition">
                             <div id="minutePetitionDetails" class="form-group col-md-12 col-sm-12 collapse slow">
+                                <hr/>
                                 <!--minute petition details-->
                                 <div class="form-row col-md-12 col-sm-12 text-right">
                                     <div class="col-md-1">
@@ -377,6 +378,35 @@
                                         <p class="display_detail" id="imageDetails"></p>
                                     </div>
                                 </div>
+                                <!--minute petition created by and at-->
+                                <div class="form-row col-md-12 col-sm-12 text-right">
+                                    <!--Left Side-->
+                                    <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                                        <!--Created by and created at-->
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="offenderCreatedBy">Created By
+                                                                                                     :</label>
+                                            </div>
+                                            <div class="col-md-8 text-left">
+                                                <p id="minutePetitionCreatedBy" class="display_detail"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Right side-->
+                                    <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                                        <div class="form-row text-right">
+                                            <div class="col-md-4">
+                                                <label class="control-label" for="offenderCreatedAt">Created At
+                                                                                                     :</label>
+                                            </div>
+                                            <div class="col-md-8 text-left">
+                                                <p id="minutePetitionCreatedAt" class="display_detail"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                             </div>
                         </div>
                     </div>
@@ -505,6 +535,7 @@
                         <!--crime -->
                         <div class="col-sm-12 flex-column collapse slow" id="crimeCollapseExample">
                             <div class="row">
+                                <hr>
                                 <!--Left Side-->
                                 <div class="form-group col-md-6 col-sm-6 text-left flex-column">
                                     <!--Crime detection team name and number-->
@@ -675,6 +706,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
                             </div>
                         </div>
                     </div>
@@ -885,10 +917,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
                             </div>
                             <!--Calling Name-->
                             <fieldset>
-                                <legend class="text-lg-center bg-white"><h3><strong> Calling Names :</strong></h3>
+                                <legend class="text-lg-center bg-white"><strong> Calling Names :</strong>
                                 </legend>
                                 <div class="row col-md-12 col-sm-12 text-left card-body" id="callingNameDisplay">
                                     <!--Calling name display -->
@@ -934,6 +967,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr/>
                             </fieldset>
                             <!-- Description -->
                             <div class="form-group col-md-12 col-sm-12 text-left flex-column">
@@ -973,14 +1007,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr/>
                             </div>
                             <!--Guardians Details-->
                             <div class="form-group col-md-12 col-sm-12 text-left flex-column">
                                 <!--To display guardian-->
                                 <fieldset>
                                     <legend
-                                            class="text-lg-center bg-white"><h3><strong> Guardian Details :</strong>
-                                    </h3>
+                                            class="text-lg-center bg-white"><strong> Guardian Details :</strong>
+
                                     </legend>
                                     <div id="guardianDetails" class="row col-12 col-sm-12 col-md-12">
                                         <!--Left Side-->
@@ -1067,6 +1102,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <hr/>
                                     </div>
                                 </fieldset>
                             </div>

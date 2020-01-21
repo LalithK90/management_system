@@ -7,6 +7,7 @@ import lk.imms.management_system.asset.commonAsset.entity.NameCount;
 import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
+import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.offender.entity.OffenderCallingName;
 import lk.imms.management_system.asset.offender.entity.OffenderFiles;
@@ -85,7 +86,7 @@ public class OffenderController {
         offender.setFileInfos(offenderFilesService.offenderFileDownloadLinks(offender));
         model.addAttribute("offender", offender);
         model.addAttribute("addStatus", false);
-        //all contravene and acount
+        //all contravene and count
         List< NameCount > nameCounts = new ArrayList<>();
 //petition offender list according to particular offender
         List< PetitionOffender > petitionOffenders = petitionOffenderService.findByOffender(offender);
@@ -106,9 +107,7 @@ public class OffenderController {
             nameCount.setCount((long) (int) contraveneList.stream().filter(x -> x.equals(contravene)).count());
             nameCounts.add(nameCount);
         }
-
-        // System.out.println("contravene count " + contraveneCounts.size());
-        model.addAttribute("contraveneCounts", nameCounts);
+        model.addAttribute("nameCounts", nameCounts);
         return "offender/offender-detail";
     }
 
@@ -140,21 +139,21 @@ public class OffenderController {
     public String addOffender(@Valid @ModelAttribute( "offender" ) Offender offender, BindingResult result,
                               Model model) {
         //get current login user
-        User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        Employee employee = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName()).getEmployee();
         // is there
         if ( offender.getId() != null ) {
             offender.setId(offender.getId());
         } else {
             //last offender Id offender registration number
-            String regNumber;
+            String regNumber = offenderService.getLastOne().getOffenderRegisterNumber();
 
-            if ( offenderService.getLastOne() == null ) {
+            if ( regNumber == null ) {
                 regNumber = makeAutoGenerateNumberService.numberAutoGen(null).toString();
             } else {
                 regNumber =
-                        makeAutoGenerateNumberService.numberAutoGen(offenderService.getLastOne().getOffenderRegisterNumber()).toString();
+                        makeAutoGenerateNumberService.numberAutoGen(regNumber).toString();
             }
-            offender.setOffenderRegisterNumber(regNumber + "/" + currentUser.getWorkingPlaces().get(0).getCode() +
+            offender.setOffenderRegisterNumber(regNumber + "/" + employee.getWorkingPlace().getCode() +
                                                        "/OF");
         }
 

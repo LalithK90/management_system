@@ -1,20 +1,20 @@
 package lk.imms.management_system.asset.petitionAddOffender.service;
 
-        import lk.imms.management_system.asset.contravene.entity.Contravene;
-        import lk.imms.management_system.asset.offender.entity.Offender;
-        import lk.imms.management_system.asset.petition.entity.Petition;
-        import lk.imms.management_system.asset.petitionAddOffender.dao.PetitionOffenderDao;
-        import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
-        import lk.imms.management_system.util.interfaces.AbstractService;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.cache.annotation.*;
-        import org.springframework.data.domain.Example;
-        import org.springframework.data.domain.ExampleMatcher;
-        import org.springframework.stereotype.Service;
-        import org.springframework.transaction.annotation.Transactional;
+import lk.imms.management_system.asset.contravene.entity.Contravene;
+import lk.imms.management_system.asset.offender.entity.Offender;
+import lk.imms.management_system.asset.petition.entity.Petition;
+import lk.imms.management_system.asset.petitionAddOffender.dao.PetitionOffenderDao;
+import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
+import lk.imms.management_system.util.interfaces.AbstractService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.*;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-        import java.time.LocalDateTime;
-        import java.util.List;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @CacheConfig( cacheNames = {"petitionOffender"} )
@@ -104,12 +104,7 @@ public class PetitionOffenderService implements AbstractService< PetitionOffende
     }
 
     @Cacheable
-    public List< PetitionOffender > findByOffenderAndContravene(Offender offender, Contravene contravene) {
-        return petitionOffenderDao.findByOffenderAndContravenes(offender, contravene);
-    }
-
-    @Cacheable
-    public List<PetitionOffender> findByOffender(Offender offender){
-       return petitionOffenderDao.findByOffender(offender);
+    public List< PetitionOffender > findByOffender(Offender offender) {
+        return petitionOffenderDao.findByOffender(offender);
     }
 }

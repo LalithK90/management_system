@@ -2,6 +2,8 @@ package lk.imms.management_system.asset.minutePetition.controller;
 
 
 import lk.imms.management_system.asset.commonAsset.service.CommonService;
+import lk.imms.management_system.asset.employee.entity.Employee;
+import lk.imms.management_system.asset.employee.entity.EmployeeWorkingPlaceHistory;
 import lk.imms.management_system.asset.minutePetition.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
@@ -25,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -84,10 +85,11 @@ public class MinutePetitionController {
         }
         //cannot be working place null on minute petition so recieved minute petition is null current login user
         // working place set as working place
-        if ( minutePetition.getEmployee().getId() == null ) {
-            minutePetition.setWorkingPlace(
-                    userService.findById(userService.findByUserIdByUserName(SecurityContextHolder.getContext().getAuthentication().getName()))
-                            .getEmployee().getWorkingPlace()  );
+        if ( minutePetition.getEmployee() == null ) {
+            Employee employee =
+                    userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName()).getEmployee();
+
+            minutePetition.setWorkingPlace(employee.getWorkingPlace());
         }
         MinutePetition minutePetition1 = minutePetitionService.persist(minutePetition);
 

@@ -65,7 +65,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     }
 
     @Cacheable
-    @Transactional
+    @Transactional(readOnly = true)
     public Petition getLastOne() {
         return petitionDao.findFirstByOrderByIdDesc();
     }

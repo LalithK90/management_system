@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@CacheConfig(cacheNames = "employeeFiles")
+@CacheConfig( cacheNames = "employeeFiles" )
 public class EmployeeFilesService {
     private final EmployeeFilesDao employeeFilesDao;
 
@@ -26,19 +26,11 @@ public class EmployeeFilesService {
         this.employeeFilesDao = employeeFilesDao;
     }
 
-    public List< EmployeeFiles > findByEmployee(Employee employee) {
-        //return employeeFilesDao.findByEmployee(employee);
-        return employeeFilesDao.findByEmployeeOrderByIdDesc(employee);
-    }
-
     public EmployeeFiles findByName(String filename) {
         return employeeFilesDao.findByName(filename);
     }
 
-    public void persistList(List< EmployeeFiles > storedFile) {
-        employeeFilesDao.saveAll(storedFile);
-    }
-    public void persist(EmployeeFiles  storedFile) {
+    public void persist(EmployeeFiles storedFile) {
         employeeFilesDao.save(storedFile);
     }
 
@@ -54,10 +46,6 @@ public class EmployeeFilesService {
 
     public EmployeeFiles findById(Long id) {
         return employeeFilesDao.getOne(id);
-    }
-
-    public EmployeeFiles findByNewName(String filename) {
-        return employeeFilesDao.findByNewName(filename);
     }
 
     public EmployeeFiles findByNewID(String filename) {

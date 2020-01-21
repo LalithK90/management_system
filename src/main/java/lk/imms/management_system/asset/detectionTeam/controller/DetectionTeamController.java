@@ -165,11 +165,12 @@ public class DetectionTeamController {
         }
 
         if ( detectionTeam.getId() == null ) {
-            if ( detectionTeamService.getLastTeam() == null ) {
+            String lastNumber = detectionTeamService.getLastTeam().getNumber();
+            if ( lastNumber == null ) {
                 detectionTeam.setNumber(makeAutoGenerateNumberService.numberAutoGen(null).toString());
             } else {
                 String number =
-                        makeAutoGenerateNumberService.numberAutoGen(detectionTeamService.getLastTeam().getNumber()).toString();
+                        makeAutoGenerateNumberService.numberAutoGen(lastNumber).toString();
                 detectionTeam.setNumber(number);
             }
 

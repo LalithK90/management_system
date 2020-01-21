@@ -63,7 +63,7 @@ public class DetectionTeamMemberService implements AbstractService< DetectionTea
     }
 
     @Cacheable
-    public List< DetectionTeam > findByEmployeeAndCreatedAtBetween(Employee employee, LocalDateTime from,
+    public List< DetectionTeamMember > findByEmployeeAndCreatedAtBetween(Employee employee, LocalDateTime from,
                                                                    LocalDateTime to) {
         return detectionTeamMemberDao.findByEmployeeAndCreatedAtBetween(employee, from, to);
     }

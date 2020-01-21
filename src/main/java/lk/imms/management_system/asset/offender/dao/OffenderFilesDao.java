@@ -12,8 +12,6 @@ public interface OffenderFilesDao extends JpaRepository< OffenderFiles, Long > {
 
     List< OffenderFiles > findByOffenderOrderByIdDesc(Offender offender);
 
-    OffenderFiles findByName(String filename);
-
     OffenderFiles findByNameAndOffender(String fileName, Offender offender);
 
     OffenderFiles findByNewName(String filename);

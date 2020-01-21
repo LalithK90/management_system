@@ -11,6 +11,7 @@ import java.util.List;
 public interface DetectionTeamDao extends JpaRepository< DetectionTeam, Long > {
     DetectionTeam findFirstByOrderByIdDesc();
 
-    List< DetectionTeam> findByPetition(Petition petition);
-    List< DetectionTeam> findAllByOrderByIdDesc();
+    List< DetectionTeam > findByPetition(Petition petition);
+
+    List< DetectionTeam > findAllByOrderByIdDesc();
 }

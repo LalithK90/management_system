@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -60,6 +61,7 @@ public class DetectionTeamService implements AbstractService< DetectionTeam, Lon
     }
 
     @Cacheable
+    @Transactional(readOnly = true)
     public DetectionTeam getLastTeam() {
         return detectionTeamDao.findFirstByOrderByIdDesc();
     }

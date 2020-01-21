@@ -66,10 +66,6 @@ public class UserService implements AbstractService< User, Long > {
         return userDao.findAll(userExample);
     }
 
-    public Long findByEmployeeId(Long id) {
-        return userDao.findByEmployeeId(id);
-    }
-
     @Cacheable
     public Long findByUserIdByUserName(String userName) {
         return userDao.findUserIdByUserName(userName);

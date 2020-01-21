@@ -16,3 +16,11 @@ public interface PetitionDao extends JpaRepository< Petition, Long > {
 
     Long countByWorkingPlaceAndCreatedAtBetween(WorkingPlace workingPlace, LocalDateTime from, LocalDateTime to);
 }
+/*SELECT YEAR(date_field) as stat_year,
+       MONTH(date_field) as stat_month,
+       COUNT(*) as stat_count
+FROM `table`
+GROUP BY stat_year,stat_month
+
+**+**data group to year month
+*/
