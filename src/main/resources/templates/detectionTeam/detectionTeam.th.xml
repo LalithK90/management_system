@@ -3,6 +3,8 @@
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
 
     <attr sel="#newTeam" th:href="${'/petition'}"/>
+    <attr sel="#crimeList" th:href="${'/crime'}"/>
+
     <attr sel="#detectionTeamListTable" th:if="${not #lists.isEmpty(detectionTeams)}"/>
     <attr sel="#userList" th:each="detectionTeam, rowCount : ${detectionTeams}"/>
     <attr sel="#index" th:text="${rowCount.count}"/>

@@ -1,6 +1,7 @@
 package lk.imms.management_system.util.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -19,9 +20,15 @@ import java.util.Properties;
 
 @Service
 public class EmailService {
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
     // to access application properties entered details
-    private Environment environment;
+    private final Environment environment;
+
+    @Autowired
+    public EmailService(JavaMailSender javaMailSender, Environment environment) {
+        this.javaMailSender = javaMailSender;
+        this.environment = environment;
+    }
 
 
     public void sendEmail(String receiverEmail, String subject, String message) throws

@@ -97,8 +97,6 @@ public class MinutePetitionController {
         petitionState.setPetitionStateType(minutePetition.getPetitionStateType());
         petitionStateService.persist(petitionState);
 
-        // Minute Petition Files
-        List< MinutePetitionFiles > storedFile = new ArrayList<>();
         //if there is nothing to save files
         if ( !minutePetition.getFiles().isEmpty() && minutePetition.getFiles().size() != 0 && minutePetition.getFiles().get(0).getOriginalFilename() != null ) {
             for ( MultipartFile file : minutePetition.getFiles() ) {
@@ -119,9 +117,8 @@ public class MinutePetitionController {
                                                                          "minutePetition"));
                 }
                 minutePetitionFile.setMinutePetition(minutePetition1);
-                storedFile.add(minutePetitionFile);
+                minutePetitionFilesService.save(minutePetitionFile);
             }
-            minutePetitionFilesService.persist(storedFile);
         }
 
         return "redirect:/petition";

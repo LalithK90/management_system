@@ -81,7 +81,7 @@ public class CrimeController {
 
         boolean authorityRole = false;
         for ( Role role :
-                userService.findById(userService.findByUserIdByUserName(SecurityContextHolder.getContext().getAuthentication().getName())).getRoles() ) {
+                userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName()).getRoles() ) {
             if ( role.getRoleName().equals("CGE") || role.getRoleName().equals("ACGE") || role.getRoleName().equals(
                     "CE") || role.getRoleName().equals("DCL") || role.getRoleName().equals("DCLE") || role.getRoleName().equals("ACE") || role.getRoleName().equals("SE") || role.getRoleName().equals("OIC") ) {
                 authorityRole = true;

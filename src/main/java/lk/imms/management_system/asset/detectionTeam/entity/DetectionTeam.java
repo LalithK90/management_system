@@ -36,7 +36,7 @@ public class DetectionTeam extends AuditEntity {
     @ManyToOne
     private Petition petition;
 
-    @OneToMany( mappedBy = "detectionTeam", cascade = CascadeType.ALL, orphanRemoval = true )
+    @OneToMany( mappedBy = "detectionTeam", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List< DetectionTeamMember > detectionTeamMembers;
 
     @OneToMany( mappedBy = "detectionTeam", cascade = CascadeType.ALL, orphanRemoval = true )

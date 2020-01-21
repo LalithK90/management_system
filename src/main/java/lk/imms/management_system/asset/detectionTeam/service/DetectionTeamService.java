@@ -24,7 +24,7 @@ public class DetectionTeamService implements AbstractService< DetectionTeam, Lon
     @Override
     @Cacheable
     public List< DetectionTeam > findAll() {
-        return detectionTeamDao.findAll();
+        return detectionTeamDao.findAllByOrderByIdDesc();
     }
 
     @Override

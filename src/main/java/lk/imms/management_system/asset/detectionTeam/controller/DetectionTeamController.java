@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( "/detection" )
-public class DetectionController {
+public class DetectionTeamController {
     private final DetectionTeamService detectionTeamService;
     private final PetitionService petitionService;
     private final UserService userService;
@@ -43,11 +43,11 @@ public class DetectionController {
     private final EmailService emailService;
 
     @Autowired
-    public DetectionController(DetectionTeamService detectionTeamService, PetitionService petitionService,
-                               UserService userService, CommonService commonService,
-                               DateTimeAgeService dateTimeAgeService,
-                               MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                               PetitionStateService petitionStateService, EmailService emailService) {
+    public DetectionTeamController(DetectionTeamService detectionTeamService, PetitionService petitionService,
+                                   UserService userService, CommonService commonService,
+                                   DateTimeAgeService dateTimeAgeService,
+                                   MakeAutoGenerateNumberService makeAutoGenerateNumberService,
+                                   PetitionStateService petitionStateService, EmailService emailService) {
         this.detectionTeamService = detectionTeamService;
         this.petitionService = petitionService;
         this.userService = userService;
@@ -221,12 +221,10 @@ public class DetectionController {
     @PostMapping( "message" )
     public String sendMessage(@ModelAttribute Message message) {
         DetectionTeam detectionTeam = detectionTeamService.findById(message.getId());
-        String email = "";
         for ( DetectionTeamMember detectionTeamMember : detectionTeam.getDetectionTeamMembers() ) {
-            email += "," + detectionTeamMember.getEmployee().getOfficeEmail();
+            String subject = "Petition Number - " + detectionTeam.getPetition().getPetitionNumber() + "Detection Team ";
+            emailService.sendEmail(detectionTeamMember.getEmployee().getOfficeEmail(), subject, message.getMessage());
         }
-        String subject = "Petition Number - " + detectionTeam.getPetition().getPetitionNumber() + "Detection Team ";
-        emailService.sendEmail(email, subject, message.getMessage());
         return "redirect:/detection";
     }
 

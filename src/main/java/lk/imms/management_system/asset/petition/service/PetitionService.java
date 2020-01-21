@@ -28,7 +28,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     @Override
     @Cacheable( "petition" )
     public List< Petition > findAll() {
-        return petitionDao.findAll();
+        return petitionDao.findAllByOrderByIdDesc();
     }
 
     @Override
@@ -65,6 +65,7 @@ public class PetitionService implements AbstractService< Petition, Long > {
     }
 
     @Cacheable
+    @Transactional
     public Petition getLastOne() {
         return petitionDao.findFirstByOrderByIdDesc();
     }

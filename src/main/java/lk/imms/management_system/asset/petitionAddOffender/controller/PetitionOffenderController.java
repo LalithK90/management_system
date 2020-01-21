@@ -153,7 +153,7 @@ public class PetitionOffenderController {
 
         PetitionOffender beforePersistPetitionOffender;
 
-        for ( PetitionOffender petitionOffender : petition.getPetitionOffenders() ) {
+        for ( PetitionOffender petitionOffender : petition.getPetitionOffenders()) {
             notContravene = petitionOffender.getContravenes().isEmpty();
             petition = petitionOffender.getPetition();
             beforePersistPetitionOffender =

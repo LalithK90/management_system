@@ -25,7 +25,7 @@ public class CrimeService implements AbstractService< Crime, Long > {
     @Override
     @Cacheable
     public List< Crime > findAll() {
-        return crimeDao.findAll();
+        return crimeDao.findAllByOrderByIdDesc();
     }
 
     @Override

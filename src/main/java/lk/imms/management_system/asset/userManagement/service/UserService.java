@@ -76,6 +76,7 @@ public class UserService implements AbstractService< User, Long > {
     }
 
     @Cacheable
+    @Transactional(readOnly = true)
     public User findByUserName(String name) {
         return userDao.findByUsername(name);
     }
