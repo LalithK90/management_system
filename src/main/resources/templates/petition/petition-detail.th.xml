@@ -99,7 +99,7 @@
         <!--detection team members-->
         <attr sel="#detectionTeamMemberList" th:each="teamMember , index : ${detectionTeam.detectionTeamMembers}">
             <attr sel="#index" th:text="${index.count}"/>
-            <attr sel="#detectionTeamMemberNumber" th:text="${teamMember.employee.payRoleNumber}"/>
+            <attr sel="#detectionTeamMemberPayRoleNumber" th:text="${teamMember.employee.payRoleNumber}"/>
             <attr sel="#detectionTeamMemberName" th:text="${teamMember.employee.name}"/>
             <attr sel="#detectionTeamMemberRole"
                   th:text="${teamMember.detectionTeamMemberRole.detectionTeamMemberRole}"/>

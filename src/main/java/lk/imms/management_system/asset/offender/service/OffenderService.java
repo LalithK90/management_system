@@ -65,9 +65,7 @@ public class OffenderService implements AbstractService< Offender, Long > {
     @Override
     @Caching( evict = {@CacheEvict( value = "offender", allEntries = true )},
             put = {@CachePut( value = "offender", key = "#offender.id" )} )
-    @Transactional
     public Offender persist(Offender offender) {
-
         return offenderDao.save(offender);
     }
 

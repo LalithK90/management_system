@@ -1,6 +1,6 @@
 package lk.imms.management_system.asset.detectionTeam.controller;
 
-import lk.imms.management_system.asset.commonAsset.entity.Message;
+import lk.imms.management_system.asset.commonAsset.model.Message;
 import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamMember;
@@ -18,6 +18,7 @@ import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
 import lk.imms.management_system.util.service.EmailService;
 import lk.imms.management_system.util.service.MakeAutoGenerateNumberService;
+import lk.imms.management_system.util.service.TwilioMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -41,13 +42,15 @@ public class DetectionTeamController {
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
     private final PetitionStateService petitionStateService;
     private final EmailService emailService;
+    private final TwilioMessageService twilioMessageService;
 
     @Autowired
     public DetectionTeamController(DetectionTeamService detectionTeamService, PetitionService petitionService,
                                    UserService userService, CommonService commonService,
                                    DateTimeAgeService dateTimeAgeService,
                                    MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                                   PetitionStateService petitionStateService, EmailService emailService) {
+                                   PetitionStateService petitionStateService, EmailService emailService,
+                                   TwilioMessageService twilioMessageService) {
         this.detectionTeamService = detectionTeamService;
         this.petitionService = petitionService;
         this.userService = userService;
@@ -56,6 +59,7 @@ public class DetectionTeamController {
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
         this.petitionStateService = petitionStateService;
         this.emailService = emailService;
+        this.twilioMessageService = twilioMessageService;
     }
 
 
@@ -225,6 +229,10 @@ public class DetectionTeamController {
         for ( DetectionTeamMember detectionTeamMember : detectionTeam.getDetectionTeamMembers() ) {
             String subject = "Petition Number - " + detectionTeam.getPetition().getPetitionNumber() + "Detection Team ";
             emailService.sendEmail(detectionTeamMember.getEmployee().getOfficeEmail(), subject, message.getMessage());
+            if (  message.getMessage().length() < 160) {
+              String mobile =  detectionTeamMember.getEmployee().getMobileOne().substring(1, 10);
+                twilioMessageService.sendSMS("+94"+mobile,message.getMessage() );
+            }
         }
         return "redirect:/detection";
     }

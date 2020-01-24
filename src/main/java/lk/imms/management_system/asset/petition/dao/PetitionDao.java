@@ -15,6 +15,11 @@ public interface PetitionDao extends JpaRepository< Petition, Long > {
     List< Petition > findAllByOrderByIdDesc();
 
     Long countByWorkingPlaceAndCreatedAtBetween(WorkingPlace workingPlace, LocalDateTime from, LocalDateTime to);
+
+    List< Petition > findByWorkingPlace(WorkingPlace workingPlace);
+
+    List< Petition > findByWorkingPlaceAndCreatedAtBetween(WorkingPlace workingPlace, LocalDateTime from,
+                                                           LocalDateTime to);
 }
 /*SELECT YEAR(date_field) as stat_year,
        MONTH(date_field) as stat_month,

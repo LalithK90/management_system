@@ -1,4 +1,4 @@
-package lk.imms.management_system.asset.commonAsset.entity;
+package lk.imms.management_system.asset.commonAsset.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DistrictList {
-
+public class StationList {
+    private Long id;
     private String name;
-    private String district;
 }

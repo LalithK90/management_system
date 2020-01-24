@@ -1,6 +1,6 @@
 package lk.imms.management_system.asset.offender.service;
 
-import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
+import lk.imms.management_system.asset.commonAsset.model.FileInfo;
 import lk.imms.management_system.asset.offender.controller.OffenderController;
 import lk.imms.management_system.asset.offender.dao.OffenderFilesDao;
 import lk.imms.management_system.asset.offender.entity.Offender;

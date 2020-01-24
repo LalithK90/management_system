@@ -38,7 +38,7 @@ public class EmailService {
 
         try {
             mailMessage.setTo(receiverEmail);
-            mailMessage.setFrom("Excise Department - Sri Lanka - (not reply)");
+            mailMessage.setFrom("-(Excise Department - Sri Lanka - (not reply))");
             mailMessage.setSubject(subject);
             mailMessage.setText(message);
 

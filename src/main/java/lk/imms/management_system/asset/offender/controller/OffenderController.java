@@ -3,7 +3,7 @@ package lk.imms.management_system.asset.offender.controller;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Enum.GuardianType;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
 import lk.imms.management_system.asset.OffednerGuardian.service.GuardianService;
-import lk.imms.management_system.asset.commonAsset.entity.NameCount;
+import lk.imms.management_system.asset.commonAsset.model.NameCount;
 import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
@@ -15,7 +15,6 @@ import lk.imms.management_system.asset.offender.service.OffenderFilesService;
 import lk.imms.management_system.asset.offender.service.OffenderService;
 import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
 import lk.imms.management_system.asset.petitionAddOffender.service.PetitionOffenderService;
-import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.util.service.MakeAutoGenerateNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -191,14 +190,13 @@ public class OffenderController {
             }
             offender.setGuardians(guardians);
         }
-
+        offender.setMobileOne(commonService.commonMobileNumberLengthValidator(offender.getMobileOne()));
+        offender.setMobileTwo(commonService.commonMobileNumberLengthValidator(offender.getMobileTwo()));
+        offender.setLand(commonService.commonMobileNumberLengthValidator(offender.getLand()));
+        //after file save offender and
+        Offender offender1 = offenderService.persist(offender);
         // System.out.println("after set guardian and calling name " + offender.toString());
         try {
-            offender.setMobileOne(commonService.commonMobileNumberLengthValidator(offender.getMobileOne()));
-            offender.setMobileTwo(commonService.commonMobileNumberLengthValidator(offender.getMobileTwo()));
-            offender.setLand(commonService.commonMobileNumberLengthValidator(offender.getLand()));
-            //after file save offender and
-            Offender offender1 = offenderService.persist(offender);
             //offender file is not
             if ( offender.getFiles() != null ) {
                 for ( MultipartFile file : offender.getFiles() ) {

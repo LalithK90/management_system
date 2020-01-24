@@ -1,9 +1,9 @@
 package lk.imms.management_system.asset.commonAsset.service;
 
-import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
+import lk.imms.management_system.asset.commonAsset.model.Enum.BloodGroup;
+import lk.imms.management_system.asset.commonAsset.model.Enum.CivilStatus;
+import lk.imms.management_system.asset.commonAsset.model.Enum.Gender;
+import lk.imms.management_system.asset.commonAsset.model.Enum.Title;
 import lk.imms.management_system.asset.employee.controller.EmployeeRestController;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;

@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.petition.controller;
 
 
-import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
+import lk.imms.management_system.asset.commonAsset.model.Enum.CivilStatus;
 import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.contravene.service.ContraveneService;
 import lk.imms.management_system.asset.crime.service.CrimeService;
@@ -239,9 +239,9 @@ public class PetitionController {
 
         WorkingPlace workingPlace = currentUser.getWorkingPlaces().get(0);
         //get index number from db and used to it create petition index number and petition number
-        String indexNumberDb = petitionService.getLastOne().getIndexNumber();
+        Petition petitionDb = (Petition) petitionService.getLastOne();
         String indexNumber =
-                makeAutoGenerateNumberService.numberAutoGen(indexNumberDb).toString();
+                makeAutoGenerateNumberService.numberAutoGen(petitionDb.getIndexNumber()).toString();
         petition.setPetitionNumber(indexNumber + "/" + workingPlace.getWorkingPlaceType() + "/" + workingPlace.getCode());
         petition.setIndexNumber(indexNumber);
 
@@ -290,6 +290,7 @@ public class PetitionController {
                     if ( minutePetitionFile != null ) {
                         // update new contents
                         minutePetitionFile.setPic(file.getBytes());
+                        minutePetitionFilesService.save(minutePetitionFile);
                     } else {
                         assert savedPetition != null;
                         minutePetitionFile = new MinutePetitionFiles(file.getOriginalFilename(),
@@ -298,9 +299,10 @@ public class PetitionController {
                                                                      savedPetition.getPetitionNumber().concat("-" + LocalDateTime.now()),
                                                                      UUID.randomUUID().toString().concat(
                                                                              "minutePetition"));
+
+                        minutePetitionFile.setMinutePetition(minutePetition1);
+                        minutePetitionFilesService.save(minutePetitionFile);
                     }
-                    minutePetitionFile.setMinutePetition(minutePetition1);
-                    minutePetitionFilesService.save(minutePetitionFile);
                 }
             }
         }

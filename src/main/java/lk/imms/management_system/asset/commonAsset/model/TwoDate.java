@@ -1,4 +1,4 @@
-package lk.imms.management_system.asset.commonAsset.entity;
+package lk.imms.management_system.asset.commonAsset.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

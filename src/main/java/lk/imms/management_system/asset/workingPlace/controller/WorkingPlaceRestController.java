@@ -1,7 +1,7 @@
 package lk.imms.management_system.asset.workingPlace.controller;
 
-import lk.imms.management_system.asset.commonAsset.entity.DistrictList;
-import lk.imms.management_system.asset.commonAsset.entity.StationList;
+import lk.imms.management_system.asset.commonAsset.model.DistrictList;
+import lk.imms.management_system.asset.commonAsset.model.StationList;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.District;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;

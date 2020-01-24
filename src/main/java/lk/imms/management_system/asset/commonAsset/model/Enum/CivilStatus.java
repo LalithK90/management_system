@@ -1,4 +1,4 @@
-package lk.imms.management_system.asset.commonAsset.entity.Enum;
+package lk.imms.management_system.asset.commonAsset.model.Enum;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

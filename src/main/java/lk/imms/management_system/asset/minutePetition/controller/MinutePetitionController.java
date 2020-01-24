@@ -102,7 +102,7 @@ public class MinutePetitionController {
         //if there is nothing to save files
         if ( !minutePetition.getFiles().isEmpty() && minutePetition.getFiles().size() != 0 && minutePetition.getFiles().get(0).getOriginalFilename() != null ) {
             for ( MultipartFile file : minutePetition.getFiles() ) {
-                if ( file.getOriginalFilename() == null && file.getContentType() == "application/octet-stream" ) {
+                if ( file.getOriginalFilename() == null && file.getContentType().equals("application/octet-stream") ) {
                     continue;
                 }
                 MinutePetitionFiles minutePetitionFile =
@@ -110,6 +110,7 @@ public class MinutePetitionController {
                 if ( minutePetitionFile != null ) {
                     // update new contents
                     minutePetitionFile.setPic(file.getBytes());
+                    minutePetitionFilesService.save(minutePetitionFile);
                 } else {
                     minutePetitionFile = new MinutePetitionFiles(file.getOriginalFilename(),
                                                                  file.getContentType(),
@@ -117,9 +118,9 @@ public class MinutePetitionController {
                                                                  minutePetition.getPetition().getPetitionNumber().concat("-" + LocalDateTime.now()),
                                                                  UUID.randomUUID().toString().concat(
                                                                          "minutePetition"));
+                    minutePetitionFile.setMinutePetition(minutePetition1);
+                    minutePetitionFilesService.save(minutePetitionFile);
                 }
-                minutePetitionFile.setMinutePetition(minutePetition1);
-                minutePetitionFilesService.save(minutePetitionFile);
             }
         }
 

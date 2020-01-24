@@ -1,6 +1,6 @@
 package lk.imms.management_system.asset.employee.service;
 
-import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
+import lk.imms.management_system.asset.commonAsset.model.FileInfo;
 import lk.imms.management_system.asset.employee.controller.EmployeeController;
 import lk.imms.management_system.asset.employee.dao.EmployeeFilesDao;
 import lk.imms.management_system.asset.employee.entity.Employee;

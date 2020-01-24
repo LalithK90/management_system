@@ -1,12 +1,11 @@
 package lk.imms.management_system.asset.offender.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lk.imms.management_system.asset.OffednerGuardian.entity.Guardian;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
-import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
+import lk.imms.management_system.asset.commonAsset.model.Enum.BloodGroup;
+import lk.imms.management_system.asset.commonAsset.model.Enum.CivilStatus;
+import lk.imms.management_system.asset.commonAsset.model.Enum.Gender;
+import lk.imms.management_system.asset.commonAsset.model.FileInfo;
 import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
@@ -16,7 +15,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;

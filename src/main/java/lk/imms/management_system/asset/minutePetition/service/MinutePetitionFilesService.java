@@ -1,12 +1,13 @@
 package lk.imms.management_system.asset.minutePetition.service;
 
-import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
+import lk.imms.management_system.asset.commonAsset.model.FileInfo;
 import lk.imms.management_system.asset.minutePetition.controller.MinutePetitionController;
 import lk.imms.management_system.asset.minutePetition.dao.MinutePetitionFilesDao;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.*;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,6 @@ public class MinutePetitionFilesService {
         return minutePetitionFilesDao.findByName(filename);
     }
 
-    @Caching( evict = {@CacheEvict( value = "minutePetitionFiles", allEntries = true )},
-            put = {@CachePut( value = "minutePetitionFiles", key = "#minutePetitionFiles.id" )} )
     public void save(MinutePetitionFiles minutePetitionFile) {
         minutePetitionFilesDao.save(minutePetitionFile);
     }

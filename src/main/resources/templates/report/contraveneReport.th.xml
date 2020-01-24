@@ -1,7 +1,52 @@
 <thlogic xmlns:th="http://www.thymeleaf.org">
     <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
     <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
-
+    <!--Data search form-->
+    <attr sel="#dateForm" th:object="${dateObject}" th:action="@{/report/search}">
+        <attr sel="#startDate" th:field="*{startDate}"/>
+        <attr sel="#endDate" th:field="*{endDate}"/>
+    </attr>
+    <!--Table Header-->
+    <attr sel="#contravene" th:each="contravene : ${contravenes}" th:text="${contravene.code}"/>
+    <!--Data List-->
+    <attr sel="#list" th:each="list : ${contraveneList}">
+        <!--working place name-->
+        <attr sel="#workingPlaceName" th:text="${list.nameOne}"/>
+        <attr sel="#PUML" th:each="count : ${list.parameterCounts}" th:text="${count.count}"/>
+        <!--&lt;!&ndash;PUML&ndash;&gt;
+        <attr sel="#PUML" th:text="${contraveneList[__${0}__].count}"/>
+        &lt;!&ndash;PUDS&ndash;&gt;
+        <attr sel="#PUDS" th:text="${contraveneList[__${1}__].count}"/>
+        &lt;!&ndash;POU&ndash;&gt;
+        <attr sel="#POU" th:text="${contraveneList[__${2}__].count}"/>
+        &lt;!&ndash;UST&ndash;&gt;
+        <attr sel="#UST" th:text="${contraveneList[__${3}__].count}"/>
+        &lt;!&ndash;UPT&ndash;&gt;
+        <attr sel="#UPT" th:text="${contraveneList[__${4}__].count}"/>
+        &lt;!&ndash;UPA&ndash;&gt;
+        <attr sel="#UPA" th:text="${contraveneList[__${5}__].count}"/>
+        &lt;!&ndash;USA&ndash;&gt;
+        <attr sel="#USA" th:text="${contraveneList[__${6}__].count}"/>
+        &lt;!&ndash;USFL&ndash;&gt;
+        <attr sel="#USFL" th:text="${contraveneList[__${7}__].count}"/>
+        &lt;!&ndash;COCN&ndash;&gt;
+        <attr sel="#COCN" th:text="${contraveneList[__${8}__].count}"/>
+        &lt;!&ndash;CANB&ndash;&gt;
+        <attr sel="#CANB" th:text="${contraveneList[__${9}__].count}"/>
+        &lt;!&ndash;HRE&ndash;&gt;
+        <attr sel="#HRE" th:text="${contraveneList[__${10}__].count}"/>
+        &lt;!&ndash;OND&ndash;&gt;
+        <attr sel="#OND" th:text="${contraveneList[__${11}__].count}"/>
+        &lt;!&ndash;CBC&ndash;&gt;
+        <attr sel="#CBC" th:text="${contraveneList[__${12}__].count}"/>
+        &lt;!&ndash;OTR&ndash;&gt;
+        <attr sel="#OTR" th:text="${contraveneList[__${13}__].count}"/>
+        &lt;!&ndash;SCPU&ndash;&gt;
+        <attr sel="#SCPU" th:text="${contraveneList[__${14}__].count}"/>
+        &lt;!&ndash;SPP&ndash;&gt;
+        <attr sel="#SPP" th:text="${contraveneList[__${15}__].count}"/>
+    -->
+    </attr>
 
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>

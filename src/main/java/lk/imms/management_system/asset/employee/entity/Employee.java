@@ -1,11 +1,11 @@
 package lk.imms.management_system.asset.employee.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.BloodGroup;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.CivilStatus;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Gender;
-import lk.imms.management_system.asset.commonAsset.entity.Enum.Title;
-import lk.imms.management_system.asset.commonAsset.entity.FileInfo;
+import lk.imms.management_system.asset.commonAsset.model.Enum.BloodGroup;
+import lk.imms.management_system.asset.commonAsset.model.Enum.CivilStatus;
+import lk.imms.management_system.asset.commonAsset.model.Enum.Gender;
+import lk.imms.management_system.asset.commonAsset.model.Enum.Title;
+import lk.imms.management_system.asset.commonAsset.model.FileInfo;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamMember;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;

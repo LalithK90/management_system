@@ -141,22 +141,24 @@ public class EmployeeController {
             //save employee images file
             for ( MultipartFile file : employee.getFiles() ) {
                 if ( file.getOriginalFilename() == null && file.getContentType().equals("application/octet-stream") ) {
-                  continue;
+                    continue;
                 }
                 EmployeeFiles employeeFiles = employeeFilesService.findByName(file.getOriginalFilename());
                 if ( employeeFiles != null ) {
                     // update new contents
                     employeeFiles.setPic(file.getBytes());
+                    // Save all to database
+                    employeeFilesService.persist(employeeFiles);
                 } else {
                     employeeFiles = new EmployeeFiles(file.getOriginalFilename(),
                                                       file.getContentType(),
                                                       file.getBytes(),
                                                       employee.getNic().concat("-" + LocalDateTime.now()),
                                                       UUID.randomUUID().toString().concat("employee"));
+                    employeeFiles.setEmployee(employee);
+                    // Save all to database
+                    employeeFilesService.persist(employeeFiles);
                 }
-                employeeFiles.setEmployee(employee);
-                // Save all  to database
-                employeeFilesService.persist(employeeFiles);
             }
 
             return "redirect:/employee";

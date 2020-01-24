@@ -9,7 +9,8 @@ public enum GuardianType {
     MOTHER("Mother"),
     FATHER("Father"),
     WIFE("Wife"),
-    GUARDIAN("Guardian");
+    GUARDIAN("Guardian"),
+    HUSBAND("Husband");
 
     private final String guardianType;
 }

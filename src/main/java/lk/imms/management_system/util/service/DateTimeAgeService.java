@@ -66,4 +66,19 @@ public class DateTimeAgeService {
     public String getMonthName(int monthNumber) {
         return Month.of(monthNumber).name().trim().toLowerCase().substring(0, 1).toUpperCase() + Month.of(monthNumber).name().trim().toLowerCase().substring(1);
     }
+
+    public boolean createdAtIsValidateWithGivenDateRange(LocalDate from, LocalDate to, LocalDateTime givenDate) {
+        boolean valide = false;
+        LocalDateTime fromFormat = dateTimeToLocalDateStartInDay(from);
+        LocalDateTime toFormat = dateTimeToLocalDateEndInDay(to);
+
+        if ( fromFormat.isAfter(givenDate) || toFormat.isBefore(givenDate) || fromFormat.isEqual(givenDate) || toFormat.isEqual(givenDate) ) {
+            valide = true;
+        }
+
+        // form<= givenDates>= to
+        return valide;
+    }
+
+
 }
