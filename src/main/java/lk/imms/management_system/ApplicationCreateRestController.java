@@ -1,68 +1,169 @@
 package lk.imms.management_system;
 
+import lk.imms.management_system.asset.commonAsset.model.Enum.BloodGroup;
+import lk.imms.management_system.asset.commonAsset.model.Enum.CivilStatus;
+import lk.imms.management_system.asset.commonAsset.model.Enum.Gender;
+import lk.imms.management_system.asset.commonAsset.model.Enum.Title;
 import lk.imms.management_system.asset.contravene.entity.Contravene;
+import lk.imms.management_system.asset.contravene.service.ContraveneService;
+import lk.imms.management_system.asset.employee.entity.Employee;
+import lk.imms.management_system.asset.employee.entity.Enum.Designation;
+import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
+import lk.imms.management_system.asset.employee.service.EmployeeService;
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionerType;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
+import lk.imms.management_system.asset.petitioner.service.PetitionerService;
 import lk.imms.management_system.asset.userManagement.entity.Role;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.RoleService;
+import lk.imms.management_system.asset.userManagement.service.UserService;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.District;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
+import lk.imms.management_system.asset.workingPlace.entity.Enum.WorkingPlaceType;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
+import lk.imms.management_system.asset.workingPlace.service.WorkingPlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.MessageFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.stream.Collectors;
 
 @RestController
 public class ApplicationCreateRestController {
     private final RoleService roleService;
+    private final ContraveneService contraveneService;
+    private final PetitionerService petitionerService;
+    private final UserService userService;
+    private final WorkingPlaceService workingPlaceService;
+    private final EmployeeService employeeService;
 
-
-    List< WorkingPlace > workingPlaceList = new ArrayList<>();
 
     @Autowired
-    public ApplicationCreateRestController(RoleService roleService) {
+    public ApplicationCreateRestController(RoleService roleService, ContraveneService contraveneService,
+                                           PetitionerService petitionerService, UserService userService,
+                                           WorkingPlaceService workingPlaceService, EmployeeService employeeService) {
         this.roleService = roleService;
+        this.contraveneService = contraveneService;
+        this.petitionerService = petitionerService;
+        this.userService = userService;
+        this.workingPlaceService = workingPlaceService;
+        this.employeeService = employeeService;
     }
 
-    //save roles
-    @GetMapping( "/role1" )
-    public List<Role> saveRole() {
+    @GetMapping( "/select/user" )
+    public String saveUser() {
+        //roles list start
         String[] roles = {"ADMIN", "CGE", "ACGE", "CE", "DCL", "DCLE", "ACE", "SE", "OIC", "IE", "ESM", "ES", "EC",
                 "EG", "ED"};
-        List< Role > roleList = new ArrayList<>();
         for ( String s : roles ) {
             Role role = new Role();
             role.setRoleName(s);
-            roleList.add(roleService.persist(role));
+            roleService.persist(role);
         }
-        return roleList;
-    }
-
-    //working Place
-    @GetMapping( "/workingPlace1" )
-    public WorkingPlace saveWorkingPlace() {
+//Working place
         WorkingPlace workingPlace = new WorkingPlace();
+        workingPlace.setCode("ADMIN");
+        workingPlace.setName("ADMIN");
+        workingPlace.setProvince(Province.WP);
+        workingPlace.setDistrict(District.CB);
+        workingPlace.setWorkingPlaceType(WorkingPlaceType.HO);
+        workingPlace.setAddress("Colombo , Head Office");
+        workingPlace.setEmailOne("admin.hq@gmail.com");
+        WorkingPlace workingPlaceDb = workingPlaceService.persist(workingPlace);
 
-        return workingPlace;
-    }
+//Employee
+        Employee employee = new Employee();
+        employee.setPayRoleNumber("11111111");
+        employee.setName("Admin User");
+        employee.setCallingName("Admin");
+        employee.setName("908670000V");
+        employee.setMobileOne("0750000000");
+        employee.setTitle(Title.DR);
+        employee.setGender(Gender.MALE);
+        employee.setBloodGroup(BloodGroup.AP);
+        employee.setDesignation(Designation.ED);
+        employee.setCivilStatus(CivilStatus.UNMARRIED);
+        employee.setEmployeeStatus(EmployeeStatus.WORKING);
+        employee.setDateOfBirth(LocalDate.now().minusYears(18));
+        employee.setDateOfAssignment(LocalDate.now());
+        employee.setWorkingPlace(workingPlaceDb);
+        Employee employeeDb = employeeService.persist(employee);
 
-    @GetMapping("/user1")
-    public User saveUser(){
-        User user = new User();
-
-        return user;
-    }
-    @GetMapping("/petitionerStart1")
-    public Petitioner savePetitioner(){
+        //contravene list save - start
+        String[] code = {"PUM", "PUD", "POU", "UST", "UPT", "UPA", "USA", "USF", "COC", "CAN", "HRE", "OND", "CBC"
+                , "OTR", "SCP", "SPP"};
+        String[] details = {
+                "Possession of Unlawfully Manufactured Liquor", "Possession of Unlawfully Distilled Spirit",
+                "Possession of Utensil", "Unlawful Sale of Toddy", "Unlawful Possession of Toddy", "Unlawful " +
+                "Possession of Arrack", "Unlawful Sale of Arrack"
+                , "Unlawful Sale of Foreign Liquor", "Cocaine", "Cannabis", "Heroine", "Other Narcotic Drugs",
+                "Contraband Cigarettes", "Other Tobacco Related", "Selling Cigarettes to persons under-age of" +
+                " 21 yrs", "Smoking in Public Places"
+        };
+        for ( int i = 0; i < code.length; ) {
+            Contravene contravene = new Contravene();
+            contravene.setCode(code[i]);
+            contravene.setDetail(details[i]);
+            contravene.setId((long) ++i);
+            contraveneService.persist(contravene);
+        }
+        // petitioner
         Petitioner petitioner = new Petitioner();
+        petitioner.setAddress("Presidential Secretariat\n" +
+                                      "Galle Face, Colombo 1\n" +
+                                      "Sri Lanka");
+        petitioner.setEmail("ps@presidentsoffice.lk");
+        petitioner.setLand("0112345345");
+        petitioner.setNameEnglish("Presidential Secretariat");
+        petitioner.setNameSinhala("ජනාධිපති ලේකම් කාර්යාලය");
+        petitioner.setNameTamil("சனாதிபதி செயலகம்");
+        petitioner.setPetitionerType(PetitionerType.PRESIDENT);
+        petitionerService.persist(petitioner);
 
-        return petitioner;
+        petitioner.setAddress("No: 58, Sir Ernest De Silva Mawatha,\n" +
+                                      "Colombo 07.\n" +
+                                      "Sri Lanka.");
+        petitioner.setEmail("info@pmoffice.gov.lk");
+        petitioner.setLand("0112575317");
+        petitioner.setNameEnglish("Prime Minister''s Office");
+        petitioner.setNameSinhala("අග්‍රාමාත්‍ය කාර්යාලය");
+        petitioner.setNameTamil("சோசலிச குடியரசின்");
+        petitioner.setPetitionerType(PetitionerType.RRIMEMINISTER);
+        petitionerService.persist(petitioner);
+
+        petitioner.setAddress("No 383, Kotte Road,\\r\\nRajagiriya.");
+        petitioner.setEmail("dg@nddcb.gov.lk");
+        petitioner.setLand("0112873718");
+        petitioner.setNameEnglish("National Dangerous Drugs Control Board");
+        petitioner.setNameSinhala("අන්තරායකර ඖෂධ පාලක ජාතික මණ්ඩලය");
+        petitioner.setNameTamil("National Dangerous Drugs Control Board");
+        petitioner.setPetitionerType(PetitionerType.NDDCA);
+        petitionerService.persist(petitioner);
+
+        //admin user one
+        User user = new User();
+        user.setEmployee(employeeDb);
+        user.setUsername("admin");
+        user.setPassword("admin");
+        String message = "Username:- "+ user.getUsername()+"\nPassword:- "+ user.getPassword();
+        user.setEnabled(true);
+        user.setRoles(roleService.findAll()
+                              .stream()
+                              .filter(role -> role.getRoleName().equals("ADMIN"))
+                              .collect(Collectors.toList()));
+        user.setWorkingPlaces(workingPlaceService.findAll());
+        userService.persist(user);
+
+       return message;
     }
-    @GetMapping("/contravene1")
-    public Contravene saveContravene(){
-        return new Contravene();
-    }
+
 
 }

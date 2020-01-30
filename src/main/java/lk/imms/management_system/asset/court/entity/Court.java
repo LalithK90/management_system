@@ -17,10 +17,10 @@ import java.util.List;
 @EqualsAndHashCode( callSuper = true )
 public class Court extends AuditEntity {
 
-    @Column(columnDefinition = "VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_bin NULL"  )
+    @Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" , length = 255)
     private String name;
 
-    @Column(columnDefinition = "VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_bin NULL"  )
+    @Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" ,length = 255)
     private String place;
 
     @OneToMany( mappedBy = "court" )

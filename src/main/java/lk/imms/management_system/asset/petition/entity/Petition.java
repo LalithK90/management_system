@@ -36,7 +36,7 @@ public class Petition extends AuditEntity {
 
     private String agaDivision;
 
-    @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL",length = 20000 )
     private String subject;
 
     @Enumerated( EnumType.STRING )

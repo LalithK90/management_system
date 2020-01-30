@@ -46,12 +46,12 @@
                     <div class="col-6">
                         <h4 class="text-white"><b> Custom Search</b></h4>
                         <form class="form-inline" id="dateForm" method="POST">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;
                             <div class="form-group">
                                 <label for="startDate">From :&nbsp;&nbsp;&nbsp;</label>
                                 <input class="form-control" id="startDate" type="date"/>
                             </div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;
                             <div class="form-group">
                                 <label for="endDate">To :&nbsp;&nbsp;&nbsp;</label>
                                 <input class="form-control" id="endDate" type="date"/>
@@ -67,84 +67,64 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!--Show table -->
-    <div class="form-row">
-        <table class="table table-striped table-inverse table-responsive" id="contraveneTable">
-            <thead class="thead-inverse">
-            <tr>
-                <th>Station Name / Contravene</th>
-                <th id="contravene"></th>
-                <th>Total</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr id="list">
-                <td id="workingPlaceName"></td>
-                <td id="PUML">0</td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <td id="SPP">0</td>-->
-                <td id="">0</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 
+        <!--Show table-->
+        <div class="row col-12 text-center">
+            <div class="offset-1 container-fluid">
+                <br/>
+                <div class="dateHas">
+                    <div class="row">
+                        <div class="text-center">
+                            Date Range From : &nbsp;
+                            <span id="start"></span>To : &nbsp;<span id="end"></span>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <table class="table table-striped table-inverse table-responsive" id="contraveneTable">
+                    <thead>
+                    <tr>
+                        <th>Station Name / Contravene</th>
+                        <th id="contravene"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="list">
+                        <td id="workingPlaceName"></td>
+                        <td id="PUML">0</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row col-12">
+                <div class="offset-6">
+                    <button class="btn btn-success btn-sm"
+                            onclick="printContent('contraveneTable')">
+                        <i class="fa fa-print"></i>&nbsp;Print
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+</div>
 <!--footer include-->
 <footer id="footer" class="page-footer"></footer>
 <!--script include-->
 <script id="script"></script>
-<script type="text/javascript">
-    $(function()
-    {
-        function tally (selector)
-        {
-            $(selector).each(function ()
-            {
-                var total = 0,
-                    column = $(this).siblings(selector).andSelf().index(this);
-                $(this).parents().prevUntil(':has(' + selector + ')').each(function ()
-                {
-                    total += parseFloat($('td.sum:eq(' + column + ')', this).html()) || 0;
-                })
-                $(this).html(total);
-            });
+
+<!--
+    <script language="javascript" type="text/javascript">
+        var tds = document.getElementById('contraveneTable').getElementsByTagName('td');
+        var sum = 0;
+        for(var i = 0; i < tds.length; i ++) {
+            if(tds[i].className == 'count-me') {
+                sum += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
         }
-        tally('td.subtotal');
-        tally('td.total');
-    });
-</script>
-<div class="col-12">
-    <table border="1" width="500" id="data">
-        <tr align="center" bgcolor="#CCCCCC">
-            <th>Name</th>
-            <th>Age</th>
-            <th>Weight</th>
-            <th>Number</th>
-        </tr>
-        <tr align="center">
-            <td>Joe</td>
-            <td class="sum">30</td>
-            <td class="sum">100</td>
-            <td class="sum">1</td>
-        </tr>
-        <tr align="center">
-            <td>Jack</td>
-            <td class="sum">29</td>
-            <td class="sum">100</td>
-            <td class="sum">1</td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                <hr>
-            </td>
-        </tr>
-        <tr align="center" bgcolor="#00CCFF">
-            <th colspan="1" align="right">&nbsp;</th>
-            <td class="total"></td>
-            <td class="total"></td>
-            <td class="total"></td>
-        </tr>
-    </table>
-</div>
+        document.getElementById('contraveneTable').innerHTML += '<tr><td>Total</td><td>' + sum + '</td></tr>';
+    </script>
+-->
+
 </body>
 </html>

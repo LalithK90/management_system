@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 public class MinutePetition extends AuditEntity {
 
-    @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL",length = 20000 )
     private String detail;
 
     @Enumerated( EnumType.STRING )

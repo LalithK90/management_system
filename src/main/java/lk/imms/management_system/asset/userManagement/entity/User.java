@@ -3,6 +3,7 @@ package lk.imms.management_system.asset.userManagement.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.asset.employee.entity.Employee;
+import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -19,12 +20,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode( callSuper = true )
 @JsonIgnoreProperties(value = "createdDate", allowGetters = true)
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
-    private Long id;
+public class User extends AuditEntity {
 
     @OneToOne
     @NotNull
@@ -41,18 +39,17 @@ public class User {
     @Column(nullable = false)
     private boolean enabled;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate createdDate;
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    private List<UserSessionLog> userSessionLogs;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @Fetch( FetchMode.SUBSELECT)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @OrderColumn(name = "role")
     private List<Role> roles;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @Fetch( FetchMode.SUBSELECT)
     @JoinTable(name = "user_working_place",
             joinColumns = @JoinColumn(name = "user_id"),

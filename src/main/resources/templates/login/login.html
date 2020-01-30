@@ -8,8 +8,8 @@
         <form id="login" method="post">
             <br/>
             <fieldset>
-             <!--   <legend class="text-lg-center bg-white"><h3><strong> Excise Department - Sri Lanka</strong></h3>
-                </legend>-->
+                <!--   <legend class="text-lg-center bg-white"><h3><strong> Excise Department - Sri Lanka</strong></h3>
+                   </legend>-->
                 <div class="form-label-group">
                     <input type="text" id="username" class="form-control" placeholder="username"
                            required>
@@ -27,15 +27,13 @@
             <div class="container-fluid " id="error">
                 <p class="bg-white text-capitalize text-danger text-lg-center">Invalid username or password. </p>
             </div>
+            <div class="container-fluid " >
+                <p id="errorMessage" class="bg-white text-capitalize text-danger text-lg-center"></p>
+            </div>
         </form>
     </div>
 </div>
 <footer id="footer"></footer>
-<script>
-    $(function () {
-        $("#draggable").draggable();
-    });
-
-</script>
+<script id="script"></script>
 </body>
 </html>

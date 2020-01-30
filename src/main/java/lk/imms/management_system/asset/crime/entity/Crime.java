@@ -4,7 +4,10 @@ import lk.imms.management_system.asset.court.entity.Court;
 import lk.imms.management_system.asset.crime.entity.entity.CrimeStatus;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.util.audit.AuditEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,32 +19,34 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Crime extends AuditEntity {
-
-    @Column( unique = true )
-    private String crimeNumber;
-
-    private String courtCaseNumber;
-
-    private String compoundedChargeSheetNumber;
-
-    @Column( columnDefinition = "VARCHAR(10000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(15000) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 15000 )
     private String result;
 
-    private String rewardSheetNumber;
-
-    @Column( columnDefinition = "VARCHAR(10000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 4000 )
     private String remark;
+
+    @Column( columnDefinition = "VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 500 )
+    private String placeOfOffence;
+
+    @Column( unique = true, length = 100)
+    private String crimeNumber;
+
+    @Column( unique = true, length = 100)
+    private String courtCaseNumber;
+
+    @Column( unique = true, length = 100)
+    private String compoundedChargeSheetNumber;
+
+    @Column( unique = true, length = 100)
+    private String rewardSheetNumber;
 
     @Enumerated( EnumType.STRING )
     private CrimeStatus crimeStatus;
 
-    @Column( columnDefinition = "VARCHAR(10000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
-    private String placeOfOffence;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private DetectionTeam detectionTeam;
 
-    @ManyToOne
+    @ManyToOne( fetch = FetchType.EAGER )
     private Court court;
 
     @DateTimeFormat( pattern = "yyyy-MM-dd" )

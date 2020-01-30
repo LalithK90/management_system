@@ -10,16 +10,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final String[] ALL_PERMIT_URL = {"/static/favicon.ico", "/img/**", "/css/**", "/js/**", "/webjars/**",
-            "/actuator/**", "/login", "/select/**", "/", "/index"};
+    private final String[] ALL_PERMIT_URL = {"/favicon.ico", "/img/**", "/css/**", "/js/**", "/webjars/**",
+            "/login", "/select/**", "/", "/index", "/passwordChange"};
 
     @Bean
     public UserDetailsServiceImpl userDetailsService() {
@@ -39,16 +43,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
+    /*Session management - bean start*/
     @Bean
     public HttpSessionEventPublisher httpSessionEventPublisher() {
         return new HttpSessionEventPublisher();
+    }
+
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+    /*Session management - bean end*/
+
+    @Bean
+    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
+    }
+
+    @Bean
+    public LogoutSuccessHandler customLogoutSuccessHandler() {
+        return new CustomLogoutSuccessHandler();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -80,33 +100,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         formLogin ->
                                 formLogin
                                         .loginPage("/login")
+                                        .loginProcessingUrl("/login")
                                         //Username and password for validation
                                         .usernameParameter("username")
                                         .passwordParameter("password")
-                                        .defaultSuccessUrl("/mainWindow"))
-                //session management
-                .sessionManagement(
-                        sessionManagement ->
-                                sessionManagement
-                                        .sessionFixation()
-                                        .migrateSession()
-                                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                                        .invalidSessionUrl("/login")
-                                        .maximumSessions(1)
-                                        .expiredUrl("/index"))
+                                        .successHandler(customAuthenticationSuccessHandler())
+                                        .failureForwardUrl("/login")
+                          )
                 //Logout controlling
                 .logout(
                         logout ->
                                 logout
                                         .logoutUrl("/logout")
-                                        .logoutSuccessUrl("/login")
+                                        .logoutSuccessHandler(customLogoutSuccessHandler())
                                         .deleteCookies("JSESSIONID")
                                         .invalidateHttpSession(true)
                                         .clearAuthentication(true))
+                //session management
+                .sessionManagement(
+                        sessionManagement ->
+                                sessionManagement
+                                        .maximumSessions(1)
+                                        .expiredUrl("/logout")
+                                        .maxSessionsPreventsLogin(true)
+                                        .sessionRegistry(sessionRegistry()))
                 //Cross site disable
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling();
     }
+
 
 }
 

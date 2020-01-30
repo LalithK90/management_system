@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://www.ehcache.org/v3 https://www.ehcache.org/schema/ehcache-core-3.0.xsd
 							http://www.ehcache.org/v3/jsr107 https://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
 
-    <!--Contravene-->
+    <!--1. Contravene-->
     <cache alias="contravene">
         <expiry>
             <ttl unit="seconds">7000</ttl>
@@ -12,7 +12,7 @@
         <heap unit="entries">30</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--Court-->
+    <!--2. Court-->
     <cache alias="court">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -20,7 +20,7 @@
         <heap unit="entries">200</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--crime-->
+    <!--3. crime-->
     <cache alias="crime">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -28,7 +28,7 @@
         <heap unit="entries">400</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--detectionTeam-->
+    <!--4. detectionTeam-->
     <cache alias="detectionTeam">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -36,7 +36,7 @@
         <heap unit="entries">400</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--detectionTeamMember-->
+    <!--5. detectionTeamMember-->
     <cache alias="detectionTeamMember">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -44,7 +44,7 @@
         <heap unit="entries">400</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--employee-->
+    <!--6. employee-->
     <cache alias="employee">
         <expiry>
             <ttl unit="seconds">6000</ttl>
@@ -52,7 +52,7 @@
         <heap unit="entries">4000</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--employeeWorkingPlaceHistory-->
+    <!--7. employeeWorkingPlaceHistory-->
     <cache alias="employeeWorkingPlaceHistory">
         <expiry>
             <ttl unit="seconds">6000</ttl>
@@ -60,7 +60,7 @@
         <heap unit="entries">4000</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--minutePetitionFiles-->
+    <!--8. minutePetitionFiles-->
     <cache alias="minutePetitionFiles">
         <expiry>
             <ttl unit="seconds">6000</ttl>
@@ -68,7 +68,7 @@
         <heap unit="entries">1000</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--minutePetition-->
+    <!--9. minutePetition-->
     <cache alias="minutePetition">
         <expiry>
             <ttl unit="seconds">6000</ttl>
@@ -76,7 +76,7 @@
         <heap unit="entries">1000</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--guardian-->
+    <!--10. guardian-->
     <cache alias="guardian">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -84,7 +84,7 @@
         <heap unit="entries">200</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--offender-->
+    <!--11. offender-->
     <cache alias="offender">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -92,7 +92,7 @@
         <heap unit="entries">200</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--offenderCallingName-->
+    <!--12. offenderCallingName-->
     <cache alias="offenderCallingName">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -100,7 +100,7 @@
         <heap unit="entries">200</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--offenderFiles-->
+    <!--13. offenderFiles-->
     <cache alias="offenderFiles">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -108,7 +108,7 @@
         <heap unit="entries">200</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--petition-->
+    <!--14. petition-->
     <cache alias="petition">
         <expiry>
             <ttl unit="seconds">6000</ttl>
@@ -116,7 +116,7 @@
         <heap unit="entries">200</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--petitionState-->
+    <!--15. petitionState-->
     <cache alias="petitionState">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -124,7 +124,7 @@
         <heap unit="entries">200</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--petitioner-->
+    <!--16. petitioner-->
     <cache alias="petitioner">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -132,7 +132,7 @@
         <heap unit="entries">1200</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--Role cache-->
+    <!--17. Role cache-->
     <cache alias="role">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -140,7 +140,7 @@
         <heap unit="entries">20</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--user-->
+    <!--18. user-->
     <cache alias="user">
         <expiry>
             <ttl unit="seconds">600</ttl>
@@ -148,7 +148,7 @@
         <heap unit="entries">20</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--workingPlace-->
+    <!--19. workingPlace-->
     <cache alias="workingPlace">
         <expiry>
             <ttl unit="seconds">6000</ttl>
@@ -156,8 +156,16 @@
         <heap unit="entries">120</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--petition offender-->
+    <!--20. petition offender-->
     <cache alias="petitionOffender">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">150</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--21. userSessionLog-->
+    <cache alias="userSessionLog">
         <expiry>
             <ttl unit="seconds">600</ttl>
         </expiry>

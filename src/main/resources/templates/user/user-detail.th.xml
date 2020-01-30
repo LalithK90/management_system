@@ -6,7 +6,7 @@
     <attr sel="#id" th:text="${userDetail.id}"/>
     <attr sel="#employeeName" th:text="${userDetail.employee.name}+ ${' - '}+${userDetail.employee.nic}"/>
     <attr sel="#userName" th:text="${userDetail.username}"/>
-    <attr sel="#createDate" th:text="${{userDetail.createdDate}}"/>
+    <attr sel="#createDate" th:text="${{userDetail.createdAt}}"/>
     <!--Working Station-->
     <attr sel="#workingStation" th:each=" workingStation, count : ${userDetail.workingPlaces}"/>
     <attr sel="#index" th:text="${count.count}"/>
@@ -17,7 +17,8 @@
     <attr sel="#roles" th:each="roles, count : ${userDetail.roles}"/>
     <attr sel="#count" th:text="${count.count}"/>
     <attr sel="#name" th:text="${roles.roleName}"/>
-
+    <!--User Session Log -->
+<!--TODO-->
     <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
 </thlogic>

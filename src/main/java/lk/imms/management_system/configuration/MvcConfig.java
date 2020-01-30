@@ -51,8 +51,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("")
-                .setViewName("forward:/mainWindow");
+        registry.addViewController("/")
+                .setViewName("forward:/login");
         registry.addViewController("/login")
                 .setViewName("login/login");
         registry.addViewController("/mainWindow")
@@ -90,6 +90,7 @@ public class MvcConfig implements WebMvcConfigurer {
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager();
     }
+
     @Bean
     public KeyGenerator multiplyKeyGenerator() {
         return (Object target, Method method, Object... params) -> method.getName() + "_" + Arrays.toString(params);

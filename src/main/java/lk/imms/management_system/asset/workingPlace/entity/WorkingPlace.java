@@ -8,13 +8,12 @@ import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.WorkingPlaceType;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -57,15 +56,13 @@ public class WorkingPlace extends AuditEntity {
     @Column( unique = true )
     private String emailOne;
 
-    @Email( message = "Provide valid email" )
     @Column( unique = true )
     private String emailTwo;
 
     @OneToMany( mappedBy = "workingPlace", fetch = FetchType.EAGER )
     private List< EmployeeWorkingPlaceHistory > employeeWorkingHistories;
 
-    @ManyToMany( mappedBy = "workingPlaces", fetch = FetchType.EAGER)
-    @OrderColumn(name = "username")
-    private List< User > users;
+    @ManyToMany( mappedBy = "workingPlaces", fetch = FetchType.EAGER )
+    private Set< User > users;
 
 }

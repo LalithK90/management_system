@@ -130,9 +130,12 @@
                 <div class="form-row">
                     <label class="control-label col-md-4" for="password">Password :</label>
                     <div class="col-md-8">
-                        <input class="form-control validate" id="password"
-                               placeholder="Enter Password Here" required type="password"
+                        <input class="form-control pwd" id="password"
+                               placeholder="Enter Password Here" required type="password" min="6"
                         />
+                        <div class="text-right">
+                            <span id="result"></span>
+                        </div>
                     </div>
                 </div>
                 <!--Working Place Find-->

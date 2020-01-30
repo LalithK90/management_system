@@ -72,7 +72,7 @@ public class UserService implements AbstractService< User, Long > {
     }
 
     @Cacheable
-    @Transactional(readOnly = true)
+    @Transactional( readOnly = true )
     public User findByUserName(String name) {
         return userDao.findByUsername(name);
     }
@@ -80,5 +80,10 @@ public class UserService implements AbstractService< User, Long > {
     @Cacheable
     public User findUserByEmployee(Employee employee) {
         return userDao.findByEmployee(employee);
+    }
+
+    @Cacheable
+    public boolean findByEmployee(Employee employee) {
+        return userDao.findByEmployee(employee) != null;
     }
 }

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -91,7 +92,10 @@ public class UserController {
     @PostMapping( value = "/workingPlace" )
     public String addUserEmployeeDetails(@ModelAttribute( "employee" ) Employee employee, Model model) {
 
-        List< Employee > employees = employeeService.search(employee);
+        List< Employee > employees = employeeService.search(employee)
+                .stream()
+                .filter(userService::findByEmployee)
+                .collect(Collectors.toList());
 
         if ( employees.size() == 1 ) {
             model.addAttribute("user", new User());
@@ -103,7 +107,7 @@ public class UserController {
         model.addAttribute("employee", new Employee());
         model.addAttribute("employeeDetailShow", false);
         model.addAttribute("employeeNotFoundShow", true);
-        model.addAttribute("employeeNotFound", "There is not employee in the system according to the provided details" +
+        model.addAttribute("employeeNotFound", "There is not employee in the system according to the provided details or that employee already be a user in the system" +
                 " \n Could you please search again !!");
 
         return "user/addUser";
@@ -138,10 +142,8 @@ public class UserController {
         //user is super senior office need to provide all working palace to check
 
         Employee employee = employeeService.findById(user.getEmployee().getId());
-        if ( user.isEnabled() ) {
-            user.setCreatedDate(dateTimeAgeService.getCurrentDate());
-        }
-        // if user desigantion is belongs to supper senior category all workstations are able to check
+
+        // if user designation is belongs to supper senior category all workstations are able to check
         if ( employee.getDesignation().equals(Designation.CGE) || employee.getDesignation().equals(Designation.ACGE) || employee.getDesignation().equals(Designation.CE) ||
                 employee.getDesignation().equals(Designation.DCL) || employee.getDesignation().equals(Designation.DCLE) ) {
             user.setWorkingPlaces(workingPlaceService.findAll());
@@ -153,7 +155,6 @@ public class UserController {
         } else {
             user.setEnabled(false);
         }
-        user.setCreatedDate(dateTimeAgeService.getCurrentDate());
         user.setEnabled(true);
         userService.persist(user);
         return "redirect:/user";

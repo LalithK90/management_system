@@ -11,14 +11,16 @@ import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.audit.AuditEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -30,10 +32,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonFilter("Employee")
+@JsonFilter( "Employee" )
 public class Employee extends AuditEntity {
 
-    @NotNull( message = "Pay roll number is required" )
     @Column( unique = true )
     private String payRoleNumber;
 
@@ -53,21 +54,17 @@ public class Employee extends AuditEntity {
     @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
     private String mobileOne;
 
-    @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
     private String mobileTwo;
 
-    @Size( max = 10, message = "Land number length should be contained 10 and 9" )
     private String land;
 
-    @Email( message = "Provide valid email" )
-    @Column( unique = true, columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL"  )
+    @Column( unique = true)
     private String email;
 
-    @Email( message = "Provide valid office email" )
-    @Column( unique = true,columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL"  )
+    @Column( unique = true)
     private String officeEmail;
 
-    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 255)
     private String address;
 
     @Enumerated( EnumType.STRING )
@@ -94,14 +91,14 @@ public class Employee extends AuditEntity {
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfAssignment;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne( cascade = CascadeType.PERSIST)
     private WorkingPlace workingPlace;
 
     @OneToMany( mappedBy = "employee", fetch = FetchType.EAGER )
     @Fetch( value = FetchMode.SUBSELECT )
     private List< DetectionTeamMember > detectionTeamMembers;
 
-    @OneToMany( mappedBy = "employee")
+    @OneToMany( mappedBy = "employee" )
     private List< EmployeeWorkingPlaceHistory > employeeWorkingHistories;
 
     @Transient

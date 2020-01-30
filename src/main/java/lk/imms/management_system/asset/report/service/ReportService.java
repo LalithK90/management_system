@@ -9,20 +9,32 @@ import lk.imms.management_system.asset.contravene.dao.ContraveneDao;
 import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.court.dao.CourtDao;
 import lk.imms.management_system.asset.crime.dao.CrimeDao;
+import lk.imms.management_system.asset.crime.entity.Crime;
+import lk.imms.management_system.asset.crime.entity.entity.CrimeStatus;
 import lk.imms.management_system.asset.detectionTeam.dao.DetectionTeamDao;
 import lk.imms.management_system.asset.detectionTeam.dao.DetectionTeamMemberDao;
+import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
+import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamMember;
+import lk.imms.management_system.asset.detectionTeam.entity.Enum.DetectionTeamStatus;
 import lk.imms.management_system.asset.employee.dao.EmployeeDao;
+import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.minutePetition.dao.MinutePetitionDao;
 import lk.imms.management_system.asset.minutePetition.dao.MinutePetitionFilesDao;
 import lk.imms.management_system.asset.offender.dao.OffenderDao;
+import lk.imms.management_system.asset.offender.entity.Offender;
 import lk.imms.management_system.asset.petition.dao.PetitionDao;
 import lk.imms.management_system.asset.petition.dao.PetitionStatuDao;
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionPriority;
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
+import lk.imms.management_system.asset.petition.entity.Enum.PetitionType;
 import lk.imms.management_system.asset.petition.entity.Petition;
+import lk.imms.management_system.asset.petition.entity.PetitionState;
 import lk.imms.management_system.asset.petitionAddOffender.dao.PetitionOffenderDao;
 import lk.imms.management_system.asset.petitionAddOffender.entity.PetitionOffender;
 import lk.imms.management_system.asset.petitioner.dao.PetitionerDao;
 import lk.imms.management_system.asset.userManagement.dao.RoleDao;
 import lk.imms.management_system.asset.userManagement.dao.UserDao;
+import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.workingPlace.dao.WorkingPlaceDao;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.service.DateTimeAgeService;
@@ -112,7 +124,7 @@ public class ReportService {
                                     , dateTimeAgeService.dateTimeToLocalDateEndInDay(to));
                 }
                 parameterCount = new ParameterCount(contravene.getDetail(),
-                                                                   (long) petitionOffenders.size());
+                                                    (long) petitionOffenders.size());
                 parameterCounts.add(parameterCount);
             }
             nameCount = new NameCount(workingPlace.getCode(), workingPlace.getName(), Long.valueOf("0"),
@@ -122,7 +134,7 @@ public class ReportService {
         return listContraveneWorkingPlaceAndCount;
     }
 
-/*
+
     //working place, contravene, count - end
 //----------------------------------------------------------------------------------------------
     //working place, crime count - start
@@ -135,7 +147,7 @@ public class ReportService {
             for ( User user : userDao.findByWorkingPlaces(workingPlace) ) {
                 crimes.addAll(crimeDao.findByCreatedByAndCreatedAtBetween(user,
                                                                           dateTimeAgeService
-                                                                          .dateTimeToLocalDateStartInDay(from)
+                                                                                  .dateTimeToLocalDateStartInDay(from)
                         , dateTimeAgeService.dateTimeToLocalDateEndInDay(to)));
             }
             NameCount nameCount = new NameCount(CrimeStatus.NO.toString(), workingPlace.getName(),
@@ -143,13 +155,13 @@ public class ReportService {
                                                         .stream()
                                                         .filter(crime ->
                                                                         crime.getCrimeStatus().equals(CrimeStatus.NO))
-                                                        .count());
+                                                        .count(), null);
             crimeCountCrimeStatusNo.add(nameCount);
         }
 
         return crimeCountCrimeStatusNo;
-    }*/
-/*
+    }
+
     //crime states complete partially
     public List< NameCount > listCrimeWorkingPlaceCrimeStatusPartially(LocalDate from, LocalDate to) {
 // crime count, working place
@@ -159,7 +171,7 @@ public class ReportService {
             for ( User user : userDao.findByWorkingPlaces(workingPlace) ) {
                 crimes.addAll(crimeDao.findByCreatedByAndCreatedAtBetween(user,
                                                                           dateTimeAgeService
-                                                                          .dateTimeToLocalDateStartInDay(from)
+                                                                                  .dateTimeToLocalDateStartInDay(from)
                         , dateTimeAgeService.dateTimeToLocalDateEndInDay(to)));
             }
             NameCount nameCount = new NameCount(CrimeStatus.PARTIAL.toString(), workingPlace.getName(),
@@ -167,8 +179,8 @@ public class ReportService {
                                                         .stream()
                                                         .filter(crime ->
                                                                         crime.getCrimeStatus().equals(CrimeStatus
-                                                                        .PARTIAL))
-                                                        .count());
+                                                                                                              .PARTIAL))
+                                                        .count(), null);
             crimeCountCrimeStatusPartially.add(nameCount);
         }
 
@@ -184,7 +196,7 @@ public class ReportService {
             for ( User user : userDao.findByWorkingPlaces(workingPlace) ) {
                 crimes.addAll(crimeDao.findByCreatedByAndCreatedAtBetween(user,
                                                                           dateTimeAgeService
-                                                                          .dateTimeToLocalDateStartInDay(from)
+                                                                                  .dateTimeToLocalDateStartInDay(from)
                         , dateTimeAgeService.dateTimeToLocalDateEndInDay(to)));
             }
             NameCount nameCount = new NameCount(CrimeStatus.COMPLETED.toString(), workingPlace.getName(),
@@ -192,8 +204,8 @@ public class ReportService {
                                                         .stream()
                                                         .filter(crime ->
                                                                         crime.getCrimeStatus().equals(CrimeStatus
-                                                                        .COMPLETED))
-                                                        .count());
+                                                                                                              .COMPLETED))
+                                                        .count(), null);
             crimeCountStatusComplete.add(nameCount);
         }
 
@@ -211,16 +223,16 @@ public class ReportService {
             List< DetectionTeam > detectionTeams = new ArrayList<>();
             for ( Petition petition : petitionDao.findByWorkingPlaceAndCreatedAtBetween(workingPlace,
                                                                                         dateTimeAgeService
-                                                                                        .dateTimeToLocalDateStartInDay(from)
+                                                                                                .dateTimeToLocalDateStartInDay(from)
                     , dateTimeAgeService.dateTimeToLocalDateEndInDay(to)) ) {
                 detectionTeams = petition.getDetectionTeams()
                         .stream()
                         .filter(detectionTeam -> detectionTeam.getDetectionTeamStatus().equals(DetectionTeamStatus
-                        .NOTSUCCESS))
+                                                                                                       .NOTSUCCESS))
                         .collect(Collectors.toList());
             }
             NameCount nameCount = new NameCount(DetectionTeamStatus.NOTSUCCESS.toString(), workingPlace.getName(),
-                                                (long) detectionTeams.size());
+                                                (long) detectionTeams.size(), null);
             detectionNotSuccess.add(nameCount);
         }
         return detectionNotSuccess;
@@ -234,16 +246,16 @@ public class ReportService {
             List< DetectionTeam > detectionTeams = new ArrayList<>();
             for ( Petition petition : petitionDao.findByWorkingPlaceAndCreatedAtBetween(workingPlace,
                                                                                         dateTimeAgeService
-                                                                                        .dateTimeToLocalDateStartInDay(from)
+                                                                                                .dateTimeToLocalDateStartInDay(from)
                     , dateTimeAgeService.dateTimeToLocalDateEndInDay(to)) ) {
                 detectionTeams = petition.getDetectionTeams()
                         .stream()
                         .filter(detectionTeam -> detectionTeam.getDetectionTeamStatus().equals(DetectionTeamStatus
-                        .SUCCESS))
+                                                                                                       .SUCCESS))
                         .collect(Collectors.toList());
             }
             NameCount nameCount = new NameCount(DetectionTeamStatus.SUCCESS.toString(), workingPlace.getName(),
-                                                (long) detectionTeams.size());
+                                                (long) detectionTeams.size(), null);
             detectionSuccess.add(nameCount);
         }
         return detectionSuccess;
@@ -258,7 +270,7 @@ public class ReportService {
                 dateTimeAgeService.dateTimeToLocalDateStartInDay(from)
                 , dateTimeAgeService.dateTimeToLocalDateEndInDay(to)) ) {
             NameCount nameCount = new NameCount(offender.getId().toString(), offender.getNameEnglish(),
-                                                (long) offender.getGuardians().size());
+                                                (long) offender.getGuardians().size(), null);
             guardianOffenderCount.add(nameCount);
         }
         return guardianOffenderCount;
@@ -274,10 +286,10 @@ public class ReportService {
         for ( WorkingPlace workingPlace : workingPlaceDao.findAll() ) {
             List< Petition > petitions = petitionDao.findByWorkingPlaceAndCreatedAtBetween(workingPlace,
                                                                                            dateTimeAgeService
-                                                                                           .dateTimeToLocalDateStartInDay(from)
+                                                                                                   .dateTimeToLocalDateStartInDay(from)
                     , dateTimeAgeService.dateTimeToLocalDateEndInDay(to));
             NameCount nameCount = new NameCount(workingPlace.getCode(), workingPlace.getName(),
-                                                (long) petitions.size());
+                                                (long) petitions.size(), null);
             workingPlacePetitionCount.add(nameCount);
         }
         return workingPlacePetitionCount;
@@ -291,13 +303,13 @@ public class ReportService {
             for ( PetitionPriority petitionPriority : PetitionPriority.values() ) {
                 List< Petition > petitions = petitionDao.findByWorkingPlaceAndCreatedAtBetween(workingPlace,
                                                                                                dateTimeAgeService
-                                                                                               .dateTimeToLocalDateStartInDay(from)
+                                                                                                       .dateTimeToLocalDateStartInDay(from)
                         , dateTimeAgeService.dateTimeToLocalDateEndInDay(to))
                         .stream()
                         .filter(petition -> petition.getPetitionPriority().equals(petitionPriority))
                         .collect(Collectors.toList());
                 NameCount nameCount = new NameCount(petitionPriority.getPetitionPriority(), workingPlace.getName(),
-                                                    (long) petitions.size());
+                                                    (long) petitions.size(), null);
                 workingPlacePetitionPriority.add(nameCount);
             }
         }
@@ -312,13 +324,13 @@ public class ReportService {
             for ( PetitionType petitionType : PetitionType.values() ) {
                 List< Petition > petitions = petitionDao.findByWorkingPlaceAndCreatedAtBetween(workingPlace,
                                                                                                dateTimeAgeService
-                                                                                               .dateTimeToLocalDateStartInDay(from)
+                                                                                                       .dateTimeToLocalDateStartInDay(from)
                         , dateTimeAgeService.dateTimeToLocalDateEndInDay(to))
                         .stream()
                         .filter(petition -> petition.getPetitionType().equals(petitionType))
                         .collect(Collectors.toList());
                 NameCount nameCount = new NameCount(petitionType.getPetitionType(), workingPlace.getName(),
-                                                    (long) petitions.size());
+                                                    (long) petitions.size(), null);
                 workingPlacePetitionType.add(nameCount);
             }
         }
@@ -334,13 +346,13 @@ public class ReportService {
                 List< PetitionState > petitionStates =
                         petitionStatuDao.findByPetitionStateTypeAndCreatedAtBetween(petitionStateType,
                                                                                     dateTimeAgeService
-                                                                                    .dateTimeToLocalDateStartInDay(from)
+                                                                                            .dateTimeToLocalDateStartInDay(from)
                                 , dateTimeAgeService.dateTimeToLocalDateEndInDay(to))
                                 .stream()
                                 .filter(petition -> petition.getPetition().getWorkingPlace().equals(workingPlace))
                                 .collect(Collectors.toList());
                 NameCount nameCount = new NameCount(petitionStateType.getPetitionStateType(), workingPlace.getName(),
-                                                    (long) petitionStates.size());
+                                                    (long) petitionStates.size(), null);
                 workingPlacePetitionStateType.add(nameCount);
             }
         }
@@ -357,7 +369,7 @@ public class ReportService {
                     contravene, dateTimeAgeService.dateTimeToLocalDateStartInDay(from)
                     , dateTimeAgeService.dateTimeToLocalDateEndInDay(to));
             NameCount count = new NameCount(contravene.getCode(), contravene.getDetail(),
-                                            (long) petitionOffenders.size());
+                                            (long) petitionOffenders.size(), null);
             contraveneCountAll.add(count);
         }
         return contraveneCountAll;
@@ -373,17 +385,17 @@ public class ReportService {
             for ( DetectionTeamMember detectionTeamMember :
                     detectionTeamMemberDao.findByEmployeeAndCreatedAtBetween(employee,
                                                                              dateTimeAgeService
-                                                                             .dateTimeToLocalDateStartInDay(from)
+                                                                                     .dateTimeToLocalDateStartInDay(from)
                             , dateTimeAgeService.dateTimeToLocalDateEndInDay(to)) ) {
                 detectionTeams.add(detectionTeamMember.getDetectionTeam());
             }
-            NameCount nameCount = new NameCount("", employee.getName(), (long) detectionTeams.size());
+            NameCount nameCount = new NameCount("", employee.getName(), (long) detectionTeams.size(), null);
             employeeDetectionTeam.add(nameCount);
         }
         return employeeDetectionTeam;
     }
     //employee - end
 //----------------------------------------------------------------------------------------------
-*/
+
 
 }

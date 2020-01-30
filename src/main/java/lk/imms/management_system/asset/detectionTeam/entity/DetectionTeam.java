@@ -24,7 +24,6 @@ public class DetectionTeam extends AuditEntity {
 
     private String name;
 
-
     @Enumerated( EnumType.STRING )
     private TeamAcceptation teamAcceptation;
 
@@ -36,13 +35,13 @@ public class DetectionTeam extends AuditEntity {
     @ManyToOne
     private Petition petition;
 
-    @OneToMany( mappedBy = "detectionTeam", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany( mappedBy = "detectionTeam", cascade = CascadeType.ALL)
     private List< DetectionTeamMember > detectionTeamMembers;
 
     @OneToMany( mappedBy = "detectionTeam", cascade = CascadeType.ALL, orphanRemoval = true )
     private List< DetectionTeamNote > detectionTeamNotes;
 
-    @OneToMany( mappedBy = "detectionTeam" )
+    @OneToMany( mappedBy = "detectionTeam", cascade = CascadeType.ALL )
     private List< Crime > crimes;
 
 }

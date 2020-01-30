@@ -440,6 +440,21 @@ $("#endDate").bind("input", function () {
         backgroundColourChangeNothingToChange($(this));
     }
 });
+
+$('#endDate, #startDate').on('click', function () {
+    let endValue = $('#endDate').val();
+    let startValue = $('#startDate').val();
+    console.log(" end " + endValue + "  start " + startValue);
+    if (endValue !== null) {
+        $('#startDate').attr('max', $('#endDate').val());
+        console.log("1 end " + endValue + "  start " + startValue);
+    }
+    if (startValue !== null) {
+        $('#endDate').attr('min', $('#startDate').val());
+        console.log("2 end " + endValue + "  start " + startValue);
+    }
+});
+
 $("#btnSummaryFind").bind("mouseover", function () {
     let endDate = document.getElementById("endDate").value;
     let startDate = document.getElementById("startDate").value;
@@ -560,7 +575,7 @@ $('#nrepsw, #npsw').keyup(function () {
     let newPassword = $('#npsw').val();
     let newPasswordReEnter = $('#nrepsw').val();
     let matchPassword = $('#passwordMatch');
-   if (newPassword === newPasswordReEnter && newPassword.length !== 0 && newPasswordReEnter.length !== 0) {
+    if (newPassword === newPasswordReEnter && newPassword.length !== 0 && newPasswordReEnter.length !== 0) {
         matchPassword.removeClass();
         matchPassword.addClass('badge badge-pill badge-success');
         matchPassword.html('Congratulations .! &nbsp;&nbsp;&nbsp; your passwords are matched');

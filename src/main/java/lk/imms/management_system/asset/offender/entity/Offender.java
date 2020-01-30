@@ -37,10 +37,10 @@ public class Offender extends AuditEntity {
     @Size( min = 5, message = "Name (English) cannot be accepted" )
     private String nameEnglish;
 
-    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL",length = 255)
     private String nameSinhala;
 
-    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 255)
     private String nameTamil;
 
     @Column( unique = true )
@@ -61,10 +61,9 @@ public class Offender extends AuditEntity {
     @Column( unique = true )
     private String email;
 
-    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
     private String address;
 
-    @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL" )
+    @Column( columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL",length = 20000)
     private String description;
 
     @Enumerated( EnumType.STRING )

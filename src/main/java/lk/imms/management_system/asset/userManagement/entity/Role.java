@@ -1,5 +1,6 @@
 package lk.imms.management_system.asset.userManagement.entity;
 
+import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,20 +17,12 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role {
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Long id;
+public class Role extends AuditEntity {
 
     @NotNull
     @Column( unique = true )
     private String roleName;
 
-    @ManyToMany( cascade = CascadeType.ALL )
-    @Fetch( FetchMode.SUBSELECT )
-    @JoinTable( name = "user_role",
-            joinColumns = @JoinColumn( name = "role_id" ),
-            inverseJoinColumns = @JoinColumn( name = "user_id" ) )
-    @OrderColumn(name = "user")
+    @ManyToMany(mappedBy = "roles")
     private List< User > users;
 }

@@ -34,7 +34,9 @@
     <attr sel="#roles" th:field="*{roles}"/>
     <attr sel="#roleList" th:each="role, rowCount : ${roleList}"
           th:text="${rowCount.count} +${'. '}+${role.roleName}"
-          th:value="${role.id}"/>
+          th:value="${role.id}"
+          th:field="*{roles}"
+    />
 
 
     <!--Working Place find -->

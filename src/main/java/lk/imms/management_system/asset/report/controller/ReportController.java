@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
@@ -28,8 +30,20 @@ public class ReportController {
     public String reportView(Model model) {
         model.addAttribute("dateObject", new TwoDate());
         model.addAttribute("contravenes", contraveneService.findAll().stream().distinct().collect(Collectors.toList()));
-        model.addAttribute("contraveneList",reportService.listContraveneWorkingPlace(LocalDate.now().minusMonths(1), LocalDate.now()));
+        model.addAttribute("contraveneList", reportService.listContraveneWorkingPlace(LocalDate.now().minusMonths(1),
+                                                                                      LocalDate.now()));
         return "report/contraveneReport";
     }
 
+    @PostMapping( "/contravene" )
+    public String reportViewCustom(@ModelAttribute TwoDate twoDate, Model model) {
+        model.addAttribute("dateObject", new TwoDate());
+        model.addAttribute("dateHas", true);
+        model.addAttribute("start", twoDate.getStartDate());
+        model.addAttribute("end", twoDate.getEndDate());
+        model.addAttribute("contravenes", contraveneService.findAll().stream().distinct().collect(Collectors.toList()));
+        model.addAttribute("contraveneList", reportService.listContraveneWorkingPlace(twoDate.getStartDate(),
+                                                                                      twoDate.getEndDate()));
+        return "report/contraveneReport";
+    }
 }
