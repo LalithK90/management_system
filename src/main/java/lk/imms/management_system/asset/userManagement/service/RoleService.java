@@ -55,4 +55,9 @@ public class RoleService implements AbstractService< Role, Long > {
         Example< Role > roleExample = Example.of(role, matcher);
         return roleDao.findAll(roleExample);
     }
+
+    @Cacheable
+    public Role findByRoleName(String roleName) {
+        return roleDao.findByRoleName(roleName);
+    }
 }

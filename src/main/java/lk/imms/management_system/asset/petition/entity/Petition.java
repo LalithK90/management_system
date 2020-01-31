@@ -1,6 +1,5 @@
 package lk.imms.management_system.asset.petition.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lk.imms.management_system.asset.contravene.entity.Contravene;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeam;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
@@ -17,7 +16,6 @@ import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

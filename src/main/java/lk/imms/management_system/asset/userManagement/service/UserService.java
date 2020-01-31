@@ -3,7 +3,9 @@ package lk.imms.management_system.asset.userManagement.service;
 
 import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.userManagement.dao.UserDao;
+import lk.imms.management_system.asset.userManagement.entity.Role;
 import lk.imms.management_system.asset.userManagement.entity.User;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
@@ -85,5 +87,15 @@ public class UserService implements AbstractService< User, Long > {
     @Cacheable
     public boolean findByEmployee(Employee employee) {
         return userDao.findByEmployee(employee) != null;
+    }
+
+    @Cacheable
+    public List< User > findByWorkingPlace(WorkingPlace workingPlace) {
+        return userDao.findByWorkingPlaces(workingPlace);
+    }
+
+    @Cacheable
+    public List< User > findByWorkingPlaceAndRoles(WorkingPlace workingPlace, Role role) {
+        return userDao.findByWorkingPlacesAndRoles(workingPlace, role);
     }
 }

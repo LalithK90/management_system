@@ -142,31 +142,14 @@ img {
 nav {
     position: sticky;
 }
-
+#petitionTodayCount{
+    position:absolute;
+    top:30%;
+    left:60%;
+    transform:translate(-10%,-90%);
+}
 /*Nav bar - end*/
-/*footer - properties start */
-.cashier-footer {
-    text-align: center;
-    font-size: 20px;
-}
 
-.cashier-footer:hover {
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    text-shadow: 2px 2px 0 #29A1D5;
-}
-
-.cashier-footer:hover {
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    box-shadow: 3px -5px #f5f5f5, -1em 0 .4em #29A1D5;
-}
-
-/*footer - properties end */
 /*error pages - properties start */
 
 /*error pages - properties end */
@@ -430,3 +413,4 @@ hr:before {
     border-radius: 20px;
 }
 /*<hr/> tag style - end */
+

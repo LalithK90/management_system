@@ -1,6 +1,7 @@
 package lk.imms.management_system.asset.minutePetition.service;
 
 
+import lk.imms.management_system.asset.employee.entity.Employee;
 import lk.imms.management_system.asset.minutePetition.dao.MinutePetitionDao;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.petition.entity.Petition;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -65,5 +67,11 @@ public class MinutePetitionService implements AbstractService< MinutePetition, L
     @Cacheable
     public List< MinutePetition > findByPetition(Petition petition) {
         return minutePetitionDao.findByPetition(petition);
+    }
+
+    @Cacheable
+    public List< MinutePetition > findByEmployeeAndCreatedAtBetween(Employee employee, LocalDateTime from,
+                                                  LocalDateTime to) {
+        return minutePetitionDao.findByEmployeeAndCreatedAtBetween(employee,from,to);
     }
 }

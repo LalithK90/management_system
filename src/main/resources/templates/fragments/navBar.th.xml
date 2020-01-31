@@ -38,5 +38,6 @@
     <!--Login - out-->
     <attr sel="#loged" sec:authorize="isAuthenticated()"/>
     <attr sel="#logedNot" sec:authorize="!isAuthenticated()"/>
+
 </thlogic>
 

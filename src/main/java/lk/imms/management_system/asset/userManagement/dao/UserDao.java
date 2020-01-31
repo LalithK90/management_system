@@ -2,6 +2,7 @@ package lk.imms.management_system.asset.userManagement.dao;
 
 
 import lk.imms.management_system.asset.employee.entity.Employee;
+import lk.imms.management_system.asset.userManagement.entity.Role;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,4 +26,6 @@ public interface UserDao extends JpaRepository< User, Long > {
     User findByEmployee(Employee employee);
 
     List<User> findByWorkingPlaces(WorkingPlace workingPlace);
+
+    List<User> findByWorkingPlacesAndRoles(WorkingPlace workingPlace, Role role);
 }

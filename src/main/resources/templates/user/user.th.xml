@@ -8,7 +8,7 @@
 <attr sel="#index" th:text="${rowCount.count}"/>
 <attr sel="#username" th:text="${user.username}"/>
 <attr sel="#userStatus" th:text="${user.enabled==true?'Active':'Blocked'}"/>
-<attr sel="#createdDate" th:text="${user.createdDate}"/>
+<attr sel="#createdDate" th:text="${{user.createdAt}}"/>
 <attr sel="#userView" th:href="${'/user/' + user.id}"/>
 <attr sel="#userEdit" th:href="${'/user/edit/' + user.id}"/>
 <attr sel="#userRemove" th:href="${'/user/remove/' + user.id}"

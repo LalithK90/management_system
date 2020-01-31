@@ -12,11 +12,12 @@ body {
 
 
 .container {
-    max-width: 1150px;
+    max-width: 100%;
     margin: 50px 0 0 50px;
 }
 .main-section{
     border-radius:4px;
+    width: 100%;
     background: linear-gradient(90deg, rgba(85,209,204,0.78529410055037643) 0%, rgba(25,134,199,0.8738095067128414) 19%, rgba(32,185,127,0.77128849830948) 93%);
 }
 .welcome-Notes{
@@ -42,7 +43,7 @@ body {
 }
 
 .tile.wide {
-    width: 320px;
+    width: 180px;
 }
 
 .tile a {
@@ -63,7 +64,7 @@ body {
 }
 
 .tile .header .count {
-    font-size: 48px;
+    font-size: 20px;
     text-align:center;
     padding:10px 0 0;
 }

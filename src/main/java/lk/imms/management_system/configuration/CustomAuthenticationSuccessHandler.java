@@ -31,21 +31,13 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         //do some logic here if you want something to be done whenever
         User authUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 //if user already have failure attempt clean before a save new session log
-        UserSessionLog userSessionLogDb =
-                userSessionLogService.findByUserAndUserSessionLogStatus(authUser,
-                                                                        UserSessionLogStatus.FAILURE);
-        if ( userSessionLogDb != null && userSessionLogDb.getFailureAttempts() <= 10 ) {
-            response.sendRedirect("/login/error10");
-        } else {
-            if(userSessionLogDb != null){
-                userSessionLogService.delete(userSessionLogDb);
-            }
-            //the user successfully logs in.
-            UserSessionLog userSessionLog = new UserSessionLog();
-            userSessionLog.setUser(authUser);
-            userSessionLog.setUserSessionLogStatus(UserSessionLogStatus.LOGGED);
-            userSessionLog.setCreatedAt(LocalDateTime.now());
-            userSessionLogService.persist(userSessionLog);
+
+        //the user successfully logs in.
+        UserSessionLog userSessionLog = new UserSessionLog();
+        userSessionLog.setUser(authUser);
+        userSessionLog.setUserSessionLogStatus(UserSessionLogStatus.LOGGED);
+        userSessionLog.setCreatedAt(LocalDateTime.now());
+        userSessionLogService.persist(userSessionLog);
 
              /*
         //default session is ok ->>>>>
@@ -55,14 +47,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         */
 
-            //set our response to OK status
-            response.setStatus(HttpServletResponse.SC_OK);
+        //set our response to OK status
+        response.setStatus(HttpServletResponse.SC_OK);
 
-            //since we have created our custom success handler, its up to us to where we will redirect the user after
-            // successfully login
-            response.sendRedirect("/mainWindow");
-        }
-
-
+        //since we have created our custom success handler, its up to us to where we will redirect the user after
+        // successfully login
+        response.sendRedirect("/mainWindow");
     }
 }

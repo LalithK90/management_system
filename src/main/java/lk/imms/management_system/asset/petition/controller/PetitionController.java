@@ -30,13 +30,16 @@ import lk.imms.management_system.asset.petitionAddOffender.service.PetitionOffen
 import lk.imms.management_system.asset.petitioner.controller.PetitionerRestController;
 import lk.imms.management_system.asset.petitioner.entity.Petitioner;
 import lk.imms.management_system.asset.petitioner.service.PetitionerService;
+import lk.imms.management_system.asset.userManagement.entity.Role;
 import lk.imms.management_system.asset.userManagement.entity.User;
+import lk.imms.management_system.asset.userManagement.service.RoleService;
 import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.District;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.WorkingPlaceType;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.asset.workingPlace.service.WorkingPlaceService;
+import lk.imms.management_system.util.service.EmailService;
 import lk.imms.management_system.util.service.MakeAutoGenerateNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -54,8 +57,10 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 // This clz is used to manage petition adding process while on this adding
 // Minute, petition, and petitioner details come on one same object MinutePetition
@@ -78,6 +83,8 @@ public class PetitionController {
     private final OffenderFilesService offenderFilesService;
     private final EmployeeService employeeService;
     private final WorkingPlaceService workingPlaceService;
+    private final RoleService roleService;
+    private final EmailService emailService;
 
     @Autowired
     public PetitionController(PetitionService petitionService, MinutePetitionFilesService minutePetitionFilesService,
@@ -89,7 +96,8 @@ public class PetitionController {
                               PetitionOffenderService petitionOffenderService,
                               EmployeeFilesService employeeFilesService, CrimeService crimeService,
                               OffenderFilesService offenderFilesService, EmployeeService employeeService,
-                              WorkingPlaceService workingPlaceService) {
+                              WorkingPlaceService workingPlaceService, RoleService roleService,
+                              EmailService emailService) {
         this.petitionService = petitionService;
         this.minutePetitionFilesService = minutePetitionFilesService;
         this.petitionStateService = petitionStateService;
@@ -106,6 +114,8 @@ public class PetitionController {
         this.offenderFilesService = offenderFilesService;
         this.employeeService = employeeService;
         this.workingPlaceService = workingPlaceService;
+        this.roleService = roleService;
+        this.emailService = emailService;
     }
 
     // Common things for petition add and update
@@ -114,7 +124,7 @@ public class PetitionController {
         model.addAttribute("petitionPriorities", PetitionPriority.values());
         commonService.commonUrlBuilder(model);
         model.addAttribute("petitionerUrl", MvcUriComponentsBuilder
-                .fromMethodName(PetitionerRestController.class, "getPetitioner", "")
+                .fromMethodName(PetitionRestController.class, "getPetitioner", "")
                 .build()
                 .toString());
         return "petition/addPetition";
@@ -134,29 +144,34 @@ public class PetitionController {
         //get current login user
         User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 
- /*       model.addAttribute("petitions",
-                           petitions
-                                   .stream()
-                                   .filter((x) -> {
-                                       boolean matched = false;
-                                       for ( WorkingPlace workingPlace : currentUser.getWorkingPlaces() ) {
-                                           matched = x.getWorkingPlace().equals(workingPlace);
-                                       }
-                                       return matched;
-                                   })
-                                   .collect(Collectors.toList()));*/
-        model.addAttribute("petitions", petitions);
-       /* PetitionState petitionState = null;
-        for ( Petition petition : petitions ) {
-            petitionState = petition.getPetitionStates().get(petition.getPetitionStates().size() - 1);
-        }
+        List< Petition > petitionList = petitions
+                .stream()
+                .filter((x) -> {
+                    boolean matched = false;
+                    for ( WorkingPlace workingPlace :
+                            currentUser.getWorkingPlaces() ) {
+                        matched =
+                                x.getWorkingPlace().equals(workingPlace);
+                    }
+                    return matched;
+                }).collect(Collectors.toList());
 
-        if ( petitionState != null ) {
-            model.addAttribute("petitionState",petitionState.getPetitionStateType().getPetitionStateType() );
-        }*/
+        minutePetitionService.findAll()
+                .stream()
+                .filter((x) -> {
+                    boolean matched = false;
+                    for ( WorkingPlace workingPlace : currentUser.getWorkingPlaces() ) {
+                        matched = x.getWorkingPlace().equals(workingPlace);
+                    }
+                    return matched;
+                })
+                .collect(Collectors.toList()).forEach(x -> petitionList.add(x.getPetition()));
+
+
+        model.addAttribute("petitions", petitionList.stream().distinct().collect(Collectors.toList()));
+
         return "petition/petition";
     }
-
 
     //Give all available petition according to login user
     @GetMapping
@@ -237,7 +252,7 @@ public class PetitionController {
             return commonThings(model);
         }
 
-        WorkingPlace workingPlace = currentUser.getWorkingPlaces().get(0);
+        WorkingPlace workingPlace = currentUser.getEmployee().getWorkingPlace();
         //get index number from db and used to it create petition index number and petition number
         Petition petitionDb = (Petition) petitionService.getLastOne();
         String indexNumber =
@@ -306,6 +321,50 @@ public class PetitionController {
                 }
             }
         }
+
+        // 3. Send email working place "CGE", "ACGE", "CE", "DCL", "DCLE", "ACE", "SE", "OIC"
+        String[] codes = {"CGE", "ACGE", "CE", "DCL", "DCLE", "ACE", "SE", "OIC"};
+        List< Role > roles = new ArrayList<>();
+        for ( String roleName : codes ) {
+            roles.add(roleService.findByRoleName(roleName));
+        }
+
+        HashSet< Employee > employees = new HashSet<>();
+        for ( Role role : roles ) {
+            userService.findByWorkingPlaceAndRoles(workingPlace, role)
+                    .stream()
+                    .filter(User::isEnabled)
+                    .collect(Collectors.toList())
+                    .forEach(user -> employees.add(user.getEmployee()));
+        }
+
+
+        if ( savedPetition != null ) {
+            String petitionNumber = savedPetition.getPetitionNumber();
+            String subject = "කරුණාකර මෙම පෙත්සම අවධානයට ගන්න: " + petitionNumber + " Please get attention this " +
+                    "petition : " + petitionNumber + " இந்த மனுவை கவனத்தில் கொள்ளுங்கள்: " + petitionNumber;
+
+            String message = "කරුණාකර මෙම පෙත්සම අවධානයට ගන්න: \t" + petitionNumber + "\nPlease get attention this " +
+                    "petition: \t" +
+                    " : " + petitionNumber + "\nஇந்த மனுவை கவனத்தில் கொள்ளுங்கள்: \t" + petitionNumber + "\n\n\n\n\n" +
+                    "\n\n" +
+                    "AGA අංශය (AGA Division, AGA பிரிவு) : \t" + savedPetition.getAgaDivision() + "\n" +
+                    "ගම (Village, கிராமம்) : \t" + savedPetition.getVillage() + "\n" +
+                    "විෂය (Subject, பொருள்) : \t" + savedPetition.getSubject() + "\n" +
+                    "පෙත්සම් ප්\u200Dරමුඛතාවය (Petition Priority, மனு முன்னுரிமை) : \t" + savedPetition.getPetitionPriority().getPetitionPriority() + "\n" +
+                    "අදාළ සුරාබදු ස්ථානය (Relevant Excise Station, தொடர்புடைய கலால் நிலையம்) : \t" + savedPetition.getWorkingPlace().getName() + "\n" +
+                    "\n\n\n\n\n" +
+                    "\n ස්තූතියි" +
+                    "\n Thanks" +
+                    "\n நன்றி" +
+                    "\n\n\n" +
+                    "\n" + savedPetition.getCreatedBy();
+
+            for ( Employee employee : employees ) {
+                emailService.sendEmail(employee.getOfficeEmail(), subject, message);
+            }
+        }
+
         return "redirect:/petition/add";
     }
 

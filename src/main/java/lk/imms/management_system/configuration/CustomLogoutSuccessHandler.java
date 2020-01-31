@@ -7,7 +7,6 @@ import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.asset.userManagement.service.UserSessionLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -29,7 +28,6 @@ public class CustomLogoutSuccessHandler extends
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
                                 Authentication authentication) throws IOException, ServletException {
-       //System.out.println(" authentication " + authentication.getName());
 
         if ( authentication != null && authentication.getDetails() != null ) {
             try {

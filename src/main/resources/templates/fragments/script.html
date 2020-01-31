@@ -22,6 +22,44 @@
     <script id="imUpJs"></script>
     <!--Text area WYSIWYG_HTML editor-->
     <script id="WYE"></script>
+
+    <!--Petition count get url-->
+    <script>
+        $(document).ready(function () {
+            let petitionCountUrl = document.location.origin + "/petitionCount";
+            console.log("petition count url "+ petitionCountUrl);
+/*
+            console.log("document.URL : "+document.URL);
+            console.log("document.location.href : "+document.location.href);
+            console.log("document.location.origin : "+document.location.origin);
+            console.log("document.location.hostname : "+document.location.hostname);
+            console.log("document.location.host : "+document.location.host);
+            console.log("document.location.pathname : "+document.location.pathname);*/
+            // to get petition count every five secound
+            window.setInterval(function () {
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: petitionCountUrl,
+                    success: function (data, textStatus) {
+                        if (textStatus === 'success') {
+                            /// call your function here
+                            $("#petitionTodayCount").html(data);
+                            console.log(data);
+                        }
+//alert("success");
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+//alert('request failed'+errorThrown);
+                        console.log('request failed   ' + errorThrown);
+                        location.reload();
+                    }
+                });
+
+            }, 5000);
+        });
+    </script>
 </div>
 </body>
 </html>
