@@ -1,0 +1,21 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <attr sel="#message" th:text="${emailMessageDetail.message}"/>
+    <attr sel="#subject" th:text="${emailMessageDetail.subject}"/>
+    <attr sel="#createdAt" th:text="${#temporals.format(emailMessageDetail.createdAt, 'dd-MM-yyyy HH:mm')}"/>
+    <attr sel="#createdBy" th:text="${emailMessageDetail.createdBy}"/>
+    <attr sel="#employeeList" th:each="employee, rowCount : ${emailMessageDetail.employees}">
+        <attr sel="#index" th:text="${rowCount.count}"/>
+        <attr sel="#name" th:text="${employee.title.title} + ${employee.name}"/>
+        <attr sel="#mobileOne" th:text="${employee.mobileOne}"/>
+        <attr sel="#officeEmail" th:text="${employee.officeEmail}"/>
+        <!--Employee view-->
+        <attr sel="#employeeView" th:href="${'/employee/' + employee.id}"/>
+
+    </attr>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+</thlogic>

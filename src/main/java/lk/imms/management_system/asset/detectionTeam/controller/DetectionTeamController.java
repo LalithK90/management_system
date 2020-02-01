@@ -8,6 +8,7 @@ import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamNote;
 import lk.imms.management_system.asset.detectionTeam.entity.Enum.DetectionTeamMemberRole;
 import lk.imms.management_system.asset.detectionTeam.entity.Enum.DetectionTeamStatus;
 import lk.imms.management_system.asset.detectionTeam.entity.Enum.TeamAcceptation;
+import lk.imms.management_system.asset.detectionTeam.service.DetectionTeamMemberService;
 import lk.imms.management_system.asset.detectionTeam.service.DetectionTeamService;
 import lk.imms.management_system.asset.petition.entity.Enum.PetitionStateType;
 import lk.imms.management_system.asset.petition.entity.PetitionState;
@@ -43,6 +44,7 @@ public class DetectionTeamController {
     private final PetitionStateService petitionStateService;
     private final EmailService emailService;
     private final TwilioMessageService twilioMessageService;
+    private final DetectionTeamMemberService detectionTeamMemberService;
 
     @Autowired
     public DetectionTeamController(DetectionTeamService detectionTeamService, PetitionService petitionService,
@@ -50,7 +52,8 @@ public class DetectionTeamController {
                                    DateTimeAgeService dateTimeAgeService,
                                    MakeAutoGenerateNumberService makeAutoGenerateNumberService,
                                    PetitionStateService petitionStateService, EmailService emailService,
-                                   TwilioMessageService twilioMessageService) {
+                                   TwilioMessageService twilioMessageService,
+                                   DetectionTeamMemberService detectionTeamMemberService) {
         this.detectionTeamService = detectionTeamService;
         this.petitionService = petitionService;
         this.userService = userService;
@@ -60,6 +63,7 @@ public class DetectionTeamController {
         this.petitionStateService = petitionStateService;
         this.emailService = emailService;
         this.twilioMessageService = twilioMessageService;
+        this.detectionTeamMemberService = detectionTeamMemberService;
     }
 
 
@@ -67,13 +71,13 @@ public class DetectionTeamController {
     public String allTeams(Model model) {
         //get current login user
         User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+/*        model.addAttribute("detectionTeams",
+                           detectionTeamService.findAll());*/
         model.addAttribute("detectionTeams",
-                           detectionTeamService.findAll());
-        /*model.addAttribute("detectionTeams",
                            detectionTeamMemberService.findAll()
                                    .stream()
                                    .filter((x) -> x.getEmployee().equals(currentUser.getEmployee()))
-                                   .collect(Collectors.toList()));*/
+                                   .collect(Collectors.toList()));
         return "detectionTeam/detectionTeam";
     }
 

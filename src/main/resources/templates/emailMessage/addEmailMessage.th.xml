@@ -1,0 +1,39 @@
+<thlogic xmlns:th="http://www.thymeleaf.org">
+    <attr sel="#header" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#navBar" th:replace="~{fragments/navBar :: navBarFragment}"/>
+
+    <!--Form -->
+    <attr sel="#form" th:action="${'/emailMessage/add'}" th:object="${emailMessage}"/>
+
+    <!--subject -->
+    <attr sel="#subject" th:field="*{subject}"/>
+    <!--Petition-->
+    <attr sel="#messageOne" th:field="*{message}"/>
+
+    <!--provinces-->
+    <attr sel="#provinceSelectList" th:each="province : ${provinces}"
+          th:text="${province.province}"
+          th:value="${province}"/>
+    <!--Designation -->
+    <attr sel="#designationList" th:each="designation : ${designations}"
+          th:text="${designation.designation}"
+          th:value="${designation}"/>
+
+    <!--Button-->
+    <attr sel="#submit" th:text="${'Send'}"/>
+
+
+    <!--Singlish to sinhala Translator-->
+    <attr sel="#translatorSinhala" th:replace="~{fragments/unicodeSinhala :: unicodeSinhalaFragment}"/>
+    <!--Tamish to Tamil Translator-->
+    <attr sel="#translatorTamil" th:replace="~{fragments/unicodeTamil :: unicodeTamilFragment}"/>
+
+    <!--URL Comes -->
+    <attr sel="#districtUrl" th:value="${districtUrl}"/>
+    <attr sel="#stationUrl" th:value="${stationUrl}"/>
+    <attr sel="#employeeUrl" th:value="${employeeUrl}"/>
+
+    <attr sel="#footer" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#script" th:replace="~{fragments/script :: scriptFragment}"/>
+    <attr sel="#customScript" th:src="@{/js/employeeFindUsingWorkingPlace.js}"/>
+</thlogic>

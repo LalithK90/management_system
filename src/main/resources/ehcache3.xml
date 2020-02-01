@@ -111,9 +111,9 @@
     <!--14. petition-->
     <cache alias="petition">
         <expiry>
-            <ttl unit="seconds">6000</ttl>
+            <ttl unit="seconds">60000</ttl>
         </expiry>
-        <heap unit="entries">200</heap>
+        <heap unit="entries">2000</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
     <!--15. petitionState-->
@@ -166,6 +166,14 @@
     </cache>
     <!--21. userSessionLog-->
     <cache alias="userSessionLog">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">150</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+    <!--22. email message-->
+    <cache alias="emailMessage">
         <expiry>
             <ttl unit="seconds">600</ttl>
         </expiry>

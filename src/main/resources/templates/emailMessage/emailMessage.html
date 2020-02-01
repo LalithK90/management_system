@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<!--header Include-->
+<head id="header">
+
+</head>
+<body>
+<!--nav Bar include-->
+<nav id="navBar"></nav>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+        </div>
+        <div class="col">
+            <h4 class="text-info text-center">
+                <strong>
+                    Send Message List
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+        <!--    <a class="btn btn-danger btn-outline-warning btn-sm" id="emailMessagesList">
+                <i aria-hidden="true" class="fa fa-gavel"></i>
+                &nbsp; Message List
+            </a>-->
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <div class="row" id="emailMessageListTable">
+            <div class="col-sm-12">
+                <table class="table table-hover table-striped" id="myTable">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>Index</th>
+                        <th>Subject</th>
+                        <th>Send By</th>
+                        <th>Send Date</th>
+                        <th class="text-center">Modify</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="emailMessageList" scope="row">
+                        <th id="index"></th>
+                        <th id="subject"></th>
+                        <th id="createdBy"></th>
+                        <th id="createdAt"></th>
+                        <th><a class="btn btn-success btn-sm" id="emailMessageView"><i
+                                class="fa fa-folder-open"></i>&nbsp;View</a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" id="emailMessagesNotList">
+            <div class="col-sm-12">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="text-center text-danger">
+                        <strong>There is no user upto now please add user to the system
+                                using add user button.
+                        </strong>
+                    </h3>
+                </div>
+            </div>
+            <script>
+                /*active boostrap alert - start*/
+                $(".alert").alert();
+                /*active boostrap alert - end*/
+            </script>
+        </div>
+    </div>
+</div>
+
+
+<!--footer include-->
+<footer id="footer" class="page-footer"></footer>
+<!--script include-->
+<script id="script"></script>
+</body>
+</html>

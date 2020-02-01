@@ -39,7 +39,6 @@ public class Petitioner extends AuditEntity {
 
     private String land;
 
-    @Email( message = "Provide valid email" )
     @Column( unique = true )
     private String email;
 

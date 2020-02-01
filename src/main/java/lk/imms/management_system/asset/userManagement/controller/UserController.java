@@ -155,6 +155,7 @@ public class UserController {
         } else {
             user.setEnabled(false);
         }
+        user.setRoles(user.getRoles());
         user.setEnabled(true);
         userService.persist(user);
         return "redirect:/user";

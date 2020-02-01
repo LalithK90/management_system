@@ -9,6 +9,7 @@ import lk.imms.management_system.asset.commonAsset.model.FileInfo;
 import lk.imms.management_system.asset.detectionTeam.entity.DetectionTeamMember;
 import lk.imms.management_system.asset.employee.entity.Enum.Designation;
 import lk.imms.management_system.asset.employee.entity.Enum.EmployeeStatus;
+import lk.imms.management_system.asset.message.entity.EmailMessage;
 import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -58,13 +58,13 @@ public class Employee extends AuditEntity {
 
     private String land;
 
-    @Column( unique = true)
+    @Column( unique = true )
     private String email;
 
-    @Column( unique = true)
+    @Column( unique = true )
     private String officeEmail;
 
-    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 255)
+    @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 255 )
     private String address;
 
     @Enumerated( EnumType.STRING )
@@ -91,7 +91,7 @@ public class Employee extends AuditEntity {
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfAssignment;
 
-    @ManyToOne( cascade = CascadeType.PERSIST)
+    @ManyToOne( cascade = CascadeType.PERSIST )
     private WorkingPlace workingPlace;
 
     @OneToMany( mappedBy = "employee", fetch = FetchType.EAGER )
@@ -100,6 +100,9 @@ public class Employee extends AuditEntity {
 
     @OneToMany( mappedBy = "employee" )
     private List< EmployeeWorkingPlaceHistory > employeeWorkingHistories;
+
+    @ManyToMany( mappedBy = "employees" )
+    private List< EmailMessage > emailMessages;
 
     @Transient
     private List< MultipartFile > files = new ArrayList<>();

@@ -270,23 +270,31 @@ let addRowToSelectedTable = function (employee) {
 
     row.insertCell(0).innerHTML = tableRowCount;
     row.insertCell(1).innerHTML = employee.id;
-    row.insertCell(2).innerHTML = `<input type="hidden" name="detectionTeamMembers[${tableRowCount - 1}].employee" value="${employee.id}" />`;
+    if ( document.location.pathname !== "/emailMessage/add") {
+    row.insertCell(2).innerHTML = `<input type="hidden" name="detectionTeamMembers[${tableRowCount - 1}]" value="${employee.id}" />`;
+        }else {
+        row.insertCell(2).innerHTML = `<input type="hidden" name="employees[${tableRowCount - 1}]" value="${employee.id}" />`;
+    }
     row.insertCell(3).innerHTML = employee.name;
-    row.insertCell(4).innerHTML = `<div>
-                                            <input type="radio" id="teamMemberStatusValue${tableRowCount}" name="detectionTeamMembers[${tableRowCount - 1}].detectionTeamMemberRole" value="INCHARGE" required/> 
-                                            <label for="teamMemberStatusValue${tableRowCount}"> In charge</label>
-                                        </div>
-                                        <div>
-                                            <input type="radio" id="teamMemberStatusValue1${tableRowCount}" name="detectionTeamMembers[${tableRowCount - 1}].detectionTeamMemberRole" value="MEMBER" checked/> 
-                                            <label for="teamMemberStatusValue1${tableRowCount}">Member</label>    
-                                        </div>             
-                                        <div>
-                                            <input type="radio" id="teamMemberStatusValue2${tableRowCount}" name="detectionTeamMembers[${tableRowCount - 1}].detectionTeamMemberRole" value="DRIVER"/> 
-                                            <label for="teamMemberStatusValue2${tableRowCount}">Driver</label>     
-                                        </div>
-                                                     
-`;
-    row.insertCell(5).innerHTML = `<button type="button" class="btn btn-danger btn-sm " onclick="deletedSelect(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
+    if ( document.location.pathname !== "/emailMessage/add") {
+        row.insertCell(4).innerHTML = `<div>
+                                                <input type="radio" id="teamMemberStatusValue${tableRowCount}" name="detectionTeamMembers[${tableRowCount - 1}].detectionTeamMemberRole" value="INCHARGE" required/> 
+                                                <label for="teamMemberStatusValue${tableRowCount}"> In charge</label>
+                                            </div>
+                                            <div>
+                                                <input type="radio" id="teamMemberStatusValue1${tableRowCount}" name="detectionTeamMembers[${tableRowCount - 1}].detectionTeamMemberRole" value="MEMBER" checked/> 
+                                                <label for="teamMemberStatusValue1${tableRowCount}">Member</label>    
+                                            </div>             
+                                            <div>
+                                                <input type="radio" id="teamMemberStatusValue2${tableRowCount}" name="detectionTeamMembers[${tableRowCount - 1}].detectionTeamMemberRole" value="DRIVER"/> 
+                                                <label for="teamMemberStatusValue2${tableRowCount}">Driver</label>     
+                                            </div>
+                                                         
+    `;
+        row.insertCell(5).innerHTML = `<button type="button" class="btn btn-danger btn-sm " onclick="deletedSelect(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
+    } else {
+        row.insertCell(4).innerHTML = `<button type="button" class="btn btn-danger btn-sm " onclick="deletedSelect(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
+    }
 
 };
 
@@ -331,7 +339,7 @@ $('#petitionStateType').bind('change', function () {
             break;
         } else {
             $('#provinceses, #designations,#employee').show();
-            $("#provinces, #districts, #stations, #designation, #employees").attr('required','required');
+            $("#provinces, #districts, #stations, #designation, #employees").attr('required', 'required');
         }
     }
 });

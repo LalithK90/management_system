@@ -27,8 +27,7 @@
     <script>
         $(document).ready(function () {
             let petitionCountUrl = document.location.origin + "/petitionCount";
-            console.log("petition count url "+ petitionCountUrl);
-/*
+/*            console.log("petition count url "+ petitionCountUrl);
             console.log("document.URL : "+document.URL);
             console.log("document.location.href : "+document.location.href);
             console.log("document.location.origin : "+document.location.origin);
@@ -46,7 +45,6 @@
                         if (textStatus === 'success') {
                             /// call your function here
                             $("#petitionTodayCount").html(data);
-                            console.log(data);
                         }
 //alert("success");
                     },
