@@ -1,33 +1,30 @@
 package lk.imms.management_system.asset.commonAsset.controller;
 
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
-import lk.imms.management_system.asset.petition.controller.PetitionRestController;
-import lk.imms.management_system.asset.petitioner.controller.PetitionerRestController;
+import lk.imms.management_system.asset.petition.entity.Petition;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.UserService;
-import lk.imms.management_system.asset.userManagement.service.UserSessionLogService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class UiController {
 
-    private final UserSessionLogService userSessionLogService;
     private final UserService userService;
     private final MinutePetitionService minutePetitionService;
     private final DateTimeAgeService dateTimeAgeService;
 
     @Autowired
-    public UiController(UserSessionLogService userSessionLogService, UserService userService,
-                        MinutePetitionService minutePetitionService, DateTimeAgeService dateTimeAgeService) {
-        this.userSessionLogService = userSessionLogService;
+    public UiController(UserService userService, MinutePetitionService minutePetitionService,
+                        DateTimeAgeService dateTimeAgeService) {
         this.userService = userService;
         this.minutePetitionService = minutePetitionService;
         this.dateTimeAgeService = dateTimeAgeService;
@@ -42,13 +39,17 @@ public class UiController {
     public String getHome(Model model) {
         //do some logic here if you want something to be done whenever
         User authUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("petitions",
-                           minutePetitionService
-                                   .findByEmployeeAndCreatedAtBetween(authUser.getEmployee(),
-                                                                      dateTimeAgeService
-                                                                              .dateTimeToLocalDateStartInDay(LocalDate.now()),
-                                                                      dateTimeAgeService
-                                                                              .dateTimeToLocalDateEndInDay(LocalDate.now())));
+        Set< Petition > petitionSet = new HashSet<>();
+        minutePetitionService
+                .findByEmployeeAndCreatedAtBetween(authUser.getEmployee(),
+                                                   dateTimeAgeService
+                                                           .dateTimeToLocalDateStartInDay(LocalDate.now()),
+                                                   dateTimeAgeService
+                                                           .dateTimeToLocalDateEndInDay(LocalDate.now())).forEach(
+                minutePetition -> {
+                    petitionSet.add(minutePetition.getPetition());
+                }                                                                                                                 );
+        model.addAttribute("petitions", petitionSet.toArray());
         return "mainWindow";
     }
 

@@ -11,7 +11,6 @@ import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
 import lk.imms.management_system.asset.workingPlace.service.WorkingPlaceService;
-import lk.imms.management_system.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,16 +30,13 @@ public class UserController {
     private final UserService userService;
     private final RoleService roleService;
     private final EmployeeService employeeService;
-    private final DateTimeAgeService dateTimeAgeService;
     private final WorkingPlaceService workingPlaceService;
 
     @Autowired
-    public UserController(UserService userService, EmployeeService employeeService,
-                          DateTimeAgeService dateTimeAgeService, RoleService roleService,
+    public UserController(UserService userService, EmployeeService employeeService, RoleService roleService,
                           WorkingPlaceService workingPlaceService) {
         this.userService = userService;
         this.employeeService = employeeService;
-        this.dateTimeAgeService = dateTimeAgeService;
         this.roleService = roleService;
         this.workingPlaceService = workingPlaceService;
     }
@@ -107,7 +103,8 @@ public class UserController {
         model.addAttribute("employee", new Employee());
         model.addAttribute("employeeDetailShow", false);
         model.addAttribute("employeeNotFoundShow", true);
-        model.addAttribute("employeeNotFound", "There is not employee in the system according to the provided details or that employee already be a user in the system" +
+        model.addAttribute("employeeNotFound", "There is not employee in the system according to the provided details" +
+                " or that employee already be a user in the system" +
                 " \n Could you please search again !!");
 
         return "user/addUser";
@@ -140,7 +137,6 @@ public class UserController {
             return commonCode(model);
         }
         //user is super senior office need to provide all working palace to check
-
         Employee employee = employeeService.findById(user.getEmployee().getId());
 
         // if user designation is belongs to supper senior category all workstations are able to check
@@ -164,7 +160,7 @@ public class UserController {
 
     @GetMapping( value = "/remove/{id}" )
     public String removeUser(@PathVariable Long id) {
-       // user can not be deleted
+        // user can not be deleted
         //userService.delete(id);
         return "redirect:/user";
     }

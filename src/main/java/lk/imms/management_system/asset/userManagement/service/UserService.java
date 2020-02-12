@@ -86,7 +86,7 @@ public class UserService implements AbstractService< User, Long > {
 
     @Cacheable
     public boolean findByEmployee(Employee employee) {
-        return userDao.findByEmployee(employee) != null;
+        return userDao.findByEmployee(employee) == null;
     }
 
     @Cacheable

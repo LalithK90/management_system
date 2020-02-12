@@ -3,7 +3,6 @@ package lk.imms.management_system.asset.minutePetition.controller;
 
 import lk.imms.management_system.asset.commonAsset.service.CommonService;
 import lk.imms.management_system.asset.employee.entity.Employee;
-import lk.imms.management_system.asset.employee.entity.EmployeeWorkingPlaceHistory;
 import lk.imms.management_system.asset.minutePetition.entity.Enum.MinuteState;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetition;
 import lk.imms.management_system.asset.minutePetition.entity.MinutePetitionFiles;
@@ -27,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -102,30 +100,26 @@ public class MinutePetitionController {
         //if there is nothing to save files
         if ( !minutePetition.getFiles().isEmpty() && minutePetition.getFiles().size() != 0 && minutePetition.getFiles().get(0).getOriginalFilename() != null ) {
             for ( MultipartFile file : minutePetition.getFiles() ) {
-                if ( file.getOriginalFilename() == null && file.getContentType().equals("application/octet-stream") ) {
-                    continue;
-                }
-                MinutePetitionFiles minutePetitionFile =
-                        minutePetitionFilesService.findByName(file.getOriginalFilename());
-                if ( minutePetitionFile != null ) {
-                    // update new contents
-                    minutePetitionFile.setPic(file.getBytes());
-                    minutePetitionFilesService.save(minutePetitionFile);
-                } else {
-                    minutePetitionFile = new MinutePetitionFiles(file.getOriginalFilename(),
-                                                                 file.getContentType(),
-                                                                 file.getBytes(),
-                                                                 minutePetition.getPetition().getPetitionNumber().concat("-" + LocalDateTime.now()),
-                                                                 UUID.randomUUID().toString().concat(
-                                                                         "minutePetition"));
-                    minutePetitionFile.setMinutePetition(minutePetition1);
+                if ( file.getOriginalFilename() != null ) {
+                    MinutePetitionFiles minutePetitionFile =
+                            minutePetitionFilesService.findByName(file.getOriginalFilename());
+                    if ( minutePetitionFile != null ) {
+                        // update new contents
+                        minutePetitionFile.setPic(file.getBytes());
+                    } else {
+                        minutePetitionFile = new MinutePetitionFiles(file.getOriginalFilename(),
+                                                                     file.getContentType(),
+                                                                     file.getBytes(),
+                                                                     minutePetition.getPetition().getPetitionNumber().concat("-" + LocalDateTime.now()),
+                                                                     UUID.randomUUID().toString().concat(
+                                                                             "minutePetition"));
+                        minutePetitionFile.setMinutePetition(minutePetition1);
+                    }
                     minutePetitionFilesService.save(minutePetitionFile);
                 }
             }
         }
-
         return "redirect:/petition";
     }
-
 
 }

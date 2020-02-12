@@ -32,7 +32,7 @@ public class EmployeeWorkingPlaceHistory extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private WorkingPlaceChangeReason workingPlaceChangeReason;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Employee employee;
 
     @ManyToOne

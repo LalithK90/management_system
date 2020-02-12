@@ -49,7 +49,7 @@ public class Petition extends AuditEntity {
     @ManyToOne
     private WorkingPlace workingPlace;
 
-    @OneToMany( mappedBy = "petition" )
+    @OneToMany( mappedBy = "petition")
     private List< PetitionState > petitionStates;
 
     @OneToMany( mappedBy = "petition" )

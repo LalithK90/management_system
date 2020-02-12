@@ -24,7 +24,7 @@ public class MimeTypeFileHandelController {
     public MimeTypeFileHandelController(ServletContext context) {
         this.context = context;
     }
-
+/*
     @GetMapping(value = "/getFile/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
     public void fileDownload(@PathVariable("id") int id, HttpServletResponse response, HttpServletRequest request) {
 
@@ -71,6 +71,6 @@ public class MimeTypeFileHandelController {
         // response.getOutputStream().write(item.getItemImage()); need to get image where store it
 
         response.getOutputStream().close();
-    }
+    }*/
 
 }

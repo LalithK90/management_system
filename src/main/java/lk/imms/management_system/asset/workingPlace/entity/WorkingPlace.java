@@ -56,7 +56,6 @@ public class WorkingPlace extends AuditEntity {
     @Column( unique = true )
     private String emailOne;
 
-    @Column( unique = true )
     private String emailTwo;
 
     @OneToMany( mappedBy = "workingPlace", fetch = FetchType.EAGER )

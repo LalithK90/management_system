@@ -40,7 +40,6 @@ public class PetitionService implements AbstractService< Petition, Long > {
     @Override
     @Caching( evict = {@CacheEvict( value = "petition", allEntries = true )},
             put = {@CachePut( value = "petition", key = "#petition.id" )} )
-    @Transactional
     public Petition persist(Petition petition) {
         return petitionDao.save(petition);
     }

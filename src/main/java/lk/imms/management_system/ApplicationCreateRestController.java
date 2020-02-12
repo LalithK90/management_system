@@ -116,37 +116,39 @@ public class ApplicationCreateRestController {
             contraveneService.persist(contravene);
         }
         // petitioner
-        Petitioner petitioner = new Petitioner();
-        petitioner.setAddress("Presidential Secretariat\n" +
+        Petitioner presidentialSecretarial = new Petitioner();
+        presidentialSecretarial.setAddress("Presidential Secretariat\n" +
                                       "Galle Face, Colombo 1\n" +
                                       "Sri Lanka");
-        petitioner.setEmail("ps@presidentsoffice.lk");
-        petitioner.setLand("0112345345");
-        petitioner.setNameEnglish("Presidential Secretariat");
-        petitioner.setNameSinhala("ජනාධිපති ලේකම් කාර්යාලය");
-        petitioner.setNameTamil("சனாதிபதி செயலகம்");
-        petitioner.setPetitionerType(PetitionerType.PRESIDENT);
-        petitionerService.persist(petitioner);
-
-        petitioner.setAddress("No: 58, Sir Ernest De Silva Mawatha,\n" +
+        presidentialSecretarial.setEmail("ps@presidentsoffice.lk");
+        presidentialSecretarial.setLand("0112345345");
+        presidentialSecretarial.setNameEnglish("Presidential Secretariat");
+        presidentialSecretarial.setNameSinhala("ජනාධිපති ලේකම් කාර්යාලය");
+        presidentialSecretarial.setNameTamil("சனாதிபதி செயலகம்");
+        presidentialSecretarial.setPetitionerType(PetitionerType.PRESIDENT);
+        petitionerService.persist(presidentialSecretarial);
+// petitioner
+        Petitioner primeMinisterOffice = new Petitioner();
+        primeMinisterOffice.setAddress("No: 58, Sir Ernest De Silva Mawatha,\n" +
                                       "Colombo 07.\n" +
                                       "Sri Lanka.");
-        petitioner.setEmail("info@pmoffice.gov.lk");
-        petitioner.setLand("0112575317");
-        petitioner.setNameEnglish("Prime Minister''s Office");
-        petitioner.setNameSinhala("අග්‍රාමාත්‍ය කාර්යාලය");
-        petitioner.setNameTamil("சோசலிச குடியரசின்");
-        petitioner.setPetitionerType(PetitionerType.RRIMEMINISTER);
-        petitionerService.persist(petitioner);
-
-        petitioner.setAddress("No 383, Kotte Road,\\r\\nRajagiriya.");
-        petitioner.setEmail("dg@nddcb.gov.lk");
-        petitioner.setLand("0112873718");
-        petitioner.setNameEnglish("National Dangerous Drugs Control Board");
-        petitioner.setNameSinhala("අන්තරායකර ඖෂධ පාලක ජාතික මණ්ඩලය");
-        petitioner.setNameTamil("National Dangerous Drugs Control Board");
-        petitioner.setPetitionerType(PetitionerType.NDDCA);
-        petitionerService.persist(petitioner);
+        primeMinisterOffice.setEmail("info@pmoffice.gov.lk");
+        primeMinisterOffice.setLand("0112575317");
+        primeMinisterOffice.setNameEnglish("Prime Minister's Office");
+        primeMinisterOffice.setNameSinhala("අග්‍රාමාත්‍ය කාර්යාලය");
+        primeMinisterOffice.setNameTamil("சோசலிச குடியரசின்");
+        primeMinisterOffice.setPetitionerType(PetitionerType.RRIMEMINISTER);
+        petitionerService.persist(primeMinisterOffice);
+// petitioner
+        Petitioner NDDCB = new Petitioner();
+        NDDCB.setAddress("No 383, Kotte Road,\\r\\nRajagiriya.");
+        NDDCB.setEmail("dg@nddcb.gov.lk");
+        NDDCB.setLand("0112873718");
+        NDDCB.setNameEnglish("National Dangerous Drugs Control Board");
+        NDDCB.setNameSinhala("අන්තරායකර ඖෂධ පාලක ජාතික මණ්ඩලය");
+        NDDCB.setNameTamil("National Dangerous Drugs Control Board");
+        NDDCB.setPetitionerType(PetitionerType.NDDCA);
+        petitionerService.persist(NDDCB);
 
         //admin user one
         User user = new User();

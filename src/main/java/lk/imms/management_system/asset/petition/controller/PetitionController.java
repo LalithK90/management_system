@@ -56,10 +56,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 // This clz is used to manage petition adding process while on this adding
@@ -124,7 +121,7 @@ public class PetitionController {
         model.addAttribute("petitionPriorities", PetitionPriority.values());
         commonService.commonUrlBuilder(model);
         model.addAttribute("petitionerUrl", MvcUriComponentsBuilder
-                .fromMethodName(PetitionRestController.class, "getPetitioner", "")
+                .fromMethodName(PetitionerRestController.class, "getPetitioner", "")
                 .build()
                 .toString());
         return "petition/addPetition";
@@ -140,36 +137,27 @@ public class PetitionController {
     }
 
     //common code from petitions list
-    private String commonCodeFromPetitionList(Model model, List< Petition > petitions) {
+    private String commonCodeFromPetitionList(Model model, List< Petition > petitionList) {
         //get current login user
         User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-
-        List< Petition > petitionList = petitions
-                .stream()
-                .filter((x) -> {
-                    boolean matched = false;
-                    for ( WorkingPlace workingPlace :
-                            currentUser.getWorkingPlaces() ) {
-                        matched =
-                                x.getWorkingPlace().equals(workingPlace);
-                    }
-                    return matched;
-                }).collect(Collectors.toList());
-
-        minutePetitionService.findAll()
-                .stream()
-                .filter((x) -> {
-                    boolean matched = false;
-                    for ( WorkingPlace workingPlace : currentUser.getWorkingPlaces() ) {
-                        matched = x.getWorkingPlace().equals(workingPlace);
-                    }
-                    return matched;
-                })
-                .collect(Collectors.toList()).forEach(x -> petitionList.add(x.getPetition()));
-
-
-        model.addAttribute("petitions", petitionList.stream().distinct().collect(Collectors.toList()));
-
+        List< WorkingPlace > workingPlaces = currentUser.getWorkingPlaces();
+        Set<Long> idSet = new HashSet<>();
+        //get all petition and match with current user working places
+        petitionList.forEach(petition -> workingPlaces.forEach(workingPlace -> {
+            if ( workingPlace.getId().equals(petition.getWorkingPlace().getId()) ) {
+                idSet.add(petition.getId());
+            }
+        }));
+        //get all minutePetition and match with current user working places
+        minutePetitionService.findAll().forEach(minutePetition -> workingPlaces.forEach(workingPlace -> {
+            if ( workingPlace.getId().equals(minutePetition.getWorkingPlace().getId()) ) {
+                idSet.add(minutePetition.getPetition().getId());
+            }
+        }));
+        //find id belongs to petition
+        List<Petition> petitions = new ArrayList<>();
+        idSet.forEach(id-> petitions.add(petitionService.findById(id)));
+        model.addAttribute("petitions", petitions);
         return "petition/petition";
     }
 
@@ -254,9 +242,13 @@ public class PetitionController {
 
         WorkingPlace workingPlace = currentUser.getEmployee().getWorkingPlace();
         //get index number from db and used to it create petition index number and petition number
-        Petition petitionDb = (Petition) petitionService.getLastOne();
-        String indexNumber =
-                makeAutoGenerateNumberService.numberAutoGen(petitionDb.getIndexNumber()).toString();
+        Petition petitionDb = petitionService.getLastOne();
+        String indexNumber;
+        if ( petitionDb == null ) {
+            indexNumber = makeAutoGenerateNumberService.numberAutoGen(null).toString();
+        } else {
+            indexNumber = makeAutoGenerateNumberService.numberAutoGen(petitionDb.getIndexNumber()).toString();
+        }
         petition.setPetitionNumber(indexNumber + "/" + workingPlace.getWorkingPlaceType() + "/" + workingPlace.getCode());
         petition.setIndexNumber(indexNumber);
 
@@ -300,22 +292,23 @@ public class PetitionController {
             //if there is nothing to save files
             if ( !petition.getFiles().isEmpty() ) {
                 for ( MultipartFile file : petition.getFiles() ) {
-                    MinutePetitionFiles minutePetitionFile =
-                            minutePetitionFilesService.findByName(file.getOriginalFilename());
-                    if ( minutePetitionFile != null ) {
-                        // update new contents
-                        minutePetitionFile.setPic(file.getBytes());
-                        minutePetitionFilesService.save(minutePetitionFile);
-                    } else {
-                        assert savedPetition != null;
-                        minutePetitionFile = new MinutePetitionFiles(file.getOriginalFilename(),
-                                                                     file.getContentType(),
-                                                                     file.getBytes(),
-                                                                     savedPetition.getPetitionNumber().concat("-" + LocalDateTime.now()),
-                                                                     UUID.randomUUID().toString().concat(
-                                                                             "minutePetition"));
+                    if ( file.getOriginalFilename() != null ) {
+                        MinutePetitionFiles minutePetitionFile =
+                                minutePetitionFilesService.findByName(file.getOriginalFilename());
+                        if ( minutePetitionFile != null ) {
+                            // update new contents
+                            minutePetitionFile.setPic(file.getBytes());
+                        } else {
+                            assert savedPetition != null;
+                            minutePetitionFile = new MinutePetitionFiles(file.getOriginalFilename(),
+                                                                         file.getContentType(),
+                                                                         file.getBytes(),
+                                                                         savedPetition.getPetitionNumber().concat("-" + LocalDateTime.now()),
+                                                                         UUID.randomUUID().toString().concat(
+                                                                                 "minutePetition"));
 
-                        minutePetitionFile.setMinutePetition(minutePetition1);
+                            minutePetitionFile.setMinutePetition(minutePetition1);
+                        }
                         minutePetitionFilesService.save(minutePetitionFile);
                     }
                 }
@@ -367,7 +360,6 @@ public class PetitionController {
 
         return "redirect:/petition/add";
     }
-
 
     //common code for search from
     private String commonCodeForSearch(Model model, Petition petition) {
