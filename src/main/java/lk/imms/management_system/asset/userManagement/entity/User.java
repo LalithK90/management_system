@@ -14,13 +14,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode( callSuper = true )
 @JsonIgnoreProperties(value = "createdDate", allowGetters = true)
 public class User extends AuditEntity {
 
@@ -49,11 +49,11 @@ public class User extends AuditEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @Fetch( FetchMode.SUBSELECT)
+    @ManyToMany(fetch = FetchType.EAGER)
+    //@Fetch( FetchMode.SUBSELECT)
     @JoinTable(name = "user_working_place",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "working_place_id"))
-    private List< WorkingPlace > workingPlaces;
+    private Set< WorkingPlace > workingPlaces;
 
 }

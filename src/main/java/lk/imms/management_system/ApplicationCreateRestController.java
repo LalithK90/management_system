@@ -34,6 +34,8 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -161,7 +163,7 @@ public class ApplicationCreateRestController {
                               .stream()
                               .filter(role -> role.getRoleName().equals("ADMIN"))
                               .collect(Collectors.toList()));
-        user.setWorkingPlaces(workingPlaceService.findAll());
+        user.setWorkingPlaces(new HashSet<>(workingPlaceService.findAll()));
         userService.persist(user);
 
        return message;

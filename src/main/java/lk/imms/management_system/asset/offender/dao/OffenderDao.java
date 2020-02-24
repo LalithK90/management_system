@@ -35,5 +35,5 @@ public interface OffenderDao extends JpaRepository< Offender, Long > {
 
     List< Offender > findByDescription(String description);
 
-    List<Offender> findByCreatedAtBetween(LocalDateTime from,LocalDateTime to);
+    List<Offender> findByCreatedAtBetween(LocalDateTime from, LocalDateTime to);
 }

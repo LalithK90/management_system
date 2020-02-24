@@ -10,6 +10,7 @@ import lk.imms.management_system.asset.userManagement.service.RoleService;
 import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.asset.workingPlace.controller.WorkingPlaceRestController;
 import lk.imms.management_system.asset.workingPlace.entity.Enum.Province;
+import lk.imms.management_system.asset.workingPlace.entity.WorkingPlace;
 import lk.imms.management_system.asset.workingPlace.service.WorkingPlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -138,12 +141,15 @@ public class UserController {
         }
         //user is super senior office need to provide all working palace to check
         Employee employee = employeeService.findById(user.getEmployee().getId());
+        Designation designation = employee.getDesignation();
 
         // if user designation is belongs to supper senior category all workstations are able to check
-        if ( employee.getDesignation().equals(Designation.CGE) || employee.getDesignation().equals(Designation.ACGE) || employee.getDesignation().equals(Designation.CE) ||
-                employee.getDesignation().equals(Designation.DCL) || employee.getDesignation().equals(Designation.DCLE) ) {
-            user.setWorkingPlaces(workingPlaceService.findAll());
-
+        if ( designation.equals(Designation.CGE) || designation.equals(Designation.ACGE) || designation.equals(Designation.CE) ||
+                designation.equals(Designation.DCL) || designation.equals(Designation.DCLE) ) {
+            Set< WorkingPlace > workingPlaceSet = new HashSet<>(workingPlaceService.findAll());
+            user.setWorkingPlaces(workingPlaceSet);
+        } else {
+            user.setWorkingPlaces(user.getWorkingPlaces());
         }
         // userService.persist(user);
         if ( employee.getEmployeeStatus().equals(EmployeeStatus.WORKING) ) {

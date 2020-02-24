@@ -11,5 +11,6 @@ import java.util.List;
 
 @Repository
 public interface DetectionTeamMemberDao extends JpaRepository< DetectionTeamMember, Long > {
-    List< DetectionTeamMember > findByEmployeeAndCreatedAtBetween(Employee employee, LocalDateTime from, LocalDateTime to);
+    List< DetectionTeamMember > findByEmployeeAndCreatedAtBetween(Employee employee, LocalDateTime from,
+                                                                  LocalDateTime to);
 }

@@ -2,6 +2,7 @@ package lk.imms.management_system.asset.commonAsset.controller;
 
 import lk.imms.management_system.asset.minutePetition.service.MinutePetitionService;
 import lk.imms.management_system.asset.petition.entity.Petition;
+import lk.imms.management_system.asset.petition.service.PetitionService;
 import lk.imms.management_system.asset.userManagement.entity.User;
 import lk.imms.management_system.asset.userManagement.service.UserService;
 import lk.imms.management_system.util.service.DateTimeAgeService;
@@ -20,63 +21,65 @@ public class UiController {
 
     private final UserService userService;
     private final MinutePetitionService minutePetitionService;
+    private final PetitionService petitionService;
     private final DateTimeAgeService dateTimeAgeService;
 
     @Autowired
     public UiController(UserService userService, MinutePetitionService minutePetitionService,
-                        DateTimeAgeService dateTimeAgeService) {
+                        PetitionService petitionService, DateTimeAgeService dateTimeAgeService) {
         this.userService = userService;
         this.minutePetitionService = minutePetitionService;
+        this.petitionService = petitionService;
         this.dateTimeAgeService = dateTimeAgeService;
     }
 
-    @GetMapping( value = {"/", "/index"} )
+    @GetMapping(value = {"/", "/index"})
     public String index() {
         return "index";
     }
 
-    @GetMapping( value = {"/home", "/mainWindow"} )
+    @GetMapping(value = {"/home", "/mainWindow"})
     public String getHome(Model model) {
         //do some logic here if you want something to be done whenever
         User authUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-        Set< Petition > petitionSet = new HashSet<>();
+        Set<Petition> petitionSet = new HashSet<>();
         minutePetitionService
                 .findByEmployeeAndCreatedAtBetween(authUser.getEmployee(),
-                                                   dateTimeAgeService
-                                                           .dateTimeToLocalDateStartInDay(LocalDate.now()),
-                                                   dateTimeAgeService
-                                                           .dateTimeToLocalDateEndInDay(LocalDate.now())).forEach(
+                        dateTimeAgeService
+                                .dateTimeToLocalDateStartInDay(LocalDate.now()),
+                        dateTimeAgeService
+                                .dateTimeToLocalDateEndInDay(LocalDate.now())).forEach(
                 minutePetition -> {
-                    petitionSet.add(minutePetition.getPetition());
-                }                                                                                                                 );
+                    petitionSet.add(petitionService.findById(minutePetition.getPetition().getId()));
+                });
         model.addAttribute("petitions", petitionSet.toArray());
         return "mainWindow";
     }
 
-    @GetMapping( value = {"/login"} )
+    @GetMapping(value = {"/login"})
     public String getLogin() {
         return "login/login";
     }
 
-    @GetMapping( value = {"/login/error10"} )
+    @GetMapping(value = {"/login/error10"})
     public String getLogin10(Model model) {
         model.addAttribute("err", "You already entered wrong credential more than 10 times. \n Please meet the system" +
                 " admin");
         return "login/login";
     }
 
-    @GetMapping( value = {"/login/noUser"} )
+    @GetMapping(value = {"/login/noUser"})
     public String getLoginNoUser(Model model) {
         model.addAttribute("err", "There is no user according to the user name. \n Please try again !!");
         return "login/login";
     }
 
-    @GetMapping( value = {"/unicodeTamil"} )
+    @GetMapping(value = {"/unicodeTamil"})
     public String getUnicodeTamil() {
         return "fragments/unicodeTamil";
     }
 
-    @GetMapping( value = {"/unicodeSinhala"} )
+    @GetMapping(value = {"/unicodeSinhala"})
     public String getUnicodeSinhala() {
         return "fragments/unicodeSinhala";
     }

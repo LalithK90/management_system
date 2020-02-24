@@ -14,5 +14,6 @@ import java.util.List;
 public interface PetitionStatuDao extends JpaRepository< PetitionState , Long > {
     List<PetitionState> findByPetition(Petition petition);
 
-    List< PetitionState> findByPetitionStateTypeAndCreatedAtBetween(PetitionStateType petitionStateType, LocalDateTime from, LocalDateTime to);
+    List< PetitionState> findByPetitionStateTypeAndCreatedAtBetween(PetitionStateType petitionStateType,
+                                                                    LocalDateTime from, LocalDateTime to);
 }

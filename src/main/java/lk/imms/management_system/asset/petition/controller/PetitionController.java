@@ -140,7 +140,7 @@ public class PetitionController {
     private String commonCodeFromPetitionList(Model model, List< Petition > petitionList) {
         //get current login user
         User currentUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-        List< WorkingPlace > workingPlaces = currentUser.getWorkingPlaces();
+        Set< WorkingPlace > workingPlaces = currentUser.getWorkingPlaces();
         Set<Long> idSet = new HashSet<>();
         //get all petition and match with current user working places
         petitionList.forEach(petition -> workingPlaces.forEach(workingPlace -> {

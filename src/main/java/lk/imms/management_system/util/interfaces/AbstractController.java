@@ -18,7 +18,7 @@ public interface AbstractController<E, I> {
 
     E modifyResource(E e);
 
-    List<E> modifyResources(List<E> eList);
+    List<E> modifyResources(List< E > eList);
 
 
 }

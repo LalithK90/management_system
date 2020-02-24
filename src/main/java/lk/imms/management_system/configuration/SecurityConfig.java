@@ -121,14 +121,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         sessionManagement ->
                                 sessionManagement
                                         .maximumSessions(1)
-                                        .expiredUrl("/logout")
+                                        .expiredUrl("/login")
                                         .maxSessionsPreventsLogin(true)
                                         .sessionRegistry(sessionRegistry()))
                 //Cross site disable
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling();
     }
-
-
 }
 

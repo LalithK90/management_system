@@ -20,7 +20,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode( callSuper = true )
 @JsonFilter( "WorkingPlace" )
 public class WorkingPlace extends AuditEntity {
 
@@ -61,7 +60,10 @@ public class WorkingPlace extends AuditEntity {
     @OneToMany( mappedBy = "workingPlace", fetch = FetchType.EAGER )
     private List< EmployeeWorkingPlaceHistory > employeeWorkingHistories;
 
-    @ManyToMany( mappedBy = "workingPlaces", fetch = FetchType.EAGER )
+    @ManyToMany
+    @JoinTable(name = "user_working_place",
+            joinColumns = @JoinColumn(name = "working_place_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set< User > users;
 
 }
